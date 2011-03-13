@@ -1,0 +1,33 @@
+GauchoMobile
+Read Me 
+
+GauchoMobile is a native iPhone client for UCSB's GauchoSpace course management system.
+At the present, it allows you to view grades, assignments, participants and the free form links/text associated with every course you are enrolled in on GauchoSpace.
+It was developed as part of CS 48 (http://www.cs.ucsb.edu/~mikec/cs48/index.html) by Aaron Dodson, Kenneth Bedolla, Mauricio Hernandez and Christian Jimenez.
+
+---------------------------------------------------------
+
+FAQs:
+
+Q: Why does GauchoMobile say No Assignments? GauchoSpace lists some on the course homepage.
+A: GauchoSpace only displays assignments from the actual Assignments "mode" of GauchoSpace. Assignments listed on the course homepage should be visible in the Dashboard section.
+
+Q: How come the information displayed is out of date?
+A: To save you time and battery power, GauchoMobile caches the information it downloads from GauchoSpace. This means that assignments, grades, etc. are instantly available,
+but may also mean that you don't see the most recent information. To make sure you're up to date, go to the information you want to update, pull the table down and release it. In the case
+of assignments, you'll need to switch to landscape orientation to be able to drag far enough to reload the information.
+
+Q: Why isn't GauchoMobile able to download any information when I launch it after not using it for a while?
+A: This is a bug. Since GauchoSpace logins expire after a while, GauchoMobile isn't able to access your information if it logged in a while ago. Double click the device home button, tap the
+red minus button on GauchoMobile and relaunch it to work around this problem.
+
+---------------------------------------------------------
+
+GauchoSpace is a Moodle site, which means that GauchoMobile may be able to work with any other Moodle site. We haven't tested this, but only moderate modifications should be required
+to get it working. First, try just switching out the URLs in GMSourceFetcher.m. If that doesn't work, you may need to modify the parsers, especially if your school uses a different
+version of Moodle. You'll also probably want to change the colors of the nav bars/loading views and graphs to match your school colors (unless those happen to be blue and gold) and switch
+out the images displayed on the login view. If you get GauchoMobile working for your school, let us know!
+
+----------------------------------------------------------
+
+If you like GauchoMobile, why not become a fan on Facebook: https://www.facebook.com/pages/Gaucho-Mobile/156258474432978
