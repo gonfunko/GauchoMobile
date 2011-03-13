@@ -1,0 +1,128 @@
+// !$*UTF8*$!
+{
+	934300CC12E0F42600AFFFE4 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 935037BA12EBA266001CBAD0 /* GauchoMobile */;
+		activeTarget = 934300D412E0F42600AFFFE4 /* GauchoMobile */;
+		addToTargets = (
+			934300D412E0F42600AFFFE4 /* GauchoMobile */,
+		);
+		codeSenseManager = 935037C812EBA286001CBAD0 /* Code sense */;
+		executables = (
+			935037BA12EBA266001CBAD0 /* GauchoMobile */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					994,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					450,
+					60,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 319763044;
+			PBXWorkspaceStateSaveDate = 319763044;
+		};
+		sourceControlManager = 935037C712EBA286001CBAD0 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	934300D412E0F42600AFFFE4 /* GauchoMobile */ = {
+		activeExec = 0;
+		executables = (
+			935037BA12EBA266001CBAD0 /* GauchoMobile */,
+		);
+	};
+	935037BA12EBA266001CBAD0 /* GauchoMobile */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = GauchoMobile;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	935037C712EBA286001CBAD0 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	935037C812EBA286001CBAD0 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	935037C912EBA28F001CBAD0 /* GMParticipantsParser.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1172, 463}}";
+			sepNavSelRange = "{238, 55}";
+			sepNavVisRange = "{0, 300}";
+		};
+	};
+	935037CA12EBA28F001CBAD0 /* GMParticipantsParser.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1172, 1690}}";
+			sepNavSelRange = "{310, 0}";
+			sepNavVisRange = "{0, 1536}";
+		};
+	};
+}

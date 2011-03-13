@@ -1,0 +1,3 @@
+Tab bar icons from http://glyphish.com/
+EGOTableViewPullRefresh from https://github.com/enormego/EGOTableViewPullRefresh/
+Tapku library from http://tapku.com/
