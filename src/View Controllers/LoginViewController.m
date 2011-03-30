@@ -25,20 +25,21 @@
     [super viewDidLoad];
     
     //Set up the moving pictures in the background
-    floatingBackground = [CALayer layer];
-    floatingBackground.frame = CGRectMake(0, 0, 1024, [self.view layer].bounds.size.height);
-    floatingBackground.position = CGPointMake([self.view frame].size.width + 190, 200);
-    floatingBackground.contentsGravity = kCAGravityCenter;
+    double ratio = [[UIScreen mainScreen] bounds].size.height / 1024.0;
+    floatingBackground = [[CALayer alloc] init];
+    floatingBackground.anchorPoint = CGPointMake(0, 0);
+    floatingBackground.frame = CGRectMake(0, 0, 1536 * ratio, 1024 * ratio);
     floatingBackground.contents = (id)[[UIImage imageNamed:@"1.jpg"] CGImage];
+    floatingBackground.backgroundColor = [[UIColor redColor] CGColor];
     floatingBackground.zPosition = [self.view layer].zPosition - 1;
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
     animation.fromValue = [floatingBackground valueForKey:@"position"];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(-190.0, 200)];
+    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(-1 * ((1536 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0)];
     animation.duration = 20.0;
     animation.delegate = self;
     
-    floatingBackground.position = CGPointMake(-190.0, 200);
+    floatingBackground.position = CGPointMake(-1 * ((1536 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0);
     
     [floatingBackground addAnimation:animation forKey:@"position"];
     [[self.view layer] addSublayer:floatingBackground];
@@ -57,6 +58,15 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    loginView.frame = CGRectMake((int)((self.view.frame.size.width - loginView.frame.size.width) / 2), 60, loginView.frame.size.width, loginView.frame.size.height);
+    loginView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:loginView];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -70,6 +80,7 @@
 - (void)dealloc
 {
     [super dealloc];
+    [floatingBackground release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,12 +98,14 @@
     if (image == 4) //Change this value to add support for more images
         image = 1;
     
+    double ratio = [[UIScreen mainScreen] bounds].size.height / 1024.0;
+    
     //Determine whether we're going left to right or right to left
     CGPoint newPoint;
-    if (CGPointEqualToPoint(floatingBackground.position, CGPointMake(-190.0, 200)))
-        newPoint = CGPointMake([self.view frame].size.width + 190, 200);
+    if (CGPointEqualToPoint(floatingBackground.position, CGPointMake(-1 * ((1536 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0)))
+        newPoint = CGPointMake(0, 0);
     else
-        newPoint = CGPointMake(-190.0, 200);
+        newPoint = CGPointMake(-1 * ((1536 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0);
         
     floatingBackground.contents = (id)[[UIImage imageNamed:[NSString stringWithFormat:@"%i.jpg", image]] CGImage];
     
@@ -129,7 +142,7 @@
     navBar.layer.zPosition = navBar.layer.zPosition + 1;
     
     //Present the loading view
-    loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake(20, 17, [self.view frame].size.width - 40, 27)];
+    loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, 17, 280, 27)];
     loadingView.layer.zPosition = navBar.layer.zPosition - 1;
     [self.view addSubview:loadingView];
     
@@ -193,8 +206,6 @@
         
         [courses release];
         [parser release];
-        
-        [floatingBackground removeAllAnimations];
         
         //Clear out the login view and display the list of courses
         [self dismissModalViewControllerAnimated:YES];

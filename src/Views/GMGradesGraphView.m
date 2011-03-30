@@ -87,14 +87,14 @@
         [self.layer addSublayer:layer];
         
         //If we've got a bit of room, badge each bar with its percentage.
-        if (width > 20) {
+        if (width > 40) {
             CATextLayer *percentage = [CATextLayer layer];
             percentage.string = [NSString stringWithFormat:@"%i%%", (int)((double)grade.score / (double)grade.max * 100)];
             percentage.font = CGFontCreateWithFontName((CFStringRef)[UIFont fontWithName:@"Helvetica-Bold" size:14.0].fontName);
             percentage.fontSize = 14.0;
             percentage.foregroundColor = [[UIColor whiteColor] CGColor];
             percentage.contentsScale = [[UIScreen mainScreen] scale];
-            percentage.frame = CGRectMake((layer.frame.size.width - [percentage preferredFrameSize].width) / 2, layer.frame.size.height - 100, [percentage preferredFrameSize].width, 16);
+            percentage.frame = CGRectMake((layer.frame.size.width - [percentage preferredFrameSize].width) / 2, (int)(layer.frame.size.height / 2 + 4), [percentage preferredFrameSize].width, 16);
             percentage.alignmentMode = kCAAlignmentCenter;
             percentage.shadowColor = [[UIColor blackColor] CGColor];
             percentage.shadowOffset = CGSizeMake(0, -1);
@@ -104,7 +104,7 @@
             CALayer *background = [CALayer layer];
             background.backgroundColor = [[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.6] CGColor];
             background.cornerRadius = 5.0;
-            background.frame = CGRectMake((layer.frame.size.width - [percentage preferredFrameSize].width) / 2 - 2, layer.frame.size.height - 104, [percentage preferredFrameSize].width + 4, 20);
+            background.frame = CGRectMake((layer.frame.size.width - [percentage preferredFrameSize].width) / 2 - 2, layer.frame.size.height / 2.0, [percentage preferredFrameSize].width + 4, 20);
             
             [layer addSublayer:background];
             [layer addSublayer:percentage];

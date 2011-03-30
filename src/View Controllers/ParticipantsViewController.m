@@ -107,9 +107,9 @@
         
         if (flag) {
             if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-                loadingView.frame = CGRectMake(100, -25, 280, 27);
+                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.height - 280) / 2), -25, 280, 27);
             else
-                loadingView.frame = CGRectMake(20, -25, 280, 27);
+                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27);
             
             loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
             [self.parentViewController.view addSubview:loadingView];
@@ -226,7 +226,10 @@
         coverflow.dataSource = self;
         coverflow.numberOfCovers = [[[[GMDataSource sharedDataSource] currentCourse] participants] count];
         [self.view addSubview:coverflow];
-        coverflow.coverSize = CGSizeMake(150, 150);
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            coverflow.coverSize = CGSizeMake(150, 150);
+        else
+            coverflow.coverSize = CGSizeMake(400, 400);
         [coverflow release];
         
         coverflowLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 40, self.view.frame.size.width, 30)];
@@ -261,9 +264,12 @@
     TKCoverflowCoverView *view = [coverflowView dequeueReusableCoverView];
     
     if(view == nil){
-		view = [[[TKCoverflowCoverView alloc] initWithFrame:CGRectMake(0, 0, 150, 150)] autorelease]; // 224
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            view = [[[TKCoverflowCoverView alloc] initWithFrame:CGRectMake(0, 0, 150, 150)] autorelease];
+        else
+            view = [[[TKCoverflowCoverView alloc] initWithFrame:CGRectMake(0, 0, 400, 400)] autorelease];
+        
 		view.baseline = 100;
-		
 	}
 
     GMParticipant *participant = [[[[GMDataSource sharedDataSource] currentCourse] participants] objectAtIndex:index];

@@ -40,12 +40,19 @@
         [self loadAssignmentsWithLoadingView:YES];
     }
     
-    calendar = [[TKCalendarMonthView alloc] initWithSundayAsFirst:YES];
-    calendar.delegate = self;
-    calendar.dataSource = self;
-    [self.view addSubview:calendar];
-    [calendar release];
-    [calendar reload];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    TKCalendarMonthView *monthView = [[TKCalendarMonthView alloc] initWithSundayAsFirst:YES];
+    monthView.delegate = self;
+    monthView.dataSource = self;
+    [self.view addSubview:monthView];
+    [monthView release];
+    [monthView reload];
+        calendar = monthView;
+    } else {
+        calendar = [[GMWeekView alloc] initWithFrame:CGRectMake(0, -1, [[UIScreen mainScreen] bounds].size.width, 170)];
+        ((GMWeekView *)calendar).delegate = self;
+        [self.view addSubview:calendar];
+    }
     self.tableView.scrollsToTop = YES;
     
     if (reloadView == nil) {
@@ -126,9 +133,9 @@
         
         if (flag) {
             if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-                loadingView.frame = CGRectMake(100, -25, 280, 27);
+                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.height - 280) / 2), -25, 280, 27);
             else
-                loadingView.frame = CGRectMake(20, -25, 280, 27);
+                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27);
             
             loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
             
@@ -202,7 +209,7 @@
         [label release];
     }
     
-    [calendar reload];
+    //[calendar reload];
     
     if (pendingID != 0) {
         [self showAssignmentWithID:[NSNumber numberWithInteger:pendingID]];
@@ -374,7 +381,7 @@
                 
                 animation.fillMode = kCAFillModeForwards;
                 animation.removedOnCompletion = NO;
-                animation.duration = .4;
+                animation.duration = .6;
                 animation.delegate = self;
                 [animation setValue:layer forKey:@"layer"];
                 
@@ -469,6 +476,20 @@
     [lookup release];
     
     return marks;
+}
+
+- (void)weekViewSelectedDate:(NSDate *)date {
+    NSArray *assignments = [[[GMDataSource sharedDataSource] currentCourse] assignments];
+    NSDateComponents *selectedDateComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:date];
+    
+    for (GMAssignment *assignment in assignments) {
+        NSDateComponents *assignmentComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:assignment.dueDate];
+        
+        if ([assignmentComponents isEqual:selectedDateComponents]) {
+            [self showAssignmentWithID:[NSNumber numberWithInteger:assignment.assignmentID]];
+            return;
+        }
+    }
 }
 
 #pragma mark - Importing Events

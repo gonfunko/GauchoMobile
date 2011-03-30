@@ -83,9 +83,9 @@
         
         if (flag) {
             if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-                loadingView.frame = CGRectMake(100, -25, 280, 27);
+                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.height - 280) / 2), -25, 280, 27);
             else
-                loadingView.frame = CGRectMake(20, -25, 280, 27);
+                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27);
             
             loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
             [self.parentViewController.view addSubview:loadingView];

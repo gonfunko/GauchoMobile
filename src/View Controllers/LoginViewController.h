@@ -20,6 +20,7 @@
     IBOutlet UITextField *password;
     IBOutlet UIButton *loginButton;
     IBOutlet UINavigationBar *navBar;
+    IBOutlet UIView *loginView;
     GMLoadingView *loadingView;
 }
 

@@ -11,6 +11,7 @@
 #import "GMAssignmentsParser.h"
 #import "GMLoadingView.h"
 #import "EGORefreshTableHeaderView.h"
+#import "GMWeekView.h"
 #import "TKCalendarMonthView.h"
 #import "NSDate+TKCategory.h"
 
@@ -19,7 +20,7 @@
     GMSourceFetcher *fetcher;
     GMLoadingView *loadingView;
     EGORefreshTableHeaderView *reloadView;
-    TKCalendarMonthView *calendar;
+    UIView *calendar;
     BOOL loading;
     NSInteger pendingID;
     

@@ -20,12 +20,17 @@
         NSString *currentItem = [items objectAtIndex:i];
         NSString *dateRange = [[[currentItem substringToIndex:[currentItem rangeOfString:@"<"].location] stringByReplacingOccurrencesOfString:@"   " withString:@" "] stringByReplacingOccurrencesOfString:@"  " withString:@" "];
         
+        if ([currentItem rangeOfString:@"CDATA"].location != NSNotFound && i != 0)
+            currentItem = [currentItem substringToIndex:[currentItem rangeOfString:@"CDATA"].location];
+        
         currentItem = [currentItem substringFromIndex:[currentItem rangeOfString:@"class=\"summary\">"].location + 16];
         
         NSString *content = [self stripHTMLFromString:[currentItem substringToIndex:[currentItem rangeOfString:@"</div>"].location]];
         
         if ([content length] < 2) {
-            content = [self stripHTMLFromString:[currentItem substringToIndex:[currentItem rangeOfString:@"</li>"].location]];
+            if ([currentItem rangeOfString:@"</li>"].location != NSNotFound) {
+                content = [self stripHTMLFromString:[currentItem substringToIndex:[currentItem rangeOfString:@"</li>"].location]]; 
+            }
         }
         
         NSArray *links = [currentItem componentsSeparatedByString:@"<li class="];

@@ -80,6 +80,9 @@
 		93B1B8251329F13700403CCD /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B1B8241329F13700403CCD /* EventKit.framework */; };
 		93BBF5CF130E3A8900B07C25 /* GMLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */; };
 		93BBF5D3130E4B8800B07C25 /* bands.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BBF5D2130E4B8800B07C25 /* bands.png */; };
+		93D0758A1333D5C20025BF9E /* GMWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D075891333D5C20025BF9E /* GMWeekView.m */; };
+		93D0759113340D0B0025BF9E /* Month Calendar Left Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0758F13340D0B0025BF9E /* Month Calendar Left Arrow@2x.png */; };
+		93D0759213340D0B0025BF9E /* Month Calendar Right Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0759013340D0B0025BF9E /* Month Calendar Right Arrow@2x.png */; };
 		93D986131310556F009C11C3 /* GMDashboardItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D986121310556F009C11C3 /* GMDashboardItem.m */; };
 		93D9861713105895009C11C3 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D9861513105895009C11C3 /* DashboardViewController.m */; };
 		93D9861813105895009C11C3 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9861613105895009C11C3 /* DashboardViewController.xib */; };
@@ -89,6 +92,7 @@
 		93EB5D02130EEC8700555E8A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93EB5D01130EEC8700555E8A /* Icon.png */; };
 		93EB5D0B130EFE6300555E8A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93EB5D03130EFE2300555E8A /* AddressBook.framework */; };
 		93EB5D0C130EFE6300555E8A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93EB5D04130EFE2300555E8A /* AddressBookUI.framework */; };
+		93EC607E1332E1E000601B04 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EC607D1332E1E000601B04 /* MainWindow-iPad.xib */; };
 		93ECB1731326F3C5007458FE /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 93ECB1711326F3C5007458FE /* blueArrow.png */; };
 		93ECB1741326F3C5007458FE /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93ECB1721326F3C5007458FE /* blueArrow@2x.png */; };
 /* End PBXBuildFile section */
@@ -212,6 +216,10 @@
 		93BBF5CD130E3A8800B07C25 /* GMLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMLoadingView.h; sourceTree = "<group>"; };
 		93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMLoadingView.m; sourceTree = "<group>"; };
 		93BBF5D2130E4B8800B07C25 /* bands.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bands.png; sourceTree = "<group>"; };
+		93D075881333D5C20025BF9E /* GMWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMWeekView.h; path = "../View Controllers/GMWeekView.h"; sourceTree = "<group>"; };
+		93D075891333D5C20025BF9E /* GMWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMWeekView.m; path = "../View Controllers/GMWeekView.m"; sourceTree = "<group>"; };
+		93D0758F13340D0B0025BF9E /* Month Calendar Left Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Month Calendar Left Arrow@2x.png"; path = "TapkuLibrary.bundle/Images/calendar/Month Calendar Left Arrow@2x.png"; sourceTree = "<group>"; };
+		93D0759013340D0B0025BF9E /* Month Calendar Right Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Month Calendar Right Arrow@2x.png"; path = "TapkuLibrary.bundle/Images/calendar/Month Calendar Right Arrow@2x.png"; sourceTree = "<group>"; };
 		93D986111310556F009C11C3 /* GMDashboardItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMDashboardItem.h; sourceTree = "<group>"; };
 		93D986121310556F009C11C3 /* GMDashboardItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMDashboardItem.m; sourceTree = "<group>"; };
 		93D9861413105895009C11C3 /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
@@ -226,6 +234,7 @@
 		93EB5D01130EEC8700555E8A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		93EB5D03130EFE2300555E8A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		93EB5D04130EFE2300555E8A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		93EC607D1332E1E000601B04 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "data/XIBs/iPad/MainWindow-iPad.xib"; sourceTree = SOURCE_ROOT; };
 		93ECB1711326F3C5007458FE /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		93ECB1721326F3C5007458FE /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -343,6 +352,7 @@
 		934300DF12E0F42600AFFFE4 /* GauchoMobile */ = {
 			isa = PBXGroup;
 			children = (
+				93EC607C1332E1DC00601B04 /* iPad */,
 				934300E812E0F42700AFFFE4 /* GauchoMobileAppDelegate.h */,
 				934300E912E0F42700AFFFE4 /* GauchoMobileAppDelegate.m */,
 				9314EC2812F3D7CB00F99756 /* GMSourceFetcher.h */,
@@ -430,6 +440,8 @@
 				93ECB1711326F3C5007458FE /* blueArrow.png */,
 				93ECB1721326F3C5007458FE /* blueArrow@2x.png */,
 				93BBF5D2130E4B8800B07C25 /* bands.png */,
+				93D0758F13340D0B0025BF9E /* Month Calendar Left Arrow@2x.png */,
+				93D0759013340D0B0025BF9E /* Month Calendar Right Arrow@2x.png */,
 				934BACA21304E8380083A5F9 /* defaulticon.png */,
 				93EB5D01130EEC8700555E8A /* Icon.png */,
 				936F2B2D130367DF0049C945 /* Icon@2x.png */,
@@ -501,10 +513,20 @@
 				93B1B81E1329D41E00403CCD /* GMGradesGraphView.m */,
 				93BBF5CD130E3A8800B07C25 /* GMLoadingView.h */,
 				93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */,
+				93D075881333D5C20025BF9E /* GMWeekView.h */,
+				93D075891333D5C20025BF9E /* GMWeekView.m */,
 				939036F3132AD77500A5AF6E /* EGORefreshTableHeaderView.h */,
 				939036F4132AD77500A5AF6E /* EGORefreshTableHeaderView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		93EC607C1332E1DC00601B04 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				93EC607D1332E1E000601B04 /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -583,6 +605,9 @@
 				9395D623132882A200332A38 /* TapkuLibrary.bundle in Resources */,
 				939036F2132AD76100A5AF6E /* MainWindow.xib in Resources */,
 				939036F9132AD7B000A5AF6E /* Credits.txt in Resources */,
+				93EC607E1332E1E000601B04 /* MainWindow-iPad.xib in Resources */,
+				93D0759113340D0B0025BF9E /* Month Calendar Left Arrow@2x.png in Resources */,
+				93D0759213340D0B0025BF9E /* Month Calendar Right Arrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,6 +662,7 @@
 				93B1B81F1329D41E00403CCD /* GMGradesGraphView.m in Sources */,
 				939036F5132AD77500A5AF6E /* EGORefreshTableHeaderView.m in Sources */,
 				93903702132AD8B100A5AF6E /* UIView+TKCategory.m in Sources */,
+				93D0758A1333D5C20025BF9E /* GMWeekView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +681,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
 			};
 			name = Debug;
 		};
@@ -669,6 +696,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -681,7 +709,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "src/GauchoMobile-Prefix.pch";
 				INFOPLIST_FILE = "data/GauchoMobile-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -694,7 +724,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "src/GauchoMobile-Prefix.pch";
 				INFOPLIST_FILE = "data/GauchoMobile-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

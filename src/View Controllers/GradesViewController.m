@@ -27,6 +27,16 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"Grades";
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     graphView = nil;
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
@@ -39,25 +49,12 @@
     
     pendingID = 0;
     
-    if (reloadView == nil) {
-		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-		view.delegate = self;
-		[self.tableView addSubview:view];
-		reloadView = view;
-		[view release];
-	}
-    
+    EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+    view.delegate = self;
+    [self.tableView addSubview:view];
+    reloadView = view;
+    [view release];
 	[reloadView refreshLastUpdatedDate];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -71,6 +68,11 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    [fetcher release];
+    [loadingView removeFromSuperview];
+    [reloadView removeFromSuperview];
+    [graphView removeFromSuperview];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -86,9 +88,9 @@
         
         if (flag) {
             if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-                loadingView.frame = CGRectMake(100, -25, 280, 27);
+                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.height - 280) / 2), -25, 280, 27);
             else
-                loadingView.frame = CGRectMake(20, -25, 280, 27);
+                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27);
             
             loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
             [self.parentViewController.view addSubview:loadingView];
@@ -258,7 +260,7 @@
                 
                 animation.fillMode = kCAFillModeForwards;
                 animation.removedOnCompletion = NO;
-                animation.duration = .4;
+                animation.duration = .6;
                 animation.delegate = self;
                 [animation setValue:layer forKey:@"layer"];
                 

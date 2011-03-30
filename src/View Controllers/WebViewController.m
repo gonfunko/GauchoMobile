@@ -61,9 +61,9 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-        loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake(100, -25, 280, 27)];
+        loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((int)(([[UIScreen mainScreen] bounds].size.height - 280) / 2), -25, 280, 27)];
     else
-        loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake(20, -25, 280, 27)];
+        loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27)];
     
     [self.view addSubview:loadingView];
     [loadingView release];
