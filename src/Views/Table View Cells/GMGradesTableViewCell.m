@@ -31,7 +31,7 @@
         outof.enabled = NO;
         [self addSubview:outof];
         
-        description = [[UITextField alloc] initWithFrame:CGRectMake(100, [self frame].origin.y+5, [self frame].size.width-80, 30)];
+        description = [[UITextField alloc] initWithFrame:CGRectMake(100, [self frame].origin.y+5, [self frame].size.width-125, 30)];
         description.font = [UIFont fontWithName:@"Helvetica-Bold" size:18.0];
         description.text = @"some descriptiongg";
         description.enabled = NO;
