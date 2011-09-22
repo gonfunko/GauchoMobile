@@ -61,11 +61,11 @@
         int countryEnd = [currentRow rangeOfString:@"<"].location;
         NSString *country = [currentRow substringWithRange:NSMakeRange(0, countryEnd)];
         
-        //Extract the date the participant last accessed GauchoSpace
+      /*  //Extract the date the participant last accessed GauchoSpace
         cruftRange = [currentRow rangeOfString:@"<td class=\"cell c4\">"];
         currentRow = [currentRow substringFromIndex:cruftRange.location + cruftRange.length];
         int lastAccessEnd = [currentRow rangeOfString:@"<"].location;
-        NSString *lastAccessed = [currentRow substringWithRange:NSMakeRange(0, lastAccessEnd)];
+        NSString *lastAccessed = [currentRow substringWithRange:NSMakeRange(0, lastAccessEnd)];*/
         
         BOOL inAddressBook = NO;
         ABAddressBookRef addressBook = ABAddressBookCreate();
@@ -83,7 +83,7 @@
         participant.country = country;
         participant.userID = [userID integerValue];
         participant.imageURL = [NSURL URLWithString:[profilePictureURL stringByReplacingOccurrencesOfString:@"f2" withString:@"f1"]];
-        participant.lastAccess = [self dateFromAccessTimestamp:lastAccessed];
+       // participant.lastAccess = [self dateFromAccessTimestamp:lastAccessed];
         participant.inAddressBook = inAddressBook;
     
         //Add the participant to the array of all participants
