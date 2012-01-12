@@ -286,10 +286,12 @@
     
     GMAssignment *assignment = [[[[GMDataSource sharedDataSource] currentCourse] assignments] objectAtIndex:indexPath.row];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterNoStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
     NSString *newString = @"";
     
     if ([[button titleForState:UIControlStateNormal] rangeOfString:@":"].location == NSNotFound) {
-        [formatter setDateFormat:@"HH:mm a"];
+        [formatter setDateFormat:@"h:mm a"];
         newString = [formatter stringFromDate:assignment.dueDate];
     } else {
         [formatter setDateFormat:@"M/d"];
