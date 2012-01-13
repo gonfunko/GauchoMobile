@@ -75,18 +75,10 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    
-    if (coverflow != nil) {
-        [coverflow removeFromSuperview];
-        coverflow = nil;
-        [coverflowLabel removeFromSuperview];
-        coverflowLabel = nil;
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self adjustForRotation];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -210,87 +202,6 @@
             [photoRequests addObject:request];
         }
     }
-}
-
-#pragma mark - Rotation handling
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
-- (void)adjustForRotation {
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        coverflow = [[TKCoverflowView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        coverflow.coverflowDelegate = self;
-        coverflow.dataSource = self;
-        coverflow.numberOfCovers = [[[[GMDataSource sharedDataSource] currentCourse] participants] count];
-        [self.view addSubview:coverflow];
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-            coverflow.coverSize = CGSizeMake(150, 150);
-        else
-            coverflow.coverSize = CGSizeMake(400, 400);
-        [coverflow release];
-        
-        coverflowLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 40, self.view.frame.size.width, 30)];
-        coverflowLabel.textColor = [UIColor whiteColor];
-        coverflowLabel.backgroundColor = [UIColor clearColor];
-        coverflowLabel.font = [UIFont boldSystemFontOfSize:14.0];
-        coverflowLabel.textAlignment = UITextAlignmentCenter;
-        if (coverflow.numberOfCovers != 0) {
-            coverflowLabel.text = ((GMParticipant *)[[[[GMDataSource sharedDataSource] currentCourse] participants] objectAtIndex:0]).name;
-        }
-        [self.view addSubview:coverflowLabel];
-        [coverflowLabel release];
-        
-        self.tableView.hidden = YES;
-    } else {
-        self.tableView.hidden = NO;
-        
-        [coverflow removeFromSuperview];
-        coverflow = nil;
-        [coverflowLabel removeFromSuperview];
-        coverflowLabel = nil;
-    }    
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation { 
-    [self adjustForRotation];
-}
-
-#pragma mark - Coverflow methods
-
-- (TKCoverflowCoverView *)coverflowView:(TKCoverflowView *)coverflowView coverAtIndex:(int)index {
-    TKCoverflowCoverView *view = [coverflowView dequeueReusableCoverView];
-    
-    if(view == nil){
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-            view = [[[TKCoverflowCoverView alloc] initWithFrame:CGRectMake(0, 0, 150, 150)] autorelease];
-        else
-            view = [[[TKCoverflowCoverView alloc] initWithFrame:CGRectMake(0, 0, 400, 400)] autorelease];
-        
-		view.baseline = 100;
-	}
-
-    GMParticipant *participant = [[[[GMDataSource sharedDataSource] currentCourse] participants] objectAtIndex:index];
-    if([pictures objectForKey:[participant.imageURL absoluteString]] != nil) {
-        view.image = [UIImage imageWithContentsOfFile:[pictures objectForKey:[participant.imageURL absoluteString]]];
-    }
-    else {
-        view.image = [UIImage imageNamed:@"defaulticon.png"];
-    }
-    
-    return view;
-}
-
-- (void)coverflowView:(TKCoverflowView *)coverflowView coverAtIndexWasBroughtToFront:(int)index {
-    GMParticipant *participant = [[[[GMDataSource sharedDataSource] currentCourse] participants] objectAtIndex:index];
-    coverflowLabel.text = participant.name;
-}
-
-- (void)coverflowView:(TKCoverflowView *)coverflowView coverAtIndexWasDoubleTapped:(int)index {
-    GMParticipant *participant = [[[[GMDataSource sharedDataSource] currentCourse] participants] objectAtIndex:index];
-    [self displayAddressBookEntryForParticipant:participant];
 }
 
 #pragma mark -

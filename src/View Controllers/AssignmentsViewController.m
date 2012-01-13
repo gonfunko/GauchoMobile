@@ -66,6 +66,10 @@
     
     pendingID = 0;
 	[reloadView refreshLastUpdatedDate];
+    
+    calendar.hidden = NO;
+            reloadView.hidden = YES;
+            self.tableView.frame = CGRectMake(0, calendar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - calendar.frame.size.height);
 }
 
 - (void)viewDidUnload
@@ -88,8 +92,6 @@
     UIBarButtonItem *import = [[UIBarButtonItem alloc] initWithTitle:@"Import" style:UIBarButtonItemStylePlain target:self action:@selector(import)];
     self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = import;
     [import release];
-    
-    [self adjustForRotation];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -100,29 +102,6 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-}
-
-#pragma mark - Rotation handling
-
-- (void)adjustForRotation {
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        reloadView.hidden = NO;
-        calendar.hidden = YES;
-    } else {
-        calendar.hidden = NO;
-        reloadView.hidden = YES;
-        self.tableView.frame = CGRectMake(0, calendar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - calendar.frame.size.height);
-    }
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [self adjustForRotation];
 }
 
 #pragma mark - Data Loading Methods

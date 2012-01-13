@@ -11,14 +11,12 @@
 #import "GMGradesTableViewCell.h"
 #import "GMLoadingView.h"
 #import "EGORefreshTableHeaderView.h"
-#import "GMGradesGraphView.h"
 
 @interface GradesViewController : UIViewController <GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate> {
 @private
     GMSourceFetcher *fetcher;
     GMLoadingView *loadingView;
     EGORefreshTableHeaderView *reloadView;
-    GMGradesGraphView *graphView;
     BOOL loading;
     NSInteger pendingID;
     IBOutlet UITableView *tableView;
@@ -31,8 +29,5 @@
 
 //Scrolls to and highlights the grade with the given grade ID in yellow
 - (void)showGradeWithID:(NSNumber *)gradeID;
-
-//Handles device rotation by switching between the landscape and portrait views
-- (void)adjustForRotation;
 
 @end

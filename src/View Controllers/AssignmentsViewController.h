@@ -29,9 +29,6 @@
 
 @property (retain) UITableView *tableView;
 
-//Handles the device being rotated by switching between the landscape and portrait view
-- (void)adjustForRotation;
-
 //Loads assignments from the network, optionally with or without the yellow loading view
 - (void)loadAssignmentsWithLoadingView:(BOOL)flag;
 

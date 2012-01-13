@@ -13,10 +13,8 @@
 #import "GMParticipantsParser.h"
 #import "GMLoadingView.h"
 #import "EGORefreshTableHeaderView.h"
-#import "TKCoverflowView.h"
-#import "TKCoverflowCoverView.h"
 
-@interface ParticipantsViewController : UIViewController<GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate, TKCoverflowViewDelegate, TKCoverflowViewDataSource, UIScrollViewDelegate> {
+@interface ParticipantsViewController : UIViewController<GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate, UIScrollViewDelegate> {
 @private
     NSMutableDictionary *sections;
     NSMutableDictionary *pictures;
@@ -25,7 +23,6 @@
 	GMSourceFetcher *fetcher;
     GMLoadingView *loadingView;
     EGORefreshTableHeaderView *reloadView;
-    TKCoverflowView *coverflow;
     
     BOOL loading;
     
@@ -33,9 +30,6 @@
 }
 
 @property (retain) UITableView *tableView;
-
-//Handles device rotation by switching between the landscape and portrait views
-- (void)adjustForRotation;
 
 //Loads participants from the network, optionally with or without the yellow loading view
 - (void)loadParticipantsWithLoadingView:(BOOL)flag;

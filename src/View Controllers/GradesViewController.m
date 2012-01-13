@@ -38,7 +38,6 @@
 {
     [super viewWillAppear:animated];
     
-    graphView = nil;
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
     loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, -25, 280, 27)];
@@ -62,7 +61,6 @@
     [super viewDidAppear:animated];
     self.navigationController.visibleViewController.navigationItem.title = @"Grades";
     self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = nil;
-    [self adjustForRotation];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -72,7 +70,6 @@
     [fetcher release];
     [loadingView removeFromSuperview];
     [reloadView removeFromSuperview];
-    [graphView removeFromSuperview];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -167,8 +164,6 @@
         [self showGradeWithID:[NSNumber numberWithInteger:pendingID]];
         pendingID = 0;
     }
-    
-    [graphView loadBars];
 }
 
 #pragma mark - Animation methods
@@ -278,31 +273,6 @@
     if ([theAnimation valueForKey:@"layer"] != nil) {
         [(CALayer *)[theAnimation valueForKey:@"layer"] removeFromSuperlayer];
     }
-}
-
-#pragma mark - Rotation handling
-
-- (void)adjustForRotation {
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        self.tableView.hidden = YES;
-        graphView = [[GMGradesGraphView alloc] initWithFrame:self.view.frame];
-        [self.view addSubview:graphView];
-        [graphView release];
-    } else {
-        self.tableView.hidden = NO;
-        [graphView removeFromSuperview];
-        graphView = nil;
-    }
-}
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [self adjustForRotation];
 }
 
 #pragma mark - Table view data source

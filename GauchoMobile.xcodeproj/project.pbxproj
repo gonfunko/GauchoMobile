@@ -54,8 +54,6 @@
 		93903702132AD8B100A5AF6E /* UIView+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 93903701132AD8B100A5AF6E /* UIView+TKCategory.m */; };
 		9395D5F6132881B700332A38 /* NSDate+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D59E132881AE00332A38 /* NSDate+TKCategory.m */; };
 		9395D601132881B700332A38 /* TKCalendarMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5B5132881B000332A38 /* TKCalendarMonthView.m */; };
-		9395D603132881B700332A38 /* TKCoverflowCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5B9132881B100332A38 /* TKCoverflowCoverView.m */; };
-		9395D604132881B700332A38 /* TKCoverflowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5BB132881B100332A38 /* TKCoverflowView.m */; };
 		9395D606132881B700332A38 /* TKGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5BF132881B200332A38 /* TKGlobal.m */; };
 		9395D61A132881B700332A38 /* UIImage+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5E7132881B500332A38 /* UIImage+TKCategory.m */; };
 		9395D623132882A200332A38 /* TapkuLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9395D622132882A200332A38 /* TapkuLibrary.bundle */; };
@@ -76,7 +74,6 @@
 		93AF605A12F39028009A3657 /* horizontalline.png in Resources */ = {isa = PBXBuildFile; fileRef = 93AF605812F39028009A3657 /* horizontalline.png */; };
 		93AF605B12F39028009A3657 /* verticalline.png in Resources */ = {isa = PBXBuildFile; fileRef = 93AF605912F39028009A3657 /* verticalline.png */; };
 		93AF605D12F39116009A3657 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93AF605C12F39116009A3657 /* QuartzCore.framework */; };
-		93B1B81F1329D41E00403CCD /* GMGradesGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B1B81E1329D41E00403CCD /* GMGradesGraphView.m */; };
 		93B1B8251329F13700403CCD /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B1B8241329F13700403CCD /* EventKit.framework */; };
 		93BBF5CF130E3A8900B07C25 /* GMLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */; };
 		93BBF5D3130E4B8800B07C25 /* bands.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BBF5D2130E4B8800B07C25 /* bands.png */; };
@@ -177,10 +174,6 @@
 		9395D59E132881AE00332A38 /* NSDate+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TKCategory.m"; sourceTree = "<group>"; };
 		9395D5B4132881B000332A38 /* TKCalendarMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCalendarMonthView.h; sourceTree = "<group>"; };
 		9395D5B5132881B000332A38 /* TKCalendarMonthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCalendarMonthView.m; sourceTree = "<group>"; };
-		9395D5B8132881B100332A38 /* TKCoverflowCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCoverflowCoverView.h; sourceTree = "<group>"; };
-		9395D5B9132881B100332A38 /* TKCoverflowCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCoverflowCoverView.m; sourceTree = "<group>"; };
-		9395D5BA132881B100332A38 /* TKCoverflowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCoverflowView.h; sourceTree = "<group>"; };
-		9395D5BB132881B100332A38 /* TKCoverflowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCoverflowView.m; sourceTree = "<group>"; };
 		9395D5BE132881B200332A38 /* TKGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKGlobal.h; sourceTree = "<group>"; };
 		9395D5BF132881B200332A38 /* TKGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKGlobal.m; sourceTree = "<group>"; };
 		9395D5E6132881B500332A38 /* UIImage+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TKCategory.h"; sourceTree = "<group>"; };
@@ -209,8 +202,6 @@
 		93AF605812F39028009A3657 /* horizontalline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horizontalline.png; sourceTree = "<group>"; };
 		93AF605912F39028009A3657 /* verticalline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verticalline.png; sourceTree = "<group>"; };
 		93AF605C12F39116009A3657 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		93B1B81D1329D41E00403CCD /* GMGradesGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGradesGraphView.h; sourceTree = "<group>"; };
-		93B1B81E1329D41E00403CCD /* GMGradesGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGradesGraphView.m; sourceTree = "<group>"; };
 		93B1B8241329F13700403CCD /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		93BBF5CD130E3A8800B07C25 /* GMLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMLoadingView.h; sourceTree = "<group>"; };
 		93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMLoadingView.m; sourceTree = "<group>"; };
@@ -467,10 +458,6 @@
 				9395D59E132881AE00332A38 /* NSDate+TKCategory.m */,
 				9395D5B4132881B000332A38 /* TKCalendarMonthView.h */,
 				9395D5B5132881B000332A38 /* TKCalendarMonthView.m */,
-				9395D5B8132881B100332A38 /* TKCoverflowCoverView.h */,
-				9395D5B9132881B100332A38 /* TKCoverflowCoverView.m */,
-				9395D5BA132881B100332A38 /* TKCoverflowView.h */,
-				9395D5BB132881B100332A38 /* TKCoverflowView.m */,
 				9395D5BE132881B200332A38 /* TKGlobal.h */,
 				9395D5BF132881B200332A38 /* TKGlobal.m */,
 				9395D5E6132881B500332A38 /* UIImage+TKCategory.h */,
@@ -506,8 +493,6 @@
 			isa = PBXGroup;
 			children = (
 				934BACA11304E7ED0083A5F9 /* Table View Cells */,
-				93B1B81D1329D41E00403CCD /* GMGradesGraphView.h */,
-				93B1B81E1329D41E00403CCD /* GMGradesGraphView.m */,
 				93BBF5CD130E3A8800B07C25 /* GMLoadingView.h */,
 				93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */,
 				93D075881333D5C20025BF9E /* GMWeekView.h */,
@@ -654,11 +639,8 @@
 				93A9AF64131099CE0012CAF3 /* WebViewController.m in Sources */,
 				9395D5F6132881B700332A38 /* NSDate+TKCategory.m in Sources */,
 				9395D601132881B700332A38 /* TKCalendarMonthView.m in Sources */,
-				9395D603132881B700332A38 /* TKCoverflowCoverView.m in Sources */,
-				9395D604132881B700332A38 /* TKCoverflowView.m in Sources */,
 				9395D606132881B700332A38 /* TKGlobal.m in Sources */,
 				9395D61A132881B700332A38 /* UIImage+TKCategory.m in Sources */,
-				93B1B81F1329D41E00403CCD /* GMGradesGraphView.m in Sources */,
 				939036F5132AD77500A5AF6E /* EGORefreshTableHeaderView.m in Sources */,
 				93903702132AD8B100A5AF6E /* UIView+TKCategory.m in Sources */,
 				93D0758A1333D5C20025BF9E /* GMWeekView.m in Sources */,
