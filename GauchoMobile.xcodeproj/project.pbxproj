@@ -41,8 +41,8 @@
 		934DBC8013031B02009BC05D /* GradesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934DBC7F13031B02009BC05D /* GradesViewController.xib */; };
 		934DBC8213031B88009BC05D /* ParticipantsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934DBC8113031B88009BC05D /* ParticipantsViewController.xib */; };
 		935037CB12EBA28F001CBAD0 /* GMParticipantsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 935037CA12EBA28F001CBAD0 /* GMParticipantsParser.m */; };
-		936F2B2E130367DF0049C945 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 936F2B2D130367DF0049C945 /* Icon@2x.png */; };
 		938277C112EBC2CC001C35E9 /* GMGradesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 938277C012EBC2CC001C35E9 /* GMGradesParser.m */; };
+		938489B314C0ACBF00F9986D /* gm.png in Resources */ = {isa = PBXBuildFile; fileRef = 938489B214C0ACBF00F9986D /* gm.png */; };
 		9388E8F714BD551500A31C10 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9388E8F614BD551500A31C10 /* libz.dylib */; };
 		938C408D12E9471700A8894E /* GMCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 938C408C12E9471700A8894E /* GMCourse.m */; };
 		938C792C12F5217A00C3F134 /* GMDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 938C792B12F5217A00C3F134 /* GMDataSource.m */; };
@@ -89,7 +89,6 @@
 		93D9861B1310783C009C11C3 /* GMTextViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D9861A1310783C009C11C3 /* GMTextViewTableCell.m */; };
 		93DB4838130F9125004EF57C /* GMDashboardParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DB4837130F9125004EF57C /* GMDashboardParser.m */; };
 		93DFABDE12EBB935005C42B8 /* GMParticipant.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DFABDD12EBB935005C42B8 /* GMParticipant.m */; };
-		93EB5D02130EEC8700555E8A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93EB5D01130EEC8700555E8A /* Icon.png */; };
 		93EB5D0B130EFE6300555E8A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93EB5D03130EFE2300555E8A /* AddressBook.framework */; };
 		93EB5D0C130EFE6300555E8A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93EB5D04130EFE2300555E8A /* AddressBookUI.framework */; };
 		93EC607E1332E1E000601B04 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EC607D1332E1E000601B04 /* MainWindow-iPad.xib */; };
@@ -156,9 +155,9 @@
 		934DBC8113031B88009BC05D /* ParticipantsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParticipantsViewController.xib; sourceTree = "<group>"; };
 		935037C912EBA28F001CBAD0 /* GMParticipantsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMParticipantsParser.h; sourceTree = "<group>"; };
 		935037CA12EBA28F001CBAD0 /* GMParticipantsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMParticipantsParser.m; sourceTree = "<group>"; };
-		936F2B2D130367DF0049C945 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		938277BF12EBC2CC001C35E9 /* GMGradesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGradesParser.h; sourceTree = "<group>"; };
 		938277C012EBC2CC001C35E9 /* GMGradesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGradesParser.m; sourceTree = "<group>"; };
+		938489B214C0ACBF00F9986D /* gm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gm.png; sourceTree = "<group>"; };
 		9388E8F614BD551500A31C10 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		938C408B12E9471700A8894E /* GMCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMCourse.h; sourceTree = "<group>"; };
 		938C408C12E9471700A8894E /* GMCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMCourse.m; sourceTree = "<group>"; };
@@ -231,7 +230,6 @@
 		93DB4837130F9125004EF57C /* GMDashboardParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMDashboardParser.m; sourceTree = "<group>"; };
 		93DFABDC12EBB935005C42B8 /* GMParticipant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMParticipant.h; sourceTree = "<group>"; };
 		93DFABDD12EBB935005C42B8 /* GMParticipant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMParticipant.m; sourceTree = "<group>"; };
-		93EB5D01130EEC8700555E8A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		93EB5D03130EFE2300555E8A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		93EB5D04130EFE2300555E8A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		93EC607D1332E1E000601B04 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "data/XIBs/iPad/MainWindow-iPad.xib"; sourceTree = SOURCE_ROOT; };
@@ -436,6 +434,7 @@
 		939036F6132AD77F00A5AF6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				938489B214C0ACBF00F9986D /* gm.png */,
 				9395D622132882A200332A38 /* TapkuLibrary.bundle */,
 				93ECB1711326F3C5007458FE /* blueArrow.png */,
 				93ECB1721326F3C5007458FE /* blueArrow@2x.png */,
@@ -443,8 +442,6 @@
 				93D0758F13340D0B0025BF9E /* Month Calendar Left Arrow@2x.png */,
 				93D0759013340D0B0025BF9E /* Month Calendar Right Arrow@2x.png */,
 				934BACA21304E8380083A5F9 /* defaulticon.png */,
-				93EB5D01130EEC8700555E8A /* Icon.png */,
-				936F2B2D130367DF0049C945 /* Icon@2x.png */,
 				9314EC5612F3EBB500F99756 /* participants.png */,
 				9314EC5712F3EBB500F99756 /* participants@2x.png */,
 				9314EC4C12F3EAFA00F99756 /* grades@2x.png */,
@@ -597,10 +594,8 @@
 				931C650C12F8CCF7005799F1 /* AssignmentsViewController.xib in Resources */,
 				934DBC8013031B02009BC05D /* GradesViewController.xib in Resources */,
 				934DBC8213031B88009BC05D /* ParticipantsViewController.xib in Resources */,
-				936F2B2E130367DF0049C945 /* Icon@2x.png in Resources */,
 				934BACA31304E8380083A5F9 /* defaulticon.png in Resources */,
 				93BBF5D3130E4B8800B07C25 /* bands.png in Resources */,
-				93EB5D02130EEC8700555E8A /* Icon.png in Resources */,
 				93D9861813105895009C11C3 /* DashboardViewController.xib in Resources */,
 				93A9AF65131099CE0012CAF3 /* WebViewController.xib in Resources */,
 				93ECB1731326F3C5007458FE /* blueArrow.png in Resources */,
@@ -611,6 +606,7 @@
 				93EC607E1332E1E000601B04 /* MainWindow-iPad.xib in Resources */,
 				93D0759113340D0B0025BF9E /* Month Calendar Left Arrow@2x.png in Resources */,
 				93D0759213340D0B0025BF9E /* Month Calendar Right Arrow@2x.png in Resources */,
+				938489B314C0ACBF00F9986D /* gm.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
