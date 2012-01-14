@@ -327,7 +327,9 @@
                 
                 CATextLayer *description = [[CATextLayer alloc] init];
                 description.frame = CGRectMake(10, 14, layer.frame.size.width - 20, layer.frame.size.height - 10);
-                description.font = CGFontCreateWithFontName((CFStringRef)[UIFont fontWithName:@"Helvetica-Bold" size:18.0].fontName);
+                CGFontRef descriptionFont = CGFontCreateWithFontName((CFStringRef)[UIFont fontWithName:@"Helvetica-Bold" size:18.0].fontName);
+                description.font = descriptionFont;
+                CGFontRelease(descriptionFont);
                 description.fontSize = 18.0;
                 description.foregroundColor = [[UIColor blackColor] CGColor];
                 description.contentsScale = [[UIScreen mainScreen] scale];

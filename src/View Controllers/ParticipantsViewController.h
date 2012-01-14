@@ -19,7 +19,6 @@
     NSMutableDictionary *sections;
     NSMutableDictionary *pictures;
     NSMutableArray *photoRequests;
-    UILabel *coverflowLabel;
 	GMSourceFetcher *fetcher;
     GMLoadingView *loadingView;
     EGORefreshTableHeaderView *reloadView;

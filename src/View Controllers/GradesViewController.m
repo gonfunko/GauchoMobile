@@ -194,7 +194,9 @@
                 
                 CATextLayer *percentage = [[CATextLayer alloc] init];
                 percentage.frame = CGRectMake(10, 11, layer.frame.size.width - 20, layer.frame.size.height - 10);
-                percentage.font = CGFontCreateWithFontName((CFStringRef)[UIFont fontWithName:@"Helvetica-Bold" size:30.0].fontName);
+                CGFontRef percentageFont = CGFontCreateWithFontName((CFStringRef)[UIFont fontWithName:@"Helvetica-Bold" size:30.0].fontName);
+                percentage.font = percentageFont;
+                CGFontRelease(percentageFont);
                 percentage.fontSize = 30.0;
                 percentage.foregroundColor = [[UIColor blackColor] CGColor];
                 percentage.contentsScale = [[UIScreen mainScreen] scale];
@@ -207,7 +209,9 @@
                 
                 CATextLayer *description = [[CATextLayer alloc] init];
                 description.frame = CGRectMake(100, 8, layer.frame.size.width - 80, 30);
-                description.font = CGFontCreateWithFontName((CFStringRef)[UIFont fontWithName:@"Helvetica-Bold" size:18.0].fontName);
+                CGFontRef descriptionFont = CGFontCreateWithFontName((CFStringRef)[UIFont fontWithName:@"Helvetica-Bold" size:18.0].fontName);
+                description.font = descriptionFont;
+                CGFontRelease(descriptionFont);
                 description.fontSize = 18.0;
                 description.foregroundColor = [[UIColor blackColor] CGColor];
                 description.contentsScale = [[UIScreen mainScreen] scale];
@@ -217,7 +221,9 @@
                 
                 CATextLayer *outof = [[CATextLayer alloc] init];
                 outof.frame = CGRectMake(100, 30, layer.frame.size.width - 80, 14);
-                outof.font = CGFontCreateWithFontName((CFStringRef)[UIFont fontWithName:@"Helvetica" size:12.0].fontName);
+                CGFontRef outofFont = CGFontCreateWithFontName((CFStringRef)[UIFont fontWithName:@"Helvetica" size:12.0].fontName);
+                outof.font = outofFont;
+                CGFontRelease(outofFont);
                 outof.fontSize = 12.0;
                 outof.foregroundColor = [[UIColor grayColor] CGColor];
                 outof.contentsScale = [[UIScreen mainScreen] scale];
