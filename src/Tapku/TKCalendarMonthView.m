@@ -220,7 +220,7 @@
 }
 
 - (id) initWithMonth:(NSDate*)date marks:(NSArray*)markArray startDayOnSunday:(BOOL)sunday{
-	if(![super initWithFrame:CGRectZero]) return nil;
+	if(self = [super initWithFrame:CGRectZero]) {
 
 	firstOfPrev = -1;
 	marks = [markArray retain];
@@ -272,7 +272,7 @@
 	[self.selectedImageView addSubview:self.currentDay];
 	[self.selectedImageView addSubview:self.dot];
 	self.multipleTouchEnabled = NO;
-	
+	}
 	return self;
 }
 - (void) dealloc {
@@ -373,7 +373,7 @@
 	int i = 1;
 	while(index % 7 != 0){
 		r = [self rectForCellAtIndex:index] ;
-		if ([marks count] > 0) 
+		if ([marks count] > 0 && index < [marks count]) 
 			[self drawTileInRect:r day:i mark:[[marks objectAtIndex:index] boolValue] font:font font2:font2];
 		else
 			[self drawTileInRect:r day:i mark:NO font:font font2:font2];
