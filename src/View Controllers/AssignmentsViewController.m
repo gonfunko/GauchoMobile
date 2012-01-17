@@ -230,12 +230,15 @@
     button.titleLabel.shadowColor = [UIColor darkGrayColor];
     button.titleLabel.shadowOffset = CGSizeMake(0, -1.0);
     
+    NSInteger offset = [[NSTimeZone localTimeZone] secondsFromGMTForDate:[NSDate date]];
+    NSDate *now = [[NSDate date] dateByAddingTimeInterval:offset];
     if (assignment.submittedDate != nil) {
         [button setTitle:@"DONE" forState:UIControlStateNormal];
         button.backgroundColor = [UIColor grayColor];
-    } else if (assignment.dueDate != nil && [[assignment.dueDate earlierDate:[NSDate date]] isEqualToDate:assignment.dueDate]) {
+    } else if (assignment.dueDate != nil && [[assignment.dueDate earlierDate:now] isEqualToDate:assignment.dueDate]) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"M/d"];
+        [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
         [button setTitle:[NSString stringWithFormat:@"DUE %@", [formatter stringFromDate:assignment.dueDate]] forState:UIControlStateNormal];
         [formatter release];
         button.backgroundColor = [UIColor colorWithRed:163/255.0 green:0.0 blue:6.0/255.0 alpha:1.0];
@@ -243,6 +246,7 @@
     } else if (assignment.dueDate != nil) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"M/d"];
+        [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
         [button setTitle:[NSString stringWithFormat:@"DUE %@", [formatter stringFromDate:assignment.dueDate]] forState:UIControlStateNormal];
         [formatter release];
         button.backgroundColor = [UIColor colorWithRed:0.0 green:139/255.0 blue:15.0/255.0 alpha:1.0];
@@ -267,6 +271,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterNoStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     NSString *newString = @"";
     
     if ([[button titleForState:UIControlStateNormal] rangeOfString:@":"].location == NSNotFound) {
@@ -283,14 +288,21 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GMAssignment *assignment = [[[[GMDataSource sharedDataSource] currentCourse] assignments] objectAtIndex:indexPath.row];
     
-    UITabBarController *controller = (UITabBarController *)(self.navigationController.visibleViewController);
+    /*UITabBarController *controller = (UITabBarController *)(self.navigationController.visibleViewController);
     controller.selectedViewController = [[controller viewControllers] objectAtIndex:3];
     [[[controller viewControllers] objectAtIndex:3] performSelector:@selector(showGradeWithID:) withObject:[NSNumber numberWithInteger:assignment.assignmentID]];
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];*/
+    
+    [table deselectRowAtIndexPath:indexPath animated:YES];
+    
+    AssignmentDetailViewController *details = [[AssignmentDetailViewController alloc] initWithNibName:@"AssignmentDetailViewController" bundle:[NSBundle mainBundle]];
+    details.assignment = assignment;
+    [self.navigationController pushViewController:details animated:YES];
+    [details release];
 }
 
 #pragma mark - Animation methods

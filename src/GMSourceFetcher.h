@@ -44,4 +44,6 @@
 //the delegate's sourceFetchSucceededWithPageSource: method
 - (void)participantsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate;
 
+- (void)detailsForAssignment:(GMAssignment *)assignment withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+
 @end

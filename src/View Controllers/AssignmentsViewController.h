@@ -14,6 +14,7 @@
 #import "GMWeekView.h"
 #import "TKCalendarMonthView.h"
 #import "NSDate+TKCategory.h"
+#import "AssignmentDetailViewController.h"
 
 @interface AssignmentsViewController : UIViewController <GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate, TKCalendarMonthViewDelegate, TKCalendarMonthViewDataSource> {
 @private

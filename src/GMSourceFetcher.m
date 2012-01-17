@@ -57,6 +57,17 @@
     [fetchRequest startAsynchronous];
 }
 
+- (void)detailsForAssignment:(GMAssignment *)assignment withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+    int assignmentID = (int)assignment.assignmentID;
+    
+    NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/mod/assignment/view.php?id=%i", assignmentID]];
+    
+    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
+    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
+    [fetchRequest setDelegate:self];
+    [fetchRequest startAsynchronous];
+}
+
 - (void)gradesForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate {
     int courseID = (int)course.courseID;
     

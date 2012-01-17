@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93127E7414C5341300CAF15F /* GMTwoButtonTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93127E7314C5341300CAF15F /* GMTwoButtonTableCell.m */; };
 		9314EBFD12F3D3D100F99756 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9314EBAC12F3D3D100F99756 /* ASIAuthenticationDialog.m */; };
 		9314EBFE12F3D3D100F99756 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9314EBAF12F3D3D100F99756 /* ASIDataCompressor.m */; };
 		9314EBFF12F3D3D100F99756 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9314EBB112F3D3D100F99756 /* ASIDataDecompressor.m */; };
@@ -28,6 +29,11 @@
 		9314EC5912F3EBB500F99756 /* participants@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9314EC5712F3EBB500F99756 /* participants@2x.png */; };
 		931C650B12F8CCF7005799F1 /* AssignmentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 931C650912F8CCF7005799F1 /* AssignmentsViewController.m */; };
 		931C650C12F8CCF7005799F1 /* AssignmentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 931C650A12F8CCF7005799F1 /* AssignmentsViewController.xib */; };
+		932A907214C23A9D00E80827 /* GMAssignmentDetailsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 932A907114C23A9D00E80827 /* GMAssignmentDetailsParser.m */; };
+		932A907514C23C9000E80827 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 932A907314C23C8600E80827 /* libxml2.dylib */; };
+		932A907C14C23CD700E80827 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 932A907714C23CD700E80827 /* TFHpple.m */; };
+		932A907D14C23CD700E80827 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 932A907914C23CD700E80827 /* TFHppleElement.m */; };
+		932A907E14C23CD700E80827 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 932A907B14C23CD700E80827 /* XPathQuery.m */; };
 		932A920912ED0E1E00C78AE9 /* GMAssignmentsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 932A920812ED0E1E00C78AE9 /* GMAssignmentsParser.m */; };
 		934300DA12E0F42600AFFFE4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934300D912E0F42600AFFFE4 /* UIKit.framework */; };
 		934300DC12E0F42600AFFFE4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934300DB12E0F42600AFFFE4 /* Foundation.framework */; };
@@ -77,9 +83,13 @@
 		93B1B8251329F13700403CCD /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B1B8241329F13700403CCD /* EventKit.framework */; };
 		93BBF5CF130E3A8900B07C25 /* GMLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */; };
 		93BBF5D3130E4B8800B07C25 /* bands.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BBF5D2130E4B8800B07C25 /* bands.png */; };
+		93C58BD514C3525A001F7558 /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C58BD314C3525A001F7558 /* AssignmentDetailViewController.m */; };
+		93C58BD614C3525A001F7558 /* AssignmentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */; };
+		93C58BD914C35544001F7558 /* GMWebViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C58BD814C35544001F7558 /* GMWebViewTableCell.m */; };
 		93D0758A1333D5C20025BF9E /* GMWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D075891333D5C20025BF9E /* GMWeekView.m */; };
 		93D0759113340D0B0025BF9E /* Month Calendar Left Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0758F13340D0B0025BF9E /* Month Calendar Left Arrow@2x.png */; };
 		93D0759213340D0B0025BF9E /* Month Calendar Right Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0759013340D0B0025BF9E /* Month Calendar Right Arrow@2x.png */; };
+		93D6CB2114C53DED00F8BFDB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D6CB1F14C53DE300F8BFDB /* MessageUI.framework */; };
 		93D986131310556F009C11C3 /* GMDashboardItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D986121310556F009C11C3 /* GMDashboardItem.m */; };
 		93D9861713105895009C11C3 /* DashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D9861513105895009C11C3 /* DashboardViewController.m */; };
 		93D9861813105895009C11C3 /* DashboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9861613105895009C11C3 /* DashboardViewController.xib */; };
@@ -94,6 +104,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		93127E7214C5341300CAF15F /* GMTwoButtonTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMTwoButtonTableCell.h; sourceTree = "<group>"; };
+		93127E7314C5341300CAF15F /* GMTwoButtonTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMTwoButtonTableCell.m; sourceTree = "<group>"; };
 		9314EBAB12F3D3D100F99756 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		9314EBAC12F3D3D100F99756 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		9314EBAD12F3D3D100F99756 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -131,6 +143,15 @@
 		931C650812F8CCF7005799F1 /* AssignmentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentsViewController.h; sourceTree = "<group>"; };
 		931C650912F8CCF7005799F1 /* AssignmentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentsViewController.m; sourceTree = "<group>"; };
 		931C650A12F8CCF7005799F1 /* AssignmentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentsViewController.xib; sourceTree = "<group>"; };
+		932A907014C23A9D00E80827 /* GMAssignmentDetailsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMAssignmentDetailsParser.h; sourceTree = "<group>"; };
+		932A907114C23A9D00E80827 /* GMAssignmentDetailsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMAssignmentDetailsParser.m; sourceTree = "<group>"; };
+		932A907314C23C8600E80827 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		932A907614C23CD700E80827 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		932A907714C23CD700E80827 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		932A907814C23CD700E80827 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		932A907914C23CD700E80827 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		932A907A14C23CD700E80827 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		932A907B14C23CD700E80827 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		932A920712ED0E1E00C78AE9 /* GMAssignmentsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMAssignmentsParser.h; sourceTree = "<group>"; };
 		932A920812ED0E1E00C78AE9 /* GMAssignmentsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMAssignmentsParser.m; sourceTree = "<group>"; };
 		934300D512E0F42600AFFFE4 /* GauchoMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GauchoMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,10 +227,16 @@
 		93BBF5CD130E3A8800B07C25 /* GMLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMLoadingView.h; sourceTree = "<group>"; };
 		93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMLoadingView.m; sourceTree = "<group>"; };
 		93BBF5D2130E4B8800B07C25 /* bands.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bands.png; sourceTree = "<group>"; };
+		93C58BD214C3525A001F7558 /* AssignmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDetailViewController.h; sourceTree = "<group>"; };
+		93C58BD314C3525A001F7558 /* AssignmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewController.m; sourceTree = "<group>"; };
+		93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AssignmentDetailViewController.xib; path = "../../src/View Controllers/AssignmentDetailViewController.xib"; sourceTree = "<group>"; };
+		93C58BD714C35544001F7558 /* GMWebViewTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMWebViewTableCell.h; sourceTree = "<group>"; };
+		93C58BD814C35544001F7558 /* GMWebViewTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMWebViewTableCell.m; sourceTree = "<group>"; };
 		93D075881333D5C20025BF9E /* GMWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMWeekView.h; path = "../View Controllers/GMWeekView.h"; sourceTree = "<group>"; };
 		93D075891333D5C20025BF9E /* GMWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMWeekView.m; path = "../View Controllers/GMWeekView.m"; sourceTree = "<group>"; };
 		93D0758F13340D0B0025BF9E /* Month Calendar Left Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Month Calendar Left Arrow@2x.png"; path = "TapkuLibrary.bundle/Images/calendar/Month Calendar Left Arrow@2x.png"; sourceTree = "<group>"; };
 		93D0759013340D0B0025BF9E /* Month Calendar Right Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Month Calendar Right Arrow@2x.png"; path = "TapkuLibrary.bundle/Images/calendar/Month Calendar Right Arrow@2x.png"; sourceTree = "<group>"; };
+		93D6CB1F14C53DE300F8BFDB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		93D986111310556F009C11C3 /* GMDashboardItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMDashboardItem.h; sourceTree = "<group>"; };
 		93D986121310556F009C11C3 /* GMDashboardItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMDashboardItem.m; sourceTree = "<group>"; };
 		93D9861413105895009C11C3 /* DashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardViewController.h; sourceTree = "<group>"; };
@@ -233,6 +260,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				932A907514C23C9000E80827 /* libxml2.dylib in Frameworks */,
 				9388E8F714BD551500A31C10 /* libz.dylib in Frameworks */,
 				93B1B8251329F13700403CCD /* EventKit.framework in Frameworks */,
 				93AF605D12F39116009A3657 /* QuartzCore.framework in Frameworks */,
@@ -240,6 +268,7 @@
 				93AF604712F385F7009A3657 /* SystemConfiguration.framework in Frameworks */,
 				93AF604512F385F2009A3657 /* CFNetwork.framework in Frameworks */,
 				93EB5D0B130EFE6300555E8A /* AddressBook.framework in Frameworks */,
+				93D6CB2114C53DED00F8BFDB /* MessageUI.framework in Frameworks */,
 				93EB5D0C130EFE6300555E8A /* AddressBookUI.framework in Frameworks */,
 				934300DA12E0F42600AFFFE4 /* UIKit.framework in Frameworks */,
 				934300DC12E0F42600AFFFE4 /* Foundation.framework in Frameworks */,
@@ -290,6 +319,7 @@
 		9314EC3112F3DC5B00F99756 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */,
 				93A9AF63131099CE0012CAF3 /* WebViewController.xib */,
 				93D9861613105895009C11C3 /* DashboardViewController.xib */,
 				934DBC8113031B88009BC05D /* ParticipantsViewController.xib */,
@@ -301,6 +331,19 @@
 			);
 			name = XIBs;
 			path = ../data/XIBs;
+			sourceTree = "<group>";
+		};
+		932A907F14C23CDB00E80827 /* hpple */ = {
+			isa = PBXGroup;
+			children = (
+				932A907614C23CD700E80827 /* TFHpple.h */,
+				932A907714C23CD700E80827 /* TFHpple.m */,
+				932A907814C23CD700E80827 /* TFHppleElement.h */,
+				932A907914C23CD700E80827 /* TFHppleElement.m */,
+				932A907A14C23CD700E80827 /* XPathQuery.h */,
+				932A907B14C23CD700E80827 /* XPathQuery.m */,
+			);
+			name = hpple;
 			sourceTree = "<group>";
 		};
 		934300CA12E0F42600AFFFE4 = {
@@ -323,7 +366,9 @@
 		934300D812E0F42600AFFFE4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				932A907314C23C8600E80827 /* libxml2.dylib */,
 				9388E8F614BD551500A31C10 /* libz.dylib */,
+				93D6CB1F14C53DE300F8BFDB /* MessageUI.framework */,
 				93B1B8241329F13700403CCD /* EventKit.framework */,
 				93EB5D03130EFE2300555E8A /* AddressBook.framework */,
 				93EB5D04130EFE2300555E8A /* AddressBookUI.framework */,
@@ -380,6 +425,10 @@
 				934BAC9C1304E7E80083A5F9 /* GMGradesTableViewCell.m */,
 				93D986191310783C009C11C3 /* GMTextViewTableCell.h */,
 				93D9861A1310783C009C11C3 /* GMTextViewTableCell.m */,
+				93C58BD714C35544001F7558 /* GMWebViewTableCell.h */,
+				93C58BD814C35544001F7558 /* GMWebViewTableCell.m */,
+				93127E7214C5341300CAF15F /* GMTwoButtonTableCell.h */,
+				93127E7314C5341300CAF15F /* GMTwoButtonTableCell.m */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -387,6 +436,7 @@
 		935037CC12EBA293001CBAD0 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				932A907F14C23CDB00E80827 /* hpple */,
 				935037C912EBA28F001CBAD0 /* GMParticipantsParser.h */,
 				935037CA12EBA28F001CBAD0 /* GMParticipantsParser.m */,
 				938277BF12EBC2CC001C35E9 /* GMGradesParser.h */,
@@ -397,6 +447,8 @@
 				9314EC2F12F3DB7200F99756 /* GMCourseParser.m */,
 				93DB4836130F9125004EF57C /* GMDashboardParser.h */,
 				93DB4837130F9125004EF57C /* GMDashboardParser.m */,
+				932A907014C23A9D00E80827 /* GMAssignmentDetailsParser.h */,
+				932A907114C23A9D00E80827 /* GMAssignmentDetailsParser.m */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -485,6 +537,8 @@
 				93D9861513105895009C11C3 /* DashboardViewController.m */,
 				93A9AF61131099CE0012CAF3 /* WebViewController.h */,
 				93A9AF62131099CE0012CAF3 /* WebViewController.m */,
+				93C58BD214C3525A001F7558 /* AssignmentDetailViewController.h */,
+				93C58BD314C3525A001F7558 /* AssignmentDetailViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -592,6 +646,7 @@
 				93D0759113340D0B0025BF9E /* Month Calendar Left Arrow@2x.png in Resources */,
 				93D0759213340D0B0025BF9E /* Month Calendar Right Arrow@2x.png in Resources */,
 				938489B314C0ACBF00F9986D /* gm.png in Resources */,
+				93C58BD614C3525A001F7558 /* AssignmentDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +699,13 @@
 				939036F5132AD77500A5AF6E /* EGORefreshTableHeaderView.m in Sources */,
 				93903702132AD8B100A5AF6E /* UIView+TKCategory.m in Sources */,
 				93D0758A1333D5C20025BF9E /* GMWeekView.m in Sources */,
+				932A907214C23A9D00E80827 /* GMAssignmentDetailsParser.m in Sources */,
+				932A907C14C23CD700E80827 /* TFHpple.m in Sources */,
+				932A907D14C23CD700E80827 /* TFHppleElement.m in Sources */,
+				932A907E14C23CD700E80827 /* XPathQuery.m in Sources */,
+				93C58BD514C3525A001F7558 /* AssignmentDetailViewController.m in Sources */,
+				93C58BD914C35544001F7558 /* GMWebViewTableCell.m in Sources */,
+				93127E7414C5341300CAF15F /* GMTwoButtonTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +722,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
@@ -674,6 +737,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
