@@ -194,7 +194,7 @@
         dataSource.password = password.text;
         
         //Try to load from the cache
-        [dataSource restoreData];
+        //[dataSource restoreData];
         
         //Parse and add the list of courses
         GMCourseParser *parser = [[GMCourseParser alloc] init];
