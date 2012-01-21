@@ -188,7 +188,9 @@
         [label release];
     }
     
-    //[calendar reload];
+    if ([calendar respondsToSelector:@selector(reload)]) {
+        [calendar performSelector:@selector(reload)];
+    }
     
     if (pendingID != 0) {
         [self showAssignmentWithID:[NSNumber numberWithInteger:pendingID]];
