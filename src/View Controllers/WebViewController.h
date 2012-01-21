@@ -19,5 +19,6 @@
 
 //Loads a given URL in the web view
 - (void)loadURL:(NSURL *)url;
+- (IBAction)openInSafari:(id)sender;
 
 @end

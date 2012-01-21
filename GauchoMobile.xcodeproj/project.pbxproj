@@ -35,6 +35,8 @@
 		932A907D14C23CD700E80827 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 932A907914C23CD700E80827 /* TFHppleElement.m */; };
 		932A907E14C23CD700E80827 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 932A907B14C23CD700E80827 /* XPathQuery.m */; };
 		932A920912ED0E1E00C78AE9 /* GMAssignmentsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 932A920812ED0E1E00C78AE9 /* GMAssignmentsParser.m */; };
+		933A49CA14C9FBE00037AD30 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A49C914C9FBE00037AD30 /* back@2x.png */; };
+		933A49CC14C9FC9A0037AD30 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A49CB14C9FC9A0037AD30 /* back.png */; };
 		934300DA12E0F42600AFFFE4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934300D912E0F42600AFFFE4 /* UIKit.framework */; };
 		934300DC12E0F42600AFFFE4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934300DB12E0F42600AFFFE4 /* Foundation.framework */; };
 		934300DE12E0F42600AFFFE4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934300DD12E0F42600AFFFE4 /* CoreGraphics.framework */; };
@@ -101,6 +103,8 @@
 		93EC607E1332E1E000601B04 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EC607D1332E1E000601B04 /* MainWindow-iPad.xib */; };
 		93ECB1731326F3C5007458FE /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 93ECB1711326F3C5007458FE /* blueArrow.png */; };
 		93ECB1741326F3C5007458FE /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93ECB1721326F3C5007458FE /* blueArrow@2x.png */; };
+		93EEE73C14C9FD9D00350104 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 93EEE73A14C9FD9D00350104 /* forward.png */; };
+		93EEE73D14C9FD9D00350104 /* forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93EEE73B14C9FD9D00350104 /* forward@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,6 +158,8 @@
 		932A907B14C23CD700E80827 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		932A920712ED0E1E00C78AE9 /* GMAssignmentsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMAssignmentsParser.h; sourceTree = "<group>"; };
 		932A920812ED0E1E00C78AE9 /* GMAssignmentsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMAssignmentsParser.m; sourceTree = "<group>"; };
+		933A49C914C9FBE00037AD30 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		933A49CB14C9FC9A0037AD30 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		934300D512E0F42600AFFFE4 /* GauchoMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GauchoMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		934300D912E0F42600AFFFE4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		934300DB12E0F42600AFFFE4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -253,6 +259,8 @@
 		93EC607D1332E1E000601B04 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "data/XIBs/iPad/MainWindow-iPad.xib"; sourceTree = SOURCE_ROOT; };
 		93ECB1711326F3C5007458FE /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		93ECB1721326F3C5007458FE /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		93EEE73A14C9FD9D00350104 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
+		93EEE73B14C9FD9D00350104 /* forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forward@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -477,6 +485,10 @@
 		939036F6132AD77F00A5AF6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				93EEE73A14C9FD9D00350104 /* forward.png */,
+				93EEE73B14C9FD9D00350104 /* forward@2x.png */,
+				933A49CB14C9FC9A0037AD30 /* back.png */,
+				933A49C914C9FBE00037AD30 /* back@2x.png */,
 				938489B214C0ACBF00F9986D /* gm.png */,
 				9395D622132882A200332A38 /* TapkuLibrary.bundle */,
 				93ECB1711326F3C5007458FE /* blueArrow.png */,
@@ -647,6 +659,10 @@
 				93D0759213340D0B0025BF9E /* Month Calendar Right Arrow@2x.png in Resources */,
 				938489B314C0ACBF00F9986D /* gm.png in Resources */,
 				93C58BD614C3525A001F7558 /* AssignmentDetailViewController.xib in Resources */,
+				933A49CA14C9FBE00037AD30 /* back@2x.png in Resources */,
+				933A49CC14C9FC9A0037AD30 /* back.png in Resources */,
+				93EEE73C14C9FD9D00350104 /* forward.png in Resources */,
+				93EEE73D14C9FD9D00350104 /* forward@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

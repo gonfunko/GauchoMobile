@@ -16,12 +16,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
     	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
-        
-        UIBarButtonItem *openInSafari = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(openInSafari)];
-        [openInSafari setStyle:UIBarButtonItemStylePlain];
-        
-        self.navigationItem.rightBarButtonItem = openInSafari;
-        [openInSafari release];
     }
     return self;
 }
@@ -105,7 +99,7 @@
     [loadingView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:1.0];
 }
 
-- (void)openInSafari {
+- (IBAction)openInSafari:(id)sender {
     [[UIApplication sharedApplication] openURL:[webView.request URL]];
 }
 
