@@ -212,6 +212,7 @@
         ((GMTextViewTableCell *)cell).textView.frame = CGRectMake(textViewFrame.origin.x, textViewFrame.origin.y, textViewFrame.size.width, stringSize.height + 10);
     } else {
         cell.textLabel.text = [[[item links] objectAtIndex:indexPath.row - 1] objectForKey:@"title"];
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
