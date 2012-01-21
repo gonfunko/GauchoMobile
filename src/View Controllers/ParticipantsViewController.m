@@ -10,6 +10,7 @@
 @implementation ParticipantsViewController
 
 @synthesize tableView;
+@synthesize sections;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -18,7 +19,6 @@
 - (void)dealloc {
     [super dealloc];
     [photoRequests release];
-    [sections release];
     [pictures release];
 }
 
@@ -33,13 +33,14 @@
     
     photoRequests = [[NSMutableArray alloc] init];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *dictPath = [[paths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%ipics.plist", (int)[[GMDataSource sharedDataSource] currentCourse].courseID]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:dictPath])
-        pictures = [[NSMutableDictionary dictionaryWithContentsOfFile:dictPath] retain];
+    NSString *dictPath = [[paths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%ipics", (int)[[GMDataSource sharedDataSource] currentCourse].courseID]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:dictPath]) {
+        pictures = [[NSKeyedUnarchiver unarchiveObjectWithFile:dictPath] retain];
+    }
     else
         pictures = [[NSMutableDictionary alloc] init];
     
-    sections = [[NSMutableDictionary alloc] init];
+    self.sections = [NSMutableArray array];
     loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, -25, 280, 27)];
     
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
@@ -47,6 +48,10 @@
     
     if ([[currentCourse participants] count] == 0) {
         [self loadParticipantsWithLoadingView:YES];
+    } else {
+        NSDictionary *_participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
+        NSArray *letters = [_participants allKeys];
+        self.sections = [letters sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     
     if (reloadView == nil) {
@@ -69,8 +74,9 @@
     
     //Based on http://stackoverflow.com/questions/2380173/iphone-how-to-write-an-image-to-disk-in-the-app-directories
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *dictPath = [[paths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%ipics.plist", (int)[[GMDataSource sharedDataSource] currentCourse].courseID]];
-    [pictures writeToFile:dictPath atomically:YES];
+    NSString *dictPath = [[paths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%ipics", (int)[[GMDataSource sharedDataSource] currentCourse].courseID]];
+    NSData *picsData = [NSKeyedArchiver archivedDataWithRootObject:pictures];
+    [picsData writeToFile:dictPath atomically:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -158,6 +164,10 @@
     
     [parser release];
     
+    NSDictionary *_participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
+    NSArray *letters = [_participants allKeys];
+    self.sections = [letters sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
     [self.tableView reloadData];
     
     [self loadPicturesForParticipants];
@@ -174,15 +184,10 @@
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
-
     [photoRequests removeObject:request];
     NSData *imageData = [request responseData];
-    
-    //Based on http://stackoverflow.com/questions/2380173/iphone-how-to-write-an-image-to-disk-in-the-app-directories
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [[paths objectAtIndex:0] stringByAppendingFormat:@"/%@", [[[[request originalURL] absoluteString] substringFromIndex:8] stringByReplacingOccurrencesOfString:@"/" withString:@""]];
-    [imageData writeToFile:path atomically:NO];
-    [pictures setObject:path forKey:[[request originalURL] absoluteString]];
+    UIImage *pic = [UIImage imageWithData:imageData];
+    [pictures setObject:pic forKey:[[request originalURL] absoluteString]];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
@@ -192,10 +197,15 @@
 }
 
 - (void)loadPicturesForParticipants {
-    NSArray *participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
-    for (GMParticipant *participant in participants) {
+    NSDictionary *participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
+    NSMutableArray *allParticipants = [[NSMutableArray alloc] init];
+    for (NSString *key in [participants allKeys]) {
+        [allParticipants addObjectsFromArray:[participants objectForKey:key]];
+    }
+    
+    for (GMParticipant *participant in allParticipants) {
         NSString *url = [participant.imageURL absoluteString];
-        if([pictures objectForKey:url] == nil) {
+        if([pictures objectForKey:url] == nil && ![url isEqualToString:@"https://gauchospace.ucsb.edu/courses/theme/gaucho/pix/u/f1.png"]) {
             ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
             [request setDelegate:self];
             [request startAsynchronous];
@@ -211,55 +221,28 @@
     return 45;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    NSArray *participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
-    
-    int sectionsCount = 0;
-    NSString *firstLetter = @"";
-    for (int i = 0; i < [participants count]; i++) {
-        if (![[[participants objectAtIndex:i] firstCharacterOfLastName] isEqualToString:firstLetter]) {
-            sectionsCount++;
-            firstLetter = [[participants objectAtIndex:i] firstCharacterOfLastName];
-            [sections setObject:firstLetter forKey:[NSNumber numberWithInt:sectionsCount - 1]];
-        }
-    }
-    
-    return sectionsCount;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    int total = [[[[[GMDataSource sharedDataSource] currentCourse] participants] allKeys] count] - 1;
+    return MAX(total, 0);
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSArray *participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSDictionary *participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
+    NSString *firstLetter = [sections objectAtIndex:section];
     
-    NSString *firstLetter = [sections objectForKey:[NSNumber numberWithInteger:section]];
-    int rows = 0;
-    for (GMParticipant *participant in participants) {
-        if ([[participant firstCharacterOfLastName] isEqualToString:firstLetter]) {
-            rows++;
-        }
+    if ([participants objectForKey:firstLetter] != nil) {
+        return [[participants objectForKey:firstLetter] count];
+    } else {
+        return 0;
     }
-    
-    return rows;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    NSArray *participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
-    NSMutableArray *letters = [[NSMutableArray alloc] init];
-    
-    NSString *firstLetter = @"";
-    for (int i = 0; i < [participants count]; i++) {
-        if (![[[participants objectAtIndex:i] firstCharacterOfLastName] isEqualToString:firstLetter]) {
-            firstLetter = [[participants objectAtIndex:i] firstCharacterOfLastName];
-            [letters addObject:firstLetter];
-        }
-    }
-    
-    return [letters autorelease];
+    return sections;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [sections objectForKey:[NSNumber numberWithInteger:section]];
+    return [sections objectAtIndex:section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
@@ -275,18 +258,18 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    NSArray *participants = [self participantsWithLastNameStartingWithLetter:[sections objectForKey:[NSNumber numberWithInteger:indexPath.section]]];
+    NSArray *participants = [[[[GMDataSource sharedDataSource] currentCourse] participants] objectForKey:[sections objectAtIndex:indexPath.section]];
     GMParticipant *participant = [participants objectAtIndex:indexPath.row];
     
     cell.textLabel.text = participant.name;
     cell.detailTextLabel.text = participant.city;
     
     if([pictures objectForKey:[participant.imageURL absoluteString]] != nil) {
-        cell.imageView.image = [UIImage imageWithContentsOfFile:[pictures objectForKey:[participant.imageURL absoluteString]]];
-    }
-    else {
-        cell.imageView.image = [UIImage imageNamed:@"defaulticon.png"];
-    }
+        cell.imageView.image = [pictures objectForKey:[participant.imageURL absoluteString]];
+     }
+     else {
+         cell.imageView.image = [UIImage imageNamed:@"defaulticon.png"];
+     }
     
     if (participant.inAddressBook) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -298,7 +281,7 @@
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *participants = [self participantsWithLastNameStartingWithLetter:[sections objectForKey:[NSNumber numberWithInteger:indexPath.section]]];
+    NSArray *participants = [[[[GMDataSource sharedDataSource] currentCourse] participants] objectForKey:[sections objectAtIndex:indexPath.section]];
     GMParticipant *participant = [participants objectAtIndex:indexPath.row];
     
     ABAddressBookRef addressBook = ABAddressBookCreate();
@@ -315,28 +298,15 @@
 }
 
 - (void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *participants = [self participantsWithLastNameStartingWithLetter:[sections objectForKey:[NSNumber numberWithInteger:indexPath.section]]];
+    NSArray *participants = [[[[GMDataSource sharedDataSource] currentCourse] participants] objectForKey:[sections objectAtIndex:indexPath.section]];
     GMParticipant *participant = [participants objectAtIndex:indexPath.row];
-
+    
     [self displayAddressBookEntryForParticipant:participant];
     
     [table deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Convenience methods
-
-- (NSArray *)participantsWithLastNameStartingWithLetter:(NSString *)letter {
-    NSMutableArray *matchingParticipants = [NSMutableArray array];
-    NSArray *participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
-    
-    for (GMParticipant *participant in participants) {
-        if ([[participant firstCharacterOfLastName] isEqualToString:letter]) {
-            [matchingParticipants addObject:participant];
-        }
-    }
-    
-    return matchingParticipants;
-}
 
 - (void)displayAddressBookEntryForParticipant:(GMParticipant *)participant {
     ABAddressBookRef addressBook = ABAddressBookCreate();

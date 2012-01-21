@@ -16,7 +16,7 @@
 
 @interface ParticipantsViewController : UIViewController<GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate, UIScrollViewDelegate> {
 @private
-    NSMutableDictionary *sections;
+    NSArray *sections;
     NSMutableDictionary *pictures;
     NSMutableArray *photoRequests;
 	GMSourceFetcher *fetcher;
@@ -29,12 +29,10 @@
 }
 
 @property (retain) UITableView *tableView;
+@property (copy) NSArray *sections;
 
 //Loads participants from the network, optionally with or without the yellow loading view
 - (void)loadParticipantsWithLoadingView:(BOOL)flag;
-
-//Returns an array of GMParticipant objects whose last names start with the given letter
-- (NSArray *)participantsWithLastNameStartingWithLetter:(NSString *)letter;
 
 //Loads and caches profile pictures for all participants
 - (void)loadPicturesForParticipants;

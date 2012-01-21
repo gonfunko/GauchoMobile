@@ -16,7 +16,7 @@
 @private
     NSString *name;
     NSArray *assignments;
-    NSArray *participants;
+    NSMutableDictionary *participants;
     NSArray *grades;
     NSArray *dashboardItems;
     NSInteger courseID;
@@ -27,7 +27,7 @@
 
 @property (copy) NSString *name;
 @property (retain) NSArray *assignments;
-@property (retain) NSArray *participants;
+@property (retain) NSMutableDictionary *participants;
 @property (retain) NSArray *grades;
 @property (retain) NSArray *dashboardItems;
 @property (assign) NSInteger courseID;

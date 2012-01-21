@@ -51,7 +51,7 @@
     if ((self = [super init])) {
         self.name = @"";
         self.assignments = [NSArray array];
-        self.participants = [NSArray array];
+        self.participants = [NSMutableDictionary dictionary];
         self.grades = [NSArray array];
         self.dashboardItems = [NSArray array];
         self.courseID = 0;
@@ -135,24 +135,35 @@
 }
 
 - (void)addParticipant:(GMParticipant *)newParticipant {
-    if (![self.participants containsObject:newParticipant]) {   
-        self.participants = [self.participants arrayByAddingObject:newParticipant];
-    }
     
     NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES];
-    self.participants = [self.participants sortedArrayUsingDescriptors:[NSArray arrayWithObject:sorter]];
+    
+    if ([self.participants objectForKey:[newParticipant firstCharacterOfLastName]] == nil) {
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        [array addObject:newParticipant];
+        [array sortUsingDescriptors:[NSArray arrayWithObject:sorter]];
+        [self.participants setObject:array forKey:[newParticipant firstCharacterOfLastName]];
+        [array release];
+    } else {
+        NSMutableArray *currentParticipants = [self.participants objectForKey:[newParticipant firstCharacterOfLastName]];
+        if (![currentParticipants containsObject:newParticipant]) {
+            [currentParticipants addObject:newParticipant];
+            [currentParticipants sortUsingDescriptors:[NSArray arrayWithObject:sorter]];
+        }
+    }
 }
 
 - (void)removeParticipant:(GMParticipant *)participant {
-    NSMutableArray *temp = [NSMutableArray arrayWithArray:self.participants];
-    [temp removeObject:participant];
-    
-    self.participants = temp;
+    NSMutableArray *temp = [self.participants objectForKey:[participant firstCharacterOfLastName]];
+    if ([temp containsObject:participant]) {
+        [temp removeObject:participant];
+    }
 }
 
 - (void)removeAllParticipants {
-    NSMutableArray *temp = [NSMutableArray array];
+    NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
     self.participants = temp;
+    [temp release];
 }
 
 - (void)addDashboardItem:(GMDashboardItem *)newItem {
