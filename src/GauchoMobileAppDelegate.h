@@ -7,10 +7,13 @@
 #import <UIKit/UIKit.h>
 #import "LoginViewController.h"
 #import "CourseViewController.h"
+#import "GMSourceFetcher.h"
 
-@interface GauchoMobileAppDelegate : NSObject <UIApplicationDelegate> {
+@interface GauchoMobileAppDelegate : NSObject <UIApplicationDelegate, GMSourceFetcherDelegate> {
 @private
-
+    GMSourceFetcher *sourceFetcher;
+    UIAlertView *waitMessage;
+    UIActivityIndicatorView *indicator;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
