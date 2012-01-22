@@ -50,11 +50,13 @@
     [self.view addGestureRecognizer:touchRecognizer];
     [touchRecognizer release];
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"username"] != nil) {
-        username.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"com.stuffediggy.gauchomobile" accessGroup:nil];
+    
+    if ([keychain objectForKey:(id)kSecAttrAccount] != nil) {
+        username.text = [keychain objectForKey:(id)kSecAttrAccount];
     }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"password"] != nil) {
-        password.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+    if ([keychain objectForKey:(id)kSecValueData] != nil) {
+        password.text = [keychain objectForKey:(id)kSecValueData];
     }
 }
 
@@ -131,8 +133,8 @@
     }
     
     //Save the username and password to autofill later
-    [[NSUserDefaults standardUserDefaults] setObject:[username text] forKey:@"username"];
-    [[NSUserDefaults standardUserDefaults] setObject:[password text] forKey:@"password"];
+    [keychain setObject:[username text] forKey:(id)kSecAttrAccount];
+    [keychain setObject:[password text] forKey:(id)kSecValueData];
     
     //Start the login request
     GMSourceFetcher *sourceFetcher = [[GMSourceFetcher alloc] init];

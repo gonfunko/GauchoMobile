@@ -11,6 +11,7 @@
 #import "GMCourseParser.h"
 #import "GMLoadingView.h"
 #import "GMDashboardParser.h"
+#import "KeychainItemWrapper.h"
 
 @interface LoginViewController : UIViewController <GMSourceFetcherDelegate>{
 @private
@@ -22,6 +23,7 @@
     IBOutlet UINavigationBar *navBar;
     IBOutlet UIView *loginView;
     GMLoadingView *loadingView;
+    KeychainItemWrapper *keychain;
 }
 
 //Called when login button is pressed; attempts to log into GauchoSpace using the entered name and password

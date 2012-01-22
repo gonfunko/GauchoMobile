@@ -12,6 +12,7 @@
 #import "GradesViewController.h"
 #import "LoginViewController.h"
 #import "GMSourceFetcher.h"
+#import "KeychainItemWrapper.h"
 
 @interface CourseViewController : UITableViewController {
 @private

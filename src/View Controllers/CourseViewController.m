@@ -144,8 +144,9 @@
     //Reset the active username and password
     [[GMDataSource sharedDataSource] setUsername:@""];
     [[GMDataSource sharedDataSource] setPassword:@""];
-    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"username"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"password"];
+    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"com.stuffediggy.gauchomobile" accessGroup:nil];
+    [keychain setObject:@"" forKey:(id)kSecAttrAccount];
+    [keychain setObject:@"" forKey:(id)kSecValueData];
     
     //Create and present the login controller
     LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];

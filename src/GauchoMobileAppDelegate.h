@@ -8,6 +8,7 @@
 #import "LoginViewController.h"
 #import "CourseViewController.h"
 #import "GMSourceFetcher.h"
+#import "KeychainItemWrapper.h"
 
 @interface GauchoMobileAppDelegate : NSObject <UIApplicationDelegate, GMSourceFetcherDelegate> {
 @private
