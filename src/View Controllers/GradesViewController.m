@@ -305,7 +305,7 @@
     
     GMGrade *grades = [[[[GMDataSource sharedDataSource] currentCourse] grades] objectAtIndex:indexPath.row];
     cell.description.text = grades.description;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (grades.score == -1){
         cell.percentage.text = @"–";
         cell.outof.text = @"Not Graded";   
