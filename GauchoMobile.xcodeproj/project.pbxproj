@@ -85,6 +85,7 @@
 		93B1B8251329F13700403CCD /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B1B8241329F13700403CCD /* EventKit.framework */; };
 		93BBF5CF130E3A8900B07C25 /* GMLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */; };
 		93BBF5D3130E4B8800B07C25 /* bands.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BBF5D2130E4B8800B07C25 /* bands.png */; };
+		93C257DF14CCC1810079E5CD /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C257DE14CCC1800079E5CD /* KeychainItemWrapper.m */; };
 		93C58BD514C3525A001F7558 /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C58BD314C3525A001F7558 /* AssignmentDetailViewController.m */; };
 		93C58BD614C3525A001F7558 /* AssignmentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */; };
 		93C58BD914C35544001F7558 /* GMWebViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C58BD814C35544001F7558 /* GMWebViewTableCell.m */; };
@@ -233,6 +234,8 @@
 		93BBF5CD130E3A8800B07C25 /* GMLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMLoadingView.h; sourceTree = "<group>"; };
 		93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMLoadingView.m; sourceTree = "<group>"; };
 		93BBF5D2130E4B8800B07C25 /* bands.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bands.png; sourceTree = "<group>"; };
+		93C257DD14CCC1800079E5CD /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		93C257DE14CCC1800079E5CD /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		93C58BD214C3525A001F7558 /* AssignmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDetailViewController.h; sourceTree = "<group>"; };
 		93C58BD314C3525A001F7558 /* AssignmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewController.m; sourceTree = "<group>"; };
 		93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AssignmentDetailViewController.xib; path = "../../src/View Controllers/AssignmentDetailViewController.xib"; sourceTree = "<group>"; };
@@ -422,6 +425,8 @@
 				939036FB132AD7F800A5AF6E /* GauchoMobile-Info.plist */,
 				934300E512E0F42600AFFFE4 /* GauchoMobile-Prefix.pch */,
 				934300E612E0F42700AFFFE4 /* main.m */,
+				93C257DD14CCC1800079E5CD /* KeychainItemWrapper.h */,
+				93C257DE14CCC1800079E5CD /* KeychainItemWrapper.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -722,6 +727,7 @@
 				93C58BD514C3525A001F7558 /* AssignmentDetailViewController.m in Sources */,
 				93C58BD914C35544001F7558 /* GMWebViewTableCell.m in Sources */,
 				93127E7414C5341300CAF15F /* GMTwoButtonTableCell.m in Sources */,
+				93C257DF14CCC1810079E5CD /* KeychainItemWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
