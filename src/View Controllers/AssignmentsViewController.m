@@ -294,15 +294,11 @@
 {
     GMAssignment *assignment = [[[[GMDataSource sharedDataSource] currentCourse] assignments] objectAtIndex:indexPath.row];
     
-    /*UITabBarController *controller = (UITabBarController *)(self.navigationController.visibleViewController);
-    controller.selectedViewController = [[controller viewControllers] objectAtIndex:3];
-    [[[controller viewControllers] objectAtIndex:3] performSelector:@selector(showGradeWithID:) withObject:[NSNumber numberWithInteger:assignment.assignmentID]];
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];*/
-    
     [table deselectRowAtIndexPath:indexPath animated:YES];
     
     AssignmentDetailViewController *details = [[AssignmentDetailViewController alloc] initWithNibName:@"AssignmentDetailViewController" bundle:[NSBundle mainBundle]];
     details.assignment = assignment;
+    details.tabBarController = (UITabBarController *)(self.navigationController.visibleViewController);
     [self.navigationController pushViewController:details animated:YES];
     [details release];
 }

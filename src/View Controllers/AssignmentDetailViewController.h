@@ -21,9 +21,11 @@
     GMLoadingView *loadingView;
     NSString *details;
     UIWebView *sizingWebView;
+    __unsafe_unretained UITabBarController *tabBarController;
     int webviewHeight;
 }
 
+@property (assign) UITabBarController *tabBarController;
 @property (retain) GMAssignment *assignment;
 @property (copy) NSString *details;
 

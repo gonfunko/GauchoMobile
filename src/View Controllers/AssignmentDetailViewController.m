@@ -12,6 +12,7 @@
 
 @synthesize assignment;
 @synthesize details;
+@synthesize tabBarController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -202,10 +203,10 @@
         [((GMWebViewTableCell *)cell).webview loadHTMLString:details baseURL:[NSURL URLWithString:@"https://gauchospace.ucsb.edu"]];
         ((GMWebViewTableCell *)cell).webview.delegate = self;
     } else if (indexPath.section == 1) {
-        [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"Email" forState:UIControlStateNormal];
-        [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"Email" forState:UIControlStateHighlighted];
-        [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"Email" forState:UIControlStateSelected];
-        [((GMTwoButtonTableCell *)cell).firstButton addTarget:self action:@selector(emailAssignment:) forControlEvents:UIControlEventTouchUpInside];
+        [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"View Grade" forState:UIControlStateNormal];
+        [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"View Grade" forState:UIControlStateHighlighted];
+        [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"View Grade" forState:UIControlStateSelected];
+        [((GMTwoButtonTableCell *)cell).firstButton addTarget:self action:@selector(showGrade:) forControlEvents:UIControlEventTouchUpInside];
         [((GMTwoButtonTableCell *)cell).secondButton setTitle:@"Print" forState:UIControlStateNormal];
         [((GMTwoButtonTableCell *)cell).secondButton setTitle:@"Print" forState:UIControlStateHighlighted];
         [((GMTwoButtonTableCell *)cell).secondButton setTitle:@"Print" forState:UIControlStateSelected];
@@ -232,14 +233,10 @@
     }
 }
 
-- (void)emailAssignment:(id)sender {
-    MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
-    controller.mailComposeDelegate = self;
-    controller.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
-    [controller setSubject:self.assignment.description];
-    [controller setMessageBody:details isHTML:YES]; 
-    [self presentModalViewController:controller animated:YES];
-    [controller release];
+- (void)showGrade:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+    tabBarController.selectedViewController = [[tabBarController viewControllers] objectAtIndex:3];
+    [[[tabBarController viewControllers] objectAtIndex:3] performSelector:@selector(showGradeWithID:) withObject:[NSNumber numberWithInteger:self.assignment.assignmentID]];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error;
