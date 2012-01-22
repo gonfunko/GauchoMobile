@@ -14,6 +14,7 @@
 #import "GMWebViewTableCell.h"
 #import "GMTwoButtonTableCell.h"
 #import "GMLoadingView.h"
+#import "WebViewController.h"
 
 @interface AssignmentDetailViewController : UITableViewController <GMSourceFetcherDelegate, UIWebViewDelegate, MFMailComposeViewControllerDelegate> {
     GMAssignment *assignment;

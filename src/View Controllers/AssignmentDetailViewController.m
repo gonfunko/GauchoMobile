@@ -124,17 +124,19 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)view {
-    webviewHeight = [[view stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"] intValue];
-    [self.tableView reloadData];
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
-    [loadingView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.25];
-    self.tableView.scrollEnabled = YES;
+    if ([view isEqual:sizingWebView]) {
+        webviewHeight = [[view stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"] intValue];
+        [self.tableView reloadData];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+        animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
+        animation.duration = 0.25;
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        [[loadingView layer] addAnimation:animation forKey:@"position"];
+        [loadingView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.25];
+        self.tableView.scrollEnabled = YES;
+    }
 }
 
 #pragma mark - Table view data source
@@ -198,6 +200,7 @@
         }
     } else if (indexPath.section == 0 && indexPath.row == 2) {
         [((GMWebViewTableCell *)cell).webview loadHTMLString:details baseURL:[NSURL URLWithString:@"https://gauchospace.ucsb.edu"]];
+        ((GMWebViewTableCell *)cell).webview.delegate = self;
     } else if (indexPath.section == 1) {
         [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"Email" forState:UIControlStateNormal];
         [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"Email" forState:UIControlStateHighlighted];
@@ -257,6 +260,22 @@
     void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {};
     
     [pic presentAnimated:YES completionHandler:completionHandler];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    if ([webView isEqual:sizingWebView]) {
+        return YES;
+    } else {
+        if ([[[request URL] absoluteString] isEqualToString:@"https://gauchospace.ucsb.edu/"]) {
+            return YES;
+        } else {
+            WebViewController *controller = [[WebViewController alloc] initWithNibName:@"WebViewController" bundle:[NSBundle mainBundle]];
+            [controller loadURL:[request URL]];
+            [self.navigationController pushViewController:controller animated:YES];
+            [controller release];
+            return NO;
+        }
+    }
 }
 
 - (void)dealloc {
