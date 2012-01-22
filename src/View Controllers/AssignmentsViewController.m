@@ -374,7 +374,7 @@
                 
                 animation.fillMode = kCAFillModeForwards;
                 animation.removedOnCompletion = NO;
-                animation.duration = .6;
+                animation.duration = .4;
                 animation.delegate = self;
                 [animation setValue:layer forKey:@"layer"];
                 
