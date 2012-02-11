@@ -40,6 +40,11 @@
     [webView loadRequest:[NSURLRequest requestWithURL:pendingURL]];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [webView stopLoading];
+    webView.delegate = nil;   
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
