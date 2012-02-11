@@ -67,6 +67,12 @@
     loginView.frame = CGRectMake((int)((self.view.frame.size.width - loginView.frame.size.width) / 2), 60, loginView.frame.size.width, loginView.frame.size.height);
     loginView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:loginView];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"loginScreenVisible"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"loginScreenVisible"];
 }
 
 - (void)viewDidUnload

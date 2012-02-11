@@ -35,7 +35,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     NSDate *lastActiveDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastActiveDate"];
-    if (lastActiveDate != nil && [[NSDate date] timeIntervalSinceDate:lastActiveDate] > 900) {
+    BOOL loginScreenVisible = [[[NSUserDefaults standardUserDefaults] objectForKey:@"loginScreenVisible"] boolValue];
+    if (lastActiveDate != nil && [[NSDate date] timeIntervalSinceDate:lastActiveDate] > 900 && !loginScreenVisible) {
         sourceFetcher = [[GMSourceFetcher alloc] init];
         KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"com.stuffediggy.gauchomobile" accessGroup:nil];
         NSString *username = [keychain objectForKey:(id)kSecAttrAccount];
