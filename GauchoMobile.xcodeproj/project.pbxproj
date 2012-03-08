@@ -51,6 +51,13 @@
 		935037CB12EBA28F001CBAD0 /* GMParticipantsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 935037CA12EBA28F001CBAD0 /* GMParticipantsParser.m */; };
 		938277C112EBC2CC001C35E9 /* GMGradesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 938277C012EBC2CC001C35E9 /* GMGradesParser.m */; };
 		938489B314C0ACBF00F9986D /* gm.png in Resources */ = {isa = PBXBuildFile; fileRef = 938489B214C0ACBF00F9986D /* gm.png */; };
+		9385EFE91508692B00872595 /* GMForumPostsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFE81508692B00872595 /* GMForumPostsParser.m */; };
+		9385EFEC1508693A00872595 /* GMForumTopicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFEB1508693A00872595 /* GMForumTopicView.m */; };
+		9385EFF31508696C00872595 /* GMForum.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFEE1508696C00872595 /* GMForum.m */; };
+		9385EFF41508696C00872595 /* GMForumPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFF01508696C00872595 /* GMForumPost.m */; };
+		9385EFF51508696C00872595 /* GMForumTopic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFF21508696C00872595 /* GMForumTopic.m */; };
+		9385EFF7150869A100872595 /* ForumTopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9385EFF6150869A100872595 /* ForumTopicViewController.xib */; };
+		9385EFFA150869CE00872595 /* ForumTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFF9150869CE00872595 /* ForumTopicViewController.m */; };
 		9388E8F714BD551500A31C10 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9388E8F614BD551500A31C10 /* libz.dylib */; };
 		938C408D12E9471700A8894E /* GMCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 938C408C12E9471700A8894E /* GMCourse.m */; };
 		938C792C12F5217A00C3F134 /* GMDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 938C792B12F5217A00C3F134 /* GMDataSource.m */; };
@@ -186,6 +193,19 @@
 		938277BF12EBC2CC001C35E9 /* GMGradesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGradesParser.h; sourceTree = "<group>"; };
 		938277C012EBC2CC001C35E9 /* GMGradesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGradesParser.m; sourceTree = "<group>"; };
 		938489B214C0ACBF00F9986D /* gm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gm.png; sourceTree = "<group>"; };
+		9385EFE71508692B00872595 /* GMForumPostsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMForumPostsParser.h; sourceTree = "<group>"; };
+		9385EFE81508692B00872595 /* GMForumPostsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMForumPostsParser.m; sourceTree = "<group>"; };
+		9385EFEA1508693A00872595 /* GMForumTopicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMForumTopicView.h; sourceTree = "<group>"; };
+		9385EFEB1508693A00872595 /* GMForumTopicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMForumTopicView.m; sourceTree = "<group>"; };
+		9385EFED1508696C00872595 /* GMForum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMForum.h; sourceTree = "<group>"; };
+		9385EFEE1508696C00872595 /* GMForum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMForum.m; sourceTree = "<group>"; };
+		9385EFEF1508696C00872595 /* GMForumPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMForumPost.h; sourceTree = "<group>"; };
+		9385EFF01508696C00872595 /* GMForumPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMForumPost.m; sourceTree = "<group>"; };
+		9385EFF11508696C00872595 /* GMForumTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMForumTopic.h; sourceTree = "<group>"; };
+		9385EFF21508696C00872595 /* GMForumTopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMForumTopic.m; sourceTree = "<group>"; };
+		9385EFF6150869A100872595 /* ForumTopicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForumTopicViewController.xib; sourceTree = "<group>"; };
+		9385EFF8150869CE00872595 /* ForumTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumTopicViewController.h; sourceTree = "<group>"; };
+		9385EFF9150869CE00872595 /* ForumTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumTopicViewController.m; sourceTree = "<group>"; };
 		9388E8F614BD551500A31C10 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		938C408B12E9471700A8894E /* GMCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMCourse.h; sourceTree = "<group>"; };
 		938C408C12E9471700A8894E /* GMCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMCourse.m; sourceTree = "<group>"; };
@@ -244,11 +264,11 @@
 		93C257E514CCCE410079E5CD /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../../Icon@2x.png"; sourceTree = "<group>"; };
 		93C58BD214C3525A001F7558 /* AssignmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDetailViewController.h; sourceTree = "<group>"; };
 		93C58BD314C3525A001F7558 /* AssignmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewController.m; sourceTree = "<group>"; };
-		93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AssignmentDetailViewController.xib; path = "../../src/View Controllers/AssignmentDetailViewController.xib"; sourceTree = "<group>"; };
+		93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentDetailViewController.xib; sourceTree = "<group>"; };
 		93C58BD714C35544001F7558 /* GMWebViewTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMWebViewTableCell.h; sourceTree = "<group>"; };
 		93C58BD814C35544001F7558 /* GMWebViewTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMWebViewTableCell.m; sourceTree = "<group>"; };
-		93D075881333D5C20025BF9E /* GMWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMWeekView.h; path = "../View Controllers/GMWeekView.h"; sourceTree = "<group>"; };
-		93D075891333D5C20025BF9E /* GMWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMWeekView.m; path = "../View Controllers/GMWeekView.m"; sourceTree = "<group>"; };
+		93D075881333D5C20025BF9E /* GMWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMWeekView.h; sourceTree = "<group>"; };
+		93D075891333D5C20025BF9E /* GMWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMWeekView.m; sourceTree = "<group>"; };
 		93D0758F13340D0B0025BF9E /* Month Calendar Left Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Month Calendar Left Arrow@2x.png"; path = "TapkuLibrary.bundle/Images/calendar/Month Calendar Left Arrow@2x.png"; sourceTree = "<group>"; };
 		93D0759013340D0B0025BF9E /* Month Calendar Right Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Month Calendar Right Arrow@2x.png"; path = "TapkuLibrary.bundle/Images/calendar/Month Calendar Right Arrow@2x.png"; sourceTree = "<group>"; };
 		93D6CB1F14C53DE300F8BFDB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -337,6 +357,7 @@
 		9314EC3112F3DC5B00F99756 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				9385EFF6150869A100872595 /* ForumTopicViewController.xib */,
 				93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */,
 				93A9AF63131099CE0012CAF3 /* WebViewController.xib */,
 				93D9861613105895009C11C3 /* DashboardViewController.xib */,
@@ -470,6 +491,8 @@
 				93DB4837130F9125004EF57C /* GMDashboardParser.m */,
 				932A907014C23A9D00E80827 /* GMAssignmentDetailsParser.h */,
 				932A907114C23A9D00E80827 /* GMAssignmentDetailsParser.m */,
+				9385EFE71508692B00872595 /* GMForumPostsParser.h */,
+				9385EFE81508692B00872595 /* GMForumPostsParser.m */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -477,6 +500,12 @@
 		938C408912E9470100A8894E /* Data Model Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9385EFED1508696C00872595 /* GMForum.h */,
+				9385EFEE1508696C00872595 /* GMForum.m */,
+				9385EFEF1508696C00872595 /* GMForumPost.h */,
+				9385EFF01508696C00872595 /* GMForumPost.m */,
+				9385EFF11508696C00872595 /* GMForumTopic.h */,
+				9385EFF21508696C00872595 /* GMForumTopic.m */,
 				93AF5FAD12F37A64009A3657 /* GMQuarter.h */,
 				93AF5FAE12F37A64009A3657 /* GMQuarter.m */,
 				938C408B12E9471700A8894E /* GMCourse.h */,
@@ -566,6 +595,8 @@
 				93A9AF62131099CE0012CAF3 /* WebViewController.m */,
 				93C58BD214C3525A001F7558 /* AssignmentDetailViewController.h */,
 				93C58BD314C3525A001F7558 /* AssignmentDetailViewController.m */,
+				9385EFF8150869CE00872595 /* ForumTopicViewController.h */,
+				9385EFF9150869CE00872595 /* ForumTopicViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -580,6 +611,8 @@
 				93D075891333D5C20025BF9E /* GMWeekView.m */,
 				939036F3132AD77500A5AF6E /* EGORefreshTableHeaderView.h */,
 				939036F4132AD77500A5AF6E /* EGORefreshTableHeaderView.m */,
+				9385EFEA1508693A00872595 /* GMForumTopicView.h */,
+				9385EFEB1508693A00872595 /* GMForumTopicView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -680,6 +713,7 @@
 				93EEE73D14C9FD9D00350104 /* forward@2x.png in Resources */,
 				93C257E414CCCE3F0079E5CD /* Icon.png in Resources */,
 				93C257E614CCCE420079E5CD /* Icon@2x.png in Resources */,
+				9385EFF7150869A100872595 /* ForumTopicViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,6 +774,12 @@
 				93C58BD914C35544001F7558 /* GMWebViewTableCell.m in Sources */,
 				93127E7414C5341300CAF15F /* GMTwoButtonTableCell.m in Sources */,
 				93C257DF14CCC1810079E5CD /* KeychainItemWrapper.m in Sources */,
+				9385EFE91508692B00872595 /* GMForumPostsParser.m in Sources */,
+				9385EFEC1508693A00872595 /* GMForumTopicView.m in Sources */,
+				9385EFF31508696C00872595 /* GMForum.m in Sources */,
+				9385EFF41508696C00872595 /* GMForumPost.m in Sources */,
+				9385EFF51508696C00872595 /* GMForumTopic.m in Sources */,
+				9385EFFA150869CE00872595 /* ForumTopicViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
