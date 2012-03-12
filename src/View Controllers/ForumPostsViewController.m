@@ -1,14 +1,18 @@
 //
-//  ForumTopicViewController.m
+//  ForumPostsViewController.m
 //  GauchoMobile
 //
-//  Created by Aaron Dodson on 2/15/12.
+//  Created by Aaron Dodson on 3/11/12.
 //  Copyright (c) 2012 Me. All rights reserved.
 //
 
-#import "ForumTopicViewController.h"
+#import "ForumPostsViewController.h"
 
-@implementation ForumTopicViewController
+@interface ForumPostsViewController ()
+
+@end
+
+@implementation ForumPostsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -18,16 +22,6 @@
     }
     return self;
 }
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
@@ -44,7 +38,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
