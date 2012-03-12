@@ -17,9 +17,13 @@
 }
 
 - (void)dealloc {
-    [super dealloc];
+    self.sections = nil;
     [photoRequests release];
     [pictures release];
+    [fetcher release];
+    [loadingView removeFromSuperview];
+    [reloadView removeFromSuperview];
+    [super dealloc];
 }
 
 #pragma mark -
@@ -29,7 +33,7 @@
     [super viewDidLoad];
     
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
-    self.navigationController.visibleViewController.navigationItem.title = @"Participants";
+    self.navigationController.visibleViewController.navigationItem.title = @"People";
     
     photoRequests = [[NSMutableArray alloc] init];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -212,6 +216,8 @@
             [photoRequests addObject:request];
         }
     }
+    
+    [allParticipants release];
 }
 
 #pragma mark -

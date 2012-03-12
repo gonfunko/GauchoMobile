@@ -62,4 +62,11 @@
     return [self.contents hash] ^ [self.dateRange hash];
 }
 
+- (void)dealloc {
+    self.dateRange = nil;
+    self.contents = nil;
+    self.links = nil;
+    [super dealloc];
+}
+
 @end

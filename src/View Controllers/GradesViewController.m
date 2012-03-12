@@ -12,6 +12,9 @@
 
 - (void)dealloc
 {
+    [fetcher release];
+    [loadingView removeFromSuperview];
+    [reloadView removeFromSuperview];
     [super dealloc];
 }
 
@@ -66,10 +69,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    [fetcher release];
-    [loadingView removeFromSuperview];
-    [reloadView removeFromSuperview];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

@@ -74,5 +74,12 @@
     [NSKeyedArchiver archiveRootObject:courses toFile:path];
 }
 
+- (void)dealloc {
+    self.username = nil;
+    self.password = nil;
+    self.currentCourse = nil;
+    [courses release];
+    [super dealloc];
+}
 
 @end

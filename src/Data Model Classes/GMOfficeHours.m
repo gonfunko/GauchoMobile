@@ -57,4 +57,10 @@
     return [self.day hash] ^ [self.time hash];
 }
 
+- (void)dealloc {
+    self.day = nil;
+    self.time = nil;
+    [super dealloc];
+}
+
 @end

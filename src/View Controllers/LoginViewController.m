@@ -85,12 +85,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-    [floatingBackground release];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -242,6 +236,13 @@
 - (void)dismissKeyboard {
     [username resignFirstResponder];
     [password resignFirstResponder];
+}
+
+- (void)dealloc {
+    [floatingBackground release];
+    [loadingView removeFromSuperview];
+    [loadingView release];
+    [super dealloc];
 }
 
 @end

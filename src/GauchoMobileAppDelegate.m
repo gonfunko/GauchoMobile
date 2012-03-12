@@ -41,6 +41,7 @@
         KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"com.stuffediggy.gauchomobile" accessGroup:nil];
         NSString *username = [keychain objectForKey:(id)kSecAttrAccount];
         NSString *password = [keychain objectForKey:(id)kSecValueData];
+        [keychain release];
         [sourceFetcher loginWithUsername:username password:password delegate:self];
         waitMessage = [[[UIAlertView alloc] initWithTitle:@"Welcome Back!" message:@"Hang on for a sec while we log you back in to GauchoSpace..." delegate:self cancelButtonTitle:nil otherButtonTitles: nil] autorelease];
         waitMessage.delegate = self;

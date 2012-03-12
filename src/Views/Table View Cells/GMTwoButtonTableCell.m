@@ -21,6 +21,7 @@
         UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(0, -3, self.frame.size.width + 6, self.frame.size.height + 6)];
         bg.backgroundColor = [UIColor groupTableViewBackgroundColor];
         [self addSubview:bg];
+        [bg release];
         
         firstButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         firstButton.frame = CGRectMake(10, self.frame.origin.y, (self.frame.size.width - 40) / 2.0, self.frame.size.height);

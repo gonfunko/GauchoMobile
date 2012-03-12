@@ -11,6 +11,7 @@
 
 - (id)init {
     if ((self = [super init])) {
+        activeRequests = [[NSMutableArray alloc] init];
     }
     
     return self;
@@ -25,6 +26,7 @@
     [loginRequest setDelegate:self];
     [loginRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
     [loginRequest startAsynchronous];
+    [activeRequests addObject:loginRequest];
 }
 
 - (void)logout {
@@ -33,6 +35,7 @@
     NSURL *logoutScriptURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/login/logout.php?sesskey=%@", sessionKey]];
     ASIFormDataRequest *logoutRequest = [ASIFormDataRequest requestWithURL:logoutScriptURL];
     [logoutRequest startSynchronous];
+    [activeRequests addObject:logoutRequest];
 }
 
 - (void)dashboardForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate {
@@ -44,6 +47,7 @@
     [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
     [fetchRequest setDelegate:self];
     [fetchRequest startAsynchronous];
+    [activeRequests addObject:fetchRequest];
 }
 
 - (void)assignmentsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate {
@@ -55,6 +59,7 @@
     [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
     [fetchRequest setDelegate:self];
     [fetchRequest startAsynchronous];
+    [activeRequests addObject:fetchRequest];
 }
 
 - (void)detailsForAssignment:(GMAssignment *)assignment withDelegate:(id <GMSourceFetcherDelegate>)delegate {
@@ -66,6 +71,7 @@
     [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
     [fetchRequest setDelegate:self];
     [fetchRequest startAsynchronous];
+    [activeRequests addObject:fetchRequest];
 }
 
 - (void)gradesForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate {
@@ -77,6 +83,7 @@
     [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
     [fetchRequest setDelegate:self];
     [fetchRequest startAsynchronous];
+    [activeRequests addObject:fetchRequest];
 }
 
 - (void)participantsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate {
@@ -88,19 +95,67 @@
     [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
     [fetchRequest setDelegate:self];
     [fetchRequest startAsynchronous];
+    [activeRequests addObject:fetchRequest];
+}
+
+- (void)forumsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+    int courseID = (int)course.courseID;
+    
+    NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/mod/forum/index.php?id=%i", courseID]];
+    
+    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
+    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
+    [fetchRequest setDelegate:self];
+    [fetchRequest startAsynchronous];
+    [activeRequests addObject:fetchRequest];
+}
+
+- (void)topicsForForum:(GMForum *)forum withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+    int forumID = [forum.forumID intValue];
+    
+    NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/mod/forum/view.php?f=%i", forumID]];
+    
+    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
+    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
+    [fetchRequest setDelegate:self];
+    [fetchRequest startAsynchronous];
+    [activeRequests addObject:fetchRequest];
+}
+
+- (void)postsForTopic:(GMForumTopic *)topic withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+    int topicID = [topic.topicID intValue];
+    
+    NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/mod/forum/discuss.php?d=%i", topicID]];
+    
+    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
+    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
+    [fetchRequest setDelegate:self];
+    [fetchRequest startAsynchronous];
+    [activeRequests addObject:fetchRequest];
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
+    [activeRequests removeObject:request];
     NSString *responseString = [request responseString];
     id <GMSourceFetcherDelegate> delegate = [[request userInfo] objectForKey:@"delegate"];
     [delegate sourceFetchSucceededWithPageSource:responseString];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
+    [activeRequests removeObject:request];
     NSError *error = [request error];
     
     id <GMSourceFetcherDelegate> delegate = [[request userInfo] objectForKey:@"delegate"];
     [delegate sourceFetchDidFailWithError:error];
+}
+
+- (void)dealloc {
+    for (ASIHTTPRequest *request in activeRequests) {
+        [request clearDelegatesAndCancel];
+    }
+    
+    [activeRequests release];
+    [super dealloc];
 }
 
 @end

@@ -35,4 +35,9 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)dealloc {
+    self.webview = nil;
+    [super dealloc];
+}
+
 @end

@@ -59,4 +59,9 @@
     return (NSUInteger)self.year ^ [self.quarter hash];
 }
 
+- (void)dealloc {
+    self.quarter = nil;
+    [super dealloc];
+}
+
 @end

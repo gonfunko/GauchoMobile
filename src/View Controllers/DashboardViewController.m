@@ -13,6 +13,9 @@
 
 - (void)dealloc
 {
+    [fetcher release];
+    [loadingView removeFromSuperview];
+    [reloadView removeFromSuperview];
     [super dealloc];
 }
 

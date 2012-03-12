@@ -71,4 +71,10 @@
     (NSUInteger)max;
 }
 
+- (void)dealloc {
+    self.description = nil;
+    self.feedback = nil;
+    [super dealloc];
+}
+
 @end

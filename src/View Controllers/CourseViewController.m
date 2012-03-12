@@ -19,6 +19,7 @@
 
 - (void)dealloc
 {
+    [fetcher release];
     [super dealloc];
 }
 
@@ -115,22 +116,27 @@
     assignmentsController.tabBarItem.image = [UIImage imageNamed:@"assignments.png"];
    
 	ParticipantsViewController *participantsController = [[ParticipantsViewController alloc] initWithNibName:@"ParticipantsViewController" bundle:[NSBundle mainBundle]];
-    participantsController.title = @"Participants";
+    participantsController.title = @"People";
     participantsController.tabBarItem.image = [UIImage imageNamed:@"participants.png"];
 
 	GradesViewController *gradesController = [[GradesViewController alloc] initWithNibName:@"GradesViewController" bundle:[NSBundle mainBundle]];
     gradesController.title = @"Grades";
     gradesController.tabBarItem.image = [UIImage imageNamed:@"grades.png"];
     
+    ForumViewController *forumController = [[ForumViewController alloc] initWithNibName:@"ForumViewController" bundle:[NSBundle mainBundle]];
+    forumController.title = @"Forums";
+    forumController.tabBarItem.image = [UIImage imageNamed:@"forums.png"];
+    
     tabBarController.navigationItem.title = @"Dashboard";
-    [tabBarController setViewControllers:[NSArray arrayWithObjects:dashboardController, assignmentsController, participantsController, gradesController, nil]];
+    [tabBarController setViewControllers:[NSArray arrayWithObjects:dashboardController, assignmentsController, participantsController, gradesController, forumController, nil]];
     [self.navigationController pushViewController:tabBarController animated:YES];
     
     [tabBarController release];
     [dashboardController release];
     [assignmentsController release];
-	[gradesController release];
-	[participantsController release];
+    [gradesController release];
+    [participantsController release];
+    [forumController release];
 }
 
 - (void)logOut {
@@ -147,6 +153,7 @@
     KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:@"com.stuffediggy.gauchomobile" accessGroup:nil];
     [keychain setObject:@"" forKey:(id)kSecAttrAccount];
     [keychain setObject:@"" forKey:(id)kSecValueData];
+    [keychain release];
     
     //Create and present the login controller
     LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];

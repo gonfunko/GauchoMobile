@@ -7,7 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GMSourceFetcher.h"
+#import "GMForumsParser.h"
+#import "GMLoadingView.h"
+#import "GMForumTopicView.h"
 
-@interface ForumPostsViewController : UIViewController
+@interface ForumPostsViewController : UIViewController <GMSourceFetcherDelegate> {
+@private
+    GMForumTopic *topic;
+    GMSourceFetcher *fetcher;
+    GMLoadingView *loadingView;
+    BOOL loading;
+    
+    IBOutlet GMForumTopicView *postsView;
+}
+
+@property (retain) GMForumTopic *topic;
+@property (nonatomic, retain) GMForumTopicView *postsView;
+
+- (void)loadPostsWithLoadingView:(BOOL)flag;
 
 @end

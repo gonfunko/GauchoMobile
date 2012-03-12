@@ -18,20 +18,20 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        percentage = [[UITextField alloc] initWithFrame:CGRectMake(10, [self frame].origin.y+5, [self frame].size.width-20, [self frame].size.height-10)];
+        percentage = [[[UITextField alloc] initWithFrame:CGRectMake(10, [self frame].origin.y+5, [self frame].size.width-20, [self frame].size.height-10)] autorelease];
         percentage.font = [UIFont fontWithName:@"Helvetica-Bold" size:30.0];
         percentage.text = @"100%";
         percentage.enabled = NO;
         [self addSubview:percentage];
         
-        outof = [[UITextField alloc] initWithFrame:CGRectMake(100, [self frame].origin.y+27, [self frame].size.width-80, 14)];
+        outof = [[[UITextField alloc] initWithFrame:CGRectMake(100, [self frame].origin.y+27, [self frame].size.width-80, 14)] autorelease];
         outof.font = [UIFont fontWithName:@"Helvetica" size:12.0];
         outof.text = @"outof 10/100";
         outof.textColor = [UIColor grayColor];
         outof.enabled = NO;
         [self addSubview:outof];
         
-        description = [[UITextField alloc] initWithFrame:CGRectMake(100, [self frame].origin.y+5, [self frame].size.width-110, 30)];
+        description = [[[UITextField alloc] initWithFrame:CGRectMake(100, [self frame].origin.y+5, [self frame].size.width-110, 30)] autorelease];
         description.font = [UIFont fontWithName:@"Helvetica-Bold" size:18.0];
         description.text = @"some descriptiongg";
         description.enabled = NO;

@@ -63,13 +63,6 @@
     [fetcher detailsForAssignment:self.assignment withDelegate:self];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -111,7 +104,8 @@
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
     GMAssignmentDetailsParser *parser = [[GMAssignmentDetailsParser alloc] init];
-    NSDictionary *results = [parser assignmentDetailsFromSource:source];
+    NSDictionary *results = [[parser assignmentDetailsFromSource:source] retain];
+    [parser release];
     self.details = [NSString stringWithFormat:@"<html> \n"
                                                   "<head> \n"
                                                   "<style type=\"text/css\"> \n"
@@ -120,6 +114,7 @@
                                                   "</head> \n"
                                                   "<body>%@</body> \n"
                                                   "</html>", @"helvetica", [results objectForKey:@"details"]];
+    [results release];
     
     [sizingWebView loadHTMLString:self.details baseURL:[NSURL URLWithString:@"https://gauchospace.ucsb.edu"]];
 }
@@ -185,6 +180,7 @@
             [formatter setDateFormat:@"MMMM dd h:mm a"];
             [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
             NSString *dueDate = [formatter stringFromDate:self.assignment.dueDate];
+            [formatter release];
             cell.textLabel.text = [NSString stringWithFormat:@"Due: %@", dueDate];
         } else {
             cell.textLabel.text = @"Due: –";
@@ -195,6 +191,7 @@
             [formatter setDateFormat:@"MMMM dd h:mm a"];
             [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
             NSString *submittedDate = [formatter stringFromDate:self.assignment.submittedDate];
+            [formatter release];
             cell.textLabel.text = [NSString stringWithFormat:@"Submitted: %@", submittedDate];
         } else {
             cell.textLabel.text = @"Submitted: –";
@@ -277,6 +274,7 @@
 
 - (void)dealloc {
     sizingWebView.delegate = nil;
+    self.assignment = nil;
     [super dealloc];
 }
 

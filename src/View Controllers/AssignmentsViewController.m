@@ -13,6 +13,9 @@
 
 - (void)dealloc
 {
+    [fetcher release];
+    [loadingView removeFromSuperview];
+    [reloadView removeFromSuperview];
     [super dealloc];
 }
 
@@ -52,6 +55,7 @@
         calendar = [[GMWeekView alloc] initWithFrame:CGRectMake(0, -1, [[UIScreen mainScreen] bounds].size.width, 170)];
         ((GMWeekView *)calendar).delegate = self;
         [self.view addSubview:calendar];
+        [calendar release];
     }
     self.tableView.scrollsToTop = YES;
     

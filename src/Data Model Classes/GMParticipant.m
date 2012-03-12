@@ -110,4 +110,13 @@
     return self.name;
 }
 
+- (void)dealloc {
+    self.name = nil;
+    self.city = nil;
+    self.country = nil;
+    self.lastAccess = nil;
+    self.imageURL = nil;
+    [super dealloc];
+}
+
 @end

@@ -11,6 +11,7 @@
 #import "GMGrade.h"
 #import "GMAssignment.h"
 #import "GMDashboardItem.h"
+#import "GMForum.h"
 
 @interface GMCourse : NSObject <NSCoding> {
 @private
@@ -19,6 +20,7 @@
     NSMutableDictionary *participants;
     NSArray *grades;
     NSArray *dashboardItems;
+    NSArray *forums;
     NSInteger courseID;
     GMOfficeHours *officeHours;
     GMQuarter *quarter;
@@ -29,6 +31,7 @@
 @property (retain) NSArray *assignments;
 @property (retain) NSMutableDictionary *participants;
 @property (retain) NSArray *grades;
+@property (retain) NSArray *forums;
 @property (retain) NSArray *dashboardItems;
 @property (assign) NSInteger courseID;
 @property (retain) GMOfficeHours *officeHours;
@@ -73,5 +76,11 @@
 
 //Removes all dashboard items from this course
 - (void)removeAllDashboardItems;
+
+- (void)addForum:(GMForum *)newForum;
+
+- (void)removeForum:(GMForum *)forum;
+
+- (void)removeAllForums;
 
 @end

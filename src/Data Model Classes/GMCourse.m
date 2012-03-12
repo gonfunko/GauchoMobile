@@ -55,6 +55,7 @@
         self.grades = [NSArray array];
         self.dashboardItems = [NSArray array];
         self.courseID = 0;
+        self.forums = [NSArray array];
     
         GMOfficeHours *_officeHours = [[GMOfficeHours alloc] init];
         self.officeHours = _officeHours;
@@ -182,6 +183,37 @@
 - (void)removeAllDashboardItems {
     NSMutableArray *temp = [NSMutableArray array];
     self.dashboardItems = temp;
+}
+
+- (void)addForum:(GMForum *)newForum {
+    if (![self.forums containsObject:newForum]) {   
+        self.forums = [self.forums arrayByAddingObject:newForum];
+    }
+}
+
+- (void)removeForum:(GMForum *)forum {
+    NSMutableArray *temp = [NSMutableArray arrayWithArray:self.forums];
+    [temp removeObject:forum];
+    
+    self.forums = temp;
+}
+
+- (void)removeAllForums {
+    NSMutableArray *temp = [NSMutableArray array];
+    self.forums = temp;
+}
+
+- (void)dealloc {
+    self.name = nil;
+    self.assignments = nil;
+    self.participants = nil;
+    self.grades = nil;
+    self.dashboardItems = nil;
+    self.forums = nil;
+    self.officeHours = nil;
+    self.quarter = nil;
+    self.instructor = nil;
+    [super dealloc];
 }
 
 @end

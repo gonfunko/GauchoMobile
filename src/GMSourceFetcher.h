@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 #import "GMCourse.h"
+#import "GMForum.h"
+#import "GMForumTopic.h"
 
 //Formal protocol; all delegates passed to methods in this class must conform to it
 @protocol GMSourceFetcherDelegate <NSObject>
@@ -19,6 +21,7 @@
 
 @interface GMSourceFetcher : NSObject {
 @private
+    NSMutableArray *activeRequests;
 }
 
 //Attempts to log into GauchoSpace and calls sourceFetchSucceededWithPageSource: on the delegate with the HTML of the home page or login page (if invalid credentials)
@@ -43,6 +46,12 @@
 //Assuming loginWithUsername:password:delegate: has been called and login succeeded, passes the HTML for the GauchoSpace participants page corresponding to course to
 //the delegate's sourceFetchSucceededWithPageSource: method
 - (void)participantsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+
+- (void)forumsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+
+- (void)topicsForForum:(GMForum *)forum withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+
+- (void)postsForTopic:(GMForumTopic *)topic withDelegate:(id <GMSourceFetcherDelegate>)delegate;
 
 - (void)detailsForAssignment:(GMAssignment *)assignment withDelegate:(id <GMSourceFetcherDelegate>)delegate;
 

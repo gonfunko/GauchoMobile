@@ -11,6 +11,7 @@
 #import "ParticipantsViewController.h"
 #import "GradesViewController.h"
 #import "LoginViewController.h"
+#import "ForumViewController.h"
 #import "GMSourceFetcher.h"
 #import "KeychainItemWrapper.h"
 

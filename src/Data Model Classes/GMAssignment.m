@@ -61,4 +61,11 @@
     return (NSUInteger)assignmentID;
 }
 
+- (void)dealloc {
+    self.description = nil;
+    self.dueDate = nil;
+    self.submittedDate = nil;
+    [super dealloc];
+}
+
 @end
