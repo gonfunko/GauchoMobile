@@ -10,6 +10,11 @@
 
 @implementation GMForumTopicTableCell
 
+@synthesize title;
+@synthesize author;
+@synthesize date;
+@synthesize replies;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -24,6 +29,13 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)dealloc {
+    self.title = nil;
+    self.author = nil;
+    self.date = nil;
+    [super dealloc];
 }
 
 @end

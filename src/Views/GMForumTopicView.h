@@ -9,9 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "GMForumPost.h"
+#import "ASIHTTPRequest.h"
+#import "GMDataSource.h"
 
-@interface GMForumTopicView : UIView
+@interface GMForumTopicView : UIView {
+    NSMutableDictionary *pictures;
+    NSMutableArray *photoRequests;
+    NSMutableDictionary *photoLayers;
+}
 
 - (void)setPosts:(NSArray *)forumPosts;
+- (void)loadPicturesForParticipants:(NSArray *)forumPosts;
 
 @end

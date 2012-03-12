@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GMForumTopicTableCell : UITableViewCell
+@interface GMForumTopicTableCell : UITableViewCell {
+    IBOutlet UILabel *title;
+    IBOutlet UILabel *author;
+    IBOutlet UILabel *date;
+    IBOutlet UIButton *replies;
+}
+
+@property (nonatomic, retain) IBOutlet UILabel *title;
+@property (nonatomic, retain) IBOutlet UILabel *author;
+@property (nonatomic, retain) IBOutlet UILabel *date;
+@property (nonatomic, retain) IBOutlet UIButton *replies;
 
 @end

@@ -14,9 +14,36 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
         self.layer.backgroundColor = [[UIColor colorWithRed:228/255.0 green:228/255.0 blue:228/255.0 alpha:1.0] CGColor];
+        
+        photoRequests = [[NSMutableArray alloc] init];
+        photoLayers = [[NSMutableDictionary alloc] init];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *dictPath = [[paths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%ipics", (int)[[GMDataSource sharedDataSource] currentCourse].courseID]];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:dictPath]) {
+            pictures = [[NSKeyedUnarchiver unarchiveObjectWithFile:dictPath] retain];
+        }
+        else
+            pictures = [[NSMutableDictionary alloc] init];
     }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+       self.layer.backgroundColor = [[UIColor colorWithRed:228/255.0 green:228/255.0 blue:228/255.0 alpha:1.0] CGColor];
+        
+        photoRequests = [[NSMutableArray alloc] init];
+        photoLayers = [[NSMutableDictionary alloc] init];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *dictPath = [[paths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%ipics", (int)[[GMDataSource sharedDataSource] currentCourse].courseID]];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:dictPath]) {
+            pictures = [[NSKeyedUnarchiver unarchiveObjectWithFile:dictPath] retain];
+        }
+        else
+            pictures = [[NSMutableDictionary alloc] init];
+    }
+    
     return self;
 }
 
@@ -68,6 +95,12 @@
         userPhoto.contents = (id)[[UIImage imageNamed:@"defaulticon.png"] CGImage];
         userPhoto.cornerRadius = 2.0;
         userPhoto.frame = CGRectMake(10, 7, 40, 40);
+        if ([photoLayers objectForKey:[post.author.imageURL absoluteString]] == nil) {
+            NSMutableSet *layers = [NSMutableSet set];
+            [photoLayers setObject:layers forKey:[post.author.imageURL absoluteString]];
+        }
+        [[photoLayers objectForKey:[post.author.imageURL absoluteString]] addObject:userPhoto];
+//        [photoLayers setObject:userPhoto forKey:[post.author.imageURL absoluteString]];
         [background addSublayer:userPhoto];
         [userPhoto release];
         
@@ -105,16 +138,61 @@
         verticalOffset += background.frame.size.height + 15;
     }
     
+    [formatter release];
+    
     self.frame = CGRectMake(0, 0, 320, verticalOffset);
+    
+    [self loadPicturesForParticipants:forumPosts];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    [photoRequests removeObject:request];
+    NSData *imageData = [request responseData];
+    UIImage *pic = [UIImage imageWithData:imageData];
+    NSMutableSet *layers = [photoLayers objectForKey:[[request originalURL] absoluteString]];
+    for (CALayer *layer in layers) {
+        layer.contents = (id)[pic CGImage];
+    }
+    
+    [pictures setObject:pic forKey:[[request originalURL] absoluteString]];
 }
-*/
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    [photoRequests removeObject:request];
+    NSError *error = [request error];
+    NSLog(@"Downloading profile picture failed with error %@", [error description]);
+}
+
+- (void)loadPicturesForParticipants:(NSArray *)forumPosts {
+    NSMutableArray *allParticipants = [[NSMutableArray alloc] init];
+    
+    for (GMForumPost *post in forumPosts) {
+        [allParticipants addObject:post.author];
+    }
+    
+    for (GMParticipant *participant in allParticipants) {
+        NSString *url = [participant.imageURL absoluteString];
+        if (![url isEqualToString:@"https://gauchospace.ucsb.edu/courses/theme/gaucho/pix/u/f1.png"]) {
+            ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+            [request setDelegate:self];
+            [request startAsynchronous];
+            [photoRequests addObject:request];
+        }
+    }
+    
+    [allParticipants release];
+}
+
+- (void)dealloc {
+    NSArray *requests = [NSArray arrayWithArray:photoRequests];
+    for (ASIHTTPRequest *request in requests) {
+        [request clearDelegatesAndCancel];
+    }
+    
+    [photoRequests release];
+    [pictures release];
+    [photoLayers release];
+    [super dealloc];
+}
 
 @end
