@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Me. All rights reserved.
 //
 
-#import "GMForumPostsParser.h"
+#import "GMForumsParser.h"
 
-@implementation GMForumPostsParser
+@implementation GMForumsParser
 
 - (NSArray *)forumsFromSource:(NSString *)html {
     NSMutableArray *allForums = [[NSMutableArray alloc] init];
@@ -16,9 +16,16 @@
     //Strip out break tags in the body of posts so hpple doesn't choke
     html = [html stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];
     TFHpple *document = [[TFHpple alloc] initWithHTMLData:[html dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    /* For some inane reason, GauchoSpace has two kinds of forums (General and Learning) that put the title
+       and description in columns 0 and 1 or 1 and 2, respectively. The apparently repetitive stuff here
+       is an effort to work around that.
+     */
 
     //Get the names and IDs of the forums
     NSArray *forums = [document searchWithXPathQuery:@"//td[@class='cell c0']/a"];
+    NSArray *secondaryForums = [document searchWithXPathQuery:@"//td[@class='cell c1']/a"];
+    forums = [forums arrayByAddingObjectsFromArray:secondaryForums];
     for (TFHppleElement *el in forums) {
         GMForum *forum = [[GMForum alloc] init];
         forum.title = el.content;
@@ -31,9 +38,37 @@
     
     //Get the forum descriptions
     NSArray *forumDescriptions = [document searchWithXPathQuery:@"//td[@class='cell c1']"];
-    for (int i = 0; i < [forumDescriptions count]; i++) {
+    for (int i = 0; i < MIN([forums count], [forumDescriptions count]); i++) {
         TFHppleElement *currentDescription = [forumDescriptions objectAtIndex:i];
-        [[allForums objectAtIndex:i] setForumDescription:currentDescription.content];
+        NSString *forumDescription = currentDescription.content;
+        if (forumDescription == nil) {
+            forumDescription = @"";
+        }
+        
+        for (TFHppleElement *childEl in currentDescription.children) {
+            if (childEl.content != nil) {
+                forumDescription = [forumDescription stringByAppendingFormat:@" %@", childEl.content];
+            }
+        }
+        
+        [[allForums objectAtIndex:i] setForumDescription:forumDescription];
+    }
+    
+    forumDescriptions = [document searchWithXPathQuery:@"//td[@class='cell c2']"];
+    for (int i = [forums count] - [secondaryForums count]; i < MIN([allForums count], [forumDescriptions count]); i++) {
+        TFHppleElement *currentDescription = [forumDescriptions objectAtIndex:i];
+        NSString *forumDescription = currentDescription.content;
+        if (forumDescription == nil) {
+            forumDescription = @"";
+        }
+
+        for (TFHppleElement *childEl in currentDescription.children) {
+            if (childEl.content != nil) {
+                forumDescription = [forumDescription stringByAppendingString:childEl.content];
+            }
+        }
+        
+        [[allForums objectAtIndex:i] setForumDescription:forumDescription];
     }
     
     [document release];
@@ -58,6 +93,7 @@
         topicID = [topicID substringFromIndex:[topicID length] - 5];
         topic.topicID = topicID;
         [allTopics addObject:topic];
+        [topic release];
     }
     
     //Get the topic starter
@@ -67,15 +103,23 @@
         GMParticipant *participant = [[GMParticipant alloc] init];
         participant.name = currentAuthor.content;
         [[allTopics objectAtIndex:i] setAuthor:participant];
+        [participant release];
     }
     
     //Get the reply count
     NSArray *replies = [document searchWithXPathQuery:@"//td[@class='replies']/a"];
     for (int i = 0; i < [replies count]; i++) {
-        TFHppleElement *currentAuthor = [topicAuthors objectAtIndex:i];
-        GMParticipant *participant = [[GMParticipant alloc] init];
-        participant.name = currentAuthor.content;
-        [[allTopics objectAtIndex:i] setReplies:NSStringT
+        TFHppleElement *currentTopic = [replies objectAtIndex:i];
+        NSInteger replyCount = [currentTopic.content intValue];
+        [[allTopics objectAtIndex:i] setReplies:replyCount];
+    }
+    
+    //Get the date of the last post
+    NSArray *lastPostDates = [document searchWithXPathQuery:@"//td[@class='lastpost']/a[2]"];
+    for (int i = 0; i < [lastPostDates count]; i++) {
+        TFHppleElement *currentTopic = [lastPostDates objectAtIndex:i];
+        NSDate *lastPostDate = [self dateFromDateString:currentTopic.content];
+        [[allTopics objectAtIndex:i] setLastPostDate:lastPostDate];
     }
     
     [document release];
@@ -113,10 +157,8 @@
     for (int i = 0; i < [authors count]; i++) {
         TFHppleElement *el = [authors objectAtIndex:i];
         NSString *dateString = [el.content stringByReplacingOccurrencesOfString:@"- " withString:@""];
-        NSLog(@"%@", dateString);
         NSDate *postDate = [self dateFromDateString:dateString];
         [[allPosts objectAtIndex:i] setPostDate:postDate];
-        NSLog(@"%@", [[allPosts objectAtIndex:i] postDate]);
         
         for (TFHppleElement *childEl in el.children) {
             if ([childEl.tagName isEqualToString:@"a"]) {
@@ -128,9 +170,18 @@
         }
     }
     
+    //Get the author's photo URLs
+    NSArray *photos = [document searchWithXPathQuery:@"//img[@height='35']"];
+    int i = 0;
+    for (TFHppleElement *el in photos) {
+        NSURL *photoURL = [NSURL URLWithString:[[el.attributes objectForKey:@"src"] stringByReplacingOccurrencesOfString:@"f2" withString:@"f1"]];
+        [[allPosts objectAtIndex:i] author].imageURL = photoURL;
+        i++;
+    }   
+    
     //Get the post IDs
     NSArray *links = [document searchWithXPathQuery:@"//a"];
-    int i = 0;
+    i = 0;
     for (TFHppleElement *el in links) {
         if ([[el.attributes valueForKey:@"id"] hasPrefix:@"p"]) {
             [[allPosts objectAtIndex:i] setPostID:[el.attributes valueForKey:@"id"]];

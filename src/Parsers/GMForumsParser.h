@@ -12,7 +12,7 @@
 #include "GMForumTopic.h"
 #include "GMForumPost.h"
 
-@interface GMForumPostsParser : NSObject
+@interface GMForumsParser : NSObject
 
 - (NSArray *)forumsFromSource:(NSString *)html;
 - (NSArray *)forumTopicsFromSource:(NSString *)html;
