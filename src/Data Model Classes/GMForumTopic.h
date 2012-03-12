@@ -15,12 +15,14 @@
     NSInteger replies;
     GMParticipant *author;
     NSDate *lastPostDate;
+    NSArray *posts;
 }
 
 @property (copy) NSString *title;
 @property (copy) NSString *topicID;
 @property (assign) NSInteger replies;
 @property (retain) GMParticipant *author;
+@property (retain) NSArray *posts;
 @property (copy) NSDate *lastPostDate;
 
 @end

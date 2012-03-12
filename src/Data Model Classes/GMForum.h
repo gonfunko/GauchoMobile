@@ -12,10 +12,12 @@
     NSString *title;
     NSString *forumDescription;
     NSString *forumID;
+    NSArray *topics;
 }
 
 @property (copy) NSString *title;
 @property (copy) NSString *forumDescription;
 @property (copy) NSString *forumID;
+@property (retain) NSArray *topics;
 
 @end
