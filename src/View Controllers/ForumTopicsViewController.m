@@ -158,7 +158,8 @@
     
     cell.title.text = topic.title;
     cell.author.text = [NSString stringWithFormat:@"Started by %@", topic.author.name];
-    cell.replies.titleLabel.text = [NSString stringWithFormat:@"%i", topic.replies];
+    [cell.replies setTitle:[NSString stringWithFormat:@"%i", topic.replies]
+                  forState:UIControlStateDisabled];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
