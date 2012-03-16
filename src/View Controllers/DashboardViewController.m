@@ -15,6 +15,7 @@
 {
     [fetcher release];
     [loadingView removeFromSuperview];
+    [loadingView release];
     [reloadView removeFromSuperview];
     [super dealloc];
 }
@@ -37,23 +38,24 @@
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
     
-    if (currentCourse == nil) {
-        return;
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(loadDashboard) 
+                                                 name:@"GMCurrentCourseChangedNotification" 
+                                               object:nil];
+     
+     if (reloadView == nil) {
+         EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+         view.delegate = self;
+         [self.tableView addSubview:view];
+         reloadView = view;
+         [view release];
+     }
+     
+     [reloadView refreshLastUpdatedDate];
     
-    if ([[currentCourse dashboardItems] count] == 0) {
+    if (currentCourse != nil && [[currentCourse dashboardItems] count] == 0) {
         [self loadDashboardWithLoadingView:YES];
     }
-    
-    if (reloadView == nil) {
-		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-		view.delegate = self;
-		[self.tableView addSubview:view];
-		reloadView = view;
-		[view release];
-	}
-    
-	[reloadView refreshLastUpdatedDate];
 }
 
 - (void)viewDidUnload
@@ -91,6 +93,10 @@
 }
 
 #pragma mark - Data loading methods
+     
+ - (void)loadDashboard {
+     [self loadDashboardWithLoadingView:YES];
+ }
 
 - (void)loadDashboardWithLoadingView:(BOOL)flag {
     if (!loading) {
@@ -104,7 +110,7 @@
             
             loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
             [self.parentViewController.view addSubview:loadingView];
-            [loadingView release];
+          //  [loadingView release];
             
             CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
             animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
