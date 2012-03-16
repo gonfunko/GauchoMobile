@@ -27,9 +27,18 @@
 - (id)init {
     if (self = [super init]) {
         self.currentCourse = nil;
+        [self addObserver:self 
+               forKeyPath:@"currentCourse" 
+                  options:NSKeyValueObservingOptionNew 
+                  context:nil];
     }
     
     return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"GMCurrentCourseChangedNotification" 
+                                                        object:self.currentCourse];
 }
 
 - (void)addCourse:(GMCourse *)newCourse {
@@ -83,6 +92,8 @@
 }
 
 - (void)dealloc {
+    [self removeObserver:self forKeyPath:@"currentCourse"];
+    
     self.username = nil;
     self.password = nil;
     self.currentCourse = nil;
