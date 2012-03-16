@@ -69,6 +69,14 @@
     [super viewDidDisappear:animated];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+    } else {
+        return YES;
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -92,7 +100,9 @@
     
     cell.textLabel.text = ((GMCourse *)[[[GMDataSource sharedDataSource] allCourses] objectAtIndex:indexPath.row]).name;
     cell.detailTextLabel.text = [((GMCourse *)[[[GMDataSource sharedDataSource] allCourses] objectAtIndex:indexPath.row]).quarter description];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     
     return cell;
 }
@@ -104,39 +114,12 @@
     GMDataSource *dataSource = [GMDataSource sharedDataSource];
     [dataSource setCurrentCourse:[[dataSource allCourses] objectAtIndex:indexPath.row]];
     
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        MainTabBarViewController *tabBarController = [[MainTabBarViewController alloc] init];
+        [self.navigationController pushViewController:tabBarController animated:YES];
+        [tabBarController release];
+    }
     
-    //Create our view controllers and add them to the tab bar controller
-    DashboardViewController *dashboardController = [[DashboardViewController alloc] initWithNibName:@"DashboardViewController" bundle:[NSBundle mainBundle]];
-    dashboardController.title = @"Dashboard";
-    dashboardController.tabBarItem.image = [UIImage imageNamed:@"dashboard.png"];
-    
-    AssignmentsViewController *assignmentsController = [[AssignmentsViewController alloc] initWithNibName:@"AssignmentsViewController" bundle:[NSBundle mainBundle]];
-    assignmentsController.title = @"Assignments";
-    assignmentsController.tabBarItem.image = [UIImage imageNamed:@"assignments.png"];
-   
-	ParticipantsViewController *participantsController = [[ParticipantsViewController alloc] initWithNibName:@"ParticipantsViewController" bundle:[NSBundle mainBundle]];
-    participantsController.title = @"People";
-    participantsController.tabBarItem.image = [UIImage imageNamed:@"participants.png"];
-
-	GradesViewController *gradesController = [[GradesViewController alloc] initWithNibName:@"GradesViewController" bundle:[NSBundle mainBundle]];
-    gradesController.title = @"Grades";
-    gradesController.tabBarItem.image = [UIImage imageNamed:@"grades.png"];
-    
-    ForumViewController *forumController = [[ForumViewController alloc] initWithNibName:@"ForumViewController" bundle:[NSBundle mainBundle]];
-    forumController.title = @"Forums";
-    forumController.tabBarItem.image = [UIImage imageNamed:@"forums.png"];
-    
-    tabBarController.navigationItem.title = @"Dashboard";
-    [tabBarController setViewControllers:[NSArray arrayWithObjects:dashboardController, assignmentsController, participantsController, gradesController, forumController, nil]];
-    [self.navigationController pushViewController:tabBarController animated:YES];
-    
-    [tabBarController release];
-    [dashboardController release];
-    [assignmentsController release];
-    [gradesController release];
-    [participantsController release];
-    [forumController release];
 }
 
 - (void)logOut {

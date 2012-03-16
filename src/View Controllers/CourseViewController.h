@@ -6,12 +6,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GMDataSource.h"
-#import "DashboardViewController.h"
-#import "AssignmentsViewController.h"
-#import "ParticipantsViewController.h"
-#import "GradesViewController.h"
 #import "LoginViewController.h"
-#import "ForumViewController.h"
+#import "MainTabBarViewController.h"
 #import "GMSourceFetcher.h"
 #import "KeychainItemWrapper.h"
 

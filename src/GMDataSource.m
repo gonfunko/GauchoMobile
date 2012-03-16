@@ -24,6 +24,14 @@
     return sharedDataSource;
 }
 
+- (id)init {
+    if (self = [super init]) {
+        self.currentCourse = nil;
+    }
+    
+    return self;
+}
+
 - (void)addCourse:(GMCourse *)newCourse {
     if (courses == nil) {
         courses = [[NSMutableArray alloc] init];

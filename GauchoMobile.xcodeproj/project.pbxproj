@@ -37,6 +37,7 @@
 		932A907D14C23CD700E80827 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 932A907914C23CD700E80827 /* TFHppleElement.m */; };
 		932A907E14C23CD700E80827 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 932A907B14C23CD700E80827 /* XPathQuery.m */; };
 		932A920912ED0E1E00C78AE9 /* GMAssignmentsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 932A920812ED0E1E00C78AE9 /* GMAssignmentsParser.m */; };
+		933586421512E0160002D70D /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933586411512E0160002D70D /* MainTabBarViewController.m */; };
 		933A49CA14C9FBE00037AD30 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A49C914C9FBE00037AD30 /* back@2x.png */; };
 		933A49CC14C9FC9A0037AD30 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A49CB14C9FC9A0037AD30 /* back.png */; };
 		934300DA12E0F42600AFFFE4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934300D912E0F42600AFFFE4 /* UIKit.framework */; };
@@ -179,6 +180,8 @@
 		932A907B14C23CD700E80827 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		932A920712ED0E1E00C78AE9 /* GMAssignmentsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMAssignmentsParser.h; sourceTree = "<group>"; };
 		932A920812ED0E1E00C78AE9 /* GMAssignmentsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMAssignmentsParser.m; sourceTree = "<group>"; };
+		933586401512E0160002D70D /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
+		933586411512E0160002D70D /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
 		933A49C914C9FBE00037AD30 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		933A49CB14C9FC9A0037AD30 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		934300D512E0F42600AFFFE4 /* GauchoMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GauchoMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -627,6 +630,8 @@
 				93725DC3150D2EAA0095B420 /* ForumTopicsViewController.m */,
 				93725DCC150D56E40095B420 /* ForumPostsViewController.h */,
 				93725DCD150D56E40095B420 /* ForumPostsViewController.m */,
+				933586401512E0160002D70D /* MainTabBarViewController.h */,
+				933586411512E0160002D70D /* MainTabBarViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -818,6 +823,7 @@
 				93725DC5150D2EAA0095B420 /* ForumTopicsViewController.m in Sources */,
 				93725DC9150D35D60095B420 /* GMForumTopicTableCell.m in Sources */,
 				93725DCF150D56E50095B420 /* ForumPostsViewController.m in Sources */,
+				933586421512E0160002D70D /* MainTabBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,7 +884,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9E0A2069-3788-4965-BC21-1542B18BEBB0";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -898,7 +904,7 @@
 				PROVISIONING_PROFILE = "9E0A2069-3788-4965-BC21-1542B18BEBB0";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = NO;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

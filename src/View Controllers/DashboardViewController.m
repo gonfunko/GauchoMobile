@@ -37,6 +37,10 @@
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
     
+    if (currentCourse == nil) {
+        return;
+    }
+    
     if ([[currentCourse dashboardItems] count] == 0) {
         [self loadDashboardWithLoadingView:YES];
     }
@@ -76,6 +80,14 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+    } else {
+        return YES;
+    }
 }
 
 #pragma mark - Data loading methods

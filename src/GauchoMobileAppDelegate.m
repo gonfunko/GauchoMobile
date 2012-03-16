@@ -14,13 +14,35 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UINavigationController *navController = [[UINavigationController alloc] init];
-    self.window.rootViewController = navController;
-    
     //Create the course view controller and set it as the root view controller
     CourseViewController *courseController = [[CourseViewController alloc] initWithNibName:@"CourseViewController" bundle:[NSBundle mainBundle]];
-    [navController pushViewController:courseController animated:NO];
-    [navController release];
+    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        UINavigationController *navController = [[UINavigationController alloc] init];
+        self.window.rootViewController = navController;
+    
+        [navController pushViewController:courseController animated:NO];
+        [navController release];
+    } else {
+        UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
+        
+        MainTabBarViewController *detail = [[MainTabBarViewController alloc] init]; 
+        UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:courseController];
+        UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:detail];
+        
+        detailNav.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
+        
+        splitViewController.viewControllers = [NSArray arrayWithObjects:rootNav, detailNav, nil];
+        splitViewController.delegate = detail;
+        
+        self.window.rootViewController = splitViewController;
+        
+        [splitViewController release];
+        [detail release];
+        [rootNav release];
+        [detailNav release];
+    }
+    
     [courseController release];
     
     [self.window makeKeyAndVisible];
