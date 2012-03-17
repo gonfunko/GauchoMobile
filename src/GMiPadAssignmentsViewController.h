@@ -9,6 +9,12 @@
 #import "AssignmentsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface GMiPadAssignmentsViewController : AssignmentsViewController
+@interface GMiPadAssignmentsViewController : AssignmentsViewController {
+    IBOutlet UILabel *date;
+    IBOutlet UILabel *longDate;
+}
+
+@property (nonatomic, retain) UILabel *date;
+@property (nonatomic, retain) UILabel *longDate;
 
 @end

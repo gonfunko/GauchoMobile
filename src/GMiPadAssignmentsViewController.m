@@ -8,11 +8,10 @@
 
 #import "GMiPadAssignmentsViewController.h"
 
-@interface GMiPadAssignmentsViewController ()
-
-@end
-
 @implementation GMiPadAssignmentsViewController
+
+@synthesize date;
+@synthesize longDate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +32,16 @@
                                              selector:@selector(loadAssignments) 
                                                  name:@"GMCurrentCourseChangedNotification" 
                                                object:nil];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponents = [calendar components:NSDayCalendarUnit
+                                                   fromDate:[NSDate date]];
+    date.text = [NSString stringWithFormat:@"%i", dateComponents.day];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"EEEE, MMMM dd, YYYY"];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    longDate.text = [formatter stringFromDate:[NSDate date]];
 }
 
 - (void)viewDidUnload
