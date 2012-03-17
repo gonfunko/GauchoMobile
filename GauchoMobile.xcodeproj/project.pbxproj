@@ -262,6 +262,7 @@
 		939036FB132AD7F800A5AF6E /* GauchoMobile-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GauchoMobile-Info.plist"; path = "data/GauchoMobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 		93903700132AD8B100A5AF6E /* UIView+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TKCategory.h"; sourceTree = "<group>"; };
 		93903701132AD8B100A5AF6E /* UIView+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TKCategory.m"; sourceTree = "<group>"; };
+		93931BD515153B5C003F1F3C /* GauchoMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GauchoMobile.entitlements; sourceTree = SOURCE_ROOT; };
 		9395D59D132881AE00332A38 /* NSDate+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TKCategory.h"; sourceTree = "<group>"; };
 		9395D59E132881AE00332A38 /* NSDate+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TKCategory.m"; sourceTree = "<group>"; };
 		9395D5B4132881B000332A38 /* TKCalendarMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCalendarMonthView.h; sourceTree = "<group>"; };
@@ -479,6 +480,7 @@
 		934300DF12E0F42600AFFFE4 /* GauchoMobile */ = {
 			isa = PBXGroup;
 			children = (
+				93931BD515153B5C003F1F3C /* GauchoMobile.entitlements */,
 				93EC607C1332E1DC00601B04 /* iPad */,
 				934300E812E0F42700AFFFE4 /* GauchoMobileAppDelegate.h */,
 				934300E912E0F42700AFFFE4 /* GauchoMobileAppDelegate.m */,
@@ -724,7 +726,7 @@
 		934300CC12E0F42600AFFFE4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 934300CF12E0F42600AFFFE4 /* Build configuration list for PBXProject "GauchoMobile" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -919,6 +921,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = GauchoMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert Dodson";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
