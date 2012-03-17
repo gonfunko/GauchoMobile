@@ -84,6 +84,9 @@
 		939036F5132AD77500A5AF6E /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 939036F4132AD77500A5AF6E /* EGORefreshTableHeaderView.m */; };
 		939036F9132AD7B000A5AF6E /* Credits.txt in Resources */ = {isa = PBXBuildFile; fileRef = 939036F7132AD7B000A5AF6E /* Credits.txt */; };
 		93903702132AD8B100A5AF6E /* UIView+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 93903701132AD8B100A5AF6E /* UIView+TKCategory.m */; };
+		93931BD915153F2C003F1F3C /* 3retina.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93931BD615153F2C003F1F3C /* 3retina.jpg */; };
+		93931BDA15153F2C003F1F3C /* 2retina.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93931BD715153F2C003F1F3C /* 2retina.jpg */; };
+		93931BDB15153F2C003F1F3C /* 1retina.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93931BD815153F2C003F1F3C /* 1retina.jpg */; };
 		9395D5F6132881B700332A38 /* NSDate+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D59E132881AE00332A38 /* NSDate+TKCategory.m */; };
 		9395D601132881B700332A38 /* TKCalendarMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5B5132881B000332A38 /* TKCalendarMonthView.m */; };
 		9395D606132881B700332A38 /* TKGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5BF132881B200332A38 /* TKGlobal.m */; };
@@ -263,6 +266,9 @@
 		93903700132AD8B100A5AF6E /* UIView+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TKCategory.h"; sourceTree = "<group>"; };
 		93903701132AD8B100A5AF6E /* UIView+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TKCategory.m"; sourceTree = "<group>"; };
 		93931BD515153B5C003F1F3C /* GauchoMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GauchoMobile.entitlements; sourceTree = SOURCE_ROOT; };
+		93931BD615153F2C003F1F3C /* 3retina.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3retina.jpg; sourceTree = "<group>"; };
+		93931BD715153F2C003F1F3C /* 2retina.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2retina.jpg; sourceTree = "<group>"; };
+		93931BD815153F2C003F1F3C /* 1retina.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1retina.jpg; sourceTree = "<group>"; };
 		9395D59D132881AE00332A38 /* NSDate+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TKCategory.h"; sourceTree = "<group>"; };
 		9395D59E132881AE00332A38 /* NSDate+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TKCategory.m"; sourceTree = "<group>"; };
 		9395D5B4132881B000332A38 /* TKCalendarMonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCalendarMonthView.h; sourceTree = "<group>"; };
@@ -614,6 +620,9 @@
 				9314EC4612F3EA1400F99756 /* dashboard.png */,
 				93AF605812F39028009A3657 /* horizontalline.png */,
 				93AF605912F39028009A3657 /* verticalline.png */,
+				93931BD615153F2C003F1F3C /* 3retina.jpg */,
+				93931BD715153F2C003F1F3C /* 2retina.jpg */,
+				93931BD815153F2C003F1F3C /* 1retina.jpg */,
 				93AF605212F38FE2009A3657 /* 1.jpg */,
 				93AF605312F38FE2009A3657 /* 2.jpg */,
 				93AF605412F38FE2009A3657 /* 3.jpg */,
@@ -799,6 +808,9 @@
 				936DAFEC15150A6200F99EE8 /* greyback.png in Resources */,
 				936DAFED15150A6200F99EE8 /* greyback@2x.png in Resources */,
 				936DAFEE15150A6200F99EE8 /* greyforward.png in Resources */,
+				93931BD915153F2C003F1F3C /* 3retina.jpg in Resources */,
+				93931BDA15153F2C003F1F3C /* 2retina.jpg in Resources */,
+				93931BDB15153F2C003F1F3C /* 1retina.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
