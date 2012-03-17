@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GMLoadingView.h"
+#import "MBProgressHUD.h"
 
 @interface WebViewController : UIViewController <UIWebViewDelegate> {
 @private
     IBOutlet UIWebView *webView;
     NSURL *pendingURL;
     
-    GMLoadingView *loadingView;
+    MBProgressHUD *HUD;
 }
 
 //Loads a given URL in the web view

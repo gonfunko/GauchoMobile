@@ -14,8 +14,6 @@
 - (void)dealloc
 {
     [fetcher release];
-    [loadingView removeFromSuperview];
-    [loadingView release];
     [reloadView removeFromSuperview];
     [super dealloc];
 }
@@ -34,9 +32,11 @@
 	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"Dashboard";
     
-    loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, -25, 280, 27)];
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
+    HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:HUD];
+    [HUD hide:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(loadDashboard) 
@@ -101,24 +101,10 @@
 - (void)loadDashboardWithLoadingView:(BOOL)flag {
     if (!loading) {
         loading = YES;
-        
+    
         if (flag) {
-            if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-                loadingView.frame = CGRectMake((int)(([self.view frame].size.width - 280) / 2), -25, 280, 27);
-            else
-                loadingView.frame = CGRectMake((int)(([self.view frame].size.width - 280) / 2), -25, 280, 27);
-            
-            loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
-            [self.parentViewController.view addSubview:loadingView];
-          //  [loadingView release];
-            
-            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-            animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-            animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, loadingView.layer.position.y + 25)];
-            animation.duration = 0.25;
-            animation.removedOnCompletion = NO;
-            animation.fillMode = kCAFillModeForwards;
-            [[loadingView layer] addAnimation:animation forKey:@"position"];
+            HUD.labelText = @"Loading";
+            [HUD show:YES];
         }
         
         GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
@@ -130,30 +116,16 @@
     NSLog(@"Loading dashboard failed with error: %@", [error description]);
     
     loading = NO;
+    [HUD hide:YES];
     [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
     
     loading = NO;
+    [HUD hide:YES];
     [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
-    
+       
     GMDashboardParser *parser = [[GMDashboardParser alloc] init];
     NSArray *items = [parser dashboardItemsFromSource:source];
     

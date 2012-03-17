@@ -9,13 +9,13 @@
 #import "GMDataSource.h"
 #import "GMGradesParser.h"
 #import "GMGradesTableViewCell.h"
-#import "GMLoadingView.h"
+#import "MBProgressHUD.h"
 #import "EGORefreshTableHeaderView.h"
 
 @interface GradesViewController : UIViewController <GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate> {
 @private
     GMSourceFetcher *fetcher;
-    GMLoadingView *loadingView;
+    MBProgressHUD *HUD;
     EGORefreshTableHeaderView *reloadView;
     BOOL loading;
     NSInteger pendingID;

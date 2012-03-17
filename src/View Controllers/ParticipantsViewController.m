@@ -21,7 +21,6 @@
     [photoRequests release];
     [pictures release];
     [fetcher release];
-    [loadingView removeFromSuperview];
     [reloadView removeFromSuperview];
     [super dealloc];
 }
@@ -45,7 +44,6 @@
         pictures = [[NSMutableDictionary alloc] init];
     
     self.sections = [NSMutableArray array];
-    loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, -25, 280, 27)];
     
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
@@ -108,22 +106,12 @@
         loading = YES;
         
         if (flag) {
-            if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.height - 280) / 2), -25, 280, 27);
-            else
-                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27);
-            
-            loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
-            [self.parentViewController.view addSubview:loadingView];
-            [loadingView release];
-            
-            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-            animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-            animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, loadingView.layer.position.y + 25)];
-            animation.duration = 0.25;
-            animation.removedOnCompletion = NO;
-            animation.fillMode = kCAFillModeForwards;
-            [[loadingView layer] addAnimation:animation forKey:@"position"];
+            HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:HUD];
+            [HUD release];
+            HUD.labelText = @"Loading";
+            HUD.removeFromSuperViewOnHide = YES;
+            [HUD show:YES];
         }
         
         GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
@@ -136,28 +124,14 @@
     
     loading = NO;
     [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
+    [HUD hide:YES];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
     
     loading = NO;
     [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
+    [HUD hide:YES];
     
     GMParticipantsParser *parser = [[GMParticipantsParser alloc] init];
     NSArray *participants = [parser participantsFromSource:source];

@@ -9,18 +9,18 @@
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMAssignmentsParser.h"
-#import "GMLoadingView.h"
 #import "EGORefreshTableHeaderView.h"
 #import "GMWeekView.h"
 #import "TKCalendarMonthView.h"
 #import "NSDate+TKCategory.h"
 #import "AssignmentDetailViewController.h"
+#import "MBProgressHUD.h"
 
 @interface AssignmentsViewController : UIViewController <GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate, TKCalendarMonthViewDelegate, TKCalendarMonthViewDataSource> {
 @private
     GMSourceFetcher *fetcher;
-    GMLoadingView *loadingView;
     EGORefreshTableHeaderView *reloadView;
+    MBProgressHUD *HUD;
     UITextField *noAssignmentsLabel;
     UIView *calendar;
     BOOL loading;

@@ -11,7 +11,7 @@
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMParticipantsParser.h"
-#import "GMLoadingView.h"
+#import "MBProgressHUD.h"
 #import "EGORefreshTableHeaderView.h"
 
 @interface ParticipantsViewController : UIViewController<GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate, UIScrollViewDelegate> {
@@ -20,7 +20,7 @@
     NSMutableDictionary *pictures;
     NSMutableArray *photoRequests;
 	GMSourceFetcher *fetcher;
-    GMLoadingView *loadingView;
+    MBProgressHUD *HUD;
     EGORefreshTableHeaderView *reloadView;
     
     BOOL loading;

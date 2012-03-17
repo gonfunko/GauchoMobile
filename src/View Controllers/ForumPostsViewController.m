@@ -33,9 +33,8 @@
     }
     
     fetcher = [[GMSourceFetcher alloc] init];
-    loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, -25, 280, 27)];
     
-        [((UIScrollView *)self.view) setBackgroundColor:[UIColor colorWithRed:228/255.0 green:228/255.0 blue:228/255.0 alpha:1.0]];
+    [((UIScrollView *)self.view) setBackgroundColor:[UIColor colorWithRed:228/255.0 green:228/255.0 blue:228/255.0 alpha:1.0]];
     
     if ([topic.posts count] == 0) {
         [self loadPostsWithLoadingView:YES];
@@ -50,24 +49,12 @@
         loading = YES;
         
         if (flag) {
-            loadingView.hidden = NO;
-            if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.height - 280) / 2), -25, 280, 27);
-            else
-                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27);
-            
-            loadingView.layer.zPosition = self.view.layer.zPosition + 1;
-            
-            [self.view addSubview:loadingView];
-            [loadingView release];
-            
-            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-            animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-            animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, loadingView.layer.position.y + 25)];
-            animation.duration = 0.25;
-            animation.removedOnCompletion = NO;
-            animation.fillMode = kCAFillModeForwards;
-            [[loadingView layer] addAnimation:animation forKey:@"position"];
+            HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:HUD];
+            [HUD release];
+            HUD.labelText = @"Loading";
+            HUD.removeFromSuperViewOnHide = YES;
+            [HUD show:YES];
         }
         
         [fetcher postsForTopic:self.topic withDelegate:self];
@@ -76,26 +63,12 @@
 
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Loading forum posts failed with error: %@", [error description]);
-    loadingView.hidden = YES;
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
+    [HUD hide:YES];
     loading = NO;
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
-    loadingView.hidden = YES;
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
+    [HUD hide:YES];
     loading = NO;
     
     GMForumsParser *parser = [[GMForumsParser alloc] init];
@@ -116,7 +89,6 @@
 - (void)dealloc {
     self.topic = nil;
     [fetcher release];
-    [loadingView removeFromSuperview];
     [super dealloc];
 }
 

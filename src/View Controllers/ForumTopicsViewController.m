@@ -33,7 +33,6 @@
     }
     
     fetcher = [[GMSourceFetcher alloc] init];
-    loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, -25, 280, 27)];
     
     if ([forum.topics count] == 0) {
         [self loadTopicsWithLoadingView:YES];
@@ -47,25 +46,12 @@
         loading = YES;
         
         if (flag) {
-            loadingView.hidden = NO;
-            if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.height - 280) / 2), -25, 280, 27);
-            else
-                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27);
-            
-            loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
-            
-            [self.tableView addSubview:loadingView];
-            self.tableView.scrollEnabled = NO;
-            [loadingView release];
-            
-            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-            animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-            animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, loadingView.layer.position.y + 25)];
-            animation.duration = 0.25;
-            animation.removedOnCompletion = NO;
-            animation.fillMode = kCAFillModeForwards;
-            [[loadingView layer] addAnimation:animation forKey:@"position"];
+            HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:HUD];
+            [HUD release];
+            HUD.labelText = @"Loading";
+            HUD.removeFromSuperViewOnHide = YES;
+            [HUD show:YES];
         }
         
         [fetcher topicsForForum:forum withDelegate:self];
@@ -76,30 +62,14 @@
     NSLog(@"Loading forum topics failed with error: %@", [error description]);
 
     self.tableView.scrollEnabled = YES;
-    loadingView.hidden = YES;
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
+    [HUD hide:YES];
     loading = NO;
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
 
     self.tableView.scrollEnabled = YES;
-    loadingView.hidden = YES;
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
+    [HUD hide:YES];
     loading = NO;
     
     GMForumsParser *parser = [[GMForumsParser alloc] init];
@@ -183,7 +153,6 @@
     NSLog(@"topics dealloc");
     self.forum = nil;
     [fetcher release];
-    [loadingView removeFromSuperview];
     [super dealloc];
 }
 

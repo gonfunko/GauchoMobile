@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GMDashboardItem.h"
 #import "GMDashboardParser.h"
-#import "GMLoadingView.h"
+#import "MBProgressHUD.h"
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMTextViewTableCell.h"
@@ -19,7 +19,7 @@
 @interface DashboardViewController : UITableViewController <GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate> {
 @private
     GMSourceFetcher *fetcher;
-    GMLoadingView *loadingView;
+    MBProgressHUD *HUD;
     EGORefreshTableHeaderView *reloadView;
     BOOL loading;
 }

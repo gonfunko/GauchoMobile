@@ -35,29 +35,21 @@
 
 - (void)viewDidLoad
 {
-    loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, -25, 280, 27)];
     details = @"";
     sizingWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 290, 100)];
     sizingWebView.delegate = self;
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"Details";
     self.tableView.allowsSelection = NO;
-    
-    loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27);
-    
-    loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
-    [self.view addSubview:loadingView];
-    [loadingView release];
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, loadingView.layer.position.y + 25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
-    
     self.tableView.scrollEnabled = NO;
+
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    [HUD release];
+    HUD.labelText = @"Loading";
+    HUD.removeFromSuperViewOnHide = YES;
+    [HUD show:YES];
+
     
     GMSourceFetcher *fetcher = [[GMSourceFetcher alloc] init];
     [fetcher detailsForAssignment:self.assignment withDelegate:self];
@@ -91,14 +83,7 @@
 
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Fetching assignment details failed with error: %@", [error description]);
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
-    [loadingView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.25];
+    [HUD hide:YES];
     self.tableView.scrollEnabled = YES;
 }
 
@@ -123,14 +108,7 @@
     if ([view isEqual:sizingWebView]) {
         webviewHeight = [[view stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"] intValue];
         [self.tableView reloadData];
-        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-        animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-        animation.duration = 0.25;
-        animation.removedOnCompletion = NO;
-        animation.fillMode = kCAFillModeForwards;
-        [[loadingView layer] addAnimation:animation forKey:@"position"];
-        [loadingView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.25];
+        [HUD hide:YES];
         self.tableView.scrollEnabled = YES;
     }
 }

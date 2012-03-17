@@ -27,7 +27,6 @@
     
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
-    loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, -25, 280, 27)];
     
     if ([[currentCourse forums] count] == 0) {
         [self loadForumsWithLoadingView:YES];
@@ -45,23 +44,12 @@
         loading = YES;
         
         if (flag) {
-            if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.height - 280) / 2), -25, 280, 27);
-            else
-                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27);
-            
-            loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
-            
-            [self.parentViewController.view addSubview:loadingView];
-            [loadingView release];
-            
-            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-            animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-            animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, loadingView.layer.position.y + 25)];
-            animation.duration = 0.25;
-            animation.removedOnCompletion = NO;
-            animation.fillMode = kCAFillModeForwards;
-            [[loadingView layer] addAnimation:animation forKey:@"position"];
+            HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:HUD];
+            [HUD release];
+            HUD.labelText = @"Loading";
+            HUD.removeFromSuperViewOnHide = YES;
+            [HUD show:YES];
         }
         
         GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
@@ -72,25 +60,12 @@
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Loading forums failed with error: %@", [error description]);
     
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
+    [HUD hide:YES];
     loading = NO;
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
+    [HUD hide:YES];
     loading = NO;
     
     [[[GMDataSource sharedDataSource] currentCourse] removeAllForums];
@@ -164,7 +139,6 @@
 
 - (void)dealloc {
     [fetcher release];
-    [loadingView removeFromSuperview];
     [super dealloc];
 }
 

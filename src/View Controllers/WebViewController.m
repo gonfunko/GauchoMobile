@@ -59,21 +59,12 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-        loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((int)(([[UIScreen mainScreen] bounds].size.height - 280) / 2), -25, 280, 27)];
-    else
-        loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27)];
-    
-    [self.view addSubview:loadingView];
-    [loadingView release];
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, loadingView.layer.position.y + 25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    [HUD release];
+    HUD.labelText = @"Loading";
+    HUD.removeFromSuperViewOnHide = YES;
+    [HUD show:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)view {
@@ -81,27 +72,11 @@
     NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     self.navigationController.visibleViewController.navigationItem.title = title;
     
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, loadingView.layer.position.y - 25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
-    
-    [loadingView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:1.0];
+    [HUD hide:YES];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, loadingView.layer.position.y - 25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
-    
-    [loadingView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:1.0];
+    [HUD hide:YES];
 }
 
 - (IBAction)openInSafari:(id)sender {

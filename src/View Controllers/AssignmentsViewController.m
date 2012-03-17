@@ -14,8 +14,6 @@
 - (void)dealloc
 {
     [fetcher release];
-    [loadingView removeFromSuperview];
-    [loadingView release];
     [reloadView removeFromSuperview];
     [super dealloc];
 }
@@ -38,7 +36,6 @@
     
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
-    loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, -25, 280, 27)];
     noAssignmentsLabel = nil;
     
     if ([[currentCourse assignments] count] == 0) {
@@ -114,20 +111,13 @@
     if (!loading) {
         loading = YES;
         
-        
         if (flag) {
-            
-            loadingView.frame = CGRectMake((int)(([self.view frame].size.width - 280) / 2), -25, 280, 27);
-            loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
-            [self.parentViewController.view addSubview:loadingView];
-            
-            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-            animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-            animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, loadingView.layer.position.y + 25)];
-            animation.duration = 0.25;
-            animation.removedOnCompletion = NO;
-            animation.fillMode = kCAFillModeForwards;
-            [[loadingView layer] addAnimation:animation forKey:@"position"];
+            HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:HUD];
+            [HUD release];
+            HUD.labelText = @"Loading";
+            HUD.removeFromSuperViewOnHide = YES;
+            [HUD show:YES];
         }
         
         GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
@@ -139,29 +129,15 @@
     NSLog(@"Loading assignments failed with error: %@", [error description]);
     
     [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
     loading = NO;
+    [HUD hide:YES];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
     
     [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(loadingView.layer.position.x, -25)];
-    animation.duration = 0.25;
-    animation.removedOnCompletion = NO;
-    animation.fillMode = kCAFillModeForwards;
-    [[loadingView layer] addAnimation:animation forKey:@"position"];
     loading = NO;
+    [HUD hide:YES];
     
     [[[GMDataSource sharedDataSource] currentCourse] removeAllAssignments];
     

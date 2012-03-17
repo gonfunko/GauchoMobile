@@ -10,13 +10,13 @@
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMForumsParser.h"
-#import "GMLoadingView.h"
+#import "MBProgressHUD.h"
 #import "ForumTopicsViewController.h"
 
 @interface ForumViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private
     GMSourceFetcher *fetcher;
-    GMLoadingView *loadingView;
+    MBProgressHUD *HUD;
     BOOL loading;
 }
 

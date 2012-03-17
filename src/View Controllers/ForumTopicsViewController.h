@@ -10,7 +10,7 @@
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMForumsParser.h"
-#import "GMLoadingView.h"
+#import "MBProgressHUD.h"
 #import "GMForumTopicTableCell.h"
 #import "ForumPostsViewController.h"
 
@@ -18,7 +18,7 @@
 @private
     GMForum *forum;
     GMSourceFetcher *fetcher;
-    GMLoadingView *loadingView;
+    MBProgressHUD *HUD;
     BOOL loading;
     
     IBOutlet GMForumTopicTableCell *topicCell;

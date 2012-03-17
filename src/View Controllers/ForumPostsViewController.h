@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "GMSourceFetcher.h"
 #import "GMForumsParser.h"
-#import "GMLoadingView.h"
+#import "MBProgressHUD.h"
 #import "GMForumTopicView.h"
 
 @interface ForumPostsViewController : UIViewController <GMSourceFetcherDelegate> {
 @private
     GMForumTopic *topic;
     GMSourceFetcher *fetcher;
-    GMLoadingView *loadingView;
+    MBProgressHUD *HUD;
     BOOL loading;
     
     IBOutlet GMForumTopicView *postsView;
