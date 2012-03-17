@@ -17,7 +17,14 @@
         dashboardController.title = @"Dashboard";
         dashboardController.tabBarItem.image = [UIImage imageNamed:@"dashboard.png"];
         
-        AssignmentsViewController *assignmentsController = [[AssignmentsViewController alloc] initWithNibName:@"AssignmentsViewController" bundle:[NSBundle mainBundle]];
+        UIViewController *assignmentsController;
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            assignmentsController = [[AssignmentsViewController alloc] initWithNibName:@"AssignmentsViewController" bundle:[NSBundle mainBundle]];
+        } else {
+            NSLog(@"assignments");
+            assignmentsController = [[GMiPadAssignmentsViewController alloc] initWithNibName:@"GMiPadAssignmentsViewController" bundle:[NSBundle mainBundle]];
+        }
+        
         assignmentsController.title = @"Assignments";
         assignmentsController.tabBarItem.image = [UIImage imageNamed:@"assignments.png"];
         

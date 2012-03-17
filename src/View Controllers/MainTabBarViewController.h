@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DashboardViewController.h"
 #import "AssignmentsViewController.h"
+#import "GMiPadAssignmentsViewController.h"
 #import "ParticipantsViewController.h"
 #import "GradesViewController.h"
 #import "ForumViewController.h"

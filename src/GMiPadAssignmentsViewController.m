@@ -18,7 +18,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -27,6 +26,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.tableView.layer.borderWidth = 1.0;
+    self.tableView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(loadAssignments) 
+                                                 name:@"GMCurrentCourseChangedNotification" 
+                                               object:nil];
 }
 
 - (void)viewDidUnload
@@ -39,6 +45,17 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
+}
+
+- (void)loadAssignments {
+    [self loadAssignmentsWithLoadingView:YES];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self 
+                                                    name:@"GMCurrentCourseChangedNotification" 
+                                                  object:nil];
+    [super dealloc];
 }
 
 @end

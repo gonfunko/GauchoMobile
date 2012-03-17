@@ -21,6 +21,7 @@
     GMSourceFetcher *fetcher;
     GMLoadingView *loadingView;
     EGORefreshTableHeaderView *reloadView;
+    UITextField *noAssignmentsLabel;
     UIView *calendar;
     BOOL loading;
     NSInteger pendingID;

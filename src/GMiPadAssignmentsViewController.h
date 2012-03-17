@@ -7,6 +7,7 @@
 //
 
 #import "AssignmentsViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface GMiPadAssignmentsViewController : AssignmentsViewController
 

@@ -15,6 +15,7 @@
 {
     [fetcher release];
     [loadingView removeFromSuperview];
+    [loadingView release];
     [reloadView removeFromSuperview];
     [super dealloc];
 }
@@ -38,6 +39,7 @@
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
     loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, -25, 280, 27)];
+    noAssignmentsLabel = nil;
     
     if ([[currentCourse assignments] count] == 0) {
         [self loadAssignmentsWithLoadingView:YES];
@@ -51,12 +53,8 @@
     [monthView release];
     [monthView reload];
         calendar = monthView;
-    } else {
-        calendar = [[GMWeekView alloc] initWithFrame:CGRectMake(0, -1, [[UIScreen mainScreen] bounds].size.width, 170)];
-        ((GMWeekView *)calendar).delegate = self;
-        [self.view addSubview:calendar];
-        [calendar release];
     }
+    
     self.tableView.scrollsToTop = YES;
     
     if (reloadView == nil) {
@@ -72,8 +70,10 @@
 	[reloadView refreshLastUpdatedDate];
     
     calendar.hidden = NO;
-            reloadView.hidden = YES;
-            self.tableView.frame = CGRectMake(0, calendar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - calendar.frame.size.height);
+    reloadView.hidden = YES;
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        self.tableView.frame = CGRectMake(0, calendar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - calendar.frame.size.height);
+    }
 }
 
 - (void)viewDidUnload
@@ -114,16 +114,12 @@
     if (!loading) {
         loading = YES;
         
+        
         if (flag) {
-            if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight)
-                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.height - 280) / 2), -25, 280, 27);
-            else
-                loadingView.frame = CGRectMake((int)(([[UIScreen mainScreen] bounds].size.width - 280) / 2), -25, 280, 27);
             
+            loadingView.frame = CGRectMake((int)(([self.view frame].size.width - 280) / 2), -25, 280, 27);
             loadingView.layer.zPosition = self.tableView.layer.zPosition + 1;
-            
             [self.parentViewController.view addSubview:loadingView];
-            [loadingView release];
             
             CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
             animation.fromValue = [NSValue valueWithCGPoint:loadingView.layer.position];
@@ -181,15 +177,18 @@
     [self.tableView reloadData];
     
     if ([assignments count] == 0) {
-        UITextField *label = [[UITextField alloc] initWithFrame:CGRectMake(0, (self.tableView.frame.size.height - 30) / 2 - 25, self.tableView.frame.size.width, 30)];
-        label.enabled = NO;
-        label.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
-        label.text = @"No Assignments";
-        label.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
-        label.textColor = [UIColor grayColor];
-        label.textAlignment = UITextAlignmentCenter;
-        [self.tableView addSubview:label];
-        [label release];
+        noAssignmentsLabel = [[UITextField alloc] initWithFrame:CGRectMake(0, (self.tableView.frame.size.height - 30) / 2 - 25, self.tableView.frame.size.width, 30)];
+        noAssignmentsLabel.enabled = NO;
+        noAssignmentsLabel.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
+        noAssignmentsLabel.text = @"No Assignments";
+        noAssignmentsLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
+        noAssignmentsLabel.textColor = [UIColor grayColor];
+        noAssignmentsLabel.textAlignment = UITextAlignmentCenter;
+        [self.tableView addSubview:noAssignmentsLabel];
+        [noAssignmentsLabel release];
+    } else {
+        [noAssignmentsLabel removeFromSuperview];
+        noAssignmentsLabel = nil;
     }
     
     if ([calendar respondsToSelector:@selector(reload)]) {
