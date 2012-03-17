@@ -43,6 +43,7 @@
             dayLayer.font = @"Helvetica";
             dayLayer.alignmentMode = kCAAlignmentRight;
             dayLayer.frame = CGRectMake(leftOffset, 45, tileWidth, 18);
+            dayLayer.contentsScale = [[UIScreen mainScreen] scale];
             [self.layer addSublayer:dayLayer];
             leftOffset += tileWidth + 10;
         }
@@ -106,12 +107,16 @@
     }
     
     //Set the title to be Month Year
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     title.string = [NSString stringWithFormat:@"%@ %d", [months objectAtIndex:dateComponents.month - 1], dateComponents.year];
+    [CATransaction commit];
     title.fontSize = 24.0;
     title.foregroundColor = [[UIColor lightGrayColor] CGColor];
     title.font = @"Helvetica-Bold";
     title.alignmentMode = kCAAlignmentCenter;
     title.frame = CGRectMake(0, 10, self.frame.size.width, 24.0);
+    title.contentsScale = [[UIScreen mainScreen] scale];
     [self.layer addSublayer:title];
        
     
@@ -141,6 +146,7 @@
         dayLayer.alignmentMode = kCAAlignmentRight;
         dayLayer.cornerRadius = 3.0;
         dayLayer.frame = CGRectMake(leftOffset, topOffet, tileWidth, 25);
+        dayLayer.contentsScale = [[UIScreen mainScreen] scale];
         
         //If the current day is actually today, make it bold and blue
         if (currentDateComponents.day == todayDateComponents.day &&
