@@ -20,13 +20,13 @@
         
         UIButton *previousMonth = [UIButton buttonWithType:UIButtonTypeCustom];
         previousMonth.frame = CGRectMake(15, 5, 30, 30);
-        [previousMonth setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+        [previousMonth setImage:[UIImage imageNamed:@"greyback.png"] forState:UIControlStateNormal];
         [previousMonth addTarget:self action:@selector(loadPreviousMonth) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:previousMonth];
         
         UIButton *nextMonth = [UIButton buttonWithType:UIButtonTypeCustom];
         nextMonth.frame = CGRectMake(self.frame.size.width - 45, 5, 30, 30);
-        [nextMonth setImage:[UIImage imageNamed:@"forward.png"] forState:UIControlStateNormal];
+        [nextMonth setImage:[UIImage imageNamed:@"greyforward.png"] forState:UIControlStateNormal];
         [nextMonth addTarget:self action:@selector(loadNextMonth) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:nextMonth];
         
