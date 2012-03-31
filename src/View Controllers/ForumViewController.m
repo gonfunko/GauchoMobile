@@ -37,6 +37,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     self.navigationController.visibleViewController.navigationItem.title = @"Forums";
+    self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)loadForumsWithLoadingView:(BOOL)flag {
