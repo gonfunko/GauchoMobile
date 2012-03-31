@@ -65,6 +65,7 @@
         background.shadowRadius = 2.0;
         background.shadowOpacity = 0.8;
         background.borderColor = [[UIColor grayColor] CGColor];
+        background.opaque = YES;
         background.frame = CGRectMake(10, verticalOffset, self.frame.size.width - 20, contentHeight.height + 65);
         
         UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, background.frame.size.width, 55)
@@ -74,16 +75,19 @@
         headerBackground.frame = CGRectMake(0, 0, background.frame.size.width, 55);
         headerBackground.fillColor = [[UIColor whiteColor] CGColor];
         headerBackground.path = maskPath.CGPath;
+        headerBackground.opaque = YES;
         [background addSublayer:headerBackground];
         [headerBackground release];
         
         CALayer *dividingLine = [[CALayer alloc] init];
         dividingLine.frame = CGRectMake(0, 55, background.frame.size.width, 1);
         dividingLine.backgroundColor = [[UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1.0] CGColor];
+        dividingLine.opaque = YES;
         [background addSublayer:dividingLine];
         CALayer *dividingLineShadow = [[CALayer alloc] init];
         dividingLineShadow.backgroundColor = [[UIColor whiteColor] CGColor];
         dividingLineShadow.frame = CGRectMake(0, 56, background.frame.size.width, 1);
+        dividingLineShadow.opaque = YES;
         [background addSublayer:dividingLineShadow];
         [dividingLine release];
         [dividingLineShadow release];
@@ -95,12 +99,13 @@
         userPhoto.contents = (id)[[UIImage imageNamed:@"defaulticon.png"] CGImage];
         userPhoto.cornerRadius = 2.0;
         userPhoto.frame = CGRectMake(10, 7, 40, 40);
+        userPhoto.opaque = YES;
         if ([photoLayers objectForKey:[post.author.imageURL absoluteString]] == nil) {
             NSMutableSet *layers = [NSMutableSet set];
             [photoLayers setObject:layers forKey:[post.author.imageURL absoluteString]];
         }
+        
         [[photoLayers objectForKey:[post.author.imageURL absoluteString]] addObject:userPhoto];
-//        [photoLayers setObject:userPhoto forKey:[post.author.imageURL absoluteString]];
         [background addSublayer:userPhoto];
         [userPhoto release];
         
