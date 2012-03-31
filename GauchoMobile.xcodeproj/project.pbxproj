@@ -265,7 +265,6 @@
 		939036FB132AD7F800A5AF6E /* GauchoMobile-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GauchoMobile-Info.plist"; path = "data/GauchoMobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 		93903700132AD8B100A5AF6E /* UIView+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TKCategory.h"; sourceTree = "<group>"; };
 		93903701132AD8B100A5AF6E /* UIView+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TKCategory.m"; sourceTree = "<group>"; };
-		93931BD515153B5C003F1F3C /* GauchoMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GauchoMobile.entitlements; sourceTree = SOURCE_ROOT; };
 		93931BD615153F2C003F1F3C /* 3retina.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3retina.jpg; sourceTree = "<group>"; };
 		93931BD715153F2C003F1F3C /* 2retina.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2retina.jpg; sourceTree = "<group>"; };
 		93931BD815153F2C003F1F3C /* 1retina.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1retina.jpg; sourceTree = "<group>"; };
@@ -486,7 +485,6 @@
 		934300DF12E0F42600AFFFE4 /* GauchoMobile */ = {
 			isa = PBXGroup;
 			children = (
-				93931BD515153B5C003F1F3C /* GauchoMobile.entitlements */,
 				93EC607C1332E1DC00601B04 /* iPad */,
 				934300E812E0F42700AFFFE4 /* GauchoMobileAppDelegate.h */,
 				934300E912E0F42700AFFFE4 /* GauchoMobileAppDelegate.m */,
@@ -933,7 +931,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = GauchoMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert Dodson";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
