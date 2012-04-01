@@ -9,13 +9,15 @@
 
 @implementation GauchoMobileAppDelegate
 
-
 @synthesize window;
+@synthesize masterPopoverController;
+@synthesize detail;
+@synthesize courseController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //Create the course view controller and set it as the root view controller
-    CourseViewController *courseController = [[CourseViewController alloc] initWithNibName:@"CourseViewController" bundle:[NSBundle mainBundle]];
+    self.courseController = [[CourseViewController alloc] initWithNibName:@"CourseViewController" bundle:[NSBundle mainBundle]];
     
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         UINavigationController *navController = [[UINavigationController alloc] init];
@@ -26,24 +28,21 @@
     } else {
         UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
         
-        MainTabBarViewController *detail = [[MainTabBarViewController alloc] init]; 
-        UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:courseController];
-        UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:detail];
+        self.detail = [[MainTabBarViewController alloc] init];
+        UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:self.courseController];
+        UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:self.detail];
         
         detailNav.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
         
         splitViewController.viewControllers = [NSArray arrayWithObjects:rootNav, detailNav, nil];
-        splitViewController.delegate = detail;
+        splitViewController.delegate = self;
         
         self.window.rootViewController = splitViewController;
         
         [splitViewController release];
-        [detail release];
         [rootNav release];
         [detailNav release];
     }
-    
-    [courseController release];
     
     [self.window makeKeyAndVisible];
     
@@ -51,6 +50,8 @@
     LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
     [self.window.rootViewController presentModalViewController:login animated:NO];
     [login release];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissMasterPopover) name:@"GMLogoutNotification" object:nil];
 
     return YES;
 }
@@ -139,10 +140,38 @@
     [indicator release];
 }
 
+- (void)dismissMasterPopover {
+    [self.masterPopoverController dismissPopoverAnimated:YES];
+    self.masterPopoverController = nil;
+}
+
+
+- (void)splitViewController:(UISplitViewController*)svc
+     willHideViewController:(UIViewController *)aViewController 
+          withBarButtonItem:(UIBarButtonItem*)barButtonItem 
+       forPopoverController:(UIPopoverController*)pc
+{  
+    [barButtonItem setTitle:@"Courses"];
+    detail.navigationItem.leftBarButtonItem = barButtonItem;
+    self.masterPopoverController = pc;
+}
+
+
+- (void)splitViewController:(UISplitViewController*)svc
+     willShowViewController:(UIViewController *)aViewController 
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    detail.navigationItem.leftBarButtonItem = nil;
+    self.masterPopoverController = nil;
+}
+
+
 
 - (void)dealloc {
-
     [window release];
+    self.detail = nil;
+    self.courseController = nil;
+    self.masterPopoverController = nil;
     [super dealloc];
 }
 

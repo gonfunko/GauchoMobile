@@ -14,6 +14,6 @@
 #import "GradesViewController.h"
 #import "ForumViewController.h"
 
-@interface MainTabBarViewController : UITabBarController <UISplitViewControllerDelegate>
+@interface MainTabBarViewController : UITabBarController
 
 @end

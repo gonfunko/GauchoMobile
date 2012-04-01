@@ -10,13 +10,19 @@
 #import "GMSourceFetcher.h"
 #import "KeychainItemWrapper.h"
 
-@interface GauchoMobileAppDelegate : NSObject <UIApplicationDelegate, GMSourceFetcherDelegate> {
+@interface GauchoMobileAppDelegate : NSObject <UIApplicationDelegate, UISplitViewControllerDelegate, GMSourceFetcherDelegate> {
 @private
     GMSourceFetcher *sourceFetcher;
+    MainTabBarViewController *detail;
+    CourseViewController *courseController;
+    UIPopoverController *masterPopoverController;
     UIAlertView *waitMessage;
     UIActivityIndicatorView *indicator;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (retain) UIPopoverController *masterPopoverController;
+@property (retain) MainTabBarViewController *detail;
+@property (retain) CourseViewController *courseController;
 
 @end

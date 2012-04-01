@@ -140,7 +140,12 @@
     
     //Create and present the login controller
     LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
-    [self.navigationController presentModalViewController:controller animated:YES];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        [self.navigationController presentModalViewController:controller animated:YES];
+    } else {
+        [[[UIApplication sharedApplication] delegate] performSelector:@selector(dismissMasterPopover)];
+        [self.splitViewController presentModalViewController:controller animated:YES];
+    }
     [controller release];
     
     [self.tableView reloadData];
