@@ -19,21 +19,36 @@
     if (self) {
         // Initialization code
         UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(0, -3, self.frame.size.width + 6, self.frame.size.height + 6)];
-        bg.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            bg.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        } else {
+            bg.backgroundColor = [UIColor colorWithRed:212/255.0 green:214/255.0 blue:220/255.0 alpha:1.0];
+        }
         [self addSubview:bg];
         [bg release];
         
-        firstButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        firstButton.frame = CGRectMake(10, self.frame.origin.y, (self.frame.size.width - 40) / 2.0, self.frame.size.height);
-        [firstButton setTitle:@"Hello" forState:UIControlStateNormal];
+        self.firstButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.firstButton.frame = CGRectMake(10, self.frame.origin.y, (self.frame.size.width - 40) / 2.0, self.frame.size.height);
+        [self.firstButton setTitle:@"Hello" forState:UIControlStateNormal];
         [self addSubview:firstButton];
         
-        secondButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        secondButton.frame = CGRectMake(30 + ((self.frame.size.width - 40) / 2.0), self.frame.origin.y, (self.frame.size.width - 40) / 2.0, self.frame.size.height);
-        [secondButton setTitle:@"World" forState:UIControlStateNormal];
+        self.secondButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.secondButton.frame = CGRectMake(30 + ((self.frame.size.width - 40) / 2.0), self.frame.origin.y, (self.frame.size.width - 40) / 2.0, self.frame.size.height);
+        [self.secondButton setTitle:@"World" forState:UIControlStateNormal];
         [self addSubview:secondButton];
     }
     return self;
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        self.firstButton.frame = CGRectMake(10, 0, (self.frame.size.width - 40) / 2.0, self.frame.size.height);
+        self.secondButton.frame = CGRectMake(30 + ((self.frame.size.width - 40) / 2.0), 0, (self.frame.size.width - 40) / 2.0, self.frame.size.height);
+    } else {
+        self.firstButton.frame = CGRectMake(30, 0, (self.frame.size.width - 80) / 2.0, self.frame.size.height);
+        self.secondButton.frame = CGRectMake(50 + ((self.frame.size.width - 80) / 2.0), 0, (self.frame.size.width - 80) / 2.0, self.frame.size.height);
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

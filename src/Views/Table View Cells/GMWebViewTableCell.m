@@ -27,7 +27,11 @@
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
-    self.webview.frame = CGRectMake(10, 0, frame.size.width - 20, frame.size.height - 10);
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        self.webview.frame = CGRectMake(frame.origin.x + 10, 0, frame.size.width - 20, frame.size.height - 10);
+    } else {
+        self.webview.frame = CGRectMake(frame.origin.x + 33, 0, frame.size.width - 66, frame.size.height - 10);
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

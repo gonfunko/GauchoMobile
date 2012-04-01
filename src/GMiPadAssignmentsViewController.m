@@ -39,8 +39,7 @@
     date.text = [NSString stringWithFormat:@"%i", dateComponents.day];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"EEEE, MMMM dd, YYYY"];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [formatter setDateFormat:@"EEEE, MMMM d, YYYY"];
     longDate.text = [formatter stringFromDate:[NSDate date]];
 }
 
@@ -58,6 +57,21 @@
 
 - (void)loadAssignments {
     [self loadAssignmentsWithLoadingView:YES];
+}
+
+- (void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GMAssignment *assignment = [[[[GMDataSource sharedDataSource] currentCourse] assignments] objectAtIndex:indexPath.row];
+    
+    [table deselectRowAtIndexPath:indexPath animated:YES];
+    
+    AssignmentDetailViewController *details = [[AssignmentDetailViewController alloc] initWithNibName:@"AssignmentDetailViewController" bundle:[NSBundle mainBundle]];
+    details.assignment = assignment;
+    details.tabBarController = (UITabBarController *)(self.navigationController.visibleViewController);
+    UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:details];
+    detailNav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentModalViewController:detailNav animated:YES];
+    [details release];
 }
 
 - (void)dealloc {

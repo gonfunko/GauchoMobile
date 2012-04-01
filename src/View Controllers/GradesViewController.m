@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
-    self.navigationController.visibleViewController.navigationItem.title = @"Grades";
+    self.tabBarController.navigationItem.title = @"Grades";
 }
 
 - (void)viewDidUnload
@@ -60,8 +60,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.navigationController.visibleViewController.navigationItem.title = @"Grades";
-    self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = nil;
+    self.tabBarController.navigationItem.title = @"Grades";
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

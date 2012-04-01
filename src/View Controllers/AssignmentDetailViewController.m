@@ -36,12 +36,23 @@
 - (void)viewDidLoad
 {
     details = @"";
-    sizingWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 290, 100)];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        sizingWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 290, 100)];
+    } else {
+        sizingWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 474, 100)];
+    }
+    
     sizingWebView.delegate = self;
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"Details";
     self.tableView.allowsSelection = NO;
     self.tableView.scrollEnabled = NO;
+    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissModalViewControllerAnimated:)];
+        self.navigationItem.rightBarButtonItem = doneButton;
+        [doneButton release];
+    }
 
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
@@ -77,8 +88,11 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    } else {
+        return YES;
+    }
 }
 
 - (void)sourceFetchDidFailWithError:(NSError *)error {
@@ -209,7 +223,12 @@
 }
 
 - (void)showGrade:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        void (^completionHandler)(void) = ^() {};
+        [self dismissViewControllerAnimated:YES completion:completionHandler];
+    }
     tabBarController.selectedViewController = [[tabBarController viewControllers] objectAtIndex:3];
     [[[tabBarController viewControllers] objectAtIndex:3] performSelector:@selector(showGradeWithID:) withObject:[NSNumber numberWithInteger:self.assignment.assignmentID]];
 }
@@ -231,7 +250,11 @@
     
     void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {};
     
-    [pic presentAnimated:YES completionHandler:completionHandler];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        [pic presentAnimated:YES completionHandler:completionHandler];
+    } else {
+        [pic presentFromRect:[sender frame] inView:[sender superview] animated:YES completionHandler:completionHandler];
+    }
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {

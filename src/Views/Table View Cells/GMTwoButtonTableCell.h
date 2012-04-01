@@ -13,7 +13,7 @@
     UIButton *secondButton;
 }
 
-@property (readonly) UIButton *firstButton;
-@property (readonly) UIButton *secondButton;
+@property (retain) UIButton *firstButton;
+@property (retain) UIButton *secondButton;
 
 @end
