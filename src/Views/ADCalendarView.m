@@ -18,11 +18,10 @@
     if (self = [super initWithCoder:aDecoder]) {
         dayTiles = [[NSMutableArray alloc] init];
         
-        NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit)
+        NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:(NSYearCalendarUnit | NSMonthCalendarUnit)
                                                        fromDate:[NSDate date]];
         
         //Add a month to our current base date
-        [dateComponents setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
         self.baseDate = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
         [self layOutDayTiles];
         
@@ -60,13 +59,29 @@
     return self;
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self];
+    
+    for (CATextLayer *day in dayTiles) {
+        if (CGRectContainsPoint(day.frame, touchPoint)) {
+            NSCalendar *calendar = [NSCalendar currentCalendar];
+            NSDateComponents *dateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) 
+                                                           fromDate:self.baseDate];
+            
+            dateComponents.day = [day.string intValue];
+            [dateComponents setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+            [self.delegate calendarMonthView:nil didSelectDate:[calendar dateFromComponents:dateComponents]];
+        }
+    }
+}
+
 - (void)loadPreviousMonth {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *dateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) 
+    NSDateComponents *dateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit) 
                                                    fromDate:self.baseDate];
     
     //Subtract a month from our current base date
-    [dateComponents setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     dateComponents.month = dateComponents.month - 1;
 
     //Update it
@@ -78,11 +93,10 @@
 
 - (void)loadNextMonth {
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *dateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) 
+    NSDateComponents *dateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit) 
                                                    fromDate:self.baseDate];
     
     //Add a month to our current base date
-    [dateComponents setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     dateComponents.month = dateComponents.month + 1;
     self.baseDate = [calendar dateFromComponents:dateComponents];
     

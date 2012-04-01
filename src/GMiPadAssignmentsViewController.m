@@ -44,6 +44,7 @@
     longDate.text = [formatter stringFromDate:[NSDate date]];
     
     ipadCalendar.dataSource = self;
+    ipadCalendar.delegate = self;
 }
 
 - (void)viewDidUnload
