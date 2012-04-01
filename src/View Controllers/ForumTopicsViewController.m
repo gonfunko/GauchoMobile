@@ -41,6 +41,14 @@
     self.tableView.rowHeight = 49;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    } else {
+        return YES;
+    }
+}
+
 - (void)loadTopicsWithLoadingView:(BOOL)flag {
     if (!loading) {
         loading = YES;
@@ -91,18 +99,6 @@
         [self.tableView addSubview:label];
         [label release];
     }
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source

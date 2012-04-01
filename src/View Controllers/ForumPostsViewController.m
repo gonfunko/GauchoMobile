@@ -44,6 +44,14 @@
     }
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    } else {
+        return YES;
+    }
+}
+
 - (void)loadPostsWithLoadingView:(BOOL)flag {
     if (!loading) {
         loading = YES;
@@ -79,11 +87,6 @@
     
     [postsView setPosts:topic.posts];
     [((UIScrollView *)self.view) setContentSize:postsView.frame.size];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)dealloc {

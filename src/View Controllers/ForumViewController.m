@@ -40,6 +40,14 @@
     self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = nil;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    } else {
+        return YES;
+    }
+}
+
 - (void)loadForumsWithLoadingView:(BOOL)flag {
     if (!loading) {
         loading = YES;

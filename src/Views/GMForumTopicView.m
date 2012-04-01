@@ -114,7 +114,7 @@
         author.fontSize = 14.0;
         author.font = @"Helvetica-Bold";
         author.foregroundColor = [[UIColor darkGrayColor] CGColor];
-        author.frame = CGRectMake(60, 10, 210, 20);
+        author.frame = CGRectMake(60, 10, self.frame.size.width - 110, 20);
         author.contentsScale = [[UIScreen mainScreen] scale];
         [background addSublayer:author];
         [author release];
@@ -124,7 +124,7 @@
         date.fontSize = 12.0;
         date.font = @"Helvetica";
         date.foregroundColor = [[UIColor lightGrayColor] CGColor];
-        date.frame = CGRectMake(60, 28, 210, 20);
+        date.frame = CGRectMake(60, 28, self.frame.size.width - 110, 20);
         date.contentsScale = [[UIScreen mainScreen] scale];
         [background addSublayer:date];
         [date release];
@@ -135,7 +135,7 @@
         content.fontSize = 14.0;
         content.font = @"Helvetica";
         content.foregroundColor = [[UIColor darkGrayColor] CGColor];
-        content.frame = CGRectMake(10, 65, 280, contentHeight.height);
+        content.frame = CGRectMake(10, 65, self.frame.size.width - 40, contentHeight.height);
         content.contentsScale = [[UIScreen mainScreen] scale];
         [background addSublayer:content];
         [content release];
