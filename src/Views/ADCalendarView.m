@@ -59,6 +59,7 @@
     
     //Subtract a month from our current base date
     dateComponents.month = dateComponents.month - 1;
+    [dateComponents setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
 
     //Update it
     self.baseDate = [calendar dateFromComponents:dateComponents];
@@ -74,6 +75,7 @@
     
     //Add a month to our current base date
     dateComponents.month = dateComponents.month + 1;
+    [dateComponents setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     self.baseDate = [calendar dateFromComponents:dateComponents];
     
     //Lay out our day tiles
@@ -91,7 +93,6 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit) 
                                                    fromDate:self.baseDate];
-    
     //And the present date
     NSDateComponents *todayDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) 
                                                         fromDate:[NSDate date]];
