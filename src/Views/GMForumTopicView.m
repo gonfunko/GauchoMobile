@@ -67,6 +67,8 @@
         background.borderColor = [[UIColor grayColor] CGColor];
         background.opaque = YES;
         background.frame = CGRectMake(10, verticalOffset, self.frame.size.width - 20, contentHeight.height + 65);
+        background.shouldRasterize = YES;
+        background.rasterizationScale = [[UIScreen mainScreen] scale];
         
         UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, background.frame.size.width, 55)
                                                        byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
@@ -76,6 +78,7 @@
         headerBackground.fillColor = [[UIColor whiteColor] CGColor];
         headerBackground.path = maskPath.CGPath;
         headerBackground.opaque = YES;
+        headerBackground.rasterizationScale = [[UIScreen mainScreen] scale];
         [background addSublayer:headerBackground];
         [headerBackground release];
         
@@ -83,11 +86,13 @@
         dividingLine.frame = CGRectMake(0, 55, background.frame.size.width, 1);
         dividingLine.backgroundColor = [[UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1.0] CGColor];
         dividingLine.opaque = YES;
+        dividingLine.rasterizationScale = [[UIScreen mainScreen] scale];
         [background addSublayer:dividingLine];
         CALayer *dividingLineShadow = [[CALayer alloc] init];
         dividingLineShadow.backgroundColor = [[UIColor whiteColor] CGColor];
         dividingLineShadow.frame = CGRectMake(0, 56, background.frame.size.width, 1);
         dividingLineShadow.opaque = YES;
+        dividingLineShadow.rasterizationScale = [[UIScreen mainScreen] scale];
         [background addSublayer:dividingLineShadow];
         [dividingLine release];
         [dividingLineShadow release];
@@ -100,6 +105,7 @@
         userPhoto.cornerRadius = 2.0;
         userPhoto.frame = CGRectMake(10, 7, 40, 40);
         userPhoto.opaque = YES;
+        userPhoto.rasterizationScale = [[UIScreen mainScreen] scale];
         if ([photoLayers objectForKey:[post.author.imageURL absoluteString]] == nil) {
             NSMutableSet *layers = [NSMutableSet set];
             [photoLayers setObject:layers forKey:[post.author.imageURL absoluteString]];
@@ -116,6 +122,7 @@
         author.foregroundColor = [[UIColor darkGrayColor] CGColor];
         author.frame = CGRectMake(60, 10, self.frame.size.width - 110, 20);
         author.contentsScale = [[UIScreen mainScreen] scale];
+        author.rasterizationScale = [[UIScreen mainScreen] scale];
         [background addSublayer:author];
         [author release];
         
@@ -126,6 +133,7 @@
         date.foregroundColor = [[UIColor lightGrayColor] CGColor];
         date.frame = CGRectMake(60, 28, self.frame.size.width - 110, 20);
         date.contentsScale = [[UIScreen mainScreen] scale];
+        date.rasterizationScale = [[UIScreen mainScreen] scale];
         [background addSublayer:date];
         [date release];
         
@@ -137,6 +145,7 @@
         content.foregroundColor = [[UIColor darkGrayColor] CGColor];
         content.frame = CGRectMake(10, 65, self.frame.size.width - 40, contentHeight.height);
         content.contentsScale = [[UIScreen mainScreen] scale];
+        content.rasterizationScale = [[UIScreen mainScreen] scale];
         [background addSublayer:content];
         [content release];
         
