@@ -7,14 +7,17 @@
 //
 
 #import "AssignmentsViewController.h"
+#import "ADCalendarView.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface GMiPadAssignmentsViewController : AssignmentsViewController {
     IBOutlet UILabel *date;
     IBOutlet UILabel *longDate;
+    IBOutlet ADCalendarView *ipadCalendar;
 }
 
 @property (nonatomic, retain) UILabel *date;
 @property (nonatomic, retain) UILabel *longDate;
+@property (nonatomic, retain) ADCalendarView *ipadCalendar;
 
 @end

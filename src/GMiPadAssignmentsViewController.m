@@ -12,6 +12,7 @@
 
 @synthesize date;
 @synthesize longDate;
+@synthesize ipadCalendar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +42,8 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"EEEE, MMMM d, YYYY"];
     longDate.text = [formatter stringFromDate:[NSDate date]];
+    
+    ipadCalendar.dataSource = self;
 }
 
 - (void)viewDidUnload
@@ -57,6 +60,11 @@
 
 - (void)loadAssignments {
     [self loadAssignmentsWithLoadingView:YES];
+}
+
+- (void)sourceFetchSucceededWithPageSource:(NSString *)source {
+    [super sourceFetchSucceededWithPageSource:source];
+    [ipadCalendar reloadData];
 }
 
 - (void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -11,11 +11,19 @@
 @implementation ADCalendarView
 
 @synthesize baseDate;
+@synthesize dataSource;
+@synthesize delegate;
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         dayTiles = [[NSMutableArray alloc] init];
-        self.baseDate = [NSDate date];
+        
+        NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit)
+                                                       fromDate:[NSDate date]];
+        
+        //Add a month to our current base date
+        [dateComponents setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+        self.baseDate = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
         [self layOutDayTiles];
         
         UIButton *previousMonth = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -58,8 +66,8 @@
                                                    fromDate:self.baseDate];
     
     //Subtract a month from our current base date
-    dateComponents.month = dateComponents.month - 1;
     [dateComponents setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    dateComponents.month = dateComponents.month - 1;
 
     //Update it
     self.baseDate = [calendar dateFromComponents:dateComponents];
@@ -74,11 +82,15 @@
                                                    fromDate:self.baseDate];
     
     //Add a month to our current base date
-    dateComponents.month = dateComponents.month + 1;
     [dateComponents setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    dateComponents.month = dateComponents.month + 1;
     self.baseDate = [calendar dateFromComponents:dateComponents];
     
     //Lay out our day tiles
+    [self layOutDayTiles];
+}
+
+- (void)reloadData {
     [self layOutDayTiles];
 }
 
@@ -133,6 +145,14 @@
     
     [dayTiles removeAllObjects];
     
+    NSDateComponents *lastDayComponents = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSWeekCalendarUnit|NSWeekdayCalendarUnit fromDate:currentDate]; // Get necessary date components
+    // set last of month
+    [lastDayComponents setMonth:[lastDayComponents month]+1];
+    [lastDayComponents setDay:0];
+    NSDate *lastDay = [calendar dateFromComponents:lastDayComponents];
+    
+    NSArray *markedDays = [[self.dataSource calendarMonthView:nil marksFromDate:currentDate toDate:lastDay] retain];
+    
     //Keep going as long as the current day is in the same month
     while ([calendar components:NSMonthCalendarUnit fromDate:currentDate].month == dateComponents.month) {
         //Pull the date components from the current date
@@ -142,8 +162,13 @@
         CATextLayer *dayLayer = [CATextLayer layer];
         dayLayer.string = [NSString stringWithFormat:@"%i", currentDateComponents.day];
         dayLayer.fontSize = 18.0;
-        dayLayer.foregroundColor = [[UIColor lightGrayColor] CGColor];
-        dayLayer.font = @"Helvetica";
+        if ([[markedDays objectAtIndex:MAX(currentDateComponents.day - 2, 0)] boolValue]) {
+            dayLayer.font = @"Helvetica-Bold";
+            dayLayer.foregroundColor = [[UIColor grayColor] CGColor];
+        } else {
+            dayLayer.font = @"Helvetica";
+            dayLayer.foregroundColor = [[UIColor lightGrayColor] CGColor];
+        }
         dayLayer.alignmentMode = kCAAlignmentRight;
         dayLayer.cornerRadius = 3.0;
         dayLayer.frame = CGRectMake(leftOffset, topOffet, tileWidth, 25);
@@ -173,6 +198,8 @@
         currentDateComponents.day = currentDateComponents.day + 1;
         currentDate = [calendar dateFromComponents:currentDateComponents];
     }
+    
+    [markedDays release];
 }
 
 - (void)dealloc {
