@@ -58,9 +58,9 @@
         pendingURL = [url copy];
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];
+- (void)webViewDidStartLoad:(UIWebView *)_webView {
+    HUD = [[MBProgressHUD alloc] initWithView:webView];
+    [self.view addSubview:HUD];
     [HUD release];
     HUD.labelText = @"Loading";
     HUD.removeFromSuperViewOnHide = YES;
@@ -72,7 +72,10 @@
     NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     self.navigationController.visibleViewController.navigationItem.title = title;
     
-    [HUD hide:YES];
+    if (HUD != nil) {
+        [HUD hide:YES];
+        HUD = nil;
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
