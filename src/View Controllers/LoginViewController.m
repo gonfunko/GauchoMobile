@@ -39,11 +39,11 @@
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
     animation.fromValue = [floatingBackground valueForKey:@"position"];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(-1 * ((1536 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0)];
+    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(-1 * ((1280 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0)];
     animation.duration = 20.0;
     animation.delegate = self;
     
-    floatingBackground.position = CGPointMake(-1 * ((1536 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0);
+    floatingBackground.position = CGPointMake(-1 * ((1280 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0);
     
     [floatingBackground addAnimation:animation forKey:@"position"];
     [[self.view layer] addSublayer:floatingBackground];
@@ -86,7 +86,11 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    } else {
+        return YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,35 +103,37 @@
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag;
 {
     [floatingBackground removeAllAnimations];
-    
-    image++;
-    if (image == 4) //Change this value to add support for more images
-        image = 1;
-    
-    double ratio = [[UIScreen mainScreen] bounds].size.height / 1024.0;
-    
-    //Determine whether we're going left to right or right to left
-    CGPoint newPoint;
-    if (CGPointEqualToPoint(floatingBackground.position, CGPointMake(-1 * ((1536 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0)))
-        newPoint = CGPointMake(0, 0);
-    else
-        newPoint = CGPointMake(-1 * ((1536 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0);
+ 
+    if (self.isViewLoaded && self.view.window) {
+        image++;
+        if (image == 4) //Change this value to add support for more images
+            image = 1;
         
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && [[UIScreen mainScreen] scale] == 2.0) {
-        floatingBackground.contents = (id)[[UIImage imageNamed:[NSString stringWithFormat:@"%iretina.jpg", image]] CGImage];
-    } else {
-        floatingBackground.contents = (id)[[UIImage imageNamed:[NSString stringWithFormat:@"%i.jpg", image]] CGImage];
+        double ratio = [[UIScreen mainScreen] bounds].size.height / 1024.0;
+        
+        //Determine whether we're going left to right or right to left
+        CGPoint newPoint;
+        if (CGPointEqualToPoint(floatingBackground.position, CGPointMake(-1 * ((1280 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0)))
+            newPoint = CGPointMake(0, 0);
+        else
+            newPoint = CGPointMake(-1 * ((1280 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0);
+            
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && [[UIScreen mainScreen] scale] == 2.0) {
+            floatingBackground.contents = (id)[[UIImage imageNamed:[NSString stringWithFormat:@"%iretina.jpg", image]] CGImage];
+        } else {
+            floatingBackground.contents = (id)[[UIImage imageNamed:[NSString stringWithFormat:@"%i.jpg", image]] CGImage];
+        }
+        
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+        animation.fromValue = [floatingBackground valueForKey:@"position"];
+        animation.toValue = [NSValue valueWithCGPoint:newPoint];
+        animation.duration = 20.0;
+        animation.delegate = self;
+        
+        floatingBackground.position = newPoint;
+        
+        [floatingBackground addAnimation:animation forKey:@"position"];
     }
-    
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [floatingBackground valueForKey:@"position"];
-    animation.toValue = [NSValue valueWithCGPoint:newPoint];
-    animation.duration = 20.0;
-    animation.delegate = self;
-    
-    floatingBackground.position = newPoint;
-    
-    [floatingBackground addAnimation:animation forKey:@"position"];
 }
 
 #pragma mark - Login logic
@@ -151,8 +157,16 @@
     
     navBar.layer.zPosition = navBar.layer.zPosition + 1;
     
+    double width;
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad &&
+        ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight)) {
+        width = 1024;
+    } else {
+        width = self.view.frame.size.width;
+    }
+    
     //Present the loading view
-    loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280) / 2, 17, 280, 27)];
+    loadingView = [[GMLoadingView alloc] initWithFrame:CGRectMake((width - 280) / 2, 17, 280, 27)];
     loadingView.layer.zPosition = navBar.layer.zPosition - 1;
     [self.view addSubview:loadingView];
     
