@@ -16,4 +16,6 @@
     GMSourceFetcher *fetcher;
 }
 
+- (void)selectCurrentCourse;
+
 @end

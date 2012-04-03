@@ -60,6 +60,9 @@
 {
     [super viewDidAppear:animated];
     [self.tableView reloadData];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        [self selectCurrentCourse];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -125,13 +128,6 @@
 }
 
 - (void)selectCurrentCourse {
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        //We need to select the row after a delay, because otherwise it gets deselected as part of the login view dismissing or something along those lines.
-        [self performSelector:@selector(_selectCurrentCourse) withObject:nil afterDelay:0.5];
-    }
-}
-
-- (void)_selectCurrentCourse {
     NSArray *allCourses = [[GMDataSource sharedDataSource] allCourses];
     NSInteger index = [allCourses indexOfObject:[[GMDataSource sharedDataSource] currentCourse]];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
