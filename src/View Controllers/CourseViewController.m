@@ -19,7 +19,6 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GMLoginSuccessfulNotification" object:nil];
     [fetcher release];
     [super dealloc];
 }
@@ -42,8 +41,6 @@
     [logOut release];
     
     fetcher = [[GMSourceFetcher alloc] init];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectCurrentCourse) name:@"GMLoginSuccessfulNotification" object:nil];
 }
 
 - (void)viewDidUnload
