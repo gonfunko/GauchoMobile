@@ -15,6 +15,7 @@
 {
     [fetcher release];
     [reloadView removeFromSuperview];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GMLoginSuccessfulNotification" object:nil];
     [super dealloc];
 }
 
@@ -56,6 +57,8 @@
     if (currentCourse != nil && [[currentCourse dashboardItems] count] == 0) {
         [self loadDashboardWithLoadingView:YES];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadDashboard) name:@"GMLoginSuccessfulNotification" object:nil];
 }
 
 - (void)viewDidUnload

@@ -159,7 +159,7 @@
     
     double width;
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad &&
-        ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight)) {
+        UIDeviceOrientationIsLandscape(self.interfaceOrientation)) {
         width = 1024;
     } else {
         width = self.view.frame.size.width;
@@ -231,8 +231,14 @@
         [courses release];
         [parser release];
         
+        if ([courses count] != 0) {
+            [[GMDataSource sharedDataSource] setCurrentCourse:[courses objectAtIndex:0]];
+        }
+        
         //Clear out the login view and display the list of courses
         [self dismissModalViewControllerAnimated:YES];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"GMLoginSuccessfulNotification" object:nil];
     }
     else {
         UIAlertView *loginFailedAlert = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:[NSString stringWithFormat:@"GauchoMobile was unable to log in. Check your username and password and try again."] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];

@@ -19,6 +19,7 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GMLoginSuccessfulNotification" object:nil];
     [fetcher release];
     [super dealloc];
 }
@@ -41,6 +42,8 @@
     [logOut release];
     
     fetcher = [[GMSourceFetcher alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectCurrentCourse) name:@"GMLoginSuccessfulNotification" object:nil];
 }
 
 - (void)viewDidUnload
@@ -119,7 +122,20 @@
         [self.navigationController pushViewController:tabBarController animated:YES];
         [tabBarController release];
     }
-    
+}
+
+- (void)selectCurrentCourse {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        //We need to select the row after a delay, because otherwise it gets deselected as part of the login view dismissing or something along those lines.
+        [self performSelector:@selector(_selectCurrentCourse) withObject:nil afterDelay:0.5];
+    }
+}
+
+- (void)_selectCurrentCourse {
+    NSArray *allCourses = [[GMDataSource sharedDataSource] allCourses];
+    NSInteger index = [allCourses indexOfObject:[[GMDataSource sharedDataSource] currentCourse]];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (void)logOut {
