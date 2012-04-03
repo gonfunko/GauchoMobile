@@ -9,6 +9,7 @@
 #import "CourseViewController.h"
 #import "GMSourceFetcher.h"
 #import "KeychainItemWrapper.h"
+#import "GMSplitViewController.h"
 
 @interface GauchoMobileAppDelegate : NSObject <UIApplicationDelegate, UISplitViewControllerDelegate, GMSourceFetcherDelegate> {
 @private

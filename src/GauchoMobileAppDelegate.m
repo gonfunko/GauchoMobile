@@ -26,7 +26,7 @@
         [navController pushViewController:courseController animated:NO];
         [navController release];
     } else {
-        UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
+        UISplitViewController *splitViewController = [[GMSplitViewController alloc] init];
         
         self.detail = [[MainTabBarViewController alloc] init];
         UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:self.courseController];
@@ -150,9 +150,9 @@
      willHideViewController:(UIViewController *)aViewController 
           withBarButtonItem:(UIBarButtonItem*)barButtonItem 
        forPopoverController:(UIPopoverController*)pc
-{  
+{
     [barButtonItem setTitle:@"Courses"];
-    detail.navigationItem.leftBarButtonItem = barButtonItem;
+    ((GMSplitViewController *)svc).barButtonItem = barButtonItem;
     self.masterPopoverController = pc;
 }
 
@@ -161,7 +161,7 @@
      willShowViewController:(UIViewController *)aViewController 
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
-    detail.navigationItem.leftBarButtonItem = nil;
+    ((GMSplitViewController *)svc).barButtonItem = nil;
     self.masterPopoverController = nil;
 }
 

@@ -21,7 +21,6 @@
         if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
             assignmentsController = [[AssignmentsViewController alloc] initWithNibName:@"AssignmentsViewController" bundle:[NSBundle mainBundle]];
         } else {
-            NSLog(@"assignments");
             assignmentsController = [[GMiPadAssignmentsViewController alloc] initWithNibName:@"GMiPadAssignmentsViewController" bundle:[NSBundle mainBundle]];
         }
         
