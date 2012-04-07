@@ -42,6 +42,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"EEEE, MMMM d, YYYY"];
     longDate.text = [formatter stringFromDate:[NSDate date]];
+    [formatter release];
     
     ipadCalendar.dataSource = self;
     ipadCalendar.delegate = self;
@@ -81,6 +82,7 @@
     detailNav.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentModalViewController:detailNav animated:YES];
     [details release];
+    [detailNav release];
 }
 
 - (void)dealloc {

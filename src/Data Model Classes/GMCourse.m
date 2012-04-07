@@ -14,6 +14,7 @@
 @synthesize participantsArray;
 @synthesize grades;
 @synthesize dashboardItems;
+@synthesize forums;
 @synthesize courseID;
 @synthesize officeHours;
 @synthesize quarter;

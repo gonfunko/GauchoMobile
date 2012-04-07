@@ -17,7 +17,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //Create the course view controller and set it as the root view controller
-    self.courseController = [[CourseViewController alloc] initWithNibName:@"CourseViewController" bundle:[NSBundle mainBundle]];
+    self.courseController = [[[CourseViewController alloc] initWithNibName:@"CourseViewController" bundle:[NSBundle mainBundle]] autorelease];
     
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         UINavigationController *navController = [[UINavigationController alloc] init];
@@ -28,7 +28,7 @@
     } else {
         UISplitViewController *splitViewController = [[GMSplitViewController alloc] init];
         
-        self.detail = [[MainTabBarViewController alloc] init];
+        self.detail = [[[MainTabBarViewController alloc] init] autorelease];
         UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:self.courseController];
         UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:self.detail];
         

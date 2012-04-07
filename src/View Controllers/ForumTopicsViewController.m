@@ -146,7 +146,6 @@
 
 
 - (void)dealloc {
-    NSLog(@"topics dealloc");
     self.forum = nil;
     [fetcher release];
     [super dealloc];

@@ -73,10 +73,11 @@
     GMParticipant *participant = [[[GMDataSource sharedDataSource] currentCourse].participantsArray objectAtIndex:index];
     
     if (!cell) {
-        cell = [[GMGridViewCell alloc] init];
+        cell = [[[GMGridViewCell alloc] init] autorelease];
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         cell.contentView = view;
+        [view release];
     }
     
     [[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -95,6 +96,7 @@
     }
     
     [cell.contentView addSubview:photo];
+    [photo release];
 
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, size.height - 30, size.width - 20, 30)];
     label.text = participant.name;
@@ -104,6 +106,7 @@
     label.textColor = [UIColor colorWithRed:84/255.0 green:95/255.0 blue:105/255.0 alpha:1.0];
     label.font = [UIFont boldSystemFontOfSize:12];
     [cell.contentView addSubview:label];
+    [label release];
     
     return cell;
 }
