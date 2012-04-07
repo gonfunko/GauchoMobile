@@ -29,6 +29,13 @@
 		9314EC5912F3EBB500F99756 /* participants@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9314EC5712F3EBB500F99756 /* participants@2x.png */; };
 		931C650B12F8CCF7005799F1 /* AssignmentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 931C650912F8CCF7005799F1 /* AssignmentsViewController.m */; };
 		931C650C12F8CCF7005799F1 /* AssignmentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 931C650A12F8CCF7005799F1 /* AssignmentsViewController.xib */; };
+		931F43E6152BAA570059A9D7 /* GMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 931F43DC152BAA570059A9D7 /* GMGridView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		931F43E7152BAA570059A9D7 /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 931F43DE152BAA570059A9D7 /* GMGridViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		931F43E8152BAA570059A9D7 /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 931F43E1152BAA570059A9D7 /* GMGridViewLayoutStrategies.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		931F43E9152BAA570059A9D7 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 931F43E3152BAA570059A9D7 /* UIGestureRecognizer+GMGridViewAdditions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		931F43EA152BAA570059A9D7 /* UIView+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 931F43E5152BAA570059A9D7 /* UIView+GMGridViewAdditions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		931F43EE152BAAA70059A9D7 /* GMiPadParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 931F43EC152BAAA70059A9D7 /* GMiPadParticipantsViewController.m */; };
+		931F43EF152BAAA70059A9D7 /* GMiPadParticipantsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 931F43ED152BAAA70059A9D7 /* GMiPadParticipantsViewController.xib */; };
 		9321933D152B7C86001461EE /* GMSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9321933C152B7C86001461EE /* GMSplitViewController.m */; };
 		9324D9A115086F1200B10D3F /* forums.png in Resources */ = {isa = PBXBuildFile; fileRef = 9324D99F15086F1200B10D3F /* forums.png */; };
 		9324D9A215086F1200B10D3F /* forums@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9324D9A015086F1200B10D3F /* forums@2x.png */; };
@@ -179,7 +186,22 @@
 		931C650812F8CCF7005799F1 /* AssignmentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentsViewController.h; sourceTree = "<group>"; };
 		931C650912F8CCF7005799F1 /* AssignmentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentsViewController.m; sourceTree = "<group>"; };
 		931C650A12F8CCF7005799F1 /* AssignmentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentsViewController.xib; sourceTree = "<group>"; };
-		9321933B152B7C86001461EE /* GMSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GMSplitViewController.h; sourceTree = "<group>"; };
+		931F43DA152BAA570059A9D7 /* GMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridView.h; sourceTree = "<group>"; };
+		931F43DB152BAA570059A9D7 /* GMGridView-Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridView-Constants.h"; sourceTree = "<group>"; };
+		931F43DC152BAA570059A9D7 /* GMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridView.m; sourceTree = "<group>"; };
+		931F43DD152BAA570059A9D7 /* GMGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewCell.h; sourceTree = "<group>"; };
+		931F43DE152BAA570059A9D7 /* GMGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewCell.m; sourceTree = "<group>"; };
+		931F43DF152BAA570059A9D7 /* GMGridViewCell+Extended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridViewCell+Extended.h"; sourceTree = "<group>"; };
+		931F43E0152BAA570059A9D7 /* GMGridViewLayoutStrategies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewLayoutStrategies.h; sourceTree = "<group>"; };
+		931F43E1152BAA570059A9D7 /* GMGridViewLayoutStrategies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewLayoutStrategies.m; sourceTree = "<group>"; };
+		931F43E2152BAA570059A9D7 /* UIGestureRecognizer+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+GMGridViewAdditions.h"; sourceTree = "<group>"; };
+		931F43E3152BAA570059A9D7 /* UIGestureRecognizer+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GMGridViewAdditions.m"; sourceTree = "<group>"; };
+		931F43E4152BAA570059A9D7 /* UIView+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GMGridViewAdditions.h"; sourceTree = "<group>"; };
+		931F43E5152BAA570059A9D7 /* UIView+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GMGridViewAdditions.m"; sourceTree = "<group>"; };
+		931F43EB152BAAA70059A9D7 /* GMiPadParticipantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; name = GMiPadParticipantsViewController.h; path = "View Controllers/GMiPadParticipantsViewController.h"; sourceTree = "<group>"; };
+		931F43EC152BAAA70059A9D7 /* GMiPadParticipantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMiPadParticipantsViewController.m; path = "View Controllers/GMiPadParticipantsViewController.m"; sourceTree = "<group>"; };
+		931F43ED152BAAA70059A9D7 /* GMiPadParticipantsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GMiPadParticipantsViewController.xib; path = "View Controllers/GMiPadParticipantsViewController.xib"; sourceTree = "<group>"; };
+		9321933B152B7C86001461EE /* GMSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSplitViewController.h; sourceTree = "<group>"; };
 		9321933C152B7C86001461EE /* GMSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMSplitViewController.m; sourceTree = "<group>"; };
 		9324D99F15086F1200B10D3F /* forums.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forums.png; sourceTree = "<group>"; };
 		9324D9A015086F1200B10D3F /* forums@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forums@2x.png"; sourceTree = "<group>"; };
@@ -425,6 +447,25 @@
 			path = ../data/XIBs;
 			sourceTree = "<group>";
 		};
+		931F43D9152BAA470059A9D7 /* GMGridView */ = {
+			isa = PBXGroup;
+			children = (
+				931F43DA152BAA570059A9D7 /* GMGridView.h */,
+				931F43DB152BAA570059A9D7 /* GMGridView-Constants.h */,
+				931F43DC152BAA570059A9D7 /* GMGridView.m */,
+				931F43DD152BAA570059A9D7 /* GMGridViewCell.h */,
+				931F43DE152BAA570059A9D7 /* GMGridViewCell.m */,
+				931F43DF152BAA570059A9D7 /* GMGridViewCell+Extended.h */,
+				931F43E0152BAA570059A9D7 /* GMGridViewLayoutStrategies.h */,
+				931F43E1152BAA570059A9D7 /* GMGridViewLayoutStrategies.m */,
+				931F43E2152BAA570059A9D7 /* UIGestureRecognizer+GMGridViewAdditions.h */,
+				931F43E3152BAA570059A9D7 /* UIGestureRecognizer+GMGridViewAdditions.m */,
+				931F43E4152BAA570059A9D7 /* UIView+GMGridViewAdditions.h */,
+				931F43E5152BAA570059A9D7 /* UIView+GMGridViewAdditions.m */,
+			);
+			name = GMGridView;
+			sourceTree = "<group>";
+		};
 		932A907F14C23CDB00E80827 /* hpple */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +484,8 @@
 			children = (
 				933098F91513F5A700F891C1 /* GMiPadAssignmentsViewController.h */,
 				933098FA1513F5A700F891C1 /* GMiPadAssignmentsViewController.m */,
+				931F43EB152BAAA70059A9D7 /* GMiPadParticipantsViewController.h */,
+				931F43EC152BAAA70059A9D7 /* GMiPadParticipantsViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -685,6 +728,7 @@
 		93B1B8231329ECB900403CCD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				931F43D9152BAA470059A9D7 /* GMGridView */,
 				934BACA11304E7ED0083A5F9 /* Table View Cells */,
 				93BBF5CD130E3A8800B07C25 /* GMLoadingView.h */,
 				93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */,
@@ -708,6 +752,7 @@
 				933098F81513F57900F891C1 /* View Controllers */,
 				93EC607D1332E1E000601B04 /* MainWindow-iPad.xib */,
 				933098FB1513F5A700F891C1 /* GMiPadAssignmentsViewController.xib */,
+				931F43ED152BAAA70059A9D7 /* GMiPadParticipantsViewController.xib */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -814,6 +859,7 @@
 				93931BD915153F2C003F1F3C /* 3retina.jpg in Resources */,
 				93931BDA15153F2C003F1F3C /* 2retina.jpg in Resources */,
 				93931BDB15153F2C003F1F3C /* 1retina.jpg in Resources */,
+				931F43EF152BAAA70059A9D7 /* GMiPadParticipantsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,6 +934,12 @@
 				933098FC1513F5A700F891C1 /* GMiPadAssignmentsViewController.m in Sources */,
 				936DAFF515150B1B00F99EE8 /* MBProgressHUD.m in Sources */,
 				9321933D152B7C86001461EE /* GMSplitViewController.m in Sources */,
+				931F43E6152BAA570059A9D7 /* GMGridView.m in Sources */,
+				931F43E7152BAA570059A9D7 /* GMGridViewCell.m in Sources */,
+				931F43E8152BAA570059A9D7 /* GMGridViewLayoutStrategies.m in Sources */,
+				931F43E9152BAA570059A9D7 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
+				931F43EA152BAA570059A9D7 /* UIView+GMGridViewAdditions.m in Sources */,
+				931F43EE152BAAA70059A9D7 /* GMiPadParticipantsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,7 +15,7 @@
 #import "EGORefreshTableHeaderView.h"
 
 @interface ParticipantsViewController : UIViewController<GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate, UIScrollViewDelegate> {
-@private
+@protected
     NSArray *sections;
     NSMutableDictionary *pictures;
     NSMutableArray *photoRequests;

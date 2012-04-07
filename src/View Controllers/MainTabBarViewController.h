@@ -11,6 +11,7 @@
 #import "AssignmentsViewController.h"
 #import "GMiPadAssignmentsViewController.h"
 #import "ParticipantsViewController.h"
+#import "GMiPadParticipantsViewController.h"
 #import "GradesViewController.h"
 #import "ForumViewController.h"
 

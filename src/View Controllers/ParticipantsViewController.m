@@ -55,7 +55,7 @@
         NSArray *letters = [_participants allKeys];
         self.sections = [letters sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
-    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
     if (reloadView == nil) {
 		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
 		view.delegate = self;
@@ -65,6 +65,7 @@
 	}
     
 	[reloadView refreshLastUpdatedDate];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
