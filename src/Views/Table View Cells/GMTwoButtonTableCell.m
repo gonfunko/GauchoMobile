@@ -22,7 +22,9 @@
         if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
             bg.backgroundColor = [UIColor groupTableViewBackgroundColor];
         } else {
-            bg.backgroundColor = [UIColor colorWithRed:212/255.0 green:214/255.0 blue:220/255.0 alpha:1.0];
+            UIView *backView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+            backView.backgroundColor = [UIColor clearColor];
+            self.backgroundView = backView;
         }
         [self addSubview:bg];
         [bg release];
