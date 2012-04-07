@@ -15,6 +15,7 @@
 #import "GMTextViewTableCell.h"
 #import "WebViewController.h"
 #import "EGORefreshTableHeaderView.h"
+#import "GMSplitViewController.h"
 
 @interface DashboardViewController : UITableViewController <GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate> {
 @private
