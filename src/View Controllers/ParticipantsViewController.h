@@ -13,6 +13,7 @@
 #import "GMParticipantsParser.h"
 #import "MBProgressHUD.h"
 #import "EGORefreshTableHeaderView.h"
+#import "GMPersonViewController.h"
 
 @interface ParticipantsViewController : UIViewController<GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate, UIScrollViewDelegate> {
 @protected
@@ -39,5 +40,7 @@
 
 //Displays the address book card for the given participant, if any
 - (void)displayAddressBookEntryForParticipant:(GMParticipant *)participant;
+
+- (void)requestFinished:(ASIHTTPRequest *)request;
 
 @end

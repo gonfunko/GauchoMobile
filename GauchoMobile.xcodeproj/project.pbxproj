@@ -63,6 +63,7 @@
 		934DBC8013031B02009BC05D /* GradesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934DBC7F13031B02009BC05D /* GradesViewController.xib */; };
 		934DBC8213031B88009BC05D /* ParticipantsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934DBC8113031B88009BC05D /* ParticipantsViewController.xib */; };
 		935037CB12EBA28F001CBAD0 /* GMParticipantsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 935037CA12EBA28F001CBAD0 /* GMParticipantsParser.m */; };
+		9359AFD71530A8D60072EDC8 /* GMPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9359AFD61530A8D60072EDC8 /* GMPersonViewController.m */; };
 		936DAFEB15150A6200F99EE8 /* greyforward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 936DAFE715150A6200F99EE8 /* greyforward@2x.png */; };
 		936DAFEC15150A6200F99EE8 /* greyback.png in Resources */ = {isa = PBXBuildFile; fileRef = 936DAFE815150A6200F99EE8 /* greyback.png */; };
 		936DAFED15150A6200F99EE8 /* greyback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 936DAFE915150A6200F99EE8 /* greyback@2x.png */; };
@@ -198,7 +199,7 @@
 		931F43E3152BAA570059A9D7 /* UIGestureRecognizer+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GMGridViewAdditions.m"; sourceTree = "<group>"; };
 		931F43E4152BAA570059A9D7 /* UIView+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GMGridViewAdditions.h"; sourceTree = "<group>"; };
 		931F43E5152BAA570059A9D7 /* UIView+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GMGridViewAdditions.m"; sourceTree = "<group>"; };
-		931F43EB152BAAA70059A9D7 /* GMiPadParticipantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; name = GMiPadParticipantsViewController.h; path = "View Controllers/GMiPadParticipantsViewController.h"; sourceTree = "<group>"; };
+		931F43EB152BAAA70059A9D7 /* GMiPadParticipantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GMiPadParticipantsViewController.h; path = "View Controllers/GMiPadParticipantsViewController.h"; sourceTree = "<group>"; };
 		931F43EC152BAAA70059A9D7 /* GMiPadParticipantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GMiPadParticipantsViewController.m; path = "View Controllers/GMiPadParticipantsViewController.m"; sourceTree = "<group>"; };
 		931F43ED152BAAA70059A9D7 /* GMiPadParticipantsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GMiPadParticipantsViewController.xib; path = "View Controllers/GMiPadParticipantsViewController.xib"; sourceTree = "<group>"; };
 		9321933B152B7C86001461EE /* GMSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMSplitViewController.h; sourceTree = "<group>"; };
@@ -244,6 +245,8 @@
 		934DBC8113031B88009BC05D /* ParticipantsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParticipantsViewController.xib; sourceTree = "<group>"; };
 		935037C912EBA28F001CBAD0 /* GMParticipantsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMParticipantsParser.h; sourceTree = "<group>"; };
 		935037CA12EBA28F001CBAD0 /* GMParticipantsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMParticipantsParser.m; sourceTree = "<group>"; };
+		9359AFD51530A8D60072EDC8 /* GMPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPersonViewController.h; sourceTree = "<group>"; };
+		9359AFD61530A8D60072EDC8 /* GMPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMPersonViewController.m; sourceTree = "<group>"; };
 		936DAFE715150A6200F99EE8 /* greyforward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greyforward@2x.png"; sourceTree = "<group>"; };
 		936DAFE815150A6200F99EE8 /* greyback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greyback.png; sourceTree = "<group>"; };
 		936DAFE915150A6200F99EE8 /* greyback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greyback@2x.png"; sourceTree = "<group>"; };
@@ -721,6 +724,8 @@
 				933586411512E0160002D70D /* MainTabBarViewController.m */,
 				9321933B152B7C86001461EE /* GMSplitViewController.h */,
 				9321933C152B7C86001461EE /* GMSplitViewController.m */,
+				9359AFD51530A8D60072EDC8 /* GMPersonViewController.h */,
+				9359AFD61530A8D60072EDC8 /* GMPersonViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -940,6 +945,7 @@
 				931F43E9152BAA570059A9D7 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				931F43EA152BAA570059A9D7 /* UIView+GMGridViewAdditions.m in Sources */,
 				931F43EE152BAAA70059A9D7 /* GMiPadParticipantsViewController.m in Sources */,
+				9359AFD71530A8D60072EDC8 /* GMPersonViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

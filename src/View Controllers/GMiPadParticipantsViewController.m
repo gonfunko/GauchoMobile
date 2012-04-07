@@ -14,7 +14,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -22,7 +21,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadParticipants)
+                                                 name:@"GMCurrentCourseChangedNotification" 
+                                               object:nil];
 }
 
 - (void)viewDidUnload
@@ -37,6 +39,10 @@
 	return YES;
 }
 
+- (void)loadParticipants {
+    [self loadParticipantsWithLoadingView:YES];
+}
+
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
     [super sourceFetchSucceededWithPageSource:source];
     [((GMGridView *)self.view) reloadData];
@@ -47,25 +53,15 @@
     [((GMGridView *)self.view) reloadData];
 }
 
-- (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
-{
-    NSMutableDictionary *participants = [[[GMDataSource sharedDataSource] currentCourse].participants copy];
-    NSInteger total = 0;
-    for (NSString *key in [participants allKeys]) {
-        total += [[participants objectForKey:key] count];
-    }
-    
-    [participants release];
-    
-    return total;
+- (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView {
+    return [[[GMDataSource sharedDataSource] currentCourse].participantsArray count];
 }
 
-- (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
+- (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation {
     if (UIInterfaceOrientationIsLandscape(orientation)) {
-        return CGSizeMake(120, 135);
+        return CGSizeMake(120, 140);
     } else {
-        return CGSizeMake(120, 135);
+        return CGSizeMake(130, 150);
     }
 }
 
@@ -74,7 +70,7 @@
     
     GMGridViewCell *cell = [gridView dequeueReusableCell];
     
-    GMParticipant *participant = [self participantAtIndex:index];
+    GMParticipant *participant = [[[GMDataSource sharedDataSource] currentCourse].participantsArray objectAtIndex:index];
     
     if (!cell) {
         cell = [[GMGridViewCell alloc] init];
@@ -90,6 +86,7 @@
     photo.layer.shadowOffset = CGSizeMake(0, 0);
     photo.layer.shadowOpacity = 0.5;
     photo.layer.shadowRadius = 4;
+    photo.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     photo.layer.shouldRasterize = YES;
     if([pictures objectForKey:[participant.imageURL absoluteString]] != nil) {
         photo.image = [pictures objectForKey:[participant.imageURL absoluteString]];
@@ -99,11 +96,12 @@
     
     [cell.contentView addSubview:photo];
 
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, size.height - 25, size.width - 20, 15)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, size.height - 30, size.width - 20, 30)];
     label.text = participant.name;
     label.textAlignment = UITextAlignmentCenter;
+    label.lineBreakMode = UILineBreakModeWordWrap;
     label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor blackColor];
+    label.textColor = [UIColor colorWithRed:84/255.0 green:95/255.0 blue:105/255.0 alpha:1.0];
     label.font = [UIFont boldSystemFontOfSize:12];
     [cell.contentView addSubview:label];
     
@@ -111,24 +109,18 @@
 }
 
 
-- (BOOL)GMGridView:(GMGridView *)gridView canDeleteItemAtIndex:(NSInteger)index
-{
+- (BOOL)GMGridView:(GMGridView *)gridView canDeleteItemAtIndex:(NSInteger)index {
     return NO;
 }
 
-- (GMParticipant *)participantAtIndex:(NSInteger)index {
-    NSMutableDictionary *participants = [[GMDataSource sharedDataSource] currentCourse].participants;
-    NSInteger currentIndex = 0;
-    for (NSString *key in [participants allKeys]) {
-        for (int i = 0; i < [[participants objectForKey:key] count]; i++) {
-            if (currentIndex == index) {
-                return [[participants objectForKey:key] objectAtIndex:i];
-            }
-            currentIndex++;
-        }
-    }
-    
-    return nil;
+- (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position {
+    GMParticipant *touchedPerson = [[[GMDataSource sharedDataSource] currentCourse].participantsArray objectAtIndex:position];
+    [self displayAddressBookEntryForParticipant:touchedPerson];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GMCurrentCourseChangedNotification" object:nil];
+    [super dealloc];
 }
 
 @end

@@ -9,6 +9,6 @@
 #import "ParticipantsViewController.h"
 #import "GMGridView.h"
 
-@interface GMiPadParticipantsViewController : ParticipantsViewController <GMGridViewDataSource>
+@interface GMiPadParticipantsViewController : ParticipantsViewController <GMGridViewDataSource, GMGridViewActionDelegate>
 
 @end

@@ -136,6 +136,7 @@
     
     GMParticipantsParser *parser = [[GMParticipantsParser alloc] init];
     NSArray *participants = [parser participantsFromSource:source];
+    [[GMDataSource sharedDataSource] currentCourse].participantsArray = [NSArray array];
     
     for (GMParticipant *participant in participants) {
         [[[GMDataSource sharedDataSource] currentCourse] addParticipant:participant];
@@ -148,6 +149,17 @@
     self.sections = [letters sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     [self.tableView reloadData];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *dictPath = [[paths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%ipics", (int)[[GMDataSource sharedDataSource] currentCourse].courseID]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:dictPath]) {
+        [pictures release];
+        pictures = [[NSKeyedUnarchiver unarchiveObjectWithFile:dictPath] retain];
+    }
+    else {
+        [pictures release];
+        pictures = [[NSMutableDictionary alloc] init];
+    }
     
     [self loadPicturesForParticipants];
     
@@ -293,9 +305,16 @@
     ABAddressBookRef addressBook = ABAddressBookCreate();
     CFArrayRef matches = ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef)participant.name);
     if (CFArrayGetCount(matches) != 0) {
-        ABPersonViewController *controller = [[ABPersonViewController alloc] init];
+        ABPersonViewController *controller = [[GMPersonViewController alloc] init];
         controller.displayedPerson = CFArrayGetValueAtIndex(matches, 0);
-        [self.navigationController pushViewController:controller animated:YES];
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            [self.navigationController pushViewController:controller animated:YES];
+        } else {
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self.navigationController presentModalViewController:navController animated:YES];
+            [navController release];
+        }
         [controller release];
     }
     

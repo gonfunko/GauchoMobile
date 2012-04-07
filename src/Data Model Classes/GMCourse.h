@@ -18,6 +18,7 @@
     NSString *name;
     NSArray *assignments;
     NSMutableDictionary *participants;
+    NSArray *participantsArray;
     NSArray *grades;
     NSArray *dashboardItems;
     NSArray *forums;
@@ -29,6 +30,7 @@
 
 @property (copy) NSString *name;
 @property (retain) NSArray *assignments;
+@property (retain) NSArray *participantsArray;
 @property (retain) NSMutableDictionary *participants;
 @property (retain) NSArray *grades;
 @property (retain) NSArray *forums;
@@ -82,5 +84,6 @@
 - (void)removeForum:(GMForum *)forum;
 
 - (void)removeAllForums;
+
 
 @end

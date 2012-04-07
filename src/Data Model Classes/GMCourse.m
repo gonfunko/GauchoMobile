@@ -11,6 +11,7 @@
 @synthesize name;
 @synthesize assignments;
 @synthesize participants;
+@synthesize participantsArray;
 @synthesize grades;
 @synthesize dashboardItems;
 @synthesize courseID;
@@ -52,6 +53,7 @@
         self.name = @"";
         self.assignments = [NSArray array];
         self.participants = [NSMutableDictionary dictionary];
+        self.participantsArray = [NSArray array];
         self.grades = [NSArray array];
         self.dashboardItems = [NSArray array];
         self.courseID = 0;
@@ -152,18 +154,31 @@
             [currentParticipants sortUsingDescriptors:[NSArray arrayWithObject:sorter]];
         }
     }
+    
+    self.participantsArray = [[self.participantsArray arrayByAddingObject:newParticipant] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sorter]];
 }
 
 - (void)removeParticipant:(GMParticipant *)participant {
     NSMutableArray *temp = [self.participants objectForKey:[participant firstCharacterOfLastName]];
+    NSMutableArray *allParticipants = [NSMutableArray array];
     if ([temp containsObject:participant]) {
         [temp removeObject:participant];
     }
+    
+    for (GMParticipant *_participant in self.participantsArray) {
+        if (![_participant isEqualTo:participant]) {
+            [allParticipants addObject:_participant];
+        }
+    }
+    
+    NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES];
+    self.participantsArray = [allParticipants sortedArrayUsingDescriptors:[NSArray arrayWithObject:sorter]];
 }
 
 - (void)removeAllParticipants {
     NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
     self.participants = temp;
+    self.participantsArray = [NSArray array];
     [temp release];
 }
 
