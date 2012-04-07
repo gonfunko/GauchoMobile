@@ -12,6 +12,7 @@
 #import "GMForumsParser.h"
 #import "MBProgressHUD.h"
 #import "ForumTopicsViewController.h"
+#import "GMSplitViewController.h"
 
 @interface ForumViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private

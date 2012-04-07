@@ -15,7 +15,9 @@
 - (void)viewWillLayoutSubviews
 {
     if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
-        ((UINavigationController *)[self.viewControllers objectAtIndex:1]).topViewController.navigationItem.leftBarButtonItem = self.barButtonItem;
+        if ([((UINavigationController *)[self.viewControllers objectAtIndex:1]).viewControllers count] == 1) {
+            ((UINavigationController *)[self.viewControllers objectAtIndex:1]).topViewController.navigationItem.leftBarButtonItem = self.barButtonItem;
+        }
     } else {
         ((UINavigationController *)[self.viewControllers objectAtIndex:1]).topViewController.navigationItem.leftBarButtonItem = nil;
     }
