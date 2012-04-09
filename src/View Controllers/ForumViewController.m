@@ -11,29 +11,40 @@
 
 @implementation ForumViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize visible;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(loadForums)
+                                                 name:@"GMCurrentCourseChangedNotification" 
+                                               object:nil];
+    
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"Forums";
     
-    GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
     
+    self.tableView.rowHeight = 80;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.visible = YES;
+    
+    GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     if ([[currentCourse forums] count] == 0) {
         [self loadForumsWithLoadingView:YES];
+    } else {
+        [self.tableView reloadData];
     }
-    
-    self.tableView.rowHeight = 80;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.visible = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -57,6 +68,12 @@
         return (interfaceOrientation == UIInterfaceOrientationPortrait);
     } else {
         return YES;
+    }
+}
+
+- (void)loadForums {
+    if (self.visible) {
+        [self loadForumsWithLoadingView:YES];
     }
 }
 
@@ -159,6 +176,7 @@
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GMCurrentCourseChangedNotification" object:nil];
     [fetcher release];
     [super dealloc];
 }

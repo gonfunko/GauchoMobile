@@ -19,7 +19,10 @@
     GMSourceFetcher *fetcher;
     MBProgressHUD *HUD;
     BOOL loading;
+    BOOL visible;
 }
+
+@property (assign) BOOL visible;
 
 - (void)loadForumsWithLoadingView:(BOOL)flag;
 
