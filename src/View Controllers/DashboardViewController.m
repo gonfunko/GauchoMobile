@@ -11,6 +11,8 @@
 
 @implementation DashboardViewController
 
+@synthesize visible;
+
 - (void)dealloc
 {
     [fetcher release];
@@ -33,7 +35,6 @@
 	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"Dashboard";
     
-    GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:HUD];
@@ -54,10 +55,6 @@
      
      [reloadView refreshLastUpdatedDate];
     
-    if (currentCourse != nil && [[currentCourse dashboardItems] count] == 0) {
-        [self loadDashboardWithLoadingView:YES];
-    }
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadDashboard) name:@"GMLoginSuccessfulNotification" object:nil];
 }
 
@@ -69,6 +66,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    self.visible = YES;
+    
+    GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
+    if (currentCourse != nil && [[currentCourse dashboardItems] count] == 0) {
+        [self loadDashboardWithLoadingView:YES];
+    } else {
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -80,11 +86,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
+    self.visible = NO;
 }
 
 - (void)viewWillLayoutSubviews
@@ -109,7 +111,9 @@
 #pragma mark - Data loading methods
      
  - (void)loadDashboard {
-     [self loadDashboardWithLoadingView:YES];
+     if (self.visible) {
+         [self loadDashboardWithLoadingView:YES];
+     }
  }
 
 - (void)loadDashboardWithLoadingView:(BOOL)flag {

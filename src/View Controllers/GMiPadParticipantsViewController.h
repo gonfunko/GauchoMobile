@@ -9,6 +9,10 @@
 #import "ParticipantsViewController.h"
 #import "GMGridView.h"
 
-@interface GMiPadParticipantsViewController : ParticipantsViewController <GMGridViewDataSource, GMGridViewActionDelegate>
+@interface GMiPadParticipantsViewController : ParticipantsViewController <GMGridViewDataSource, GMGridViewActionDelegate> {
+    BOOL visible;
+}
+
+@property (assign) BOOL visible;
 
 @end

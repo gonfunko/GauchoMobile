@@ -17,7 +17,7 @@
 #import "MBProgressHUD.h"
 
 @interface AssignmentsViewController : UIViewController <GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate, TKCalendarMonthViewDelegate, TKCalendarMonthViewDataSource> {
-@private
+@protected
     GMSourceFetcher *fetcher;
     EGORefreshTableHeaderView *reloadView;
     MBProgressHUD *HUD;

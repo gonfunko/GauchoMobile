@@ -10,6 +10,8 @@
 
 @implementation GMiPadParticipantsViewController
 
+@synthesize visible;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,11 +29,22 @@
                                                object:nil];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.visible = YES;
+    
+    GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
+    if ([[currentCourse participantsArray] count] == 0) {
+        [self loadParticipantsWithLoadingView:YES];
+    } else {
+        [((GMGridView *)self.view) reloadData];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.visible = NO;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -40,7 +53,9 @@
 }
 
 - (void)loadParticipants {
-    [self loadParticipantsWithLoadingView:YES];
+    if (self.visible) {
+        [self loadParticipantsWithLoadingView:YES];
+    }
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {

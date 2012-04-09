@@ -23,7 +23,10 @@
     MBProgressHUD *HUD;
     EGORefreshTableHeaderView *reloadView;
     BOOL loading;
+    BOOL visible;
 }
+
+@property (assign) BOOL visible;
 
 //Loads dashboard items from the network, optionally with or without the yellow loading view
 - (void)loadDashboardWithLoadingView:(BOOL)flag;

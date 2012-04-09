@@ -13,6 +13,7 @@
 @synthesize date;
 @synthesize longDate;
 @synthesize ipadCalendar;
+@synthesize visible;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,8 +35,8 @@
                                                  name:@"GMCurrentCourseChangedNotification" 
                                                object:nil];
     
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *dateComponents = [calendar components:NSDayCalendarUnit
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponents = [cal components:NSDayCalendarUnit
                                                    fromDate:[NSDate date]];
     date.text = [NSString stringWithFormat:@"%i", dateComponents.day];
     
@@ -48,11 +49,25 @@
     ipadCalendar.delegate = self;
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.visible = YES;
+    
+    GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
+    
+    if ([[currentCourse assignments] count] == 0) {
+        [self loadAssignmentsWithLoadingView:YES];
+    } else {
+        [self.tableView reloadData];
+        [ipadCalendar reloadData];
+        noAssignmentsLabel.hidden = YES;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.visible = NO;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -61,7 +76,9 @@
 }
 
 - (void)loadAssignments {
-    [self loadAssignmentsWithLoadingView:YES];
+    if (self.visible) {
+        [self loadAssignmentsWithLoadingView:YES];
+    }
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {

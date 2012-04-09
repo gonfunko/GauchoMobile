@@ -71,6 +71,17 @@
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         self.tableView.frame = CGRectMake(0, calendar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - calendar.frame.size.height);
     }
+    
+    noAssignmentsLabel = [[UITextField alloc] initWithFrame:CGRectMake(0, (self.tableView.frame.size.height - 30) / 2 - 25, self.tableView.frame.size.width, 30)];
+    noAssignmentsLabel.enabled = NO;
+    noAssignmentsLabel.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
+    noAssignmentsLabel.text = @"No Assignments";
+    noAssignmentsLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
+    noAssignmentsLabel.textColor = [UIColor grayColor];
+    noAssignmentsLabel.textAlignment = UITextAlignmentCenter;
+    noAssignmentsLabel.hidden = YES;
+    [self.tableView addSubview:noAssignmentsLabel];
+    [noAssignmentsLabel release];
 }
 
 - (void)viewDidUnload
@@ -153,18 +164,9 @@
     [self.tableView reloadData];
     
     if ([assignments count] == 0) {
-        noAssignmentsLabel = [[UITextField alloc] initWithFrame:CGRectMake(0, (self.tableView.frame.size.height - 30) / 2 - 25, self.tableView.frame.size.width, 30)];
-        noAssignmentsLabel.enabled = NO;
-        noAssignmentsLabel.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
-        noAssignmentsLabel.text = @"No Assignments";
-        noAssignmentsLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
-        noAssignmentsLabel.textColor = [UIColor grayColor];
-        noAssignmentsLabel.textAlignment = UITextAlignmentCenter;
-        [self.tableView addSubview:noAssignmentsLabel];
-        [noAssignmentsLabel release];
+        noAssignmentsLabel.hidden = NO;
     } else {
-        [noAssignmentsLabel removeFromSuperview];
-        noAssignmentsLabel = nil;
+        noAssignmentsLabel.hidden = YES;
     }
     
     if ([calendar respondsToSelector:@selector(reload)]) {

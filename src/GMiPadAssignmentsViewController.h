@@ -14,10 +14,12 @@
     IBOutlet UILabel *date;
     IBOutlet UILabel *longDate;
     IBOutlet ADCalendarView *ipadCalendar;
+    BOOL visible;
 }
 
 @property (nonatomic, retain) UILabel *date;
 @property (nonatomic, retain) UILabel *longDate;
 @property (nonatomic, retain) ADCalendarView *ipadCalendar;
+@property (assign) BOOL visible;
 
 @end
