@@ -17,6 +17,7 @@
         self.layer.shadowColor = [[UIColor blackColor] CGColor];
         self.layer.shadowOffset = CGSizeMake(0, 2.0);
         self.layer.shadowOpacity = 0.75;
+        self.layer.shouldRasterize = YES;
         
         CALayer *maskLayer = [CALayer layer];    
         maskLayer.frame = CGRectMake(0, -10, [self frame].size.width, [self frame].size.height + 10);

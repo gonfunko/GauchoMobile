@@ -36,6 +36,8 @@
     }
     floatingBackground.backgroundColor = [[UIColor redColor] CGColor];
     floatingBackground.zPosition = [self.view layer].zPosition - 1;
+    floatingBackground.rasterizationScale = [[UIScreen mainScreen] scale];
+    floatingBackground.shouldRasterize = YES;
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
     animation.fromValue = [floatingBackground valueForKey:@"position"];
