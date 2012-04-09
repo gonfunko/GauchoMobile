@@ -41,7 +41,8 @@
             for (int j = 1; j < [links count]; j++) {
                 NSString *currentLink = [links objectAtIndex:j];
                 
-                if ([currentLink rangeOfString:@"<span>"].location != NSNotFound) {
+                if ([currentLink rangeOfString:@"<span>"].location != NSNotFound &&
+                    [currentLink rangeOfString:@"href=\""].location != NSNotFound) {
                     currentLink = [currentLink substringFromIndex:[currentLink rangeOfString:@"href=\""].location + 6];
                     
                     NSString *url = [currentLink substringToIndex:[currentLink rangeOfString:@"\""].location];
