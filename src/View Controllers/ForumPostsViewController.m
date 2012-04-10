@@ -32,6 +32,11 @@
         self.navigationController.visibleViewController.navigationItem.title = topic.title;
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self.navigationController
+                                             selector:@selector(popToRootViewControllerAnimated:)
+                                                 name:@"GMCurrentCourseChangedNotification" 
+                                               object:nil];
+    
     fetcher = [[GMSourceFetcher alloc] init];
     
     [((UIScrollView *)self.view) setBackgroundColor:[UIColor colorWithRed:228/255.0 green:228/255.0 blue:228/255.0 alpha:1.0]];
@@ -90,6 +95,7 @@
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self.navigationController name:@"GMCurrentCourseChangedNotification" object:nil];
     self.topic = nil;
     [fetcher release];
     [super dealloc];
