@@ -35,6 +35,7 @@
         description.font = [UIFont fontWithName:@"Helvetica-Bold" size:18.0];
         description.text = @"some descriptiongg";
         description.enabled = NO;
+        description.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self addSubview:description];
 
     }
