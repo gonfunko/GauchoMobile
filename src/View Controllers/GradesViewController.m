@@ -9,9 +9,11 @@
 @implementation GradesViewController
 
 @synthesize tableView;
+@synthesize visible;
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GMCurrentCourseChangedNotification" object:nil];
     [fetcher release];
     [reloadView removeFromSuperview];
     [super dealloc];
@@ -29,6 +31,21 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.tabBarController.navigationItem.title = @"Grades";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(loadGrades)
+                                                 name:@"GMCurrentCourseChangedNotification" 
+                                               object:nil];
+    
+    noGradesLabel = [[UITextField alloc] initWithFrame:CGRectMake(0, (self.tableView.frame.size.height - 30) / 2 - 25, self.tableView.frame.size.width, 30)];
+    noGradesLabel.hidden = YES;
+    noGradesLabel.text = @"No Grades";
+    noGradesLabel.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
+    noGradesLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
+    noGradesLabel.textColor = [UIColor grayColor];
+    noGradesLabel.textAlignment = UITextAlignmentCenter;
+    [self.tableView addSubview:noGradesLabel];
+    [noGradesLabel release];
 }
 
 - (void)viewDidUnload
@@ -39,6 +56,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.visible = YES;
     
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
@@ -67,6 +85,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    self.visible = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -75,6 +94,12 @@
 }
 
 #pragma mark - Data loading methods
+
+- (void)loadGrades {
+    if (self.visible) {
+        [self loadGradesWithLoadingView:YES];
+    }
+}
 
 - (void)loadGradesWithLoadingView:(BOOL)flag {
     if (!loading) {
@@ -122,15 +147,9 @@
     [self.tableView reloadData];
     
     if ([grades count] == 0) {
-        UITextField *label = [[UITextField alloc] initWithFrame:CGRectMake(0, (self.tableView.frame.size.height - 30) / 2 - 25, self.tableView.frame.size.width, 30)];
-        label.enabled = NO;
-        label.text = @"No Grades";
-        label.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
-        label.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
-        label.textColor = [UIColor grayColor];
-        label.textAlignment = UITextAlignmentCenter;
-        [self.tableView addSubview:label];
-        [label release];
+        noGradesLabel.hidden = NO;
+    } else {
+        noGradesLabel.hidden = YES;
     }
     
     if (pendingID != 0) {

@@ -17,12 +17,15 @@
     GMSourceFetcher *fetcher;
     MBProgressHUD *HUD;
     EGORefreshTableHeaderView *reloadView;
+    UITextField *noGradesLabel;
     BOOL loading;
+    BOOL visible;
     NSInteger pendingID;
     IBOutlet UITableView *tableView;
 }
 
 @property (retain) UITableView *tableView;
+@property (assign) BOOL visible;
 
 //Loads grades from the network, optionally with or without the yellow loading view
 - (void)loadGradesWithLoadingView:(BOOL)flag;
