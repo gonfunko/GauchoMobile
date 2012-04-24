@@ -113,6 +113,8 @@
  - (void)loadDashboard {
      if (self.visible) {
          [self loadDashboardWithLoadingView:YES];
+     } else {
+         [self.tableView reloadData];
      }
  }
 
