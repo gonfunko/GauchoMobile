@@ -24,6 +24,11 @@
 {
     [super viewDidLoad];
     
+    
+    loginView.frame = CGRectMake((int)((self.view.frame.size.width - loginView.frame.size.width) / 2), 60, loginView.frame.size.width, loginView.frame.size.height);
+    loginView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:loginView];
+    
     //Set up the moving pictures in the background
     double ratio = [[UIScreen mainScreen] bounds].size.height / 1024.0;
     floatingBackground = [[CALayer alloc] init];
@@ -70,10 +75,6 @@
 {
     [super viewWillAppear:animated];
     
-    loginView.frame = CGRectMake((int)((self.view.frame.size.width - loginView.frame.size.width) / 2), 60, loginView.frame.size.width, loginView.frame.size.height);
-    loginView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:loginView];
-    
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"loginScreenVisible"];
 }
 
@@ -93,6 +94,10 @@
     } else {
         return YES;
     }
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    loginView.frame = CGRectMake((int)((self.view.bounds.size.width - loginView.frame.size.width) / 2), 60, loginView.frame.size.width, loginView.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning
