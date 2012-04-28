@@ -188,7 +188,13 @@
     if (indexPath.row == 0) {
         GMDashboardItem *item = [[[[GMDataSource sharedDataSource] currentCourse] dashboardItems] objectAtIndex:indexPath.section];
         //Based on http://stackoverflow.com/questions/2669063/how-to-get-the-size-of-a-nsstring
-        CGSize maximumSize = CGSizeMake(300, 9999);
+        CGSize maximumSize;
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            maximumSize = CGSizeMake(300, 9999);
+        } else {
+            maximumSize = CGSizeMake(self.tableView.bounds.size.width - 20, 9999);
+        }
+        
         CGSize stringSize = [item.contents sizeWithFont:[UIFont fontWithName:@"Helvetica" size:16.0] 
                                    constrainedToSize:maximumSize 
                                        lineBreakMode:UILineBreakModeWordWrap];
@@ -217,11 +223,18 @@
     
     if (indexPath.row == 0) {
         ((GMTextViewTableCell *)cell).textView.text = item.contents;
-        CGSize maximumSize = CGSizeMake(300, 9999);
+        CGRect textViewFrame = ((GMTextViewTableCell *)cell).textView.frame;
+        CGSize maximumSize;
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            maximumSize = CGSizeMake(300, 9999);
+        } else {
+            maximumSize = CGSizeMake(self.tableView.bounds.size.width - 20, 9999);
+        }
+        
         CGSize stringSize = [item.contents sizeWithFont:[UIFont fontWithName:@"Helvetica" size:16.0] 
                                       constrainedToSize:maximumSize 
                                           lineBreakMode:UILineBreakModeWordWrap];
-        CGRect textViewFrame = ((GMTextViewTableCell *)cell).textView.frame;
+        
         ((GMTextViewTableCell *)cell).textView.frame = CGRectMake(textViewFrame.origin.x, textViewFrame.origin.y, textViewFrame.size.width, stringSize.height + 10);
     } else {
         cell.textLabel.text = [[[item links] objectAtIndex:indexPath.row - 1] objectForKey:@"title"];

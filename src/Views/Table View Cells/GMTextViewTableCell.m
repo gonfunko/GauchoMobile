@@ -26,6 +26,15 @@
     return self;
 }
 
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        self.textView.frame = CGRectMake(frame.origin.x, 0, frame.size.width, frame.size.height);
+    } else {
+        self.textView.frame = CGRectMake(frame.origin.x, 0, frame.size.width, frame.size.height);
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
