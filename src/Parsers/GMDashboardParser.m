@@ -73,6 +73,8 @@
     source = [source stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     source = [source stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
     source = [source stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];
+    source = [source stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+    
     NSRange r;
     while ((r = [source rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound) {
         source = [source stringByReplacingCharactersInRange:r withString:@""];
