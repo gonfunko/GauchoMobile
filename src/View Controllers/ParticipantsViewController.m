@@ -126,13 +126,17 @@
     loading = NO;
     [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     [HUD hide:YES];
+    HUD = nil;
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
     
     loading = NO;
     [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    [HUD hide:YES];
+    if (HUD != nil) {
+        [HUD hide:YES];
+        HUD = nil;
+    }
     
     GMParticipantsParser *parser = [[GMParticipantsParser alloc] init];
     NSArray *participants = [parser participantsFromSource:source];
