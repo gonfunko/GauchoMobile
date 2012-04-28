@@ -40,7 +40,7 @@
         NSInteger leftOffset = 5;
         NSInteger availableWidth = self.frame.size.width - 80;
         NSInteger tileWidth = availableWidth / 7;
-        NSArray *days = @[ @"Sun", @"Mon", @"Tue", @"Wed", @"Thu", @"Fri", @"Sat" ];
+        NSArray *days = [NSArray arrayWithObjects:@"Sun", @"Mon", @"Tue", @"Wed", @"Thu", @"Fri", @"Sat", nil];
         
         for (NSString *day in days) {
             CATextLayer *dayLayer = [CATextLayer layer];
@@ -128,7 +128,7 @@
     
     NSDate *currentDate = [calendar dateFromComponents:dateComponents];
     
-    NSArray *months = @[ @"January", @"February", @"March", @"April", @"May", @"June", @"July", @"August", @"September", @"October", @"November", @"December" ];
+    NSArray *months = [NSArray arrayWithObjects:@"January", @"February", @"March", @"April", @"May", @"June", @"July", @"August", @"September", @"October", @"November", @"December", nil];
     if (title == nil) {
         title = [CATextLayer layer];
     }
