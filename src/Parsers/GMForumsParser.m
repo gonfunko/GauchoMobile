@@ -129,25 +129,17 @@
 
 - (NSArray *)forumPostsFromSource:(NSString *)html {
     NSMutableArray *allPosts = [[NSMutableArray alloc] init];
-    
-    //Strip out break tags in the body of posts so hpple doesn't choke
-    html = [html stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];
     TFHpple *document = [[TFHpple alloc] initWithHTMLData:[html dataUsingEncoding:NSUTF8StringEncoding]];
-    //Get the bodies of the posts
-    NSArray *posts = [document searchWithXPathQuery:@"//div[@class='posting']"];
-    for (TFHppleElement *el in posts) {
-        GMForumPost *post = [[GMForumPost alloc] init];
-        
-        NSString *content = el.content;
-        if (content == nil) {
-            content = @"";
-        }
-        for (TFHppleElement *childEl in el.children) {
-            content = [content stringByAppendingFormat:@"\n%@", childEl.content];
-        }
-        
-        post.message = content;
+    
+    NSArray *postingChunks = [html componentsSeparatedByString:@"<div class=\"posting\">"];
+    
+    for (int i = 1; i < [postingChunks count]; i++) {
+        NSString *message = [[postingChunks objectAtIndex:i] substringToIndex:[[postingChunks objectAtIndex:i] rangeOfString:@"</div>"].location];
+        message = [self stripHTMLFromString:message];
 
+        GMForumPost *post = [[GMForumPost alloc] init];
+        post.message = message;
+        
         [allPosts addObject:post];
         [post release];
     }
@@ -202,6 +194,23 @@
     [formatter release];
     
     return date;
+}
+
+- (NSString *)stripHTMLFromString:(NSString *)source {
+    //Based on http://stackoverflow.com/questions/277055/remove-html-tags-from-an-nsstring-on-the-iphone
+    source = [source stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    source = [source stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
+    source = [source stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+    source = [source stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];
+    
+    NSRange r;
+    while ((r = [source rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound) {
+        source = [source stringByReplacingCharactersInRange:r withString:@""];
+    }
+    
+    source = [source stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    return source;
 }
 
 @end

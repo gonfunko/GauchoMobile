@@ -18,5 +18,6 @@
 - (NSArray *)forumTopicsFromSource:(NSString *)html;
 - (NSArray *)forumPostsFromSource:(NSString *)html;
 - (NSDate *)dateFromDateString:(NSString *)dateString;
+- (NSString *)stripHTMLFromString:(NSString *)source;
 
 @end
