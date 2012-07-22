@@ -14,6 +14,11 @@
 - (NSArray *)dashboardItemsFromSource:(NSString *)source {
     NSMutableArray *dashboardItems = [[[NSMutableArray alloc] init] autorelease];
     
+    //If the user is not enrolled in any courses, we may not actually be passed the source for a dashboard page; if so, bail out
+    if ([source rangeOfString:@"class=\"summary\">"].location == NSNotFound) {
+        return dashboardItems;
+    }
+    
     NSArray *items = [source componentsSeparatedByString:@"class=\"weekdates\">"];
     
     for (int i = 0; i < [items count]; i++) {
