@@ -29,7 +29,7 @@
     floatingBackground = [[CALayer alloc] init];
     floatingBackground.anchorPoint = CGPointMake(0, 0);
     floatingBackground.frame = CGRectMake(0, 0, 1536 * ratio, 1024 * ratio);
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && [[UIScreen mainScreen] scale] == 2.0) {
+    if ([[UIScreen mainScreen] scale] == 2.0) {
         floatingBackground.contents = (id)[[UIImage imageNamed:@"1retina.jpg"] CGImage];
     } else {
         floatingBackground.contents = (id)[[UIImage imageNamed:@"1.jpg"] CGImage];
@@ -124,7 +124,7 @@
         else
             newPoint = CGPointMake(-1 * ((1280 * ratio) - [[UIScreen mainScreen] bounds].size.width), 0);
             
-        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && [[UIScreen mainScreen] scale] == 2.0) {
+        if ([[UIScreen mainScreen] scale] == 2.0) {
             floatingBackground.contents = (id)[[UIImage imageNamed:[NSString stringWithFormat:@"%iretina.jpg", image]] CGImage];
         } else {
             floatingBackground.contents = (id)[[UIImage imageNamed:[NSString stringWithFormat:@"%i.jpg", image]] CGImage];
