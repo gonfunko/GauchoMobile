@@ -84,6 +84,11 @@
 		937485891608C9B100D587D0 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 937485881608C9B100D587D0 /* Default-Landscape@2x~ipad.png */; };
 		9374858B1608D1DB00D587D0 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 9374858A1608D1DB00D587D0 /* Icon-72.png */; };
 		9374858D1608D1DF00D587D0 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9374858C1608D1DF00D587D0 /* Icon-72@2x.png */; };
+		93748592160942F300D587D0 /* tabbarbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 93748590160942F300D587D0 /* tabbarbackground.png */; };
+		93748593160942F300D587D0 /* tabbarbackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93748591160942F300D587D0 /* tabbarbackground@2x.png */; };
+		937485961609482E00D587D0 /* tabbarselection.png in Resources */ = {isa = PBXBuildFile; fileRef = 937485941609482D00D587D0 /* tabbarselection.png */; };
+		937485971609482E00D587D0 /* tabbarselection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 937485951609482E00D587D0 /* tabbarselection@2x.png */; };
+		9374859916094A6800D587D0 /* selectedtabbaritemgradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9374859816094A6800D587D0 /* selectedtabbaritemgradient@2x.png */; };
 		938277C112EBC2CC001C35E9 /* GMGradesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 938277C012EBC2CC001C35E9 /* GMGradesParser.m */; };
 		938489B314C0ACBF00F9986D /* gm.png in Resources */ = {isa = PBXBuildFile; fileRef = 938489B214C0ACBF00F9986D /* gm.png */; };
 		9385EFE91508692B00872595 /* GMForumsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFE81508692B00872595 /* GMForumsParser.m */; };
@@ -154,6 +159,9 @@
 		93ECB1741326F3C5007458FE /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93ECB1721326F3C5007458FE /* blueArrow@2x.png */; };
 		93EEE73C14C9FD9D00350104 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 93EEE73A14C9FD9D00350104 /* forward.png */; };
 		93EEE73D14C9FD9D00350104 /* forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93EEE73B14C9FD9D00350104 /* forward@2x.png */; };
+		C4414432160BF33200A18757 /* tabbaritemgradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4414431160BF33200A18757 /* tabbaritemgradient@2x.png */; };
+		C4414436160C00EA00A18757 /* selectedtabbaritemgradient.png in Resources */ = {isa = PBXBuildFile; fileRef = C4414434160C00EA00A18757 /* selectedtabbaritemgradient.png */; };
+		C4414437160C00EA00A18757 /* tabbaritemgradient.png in Resources */ = {isa = PBXBuildFile; fileRef = C4414435160C00EA00A18757 /* tabbaritemgradient.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -280,6 +288,11 @@
 		937485881608C9B100D587D0 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "data/Images/Default-Landscape@2x~ipad.png"; sourceTree = SOURCE_ROOT; };
 		9374858A1608D1DB00D587D0 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "data/Images/Icon-72.png"; sourceTree = SOURCE_ROOT; };
 		9374858C1608D1DF00D587D0 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "data/Images/Icon-72@2x.png"; sourceTree = SOURCE_ROOT; };
+		93748590160942F300D587D0 /* tabbarbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarbackground.png; sourceTree = "<group>"; };
+		93748591160942F300D587D0 /* tabbarbackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbarbackground@2x.png"; sourceTree = "<group>"; };
+		937485941609482D00D587D0 /* tabbarselection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarselection.png; sourceTree = "<group>"; };
+		937485951609482E00D587D0 /* tabbarselection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbarselection@2x.png"; sourceTree = "<group>"; };
+		9374859816094A6800D587D0 /* selectedtabbaritemgradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selectedtabbaritemgradient@2x.png"; sourceTree = "<group>"; };
 		938277BF12EBC2CC001C35E9 /* GMGradesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGradesParser.h; sourceTree = "<group>"; };
 		938277C012EBC2CC001C35E9 /* GMGradesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGradesParser.m; sourceTree = "<group>"; };
 		938489B214C0ACBF00F9986D /* gm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gm.png; sourceTree = "<group>"; };
@@ -383,6 +396,9 @@
 		93ECB1721326F3C5007458FE /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
 		93EEE73A14C9FD9D00350104 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
 		93EEE73B14C9FD9D00350104 /* forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forward@2x.png"; sourceTree = "<group>"; };
+		C4414431160BF33200A18757 /* tabbaritemgradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbaritemgradient@2x.png"; sourceTree = "<group>"; };
+		C4414434160C00EA00A18757 /* selectedtabbaritemgradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedtabbaritemgradient.png; sourceTree = "<group>"; };
+		C4414435160C00EA00A18757 /* tabbaritemgradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbaritemgradient.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -655,6 +671,14 @@
 		939036F6132AD77F00A5AF6E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C4414434160C00EA00A18757 /* selectedtabbaritemgradient.png */,
+				C4414435160C00EA00A18757 /* tabbaritemgradient.png */,
+				C4414431160BF33200A18757 /* tabbaritemgradient@2x.png */,
+				9374859816094A6800D587D0 /* selectedtabbaritemgradient@2x.png */,
+				937485941609482D00D587D0 /* tabbarselection.png */,
+				937485951609482E00D587D0 /* tabbarselection@2x.png */,
+				93748590160942F300D587D0 /* tabbarbackground.png */,
+				93748591160942F300D587D0 /* tabbarbackground@2x.png */,
 				9374858C1608D1DF00D587D0 /* Icon-72@2x.png */,
 				9374858A1608D1DB00D587D0 /* Icon-72.png */,
 				937485881608C9B100D587D0 /* Default-Landscape@2x~ipad.png */,
@@ -901,6 +925,14 @@
 				937485891608C9B100D587D0 /* Default-Landscape@2x~ipad.png in Resources */,
 				9374858B1608D1DB00D587D0 /* Icon-72.png in Resources */,
 				9374858D1608D1DF00D587D0 /* Icon-72@2x.png in Resources */,
+				93748592160942F300D587D0 /* tabbarbackground.png in Resources */,
+				93748593160942F300D587D0 /* tabbarbackground@2x.png in Resources */,
+				937485961609482E00D587D0 /* tabbarselection.png in Resources */,
+				937485971609482E00D587D0 /* tabbarselection@2x.png in Resources */,
+				9374859916094A6800D587D0 /* selectedtabbaritemgradient@2x.png in Resources */,
+				C4414432160BF33200A18757 /* tabbaritemgradient@2x.png in Resources */,
+				C4414436160C00EA00A18757 /* selectedtabbaritemgradient.png in Resources */,
+				C4414437160C00EA00A18757 /* tabbaritemgradient.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1031,7 +1063,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert Dodson";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1040,7 +1072,7 @@
 				INFOPLIST_FILE = "data/GauchoMobile-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9E0A2069-3788-4965-BC21-1542B18BEBB0";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1051,7 +1083,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert Dodson";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1059,7 +1091,7 @@
 				INFOPLIST_FILE = "data/GauchoMobile-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9E0A2069-3788-4965-BC21-1542B18BEBB0";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
