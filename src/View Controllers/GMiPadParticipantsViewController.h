@@ -7,6 +7,7 @@
 //
 
 #import "ParticipantsViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import "GMGridView.h"
 
 @interface GMiPadParticipantsViewController : ParticipantsViewController <GMGridViewDataSource, GMGridViewActionDelegate> {

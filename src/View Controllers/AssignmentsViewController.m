@@ -14,7 +14,6 @@
 - (void)dealloc
 {
     [fetcher release];
-    [reloadView removeFromSuperview];
     [super dealloc];
 }
 
@@ -53,21 +52,11 @@
     }
     
     self.tableView.scrollsToTop = YES;
-    
-    if (reloadView == nil) {
-		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-		view.delegate = self;
-		[self.tableView addSubview:view];
-		reloadView = view;
-        reloadView.hidden = YES;
-		[view release];
-	}
-    
+
     pendingID = 0;
-	[reloadView refreshLastUpdatedDate];
     
     calendar.hidden = NO;
-    reloadView.hidden = YES;
+    
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         self.tableView.frame = CGRectMake(0, calendar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - calendar.frame.size.height);
     }
@@ -138,15 +127,11 @@
 
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Loading assignments failed with error: %@", [error description]);
-    
-    [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     loading = NO;
     [HUD hide:YES];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
-    
-    [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     loading = NO;
     [HUD hide:YES];
     
@@ -367,34 +352,6 @@
     } else {
         pendingID = [assignmentID integerValue];
     }
-}
-
-#pragma mark -
-#pragma mark Refresh View Methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {	
-	
-	[reloadView egoRefreshScrollViewDidScroll:scrollView];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-	
-	[reloadView egoRefreshScrollViewDidEndDragging:scrollView];
-}
-
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view {
-	
-	[self loadAssignmentsWithLoadingView:NO];
-}
-
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view {
-	
-	return loading;
-}
-
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view {
-	
-	return [NSDate date];
 }
 
 #pragma mark -

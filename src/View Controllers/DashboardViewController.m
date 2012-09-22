@@ -16,7 +16,6 @@
 - (void)dealloc
 {
     [fetcher release];
-    [reloadView removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GMLoginSuccessfulNotification" object:nil];
     [super dealloc];
 }
@@ -44,18 +43,11 @@
                                              selector:@selector(loadDashboard) 
                                                  name:@"GMCurrentCourseChangedNotification" 
                                                object:nil];
-     
-     if (reloadView == nil) {
-         EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-         view.delegate = self;
-         [self.tableView addSubview:view];
-         reloadView = view;
-         [view release];
-     }
-     
-     [reloadView refreshLastUpdatedDate];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadDashboard) name:@"GMLoginSuccessfulNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadDashboard)
+                                                 name:@"GMLoginSuccessfulNotification"
+                                               object:nil];
 }
 
 - (void)viewDidUnload
@@ -137,14 +129,12 @@
     
     loading = NO;
     [HUD hide:YES];
-    [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
     
     loading = NO;
     [HUD hide:YES];
-    [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
        
     GMDashboardParser *parser = [[GMDashboardParser alloc] init];
     NSArray *items = [parser dashboardItemsFromSource:source];
@@ -263,35 +253,6 @@
     [controller loadURL:url];
     [self.navigationController pushViewController:controller animated:YES];
     [controller release];
-}
-
-#pragma mark - Reload view methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {	
-	
-	[reloadView egoRefreshScrollViewDidScroll:scrollView];
-    
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-	
-	[reloadView egoRefreshScrollViewDidEndDragging:scrollView];
-}
-
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view {
-	
-	[self loadDashboardWithLoadingView:NO];
-}
-
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view {
-	
-	return loading;
-	
-}
-
-- (NSDate *)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view {
-	
-	return [NSDate date];
 }
 
 @end

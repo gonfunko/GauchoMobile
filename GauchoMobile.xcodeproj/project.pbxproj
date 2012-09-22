@@ -104,7 +104,6 @@
 		938C793012F5245300C3F134 /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 938C792E12F5245300C3F134 /* CourseViewController.m */; };
 		938C793112F5245300C3F134 /* CourseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 938C792F12F5245300C3F134 /* CourseViewController.xib */; };
 		939036F2132AD76100A5AF6E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 939036F1132AD76100A5AF6E /* MainWindow.xib */; };
-		939036F5132AD77500A5AF6E /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 939036F4132AD77500A5AF6E /* EGORefreshTableHeaderView.m */; };
 		939036F9132AD7B000A5AF6E /* Credits.txt in Resources */ = {isa = PBXBuildFile; fileRef = 939036F7132AD7B000A5AF6E /* Credits.txt */; };
 		93903702132AD8B100A5AF6E /* UIView+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 93903701132AD8B100A5AF6E /* UIView+TKCategory.m */; };
 		93931BD915153F2C003F1F3C /* 3retina.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93931BD615153F2C003F1F3C /* 3retina.jpg */; };
@@ -318,8 +317,6 @@
 		938C792E12F5245300C3F134 /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
 		938C792F12F5245300C3F134 /* CourseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseViewController.xib; sourceTree = "<group>"; };
 		939036F1132AD76100A5AF6E /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		939036F3132AD77500A5AF6E /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
-		939036F4132AD77500A5AF6E /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		939036F7132AD7B000A5AF6E /* Credits.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Credits.txt; path = ../data/Credits.txt; sourceTree = "<group>"; };
 		939036FB132AD7F800A5AF6E /* GauchoMobile-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GauchoMobile-Info.plist"; path = "data/GauchoMobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 		93903700132AD8B100A5AF6E /* UIView+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TKCategory.h"; sourceTree = "<group>"; };
@@ -790,8 +787,6 @@
 				93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */,
 				93D075881333D5C20025BF9E /* GMWeekView.h */,
 				93D075891333D5C20025BF9E /* GMWeekView.m */,
-				939036F3132AD77500A5AF6E /* EGORefreshTableHeaderView.h */,
-				939036F4132AD77500A5AF6E /* EGORefreshTableHeaderView.m */,
 				9385EFEA1508693A00872595 /* GMForumTopicView.h */,
 				9385EFEB1508693A00872595 /* GMForumTopicView.m */,
 				933098F51513F55400F891C1 /* ADCalendarView.h */,
@@ -982,7 +977,6 @@
 				9395D601132881B700332A38 /* TKCalendarMonthView.m in Sources */,
 				9395D606132881B700332A38 /* TKGlobal.m in Sources */,
 				9395D61A132881B700332A38 /* UIImage+TKCategory.m in Sources */,
-				939036F5132AD77500A5AF6E /* EGORefreshTableHeaderView.m in Sources */,
 				93903702132AD8B100A5AF6E /* UIView+TKCategory.m in Sources */,
 				93D0758A1333D5C20025BF9E /* GMWeekView.m in Sources */,
 				932A907214C23A9D00E80827 /* GMAssignmentDetailsParser.m in Sources */,

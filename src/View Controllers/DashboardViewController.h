@@ -14,14 +14,12 @@
 #import "GMDataSource.h"
 #import "GMTextViewTableCell.h"
 #import "WebViewController.h"
-#import "EGORefreshTableHeaderView.h"
 #import "GMSplitViewController.h"
 
-@interface DashboardViewController : UITableViewController <GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate> {
+@interface DashboardViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private
     GMSourceFetcher *fetcher;
     MBProgressHUD *HUD;
-    EGORefreshTableHeaderView *reloadView;
     BOOL loading;
     BOOL visible;
 }

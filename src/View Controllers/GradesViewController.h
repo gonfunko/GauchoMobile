@@ -10,13 +10,11 @@
 #import "GMGradesParser.h"
 #import "GMGradesTableViewCell.h"
 #import "MBProgressHUD.h"
-#import "EGORefreshTableHeaderView.h"
 
-@interface GradesViewController : UIViewController <GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate> {
+@interface GradesViewController : UIViewController <GMSourceFetcherDelegate> {
 @private
     GMSourceFetcher *fetcher;
     MBProgressHUD *HUD;
-    EGORefreshTableHeaderView *reloadView;
     UITextField *noGradesLabel;
     BOOL loading;
     BOOL visible;

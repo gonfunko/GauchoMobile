@@ -12,17 +12,15 @@
 #import "GMDataSource.h"
 #import "GMParticipantsParser.h"
 #import "MBProgressHUD.h"
-#import "EGORefreshTableHeaderView.h"
 #import "GMPersonViewController.h"
 
-@interface ParticipantsViewController : UIViewController<GMSourceFetcherDelegate, EGORefreshTableHeaderDelegate, UIScrollViewDelegate> {
+@interface ParticipantsViewController : UIViewController<GMSourceFetcherDelegate, UIScrollViewDelegate> {
 @protected
     NSArray *sections;
     NSMutableDictionary *pictures;
     NSMutableArray *photoRequests;
 	GMSourceFetcher *fetcher;
     MBProgressHUD *HUD;
-    EGORefreshTableHeaderView *reloadView;
     
     BOOL loading;
     

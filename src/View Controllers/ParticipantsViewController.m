@@ -21,7 +21,6 @@
     [photoRequests release];
     [pictures release];
     [fetcher release];
-    [reloadView removeFromSuperview];
     [super dealloc];
 }
 
@@ -54,17 +53,6 @@
         NSDictionary *_participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
         NSArray *letters = [_participants allKeys];
         self.sections = [letters sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-    }
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-    if (reloadView == nil) {
-		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-		view.delegate = self;
-		[self.tableView addSubview:view];
-		reloadView = view;
-		[view release];
-	}
-    
-	[reloadView refreshLastUpdatedDate];
     }
 }
 
@@ -124,7 +112,6 @@
     NSLog(@"Loading participants failed with error: %@", [error description]);
     
     loading = NO;
-    [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     [HUD hide:YES];
     HUD = nil;
 }
@@ -132,7 +119,6 @@
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
     
     loading = NO;
-    [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     if (HUD != nil) {
         [HUD hide:YES];
         HUD = nil;
@@ -324,35 +310,6 @@
     
     CFRelease(addressBook);
     CFRelease(matches);
-}
-
-#pragma mark - Reload view methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {	
-	
-	[reloadView egoRefreshScrollViewDidScroll:scrollView];
-    
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-	
-	[reloadView egoRefreshScrollViewDidEndDragging:scrollView];
-}
-
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view {
-	
-	[self loadParticipantsWithLoadingView:NO];
-}
-
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view {
-	
-	return loading;
-	
-}
-
-- (NSDate *)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view {
-	
-	return [NSDate date];
 }
 
 @end

@@ -15,7 +15,6 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GMCurrentCourseChangedNotification" object:nil];
     [fetcher release];
-    [reloadView removeFromSuperview];
     [super dealloc];
 }
 
@@ -66,13 +65,6 @@
     }
     
     pendingID = 0;
-    
-    EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-    view.delegate = self;
-    [self.tableView addSubview:view];
-    reloadView = view;
-    [view release];
-	[reloadView refreshLastUpdatedDate];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -123,7 +115,6 @@
     NSLog(@"Loading grades failed with error: %@", [error description]);
 
     loading = NO;
-    [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     [HUD hide:YES];
     HUD = nil;
 }
@@ -131,7 +122,6 @@
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
     
     loading = NO;
-    [reloadView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     if (HUD != nil) {
         [HUD hide:YES];
         HUD = nil;
@@ -329,33 +319,6 @@
     [[[controller viewControllers] objectAtIndex:1] performSelector:@selector(showAssignmentWithID:) withObject:[NSNumber numberWithInteger:grade.gradeID]];
     
     [table deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-#pragma mark - Reload view methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {	
-	
-	[reloadView egoRefreshScrollViewDidScroll:scrollView];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-	
-	[reloadView egoRefreshScrollViewDidEndDragging:scrollView];
-}
-
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view {
-	
-	[self loadGradesWithLoadingView:NO];
-}
-
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView *)view {
-	
-	return loading;
-}
-
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView *)view {
-	
-	return [NSDate date];
 }
 
 @end
