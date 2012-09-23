@@ -66,15 +66,19 @@
         currentRow = [currentRow substringFromIndex:cruftRange.location + cruftRange.length];
         int lastAccessEnd = [currentRow rangeOfString:@"<"].location;
         NSString *lastAccessed = [currentRow substringWithRange:NSMakeRange(0, lastAccessEnd)];*/
-        
+
         BOOL inAddressBook = NO;
         ABAddressBookRef addressBook = ABAddressBookCreate();
-        CFArrayRef matches = ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef)name);
-        if (CFArrayGetCount(matches) != 0)
-            inAddressBook = YES;
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {});
         
-        CFRelease(addressBook);
-        CFRelease(matches);
+        if (addressBook) {
+            CFArrayRef matches = ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef)name);
+            if (CFArrayGetCount(matches) != 0)
+                inAddressBook = YES;
+            
+            CFRelease(addressBook);
+            CFRelease(matches);
+        }
         
         //Create a participant object to model this participant
         GMParticipant *participant = [[GMParticipant alloc] init];
