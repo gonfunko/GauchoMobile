@@ -21,6 +21,7 @@
     NSMutableArray *photoRequests;
 	GMSourceFetcher *fetcher;
     MBProgressHUD *HUD;
+    ABAddressBookRef addressBook;
     
     BOOL loading;
     
