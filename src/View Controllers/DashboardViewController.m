@@ -171,7 +171,12 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [[[[[GMDataSource sharedDataSource] currentCourse] dashboardItems] objectAtIndex:section] dateRange];
+    NSString *title = [[[[[GMDataSource sharedDataSource] currentCourse] dashboardItems] objectAtIndex:section] dateRange];
+    if ([title isEqualToString:@""]) {
+        title = @"Course Info";
+    }
+    
+    return title;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -253,6 +258,58 @@
     [controller loadURL:url];
     [self.navigationController pushViewController:controller animated:YES];
     [controller release];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    if ([self currentDateWithinDateRangeString:[self tableView:tableView titleForHeaderInSection:section]]) {
+        UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 23)] autorelease];
+        CALayer *yellowHeader = [[CALayer alloc] init];
+        yellowHeader.frame = CGRectMake(0, -1, tableView.bounds.size.width, 23);
+        yellowHeader.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"currentweeksectionheader"]].CGColor;
+        [headerView.layer addSublayer:yellowHeader];
+        [yellowHeader release];
+        
+        UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(12, -1, tableView.bounds.size.width - 24, 23)];
+        sectionLabel.text = [self tableView:tableView titleForHeaderInSection:section];
+        sectionLabel.textColor = [UIColor whiteColor];
+        sectionLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        sectionLabel.backgroundColor = [UIColor clearColor];
+        sectionLabel.shadowColor = [UIColor colorWithRed:0.617 green:0.496 blue:0.000 alpha:1.000];
+        sectionLabel.shadowOffset = CGSizeMake(0, 1);
+        [headerView addSubview:sectionLabel];
+        [sectionLabel release];
+        
+        return headerView;
+    } else {
+        return nil;
+    }
+}
+
+- (BOOL)currentDateWithinDateRangeString:(NSString *)range {
+    if (range && ![range isEqualToString:@"Course Info"]) {
+        NSDate *now = [NSDate date];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"dd MMMM"];
+        NSString *startDateString = [range substringToIndex:[range rangeOfString:@" - "].location];
+        NSString *endDateString = [range substringFromIndex:[range rangeOfString:@" - "].location + 3];
+        NSDate *startDate = [formatter dateFromString:startDateString];
+        NSDate *endDate = [formatter dateFromString:endDateString];
+        
+        NSDateComponents *nowComponents = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit fromDate:now];
+        NSString *nowString = [NSString stringWithFormat:@"%d %d", nowComponents.day, nowComponents.month];
+        [formatter setDateFormat:@"dd MM"];
+        now = [formatter dateFromString:nowString];
+        
+        NSLog(@"Start: %@ End: %@ Current: %@", [startDate description], [endDate description], [now description]);
+        
+        if (([now compare:startDate] == NSOrderedSame || [now compare:startDate] == NSOrderedDescending) &&
+            ([now compare:endDate] == NSOrderedSame || [now compare:endDate] == NSOrderedAscending)) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 @end
