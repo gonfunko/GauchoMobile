@@ -48,8 +48,13 @@
 
         
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
-            [[self tabBar] setBackgroundImage:[UIImage imageNamed:@"tabbarbackground"]];
-            [[self tabBar] setSelectionIndicatorImage:[UIImage imageNamed:@"tabbarselection"]];
+            if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+                [[self tabBar] setBackgroundImage:[UIImage imageNamed:@"ipadtabbarbackground"]];
+                [[self tabBar] setSelectionIndicatorImage:[UIImage imageNamed:@"ipadtabbarselection"]];
+            } else {
+                [[self tabBar] setBackgroundImage:[UIImage imageNamed:@"tabbarbackground"]];
+                [[self tabBar] setSelectionIndicatorImage:[UIImage imageNamed:@"tabbarselection"]];
+            }
             
             UIImage *selectedIcon = [self tabBarIconWithImage:[UIImage imageNamed:@"dashboard"]
                                            andGradientOverlay:[UIImage imageNamed:@"selectedtabbaritemgradient"]];
