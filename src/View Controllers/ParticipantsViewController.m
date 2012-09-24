@@ -21,6 +21,9 @@
     [photoRequests release];
     [pictures release];
     [fetcher release];
+    if (addressBook) {
+        CFRelease(addressBook);
+    }
     [super dealloc];
 }
 
@@ -55,12 +58,9 @@
         self.sections = [letters sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     
+    addressBook = ABAddressBookCreate();
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
-        CFErrorRef error;
-        addressBook = ABAddressBookCreateWithOptions(NULL, &error);
         ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {});
-    } else {
-        addressBook = ABAddressBookCreate();
     }
 }
 
@@ -274,9 +274,8 @@
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *participants = [[[[GMDataSource sharedDataSource] currentCourse] participants] objectForKey:[sections objectAtIndex:indexPath.section]];
     GMParticipant *participant = [participants objectAtIndex:indexPath.row];
-    if (addressBook) {
+    if (addressBook != NULL) {
         CFArrayRef matches = ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef)participant.name);
-        CFRelease(addressBook);
         if (CFArrayGetCount(matches) != 0) {
             CFRelease(matches);
             return indexPath;
@@ -300,7 +299,7 @@
 #pragma mark - Convenience methods
 
 - (void)displayAddressBookEntryForParticipant:(GMParticipant *)participant {
-    if (addressBook) {
+    if (addressBook != NULL) {
         CFArrayRef matches = ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef)participant.name);
         if (CFArrayGetCount(matches) != 0) {
             ABPersonViewController *controller = [[GMPersonViewController alloc] init];
@@ -315,8 +314,6 @@
             }
             [controller release];
         }
-        
-        CFRelease(addressBook);
         CFRelease(matches);
     }
 }
