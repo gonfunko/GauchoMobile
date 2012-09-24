@@ -427,21 +427,51 @@
 
 - (void)import {
     EKEventStore *store = [[EKEventStore alloc] init];
-    NSArray *assignments = [[[GMDataSource sharedDataSource] currentCourse] assignments];
     
-    for (GMAssignment *assignment in assignments) {
-        EKEvent *newEvent = [EKEvent eventWithEventStore:store];
-        newEvent.title = assignment.description;
-        newEvent.startDate = [assignment.dueDate dateByAddingTimeInterval:-3600];
-        newEvent.endDate = assignment.dueDate;
-        newEvent.calendar = [store defaultCalendarForNewEvents];
-        
-        [store saveEvent:newEvent span:EKSpanThisEvent error:nil];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
+        [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+            [self performSelectorOnMainThread:@selector(_import) withObject:nil waitUntilDone:NO];
+        }];
+    } else {
+        [self _import];
     }
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Assignments Imported" message:[NSString stringWithFormat:@"Your assignments have been successfully imported into the calendar %@", [store defaultCalendarForNewEvents].title] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-    [alert show];
-    [alert release];
+    [store release];
+}
+
+-(void)_import {
+    EKEventStore *store = [[EKEventStore alloc] init];
+    
+    if (SYSTEM_VERSION_LESS_THAN(@"6.0") || [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent] == EKAuthorizationStatusAuthorized) {
+        NSArray *assignments = [[[GMDataSource sharedDataSource] currentCourse] assignments];
+        
+        for (GMAssignment *assignment in assignments) {
+            EKEvent *newEvent = [EKEvent eventWithEventStore:store];
+            newEvent.title = assignment.description;
+            newEvent.startDate = [assignment.dueDate dateByAddingTimeInterval:-3600];
+            newEvent.endDate = assignment.dueDate;
+            newEvent.calendar = [store defaultCalendarForNewEvents];
+            
+            [store saveEvent:newEvent span:EKSpanThisEvent error:nil];
+        }
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Assignments Imported"
+                                                        message:[NSString stringWithFormat:@"Your assignments have been successfully imported into the calendar %@", [store defaultCalendarForNewEvents].title]
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"OK", nil];
+        [alert show];
+        [alert release];
+    } else if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") && [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent] != EKAuthorizationStatusAuthorized) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Import Assignments"
+                                                        message:@"GauchoMobile does not have access to your calendars. Open Settings > Privacy > Calendars, enable access and try again."
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"OK", nil];
+        [alert show];
+        [alert release];
+    }
+    
     [store release];
 }
 
