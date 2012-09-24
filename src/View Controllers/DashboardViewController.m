@@ -301,8 +301,6 @@
         [formatter setDateFormat:@"dd MM"];
         now = [formatter dateFromString:nowString];
         
-        NSLog(@"Start: %@ End: %@ Current: %@", [startDate description], [endDate description], [now description]);
-        
         if (([now compare:startDate] == NSOrderedSame || [now compare:startDate] == NSOrderedDescending) &&
             ([now compare:endDate] == NSOrderedSame || [now compare:endDate] == NSOrderedAscending)) {
             return YES;
