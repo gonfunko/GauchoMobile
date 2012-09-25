@@ -162,11 +162,13 @@
     [self loadPicturesForParticipants];
     
     if ([participants count] == 0) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.tableView.frame.size.height - 30) / 2, self.tableView.frame.size.width, 30)];
+        UITextField *label = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
         label.text = @"No Participants";
         label.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
         label.textColor = [UIColor grayColor];
         label.textAlignment = UITextAlignmentCenter;
+        label.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        label.userInteractionEnabled = NO;
         [self.tableView addSubview:label];
         [label release];
     }

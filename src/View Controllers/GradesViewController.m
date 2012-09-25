@@ -36,13 +36,14 @@
                                                  name:@"GMCurrentCourseChangedNotification" 
                                                object:nil];
     
-    noGradesLabel = [[UITextField alloc] initWithFrame:CGRectMake(0, (self.tableView.frame.size.height - 30) / 2 - 25, self.tableView.frame.size.width, 30)];
+    noGradesLabel = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
     noGradesLabel.hidden = YES;
     noGradesLabel.text = @"No Grades";
-    noGradesLabel.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
     noGradesLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
     noGradesLabel.textColor = [UIColor grayColor];
     noGradesLabel.textAlignment = UITextAlignmentCenter;
+    noGradesLabel.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    noGradesLabel.userInteractionEnabled = NO;
     [self.tableView addSubview:noGradesLabel];
     [noGradesLabel release];
 }
@@ -56,6 +57,8 @@
 {
     [super viewWillAppear:animated];
     self.visible = YES;
+    
+    noGradesLabel.frame = [self.tableView boundsForPlaceholderLabel];
     
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
@@ -83,6 +86,10 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    noGradesLabel.frame = [self.tableView boundsForPlaceholderLabel];
 }
 
 #pragma mark - Data loading methods

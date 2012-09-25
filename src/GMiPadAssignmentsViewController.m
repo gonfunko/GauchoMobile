@@ -75,6 +75,10 @@
 	return YES;
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    noAssignmentsLabel.frame = [self.tableView boundsForPlaceholderLabel];
+}
+
 - (void)loadAssignments {
     if (self.visible) {
         [self loadAssignmentsWithLoadingView:YES];

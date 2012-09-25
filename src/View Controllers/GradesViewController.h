@@ -10,6 +10,7 @@
 #import "GMGradesParser.h"
 #import "GMGradesTableViewCell.h"
 #import "MBProgressHUD.h"
+#import "UITableView+GMAdditions.h"
 
 @interface GradesViewController : UIViewController <GMSourceFetcherDelegate> {
 @private

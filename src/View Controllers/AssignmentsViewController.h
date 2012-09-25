@@ -14,6 +14,7 @@
 #import "NSDate+TKCategory.h"
 #import "AssignmentDetailViewController.h"
 #import "MBProgressHUD.h"
+#import "UITableView+GMAdditions.h"
 
 @interface AssignmentsViewController : UIViewController <GMSourceFetcherDelegate, TKCalendarMonthViewDelegate, TKCalendarMonthViewDataSource> {
 @protected

@@ -61,13 +61,13 @@
         self.tableView.frame = CGRectMake(0, calendar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - calendar.frame.size.height);
     }
     
-    noAssignmentsLabel = [[UITextField alloc] initWithFrame:CGRectMake(0, (self.tableView.frame.size.height - 30) / 2 - 25, self.tableView.frame.size.width, 30)];
+    noAssignmentsLabel = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
     noAssignmentsLabel.enabled = NO;
-    noAssignmentsLabel.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
     noAssignmentsLabel.text = @"No Assignments";
     noAssignmentsLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
     noAssignmentsLabel.textColor = [UIColor grayColor];
     noAssignmentsLabel.textAlignment = UITextAlignmentCenter;
+    noAssignmentsLabel.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     noAssignmentsLabel.hidden = YES;
     [self.tableView addSubview:noAssignmentsLabel];
     [noAssignmentsLabel release];
@@ -83,6 +83,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    noAssignmentsLabel.frame = [self.tableView boundsForPlaceholderLabel];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -359,6 +360,7 @@
 
 - (void)calendarMonthView:(TKCalendarMonthView *)monthView monthDidChange:(NSDate *)month animated:(BOOL)animated {
     self.tableView.frame = CGRectMake(0, monthView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - monthView.frame.size.height);
+    noAssignmentsLabel.frame = [self.tableView boundsForPlaceholderLabel];
 }
 
 - (void)calendarMonthView:(TKCalendarMonthView *)monthView didSelectDate:(NSDate *)date {

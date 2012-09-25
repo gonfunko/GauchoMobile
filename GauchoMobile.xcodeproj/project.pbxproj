@@ -139,6 +139,7 @@
 		93BDDA6C161117800007519F /* ipadtabbarbackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BDDA6B161117800007519F /* ipadtabbarbackground@2x.png */; };
 		93BDDA6F161118020007519F /* ipadtabbarselection.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BDDA6D161118020007519F /* ipadtabbarselection.png */; };
 		93BDDA70161118020007519F /* ipadtabbarbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BDDA6E161118020007519F /* ipadtabbarbackground.png */; };
+		93BDDA73161122270007519F /* UITableView+GMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BDDA72161122270007519F /* UITableView+GMAdditions.m */; };
 		93C257DF14CCC1810079E5CD /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C257DE14CCC1800079E5CD /* KeychainItemWrapper.m */; };
 		93C257E214CCC2800079E5CD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C257E014CCC2760079E5CD /* Security.framework */; };
 		93C257E414CCCE3F0079E5CD /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93C257E314CCCE3F0079E5CD /* Icon.png */; };
@@ -371,6 +372,8 @@
 		93BDDA6B161117800007519F /* ipadtabbarbackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipadtabbarbackground@2x.png"; sourceTree = "<group>"; };
 		93BDDA6D161118020007519F /* ipadtabbarselection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipadtabbarselection.png; sourceTree = "<group>"; };
 		93BDDA6E161118020007519F /* ipadtabbarbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipadtabbarbackground.png; sourceTree = "<group>"; };
+		93BDDA71161122270007519F /* UITableView+GMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+GMAdditions.h"; sourceTree = "<group>"; };
+		93BDDA72161122270007519F /* UITableView+GMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+GMAdditions.m"; sourceTree = "<group>"; };
 		93C257DD14CCC1800079E5CD /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		93C257DE14CCC1800079E5CD /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		93C257E014CCC2760079E5CD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -590,6 +593,7 @@
 				938C408912E9470100A8894E /* Data Model Classes */,
 				93B1B8231329ECB900403CCD /* Views */,
 				93AF604C12F38BD7009A3657 /* View Controllers */,
+				93BDDA74161122330007519F /* Categories */,
 				9314EC3112F3DC5B00F99756 /* XIBs */,
 				934300E012E0F42600AFFFE4 /* Supporting Files */,
 			);
@@ -815,6 +819,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		93BDDA74161122330007519F /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				93BDDA71161122270007519F /* UITableView+GMAdditions.h */,
+				93BDDA72161122270007519F /* UITableView+GMAdditions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		93EC607C1332E1DC00601B04 /* iPad */ = {
 			isa = PBXGroup;
 			children = (
@@ -1032,6 +1045,7 @@
 				931F43EA152BAA570059A9D7 /* UIView+GMGridViewAdditions.m in Sources */,
 				931F43EE152BAAA70059A9D7 /* GMiPadParticipantsViewController.m in Sources */,
 				9359AFD71530A8D60072EDC8 /* GMPersonViewController.m in Sources */,
+				93BDDA73161122270007519F /* UITableView+GMAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

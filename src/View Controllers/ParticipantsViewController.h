@@ -13,6 +13,7 @@
 #import "GMParticipantsParser.h"
 #import "MBProgressHUD.h"
 #import "GMPersonViewController.h"
+#import "UITableView+GMAdditions.h"
 
 @interface ParticipantsViewController : UIViewController<GMSourceFetcherDelegate, UIScrollViewDelegate> {
 @protected

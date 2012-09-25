@@ -13,12 +13,14 @@
 #import "MBProgressHUD.h"
 #import "GMForumTopicTableCell.h"
 #import "ForumPostsViewController.h"
+#import "UITableView+GMAdditions.h"
 
 @interface ForumTopicsViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private
     GMForum *forum;
     GMSourceFetcher *fetcher;
     MBProgressHUD *HUD;
+    UITextField *noTopicsLabel;
     BOOL loading;
     
     IBOutlet GMForumTopicTableCell *topicCell;

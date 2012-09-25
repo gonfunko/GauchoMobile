@@ -28,6 +28,8 @@
     fetcher = [[GMSourceFetcher alloc] init];
     
     self.tableView.rowHeight = 80;
+    
+    noForumsLabel = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -69,6 +71,10 @@
     } else {
         return YES;
     }
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    noForumsLabel.frame = [self.tableView boundsForPlaceholderLabel];
 }
 
 - (void)loadForums {
@@ -120,15 +126,14 @@
     [self.tableView reloadData];
     
     if ([forums count] == 0) {
-        UITextField *label = [[UITextField alloc] initWithFrame:CGRectMake(0, (self.tableView.frame.size.height - 30) / 2 - 25, self.tableView.frame.size.width, 30)];
-        label.enabled = NO;
-        label.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
-        label.text = @"No Forums";
-        label.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
-        label.textColor = [UIColor grayColor];
-        label.textAlignment = UITextAlignmentCenter;
-        [self.tableView addSubview:label];
-        [label release];
+        noForumsLabel = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
+        noForumsLabel.enabled = NO;
+        noForumsLabel.text = @"No Forums";
+        noForumsLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
+        noForumsLabel.textColor = [UIColor grayColor];
+        noForumsLabel.textAlignment = UITextAlignmentCenter;
+        [self.tableView addSubview:noForumsLabel];
+        [noForumsLabel release];
     }
 }
 
