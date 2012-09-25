@@ -69,7 +69,10 @@
 
         BOOL inAddressBook = NO;
         ABAddressBookRef addressBook = ABAddressBookCreate();
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {});
+        
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
+            ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {});
+        }
         
         if (addressBook) {
             CFArrayRef matches = ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef)name);
