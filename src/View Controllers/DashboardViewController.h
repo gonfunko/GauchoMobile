@@ -21,6 +21,7 @@
 @private
     GMSourceFetcher *fetcher;
     MBProgressHUD *HUD;
+    NSDateFormatter *dateFormatter;
     BOOL loading;
     BOOL visible;
 }

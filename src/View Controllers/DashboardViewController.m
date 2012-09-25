@@ -16,6 +16,7 @@
 - (void)dealloc
 {
     [fetcher release];
+    [dateFormatter release];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GMLoginSuccessfulNotification" object:nil];
     [super dealloc];
 }
@@ -34,6 +35,7 @@
 	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"Dashboard";
     
+    dateFormatter = [[NSDateFormatter alloc] init];
     fetcher = [[GMSourceFetcher alloc] init];
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:HUD];
@@ -289,17 +291,16 @@
 - (BOOL)currentDateWithinDateRangeString:(NSString *)range {
     if (range && ![range isEqualToString:@"Course Info"]) {
         NSDate *now = [NSDate date];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"dd MMMM"];
+        [dateFormatter setDateFormat:@"dd MMMM"];
         NSString *startDateString = [range substringToIndex:[range rangeOfString:@" - "].location];
         NSString *endDateString = [range substringFromIndex:[range rangeOfString:@" - "].location + 3];
-        NSDate *startDate = [formatter dateFromString:startDateString];
-        NSDate *endDate = [formatter dateFromString:endDateString];
+        NSDate *startDate = [dateFormatter dateFromString:startDateString];
+        NSDate *endDate = [dateFormatter dateFromString:endDateString];
         
         NSDateComponents *nowComponents = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit fromDate:now];
         NSString *nowString = [NSString stringWithFormat:@"%d %d", nowComponents.day, nowComponents.month];
-        [formatter setDateFormat:@"dd MM"];
-        now = [formatter dateFromString:nowString];
+        [dateFormatter setDateFormat:@"dd MM"];
+        now = [dateFormatter dateFromString:nowString];
         
         if (([now compare:startDate] == NSOrderedSame || [now compare:startDate] == NSOrderedDescending) &&
             ([now compare:endDate] == NSOrderedSame || [now compare:endDate] == NSOrderedAscending)) {
