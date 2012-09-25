@@ -155,6 +155,7 @@
     
     if ([participants count] == 0) {
         UITextField *label = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
+        label.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         label.text = @"No Participants";
         label.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
         label.textColor = [UIColor grayColor];

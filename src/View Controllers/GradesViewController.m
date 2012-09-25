@@ -37,6 +37,7 @@
                                                object:nil];
     
     noGradesLabel = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
+    noGradesLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     noGradesLabel.hidden = YES;
     noGradesLabel.text = @"No Grades";
     noGradesLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];

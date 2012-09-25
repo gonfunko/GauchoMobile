@@ -62,6 +62,7 @@
     }
     
     noAssignmentsLabel = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
+    noAssignmentsLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     noAssignmentsLabel.enabled = NO;
     noAssignmentsLabel.text = @"No Assignments";
     noAssignmentsLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];

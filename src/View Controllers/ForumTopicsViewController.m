@@ -101,6 +101,7 @@
     
     if ([forums count] == 0) {
         noTopicsLabel = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
+        noTopicsLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         noTopicsLabel.enabled = NO;
         noTopicsLabel.text = @"No Topics";
         noTopicsLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
