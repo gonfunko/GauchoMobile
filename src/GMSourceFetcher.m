@@ -9,11 +9,12 @@
 @implementation GMSourceFetcher
 
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password delegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
-    NSString *requestString = [NSString stringWithFormat:@"username=%@&password=%@", username, password];
-    CFStringRef _escapedRequestString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)requestString, NULL, CFSTR(":/?#[]@!$ '()*+,;\"<>%{}|\\^~`"), kCFStringEncodingUTF8);
-    NSString *escapedRequestString = (NSString *)_escapedRequestString;
-    NSData *requestData = [escapedRequestString dataUsingEncoding:NSUTF8StringEncoding];
-    CFRelease(_escapedRequestString);
+    CFStringRef escapedUsername = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)username, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"), kCFStringEncodingUTF8);
+    CFStringRef escapedPassword = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)password, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"), kCFStringEncodingUTF8);
+    NSString *requestString = [NSString stringWithFormat:@"username=%@&password=%@", (NSString *)escapedUsername, (NSString *)escapedPassword];
+    NSData *requestData = [requestString dataUsingEncoding:NSUTF8StringEncoding];
+    CFRelease(escapedUsername);
+    CFRelease(escapedPassword);
     
     NSURL *url = [NSURL URLWithString:@"https://gauchospace.ucsb.edu/courses/login/index.php"];
 
