@@ -63,8 +63,8 @@
     [((GMGridView *)self.view) reloadData];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    [super requestFinished:request];
+- (void)gotImageData:(NSDictionary *)imgData {
+    [super gotImageData:imgData];
     [((GMGridView *)self.view) reloadData];
 }
 

@@ -7,7 +7,6 @@
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
-#import "ASIHTTPRequest.h"
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMParticipantsParser.h"
@@ -19,7 +18,6 @@
 @protected
     NSArray *sections;
     NSMutableDictionary *pictures;
-    NSMutableArray *photoRequests;
 	GMSourceFetcher *fetcher;
     MBProgressHUD *HUD;
     ABAddressBookRef addressBook;
@@ -41,6 +39,6 @@
 //Displays the address book card for the given participant, if any
 - (void)displayAddressBookEntryForParticipant:(GMParticipant *)participant;
 
-- (void)requestFinished:(ASIHTTPRequest *)request;
+- (void)gotImageData:(NSDictionary *)imgData;
 
 @end

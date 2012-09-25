@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "GMForumPost.h"
-#import "ASIHTTPRequest.h"
 #import "GMDataSource.h"
 
 @interface GMForumTopicView : UIView {
     NSMutableDictionary *pictures;
-    NSMutableArray *photoRequests;
     NSMutableDictionary *photoLayers;
 }
 

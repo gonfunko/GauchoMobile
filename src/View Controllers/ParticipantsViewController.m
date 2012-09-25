@@ -18,7 +18,6 @@
 
 - (void)dealloc {
     self.sections = nil;
-    [photoRequests release];
     [pictures release];
     [fetcher release];
     if (addressBook) {
@@ -36,7 +35,6 @@
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"People";
     
-    photoRequests = [[NSMutableArray alloc] init];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *dictPath = [[paths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%ipics", (int)[[GMDataSource sharedDataSource] currentCourse].courseID]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:dictPath]) {
@@ -65,12 +63,6 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    
-    NSArray *requests = [NSArray arrayWithArray:photoRequests];
-    for (ASIHTTPRequest *request in requests) {
-        [request clearDelegatesAndCancel];
-    }
-    
     //Based on http://stackoverflow.com/questions/2380173/iphone-how-to-write-an-image-to-disk-in-the-app-directories
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *dictPath = [[paths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%ipics", (int)[[GMDataSource sharedDataSource] currentCourse].courseID]];
@@ -174,19 +166,6 @@
     }
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    [photoRequests removeObject:request];
-    NSData *imageData = [request responseData];
-    UIImage *pic = [UIImage imageWithData:imageData];
-    [pictures setObject:pic forKey:[[request originalURL] absoluteString]];
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    [photoRequests removeObject:request];
-    NSError *error = [request error];
-    NSLog(@"Downloading profile picture failed with error %@", [error description]);
-}
-
 - (void)loadPicturesForParticipants {
     NSDictionary *participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
     NSMutableArray *allParticipants = [[NSMutableArray alloc] init];
@@ -197,14 +176,21 @@
     for (GMParticipant *participant in allParticipants) {
         NSString *url = [participant.imageURL absoluteString];
         if([pictures objectForKey:url] == nil && ![url isEqualToString:@"https://gauchospace.ucsb.edu/courses/theme/gaucho/pix/u/f1.png"]) {
-            ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
-            [request setDelegate:self];
-            [request startAsynchronous];
-            [photoRequests addObject:request];
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+            [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                NSDictionary *imgData = @{@"data" : data, @"url" : url};
+                [self performSelectorOnMainThread:@selector(gotImageData:) withObject:imgData waitUntilDone:YES];
+            }];
         }
     }
     
     [allParticipants release];
+}
+
+- (void)gotImageData:(NSDictionary *)imgData {
+    NSData *imageData = [imgData objectForKey:@"data"];
+    UIImage *pic = [UIImage imageWithData:imageData];
+    [pictures setObject:pic forKey:[imgData objectForKey:@"url"]];
 }
 
 #pragma mark -

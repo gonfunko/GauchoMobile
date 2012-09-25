@@ -19,40 +19,37 @@
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source;
 @end
 
-@interface GMSourceFetcher : NSObject {
-@private
-    NSMutableArray *activeRequests;
-}
+@interface GMSourceFetcher : NSObject
 
 //Attempts to log into GauchoSpace and calls sourceFetchSucceededWithPageSource: on the delegate with the HTML of the home page or login page (if invalid credentials)
 //If login was successful, assignments, grades and participants may be fetched after the delegate receives its callback
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password delegate:(id <GMSourceFetcherDelegate>)delegate;
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password delegate:(NSObject <GMSourceFetcherDelegate> *)delegate;
 
 //Terminates the current session and logs out of GauchoSpace.
 - (void)logout;
 
 //Assuming loginWithUsername:password:delegate: has been called and login succeeded, passes the HTML for the GauchoSpace course home page corresponding to course to
 //the delegate's sourceFetchSucceededWithPageSource: method
-- (void)dashboardForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+- (void)dashboardForCourse:(GMCourse *)course withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate;
 
 //Assuming loginWithUsername:password:delegate: has been called and login succeeded, passes the HTML for the GauchoSpace assignments page corresponding to course to
 //the delegate's sourceFetchSucceededWithPageSource: method
-- (void)assignmentsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+- (void)assignmentsForCourse:(GMCourse *)course withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate;
 
 //Assuming loginWithUsername:password:delegate: has been called and login succeeded, passes the HTML for the GauchoSpace grades page corresponding to course to
 //the delegate's sourceFetchSucceededWithPageSource: method
-- (void)gradesForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+- (void)gradesForCourse:(GMCourse *)course withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate;
 
 //Assuming loginWithUsername:password:delegate: has been called and login succeeded, passes the HTML for the GauchoSpace participants page corresponding to course to
 //the delegate's sourceFetchSucceededWithPageSource: method
-- (void)participantsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+- (void)participantsForCourse:(GMCourse *)course withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate;
 
-- (void)forumsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+- (void)forumsForCourse:(GMCourse *)course withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate;
 
-- (void)topicsForForum:(GMForum *)forum withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+- (void)topicsForForum:(GMForum *)forum withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate;
 
-- (void)postsForTopic:(GMForumTopic *)topic withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+- (void)postsForTopic:(GMForumTopic *)topic withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate;
 
-- (void)detailsForAssignment:(GMAssignment *)assignment withDelegate:(id <GMSourceFetcherDelegate>)delegate;
+- (void)detailsForAssignment:(GMAssignment *)assignment withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate;
 
 @end

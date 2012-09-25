@@ -5,157 +5,118 @@
 //
 
 #import "GMSourceFetcher.h"
-#import "ASIFormDataRequest.h"
 
 @implementation GMSourceFetcher
 
-- (id)init {
-    if ((self = [super init])) {
-        activeRequests = [[NSMutableArray alloc] init];
-    }
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password delegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
+    NSString *requestString = [NSString stringWithFormat:@"username=%@&password=%@", username, password];
+    CFStringRef _escapedRequestString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)requestString, NULL, CFSTR(":/?#[]@!$ '()*+,;\"<>%{}|\\^~`"), kCFStringEncodingUTF8);
+    NSString *escapedRequestString = (NSString *)_escapedRequestString;
+    NSData *requestData = [escapedRequestString dataUsingEncoding:NSUTF8StringEncoding];
+    CFRelease(_escapedRequestString);
     
-    return self;
-}
+    NSURL *url = [NSURL URLWithString:@"https://gauchospace.ucsb.edu/courses/login/index.php"];
 
-- (void)loginWithUsername:(NSString *)username password:(NSString *)password delegate:(id<GMSourceFetcherDelegate>)delegate {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:requestData];
     
-    NSURL *loginScriptURL = [NSURL URLWithString:@"https://gauchospace.ucsb.edu/courses/login/index.php"];
-    ASIFormDataRequest *loginRequest = [ASIFormDataRequest requestWithURL:loginScriptURL];
-    [loginRequest setPostValue:username forKey:@"username"];
-    [loginRequest setPostValue:password forKey:@"password"];
-    [loginRequest setDelegate:self];
-    [loginRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
-    [loginRequest startAsynchronous];
-    [activeRequests addObject:loginRequest];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (data) {
+            NSString *pageContents = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            [delegate performSelectorOnMainThread:@selector(sourceFetchSucceededWithPageSource:) withObject:pageContents waitUntilDone:YES];
+            [pageContents release];
+        } else {
+            NSLog(@"Error logging in to GauchoSpace: %@", [error description]);
+            [delegate performSelectorOnMainThread:@selector(sourceFetchDidFailWithError:) withObject:error waitUntilDone:YES];
+        }
+    }];
 }
 
 - (void)logout {
     NSString *sessionKey = [[NSUserDefaults standardUserDefaults] objectForKey:@"sessionkey"];
     
     NSURL *logoutScriptURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/login/logout.php?sesskey=%@", sessionKey]];
-    ASIFormDataRequest *logoutRequest = [ASIFormDataRequest requestWithURL:logoutScriptURL];
-    [logoutRequest startSynchronous];
-    [activeRequests addObject:logoutRequest];
+    NSURLRequest *request = [NSURLRequest requestWithURL:logoutScriptURL];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (data == nil) {
+            NSLog(@"Error logging out");
+        }
+    }];
 }
 
-- (void)dashboardForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+- (void)dashboardForCourse:(GMCourse *)course withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
     int courseID = (int)course.courseID;
-    
+
     NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/course/view.php?id=%i", courseID]];
-    
-    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
-    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
-    [fetchRequest setDelegate:self];
-    [fetchRequest startAsynchronous];
-    [activeRequests addObject:fetchRequest];
+    [self fetchURL:fetchURL withDelegate:delegate];
 }
 
-- (void)assignmentsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+- (void)assignmentsForCourse:(GMCourse *)course withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
     int courseID = (int)course.courseID;
     
     NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/mod/assignment/index.php?id=%i", courseID]];
-    
-    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
-    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
-    [fetchRequest setDelegate:self];
-    [fetchRequest startAsynchronous];
-    [activeRequests addObject:fetchRequest];
+    [self fetchURL:fetchURL withDelegate:delegate];
 }
 
-- (void)detailsForAssignment:(GMAssignment *)assignment withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+- (void)detailsForAssignment:(GMAssignment *)assignment withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
     int assignmentID = (int)assignment.assignmentID;
     
     NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/mod/assignment/view.php?id=%i", assignmentID]];
-    
-    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
-    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
-    [fetchRequest setDelegate:self];
-    [fetchRequest startAsynchronous];
-    [activeRequests addObject:fetchRequest];
+    [self fetchURL:fetchURL withDelegate:delegate];
 }
 
-- (void)gradesForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+- (void)gradesForCourse:(GMCourse *)course withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
     int courseID = (int)course.courseID;
     
     NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/grade/report/index.php?id=%i", courseID]];
-    
-    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
-    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
-    [fetchRequest setDelegate:self];
-    [fetchRequest startAsynchronous];
-    [activeRequests addObject:fetchRequest];
+    [self fetchURL:fetchURL withDelegate:delegate];
 }
 
-- (void)participantsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+- (void)participantsForCourse:(GMCourse *)course withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
     int courseID = (int)course.courseID;
     
     NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/user/index.php?roleid=0&id=%i&search=&perpage=5000", courseID]];
-    
-    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
-    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
-    [fetchRequest setDelegate:self];
-    [fetchRequest startAsynchronous];
-    [activeRequests addObject:fetchRequest];
+    [self fetchURL:fetchURL withDelegate:delegate];
 }
 
-- (void)forumsForCourse:(GMCourse *)course withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+- (void)forumsForCourse:(GMCourse *)course withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
     int courseID = (int)course.courseID;
     
     NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/mod/forum/index.php?id=%i", courseID]];
-    
-    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
-    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
-    [fetchRequest setDelegate:self];
-    [fetchRequest startAsynchronous];
-    [activeRequests addObject:fetchRequest];
+    [self fetchURL:fetchURL withDelegate:delegate];
 }
 
-- (void)topicsForForum:(GMForum *)forum withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+- (void)topicsForForum:(GMForum *)forum withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
     int forumID = [forum.forumID intValue];
     
     NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/mod/forum/view.php?f=%i", forumID]];
-    
-    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
-    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
-    [fetchRequest setDelegate:self];
-    [fetchRequest startAsynchronous];
-    [activeRequests addObject:fetchRequest];
+    [self fetchURL:fetchURL withDelegate:delegate];
 }
 
-- (void)postsForTopic:(GMForumTopic *)topic withDelegate:(id <GMSourceFetcherDelegate>)delegate {
+- (void)postsForTopic:(GMForumTopic *)topic withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
     int topicID = [topic.topicID intValue];
     
     NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/mod/forum/discuss.php?d=%i", topicID]];
-    
-    ASIHTTPRequest *fetchRequest = [ASIHTTPRequest requestWithURL:fetchURL];
-    [fetchRequest setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
-    [fetchRequest setDelegate:self];
-    [fetchRequest startAsynchronous];
-    [activeRequests addObject:fetchRequest];
+    [self fetchURL:fetchURL withDelegate:delegate];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    [activeRequests removeObject:request];
-    NSString *responseString = [request responseString];
-    id <GMSourceFetcherDelegate> delegate = [[request userInfo] objectForKey:@"delegate"];
-    [delegate sourceFetchSucceededWithPageSource:responseString];
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    [activeRequests removeObject:request];
-    NSError *error = [request error];
-    
-    id <GMSourceFetcherDelegate> delegate = [[request userInfo] objectForKey:@"delegate"];
-    [delegate sourceFetchDidFailWithError:error];
-}
-
-- (void)dealloc {
-    for (ASIHTTPRequest *request in activeRequests) {
-        [request clearDelegatesAndCancel];
-    }
-    
-    [activeRequests release];
-    [super dealloc];
+- (void)fetchURL:(NSURL *)url withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (data) {
+            NSString *pageContents = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            [delegate performSelectorOnMainThread:@selector(sourceFetchSucceededWithPageSource:) withObject:pageContents waitUntilDone:YES];
+            [pageContents release];
+        } else {
+            NSLog(@"Error fetching URL: %@", url.absoluteString);
+            [delegate performSelectorOnMainThread:@selector(sourceFetchDidFailWithError:) withObject:error waitUntilDone:YES];
+        }
+    }];
 }
 
 @end

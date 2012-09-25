@@ -15,8 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.layer.backgroundColor = [[UIColor colorWithRed:228/255.0 green:228/255.0 blue:228/255.0 alpha:1.0] CGColor];
-        
-        photoRequests = [[NSMutableArray alloc] init];
+    
         photoLayers = [[NSMutableDictionary alloc] init];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *dictPath = [[paths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%ipics", (int)[[GMDataSource sharedDataSource] currentCourse].courseID]];
@@ -33,7 +32,6 @@
     if (self = [super initWithCoder:aDecoder]) {
        self.layer.backgroundColor = [[UIColor colorWithRed:228/255.0 green:228/255.0 blue:228/255.0 alpha:1.0] CGColor];
         
-        photoRequests = [[NSMutableArray alloc] init];
         photoLayers = [[NSMutableDictionary alloc] init];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *dictPath = [[paths objectAtIndex:0] stringByAppendingString:[NSString stringWithFormat:@"/%ipics", (int)[[GMDataSource sharedDataSource] currentCourse].courseID]];
@@ -159,24 +157,6 @@
     [self loadPicturesForParticipants:forumPosts];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    [photoRequests removeObject:request];
-    NSData *imageData = [request responseData];
-    UIImage *pic = [UIImage imageWithData:imageData];
-    NSMutableSet *layers = [photoLayers objectForKey:[[request originalURL] absoluteString]];
-    for (CALayer *layer in layers) {
-        layer.contents = (id)[pic CGImage];
-    }
-    
-    [pictures setObject:pic forKey:[[request originalURL] absoluteString]];
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    [photoRequests removeObject:request];
-    NSError *error = [request error];
-    NSLog(@"Downloading profile picture failed with error %@", [error description]);
-}
-
 - (void)loadPicturesForParticipants:(NSArray *)forumPosts {
     NSMutableArray *allParticipants = [[NSMutableArray alloc] init];
     
@@ -187,23 +167,29 @@
     for (GMParticipant *participant in allParticipants) {
         NSString *url = [participant.imageURL absoluteString];
         if (![url isEqualToString:@"https://gauchospace.ucsb.edu/courses/theme/gaucho/pix/u/f1.png"]) {
-            ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
-            [request setDelegate:self];
-            [request startAsynchronous];
-            [photoRequests addObject:request];
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+            [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                NSDictionary *imgDict = @{@"data" : data, @"url" : url};
+                [self performSelectorOnMainThread:@selector(gotImageData:) withObject:imgDict waitUntilDone:YES];
+            }];
         }
     }
     
     [allParticipants release];
 }
 
-- (void)dealloc {
-    NSArray *requests = [NSArray arrayWithArray:photoRequests];
-    for (ASIHTTPRequest *request in requests) {
-        [request clearDelegatesAndCancel];
+- (void)gotImageData:(NSDictionary *)imgData {
+    NSData *imageData = [imgData objectForKey:@"data"];
+    UIImage *pic = [UIImage imageWithData:imageData];
+    NSMutableSet *layers = [photoLayers objectForKey:[imgData objectForKey:@"url"]];
+    for (CALayer *layer in layers) {
+        layer.contents = (id)[pic CGImage];
     }
     
-    [photoRequests release];
+    [pictures setObject:pic forKey:[imgData objectForKey:@"url"]];
+}
+
+- (void)dealloc {
     [pictures release];
     [photoLayers release];
     [super dealloc];
