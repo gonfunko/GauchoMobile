@@ -33,7 +33,7 @@
         NSString *content = [self stripHTMLFromString:[currentItem substringToIndex:[currentItem rangeOfString:@"</div>"].location]];
         
         if ([content length] < 2) {
-            if ([currentItem rangeOfString:@"</li>"].location != NSNotFound) {
+            if ([currentItem rangeOfString:@"</li>"].location != NSNotFound && i != [items count] - 1) {
                 content = [self stripHTMLFromString:[currentItem substringToIndex:[currentItem rangeOfString:@"</li>"].location]]; 
             }
         }
