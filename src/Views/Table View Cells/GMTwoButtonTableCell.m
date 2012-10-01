@@ -18,16 +18,9 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(0, -3, self.frame.size.width + 6, self.frame.size.height + 6)];
-        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-            bg.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        } else {
-            UIView *backView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-            backView.backgroundColor = [UIColor clearColor];
-            self.backgroundView = backView;
-        }
-        [self addSubview:bg];
-        [bg release];
+        UIView *backView = [[[UI5View alloc] initWithFrame:CGRectZero] autorelease];
+        backView.backgroundColor = [UIColor clearColor];
+        self.backgroundView = backView;
         
         self.firstButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.firstButton.frame = CGRectMake(10, self.frame.origin.y, (self.frame.size.width - 40) / 2.0, self.frame.size.height);
