@@ -18,7 +18,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        UIView *backView = [[[UI5View alloc] initWithFrame:CGRectZero] autorelease];
+        UIView *backView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
         backView.backgroundColor = [UIColor clearColor];
         self.backgroundView = backView;
         
