@@ -31,10 +31,12 @@
         currentItem = [currentItem substringFromIndex:[currentItem rangeOfString:@"class=\"summary\">"].location + 16];
         
         NSString *content = [self stripHTMLFromString:[currentItem substringToIndex:[currentItem rangeOfString:@"</div>"].location]];
+        content = [self removeXMLEntitiesFromString:content];
         
         if ([content length] < 2) {
             if ([currentItem rangeOfString:@"</li>"].location != NSNotFound && i != [items count] - 1) {
-                content = [self stripHTMLFromString:[currentItem substringToIndex:[currentItem rangeOfString:@"</li>"].location]]; 
+                content = [self stripHTMLFromString:[currentItem substringToIndex:[currentItem rangeOfString:@"</li>"].location]];
+                content = [self removeXMLEntitiesFromString:content];
             }
         }
         
@@ -88,6 +90,91 @@
     source = [source stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     return source;
+}
+
+//From http://stackoverflow.com/questions/1105169/html-character-decoding-in-objective-c-cocoa-touch
+- (NSString *)removeXMLEntitiesFromString:(NSString *)string {
+    NSUInteger myLength = [string length];
+    NSUInteger ampIndex = [string rangeOfString:@"&" options:NSLiteralSearch].location;
+    
+    // Short-circuit if there are no ampersands.
+    if (ampIndex == NSNotFound) {
+        return string;
+    }
+    // Make result string with some extra capacity.
+    NSMutableString *result = [NSMutableString stringWithCapacity:(myLength * 1.25)];
+    
+    // First iteration doesn't need to scan to & since we did that already, but for code simplicity's sake we'll do it again with the scanner.
+    NSScanner *scanner = [NSScanner scannerWithString:string];
+    
+    [scanner setCharactersToBeSkipped:nil];
+    
+    NSCharacterSet *boundaryCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@" \t\n\r;"];
+    
+    do {
+        // Scan up to the next entity or the end of the string.
+        NSString *nonEntityString;
+        if ([scanner scanUpToString:@"&" intoString:&nonEntityString]) {
+            [result appendString:nonEntityString];
+        }
+        if ([scanner isAtEnd]) {
+            goto finish;
+        }
+        
+        // Scan either a HTML or numeric character entity reference.
+        if ([scanner scanString:@"&amp;" intoString:NULL])
+            [result appendString:@"&"];
+        else if ([scanner scanString:@"&apos;" intoString:NULL])
+            [result appendString:@"'"];
+        else if ([scanner scanString:@"&quot;" intoString:NULL])
+            [result appendString:@"\""];
+        else if ([scanner scanString:@"&lt;" intoString:NULL])
+            [result appendString:@"<"];
+        else if ([scanner scanString:@"&gt;" intoString:NULL])
+            [result appendString:@">"];
+        else if ([scanner scanString:@"&#" intoString:NULL]) {
+            BOOL gotNumber;
+            unsigned charCode;
+            NSString *xForHex = @"";
+            
+            // Is it hex or decimal?
+            if ([scanner scanString:@"x" intoString:&xForHex]) {
+                gotNumber = [scanner scanHexInt:&charCode];
+            }
+            else {
+                gotNumber = [scanner scanInt:(int*)&charCode];
+            }
+            
+            if (gotNumber) {
+                [result appendFormat:@"%u", charCode];
+                
+                [scanner scanString:@";" intoString:NULL];
+            }
+            else {
+                NSString *unknownEntity = @"";
+                
+                [scanner scanUpToCharactersFromSet:boundaryCharacterSet intoString:&unknownEntity];
+                
+                
+                [result appendFormat:@"&#%@%@", xForHex, unknownEntity];
+                
+                NSLog(@"Expected numeric character entity but got &#%@%@;", xForHex, unknownEntity);
+                
+            }
+            
+        }
+        else {
+            NSString *amp;
+            
+            [scanner scanString:@"&" intoString:&amp];      //an isolated & symbol
+            [result appendString:amp];
+        }
+        
+    }
+    while (![scanner isAtEnd]);
+    
+finish:
+    return result;
 }
 
 @end
