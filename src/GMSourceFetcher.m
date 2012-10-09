@@ -93,9 +93,9 @@
 }
 
 - (void)topicsForForum:(GMForum *)forum withDelegate:(NSObject <GMSourceFetcherDelegate> *)delegate {
-    int forumID = [forum.forumID intValue];
+    NSString *forumID = forum.forumID;
     
-    NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/mod/forum/view.php?f=%i", forumID]];
+    NSURL *fetchURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://gauchospace.ucsb.edu/courses/mod/forum/view.php?f=%@", forumID]];
     [self fetchURL:fetchURL withDelegate:delegate];
 }
 

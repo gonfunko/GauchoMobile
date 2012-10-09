@@ -31,7 +31,10 @@
         forum.title = el.content;
         
         NSString *forumID = [el.attributes objectForKey:@"href"];
-        forumID = [forumID substringFromIndex:[forumID length] - 4];
+        if ([forumID rangeOfString:@"="].location != NSNotFound) {
+            forumID = [forumID substringFromIndex:[forumID rangeOfString:@"="].location + 1];
+        }
+        
         forum.forumID = forumID;
         [allForums addObject:forum];
     }
