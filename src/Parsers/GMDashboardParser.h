@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GMDashboardItem.h"
+#import "GTMNSString+HTML.h"
 
 @interface GMDashboardParser : NSObject {
 @private

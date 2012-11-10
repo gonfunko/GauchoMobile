@@ -11,6 +11,7 @@
 #include "GMForum.h"
 #include "GMForumTopic.h"
 #include "GMForumPost.h"
+#include "GTMNSString+HTML.h"
 
 @interface GMForumsParser : NSObject
 

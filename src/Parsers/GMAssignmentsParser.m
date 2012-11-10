@@ -54,7 +54,7 @@
             
             GMAssignment *assignment = [[GMAssignment alloc] init];
             assignment.assignmentID = assignmentID;
-            assignment.description = description;
+            assignment.description = [description gtm_stringByUnescapingFromHTML];
             assignment.dueDate = assignmentDueDate;
             assignment.submittedDate = submissionDate;
             

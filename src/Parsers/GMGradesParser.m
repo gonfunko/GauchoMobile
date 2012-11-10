@@ -68,7 +68,7 @@
             }
             
             GMGrade *grade = [[GMGrade alloc] init];
-            grade.description = description;
+            grade.description = [description gtm_stringByUnescapingFromHTML];
             grade.score = (NSInteger)score;
             grade.max = (NSInteger)max;
             grade.feedback = feedback;

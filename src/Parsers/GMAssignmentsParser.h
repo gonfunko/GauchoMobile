@@ -6,6 +6,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GMAssignment.h"
+#import "GTMNSString+HTML.h"
 
 @interface GMAssignmentsParser : NSObject {
 @private

@@ -12,7 +12,7 @@
 
 - (NSDictionary *)assignmentDetailsFromSource:(NSString *)html {
     html = [html substringFromIndex:[html rangeOfString:@"<div id=\"intro\" class=\"box generalbox generalboxcontent boxaligncenter\">"].location + 72];
-    NSString *result = [html substringToIndex:[html rangeOfString:@"</div>"].location];
+    NSString *result = [[html substringToIndex:[html rangeOfString:@"</div>"].location] gtm_stringByUnescapingFromHTML];
     
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:result, @"details", nil];
     

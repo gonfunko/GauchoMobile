@@ -28,7 +28,7 @@
     forums = [forums arrayByAddingObjectsFromArray:secondaryForums];
     for (TFHppleElement *el in forums) {
         GMForum *forum = [[GMForum alloc] init];
-        forum.title = el.content;
+        forum.title = [el.content gtm_stringByUnescapingFromHTML];
         
         NSString *forumID = [el.attributes objectForKey:@"href"];
         if ([forumID rangeOfString:@"="].location != NSNotFound) {
@@ -90,7 +90,7 @@
     NSArray *topics = [document searchWithXPathQuery:@"//td[@class='topic starter']/a"];
     for (TFHppleElement *el in topics) {
         GMForumTopic *topic = [[GMForumTopic alloc] init];
-        topic.title = el.content;
+        topic.title = [el.content gtm_stringByUnescapingFromHTML];
         
         NSString *topicID = [el.attributes objectForKey:@"href"];
         topicID = [topicID substringFromIndex:[topicID length] - 5];
@@ -141,7 +141,7 @@
         message = [self stripHTMLFromString:message];
 
         GMForumPost *post = [[GMForumPost alloc] init];
-        post.message = message;
+        post.message = [message gtm_stringByUnescapingFromHTML];
         
         [allPosts addObject:post];
         [post release];
@@ -201,9 +201,6 @@
 
 - (NSString *)stripHTMLFromString:(NSString *)source {
     //Based on http://stackoverflow.com/questions/277055/remove-html-tags-from-an-nsstring-on-the-iphone
-    source = [source stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    source = [source stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
-    source = [source stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
     source = [source stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];
     
     NSRange r;

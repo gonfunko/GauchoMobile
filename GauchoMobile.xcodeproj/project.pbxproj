@@ -97,6 +97,7 @@
 		939036F2132AD76100A5AF6E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 939036F1132AD76100A5AF6E /* MainWindow.xib */; };
 		939036F9132AD7B000A5AF6E /* Credits.txt in Resources */ = {isa = PBXBuildFile; fileRef = 939036F7132AD7B000A5AF6E /* Credits.txt */; };
 		93903702132AD8B100A5AF6E /* UIView+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 93903701132AD8B100A5AF6E /* UIView+TKCategory.m */; };
+		93928852164F198F00A9BAD2 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 93928851164F198F00A9BAD2 /* GTMNSString+HTML.m */; };
 		93931BD915153F2C003F1F3C /* 3retina.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93931BD615153F2C003F1F3C /* 3retina.jpg */; };
 		93931BDA15153F2C003F1F3C /* 2retina.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93931BD715153F2C003F1F3C /* 2retina.jpg */; };
 		93931BDB15153F2C003F1F3C /* 1retina.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93931BD815153F2C003F1F3C /* 1retina.jpg */; };
@@ -297,6 +298,9 @@
 		939036FB132AD7F800A5AF6E /* GauchoMobile-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GauchoMobile-Info.plist"; path = "data/GauchoMobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 		93903700132AD8B100A5AF6E /* UIView+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TKCategory.h"; sourceTree = "<group>"; };
 		93903701132AD8B100A5AF6E /* UIView+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TKCategory.m"; sourceTree = "<group>"; };
+		9392884F164F198F00A9BAD2 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		93928850164F198F00A9BAD2 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		93928851164F198F00A9BAD2 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		93931BD615153F2C003F1F3C /* 3retina.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3retina.jpg; sourceTree = "<group>"; };
 		93931BD715153F2C003F1F3C /* 2retina.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2retina.jpg; sourceTree = "<group>"; };
 		93931BD815153F2C003F1F3C /* 1retina.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1retina.jpg; sourceTree = "<group>"; };
@@ -753,6 +757,9 @@
 		93BDDA74161122330007519F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				9392884F164F198F00A9BAD2 /* GTMDefines.h */,
+				93928850164F198F00A9BAD2 /* GTMNSString+HTML.h */,
+				93928851164F198F00A9BAD2 /* GTMNSString+HTML.m */,
 				93BDDA71161122270007519F /* UITableView+GMAdditions.h */,
 				93BDDA72161122270007519F /* UITableView+GMAdditions.m */,
 			);
@@ -968,6 +975,7 @@
 				931F43EE152BAAA70059A9D7 /* GMiPadParticipantsViewController.m in Sources */,
 				9359AFD71530A8D60072EDC8 /* GMPersonViewController.m in Sources */,
 				93BDDA73161122270007519F /* UITableView+GMAdditions.m in Sources */,
+				93928852164F198F00A9BAD2 /* GTMNSString+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

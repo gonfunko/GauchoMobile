@@ -6,6 +6,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GMGrade.h"
+#import "GTMNSString+HTML.h"
 
 @interface GMGradesParser : NSObject {
 @private

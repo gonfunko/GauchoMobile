@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GTMNSString+HTML.h"
 
 @interface GMAssignmentDetailsParser : NSObject
 
