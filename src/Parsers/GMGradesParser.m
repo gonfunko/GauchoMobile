@@ -55,8 +55,15 @@
                 [gradeInformation addObject:item];
             }
             
-            score = [self numericalScoreFromScoreDescription:[gradeInformation objectAtIndex:0]];
-            max = [self maxValueFromRange:[gradeInformation objectAtIndex:1]];
+            if ([gradeInformation count] != 0) {
+                score = [self numericalScoreFromScoreDescription:[gradeInformation objectAtIndex:0]];
+            } else {
+                score = -1;
+            }
+            
+            if ([gradeInformation count] >= 2) {
+                max = [self maxValueFromRange:[gradeInformation objectAtIndex:1]];
+            }
             
             if ([currentRow rangeOfString:@"<td class='  item b1b feedbacktext' >"].location != NSNotFound) {
                 cruftRange = [currentRow rangeOfString:@"<td class='  item b1b feedbacktext' >"];
