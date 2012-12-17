@@ -82,8 +82,72 @@
     [HUD hide:YES];
 }
 
-- (IBAction)openInSafari:(id)sender {
-    [[UIApplication sharedApplication] openURL:[webView.request URL]];
+- (IBAction)showActionSheet:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Open in Safari", @"Open In...", nil];
+    
+    [actionSheet showFromBarButtonItem:actionButton animated:YES];
+    
+    [actionSheet release];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [[UIApplication sharedApplication] openURL:webView.request.URL];
+    } else if (buttonIndex == 1) {
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            [self showOpenInSheet];
+        } else {
+            [self performSelector:@selector(showOpenInSheet) withObject:nil afterDelay:1.0];
+        }
+    }
+}
+
+- (void)showOpenInSheet {
+    NSCachedURLResponse *currentPage = [[NSURLCache sharedURLCache] cachedResponseForRequest:webView.request];
+    
+    if (currentPage) {
+        NSString *pagePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:[currentPage.response.URL lastPathComponent]];
+        
+        NSError *fileWriteError = nil;
+        if ([currentPage.data writeToFile:pagePath
+                                  options:NSDataWritingAtomic
+                                    error:&fileWriteError]) {
+            
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Unable to Share"
+                                                            message:@"The contents of this web page could not be shared with other applications"
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"OK", nil];
+            
+            [alert show];
+            [alert release];
+            return;
+        }
+        
+        UIDocumentInteractionController *documentController = [[UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pagePath]] retain];
+        documentController.delegate = self;
+        
+        [documentController presentOpenInMenuFromBarButtonItem:actionButton
+                                                      animated:YES];
+    }
+}
+
+- (void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:controller.URL.path]) {
+        [[NSFileManager defaultManager] removeItemAtURL:controller.URL error:nil];
+    }
+}
+
+- (void)documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController *)controller {
+    //This is horrible, and really shouldn't be necessary, but the Internet seems to agree that it is in this case,
+    //because if we don't retain the UIDocumentInteractionController (and therefore need to release it here),
+    //we'll crash when the user chooses an app to open in.
+    [controller release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
