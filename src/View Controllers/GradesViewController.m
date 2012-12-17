@@ -8,13 +8,11 @@
 
 @implementation GradesViewController
 
-@synthesize tableView;
-@synthesize visible;
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GMCurrentCourseChangedNotification" object:nil];
     [fetcher release];
+    [HUD release];
     [super dealloc];
 }
 
@@ -31,10 +29,14 @@
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.tabBarController.navigationItem.title = @"Grades";
     
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(loadGrades)
-                                                 name:@"GMCurrentCourseChangedNotification" 
-                                               object:nil];
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self
+                       action:@selector(refreshGrades:)
+             forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    [refreshControl release];
     
     noGradesLabel = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
     noGradesLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
@@ -57,7 +59,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.visible = YES;
+    
+    
+    self.tabBarController.navigationItem.title = @"Grades";
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
     
     noGradesLabel.frame = [self.tableView boundsForPlaceholderLabel];
     
@@ -71,17 +76,9 @@
     pendingID = 0;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    self.tabBarController.navigationItem.title = @"Grades";
-    self.tabBarController.navigationItem.rightBarButtonItem = nil;
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.visible = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -95,45 +92,32 @@
 
 #pragma mark - Data loading methods
 
-- (void)loadGrades {
-    if (self.visible) {
-        [self loadGradesWithLoadingView:YES];
-    }
+- (void)refreshGrades:(id)sender {
+    [self loadGradesWithLoadingView:NO];
 }
 
 - (void)loadGradesWithLoadingView:(BOOL)flag {
-    if (!loading) {
-        loading = YES;
-        
-        if (flag) {
-            HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-            [self.navigationController.view addSubview:HUD];
-            [HUD release];
-            HUD.labelText = @"Loading";
-            HUD.removeFromSuperViewOnHide = YES;
-            [HUD show:YES];
-        }
-        
-        GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
-        [fetcher gradesForCourse:currentCourse withDelegate:self];
+    if (flag) {
+        [self.navigationController.view addSubview:HUD];
+        HUD.labelText = @"Loading";
+        HUD.removeFromSuperViewOnHide = YES;
+        [HUD show:YES];
     }
+    
+    GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
+    [fetcher gradesForCourse:currentCourse withDelegate:self];
 }
 
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Loading grades failed with error: %@", [error description]);
 
-    loading = NO;
     [HUD hide:YES];
-    HUD = nil;
+    [self.refreshControl endRefreshing];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
-    
-    loading = NO;
-    if (HUD != nil) {
-        [HUD hide:YES];
-        HUD = nil;
-    }
+    [HUD hide:YES];
+    [self.refreshControl endRefreshing];
     
     [[[GMDataSource sharedDataSource] currentCourse] removeAllGrades];
 

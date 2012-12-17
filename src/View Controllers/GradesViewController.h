@@ -12,21 +12,15 @@
 #import "MBProgressHUD.h"
 #import "UITableView+GMAdditions.h"
 
-@interface GradesViewController : UIViewController <GMSourceFetcherDelegate> {
+@interface GradesViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private
     GMSourceFetcher *fetcher;
     MBProgressHUD *HUD;
     UITextField *noGradesLabel;
-    BOOL loading;
-    BOOL visible;
     NSInteger pendingID;
-    IBOutlet UITableView *tableView;
 }
 
-@property (retain) UITableView *tableView;
-@property (assign) BOOL visible;
-
-//Loads grades from the network, optionally with or without the yellow loading view
+//Loads grades from the network
 - (void)loadGradesWithLoadingView:(BOOL)flag;
 
 //Scrolls to and highlights the grade with the given grade ID in yellow
