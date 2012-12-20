@@ -142,7 +142,6 @@
 		93C58BD514C3525A001F7558 /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C58BD314C3525A001F7558 /* AssignmentDetailViewController.m */; };
 		93C58BD614C3525A001F7558 /* AssignmentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */; };
 		93C58BD914C35544001F7558 /* GMWebViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C58BD814C35544001F7558 /* GMWebViewTableCell.m */; };
-		93D0758A1333D5C20025BF9E /* GMWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D075891333D5C20025BF9E /* GMWeekView.m */; };
 		93D0759113340D0B0025BF9E /* Month Calendar Left Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0758F13340D0B0025BF9E /* Month Calendar Left Arrow@2x.png */; };
 		93D0759213340D0B0025BF9E /* Month Calendar Right Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0759013340D0B0025BF9E /* Month Calendar Right Arrow@2x.png */; };
 		93D6CB2114C53DED00F8BFDB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D6CB1F14C53DE300F8BFDB /* MessageUI.framework */; };
@@ -363,8 +362,6 @@
 		93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentDetailViewController.xib; sourceTree = "<group>"; };
 		93C58BD714C35544001F7558 /* GMWebViewTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMWebViewTableCell.h; sourceTree = "<group>"; };
 		93C58BD814C35544001F7558 /* GMWebViewTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMWebViewTableCell.m; sourceTree = "<group>"; };
-		93D075881333D5C20025BF9E /* GMWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMWeekView.h; sourceTree = "<group>"; };
-		93D075891333D5C20025BF9E /* GMWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMWeekView.m; sourceTree = "<group>"; };
 		93D0758F13340D0B0025BF9E /* Month Calendar Left Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Month Calendar Left Arrow@2x.png"; path = "TapkuLibrary.bundle/Images/calendar/Month Calendar Left Arrow@2x.png"; sourceTree = "<group>"; };
 		93D0759013340D0B0025BF9E /* Month Calendar Right Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Month Calendar Right Arrow@2x.png"; path = "TapkuLibrary.bundle/Images/calendar/Month Calendar Right Arrow@2x.png"; sourceTree = "<group>"; };
 		93D6CB1F14C53DE300F8BFDB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -750,8 +747,6 @@
 				934BACA11304E7ED0083A5F9 /* Table View Cells */,
 				93BBF5CD130E3A8800B07C25 /* GMLoadingView.h */,
 				93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */,
-				93D075881333D5C20025BF9E /* GMWeekView.h */,
-				93D075891333D5C20025BF9E /* GMWeekView.m */,
 				9385EFEA1508693A00872595 /* GMForumTopicView.h */,
 				9385EFEB1508693A00872595 /* GMForumTopicView.m */,
 				933098F51513F55400F891C1 /* ADCalendarView.h */,
@@ -953,7 +948,6 @@
 				9395D606132881B700332A38 /* TKGlobal.m in Sources */,
 				9395D61A132881B700332A38 /* UIImage+TKCategory.m in Sources */,
 				93903702132AD8B100A5AF6E /* UIView+TKCategory.m in Sources */,
-				93D0758A1333D5C20025BF9E /* GMWeekView.m in Sources */,
 				932A907214C23A9D00E80827 /* GMAssignmentDetailsParser.m in Sources */,
 				932A907C14C23CD700E80827 /* TFHpple.m in Sources */,
 				932A907D14C23CD700E80827 /* TFHppleElement.m in Sources */,

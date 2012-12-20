@@ -7,7 +7,6 @@
 #import <UIKit/UIKit.h>
 #import <EventKit/EventKit.h>
 #import "GMDataSource.h"
-#import "GMWeekView.h"
 #import "TKCalendarMonthView.h"
 #import "NSDate+TKCategory.h"
 #import "MBProgressHUD.h"
