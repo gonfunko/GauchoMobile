@@ -27,6 +27,8 @@
                                              selector:@selector(loadParticipants)
                                                  name:@"GMCurrentCourseChangedNotification" 
                                                object:nil];
+    
+    [collectionView registerClass:[GMParticipantCollectionViewCell class] forCellWithReuseIdentifier:@"participantCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -38,7 +40,7 @@
     if ([[currentCourse participantsArray] count] == 0) {
         [self loadParticipantsWithLoadingView:YES];
     } else {
-        [((GMGridView *)self.view) reloadData];
+        [collectionView reloadData];
     }
 }
 
@@ -60,79 +62,35 @@
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
     [super sourceFetchSucceededWithPageSource:source];
-    [((GMGridView *)self.view) reloadData];
+    [collectionView reloadData];
 }
 
 - (void)gotImageData:(NSDictionary *)imgData {
     [super gotImageData:imgData];
-    [((GMGridView *)self.view) reloadData];
+    [collectionView reloadData];
 }
 
-- (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView {
+- (NSInteger)collectionView:(UICollectionView *)cv numberOfItemsInSection:(NSInteger)section {
     return [[[GMDataSource sharedDataSource] currentCourse].participantsArray count];
 }
 
-- (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    if (UIInterfaceOrientationIsLandscape(orientation)) {
-        return CGSizeMake(120, 140);
-    } else {
-        return CGSizeMake(130, 150);
-    }
-}
-
-- (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index {
-    CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    GMGridViewCell *cell = [gridView dequeueReusableCell];
+    GMParticipantCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"participantCell" forIndexPath:indexPath];
+    GMParticipant *participant = [[[GMDataSource sharedDataSource] currentCourse].participantsArray objectAtIndex:indexPath.row];
     
-    GMParticipant *participant = [[[GMDataSource sharedDataSource] currentCourse].participantsArray objectAtIndex:index];
-    
-    if (!cell) {
-        cell = [[[GMGridViewCell alloc] init] autorelease];
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-        cell.contentView = view;
-        [view release];
-    }
-    
-    [[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-    UIImageView *photo = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, size.width - 20, size.width - 20)];
-    photo.layer.shadowColor = [[UIColor darkGrayColor] CGColor];
-    photo.layer.shadowOffset = CGSizeMake(0, 0);
-    photo.layer.shadowOpacity = 0.5;
-    photo.layer.shadowRadius = 4;
-    photo.layer.rasterizationScale = [[UIScreen mainScreen] scale];
-    photo.layer.shouldRasterize = YES;
+    cell.label.text = participant.name;
     if([pictures objectForKey:[participant.imageURL absoluteString]] != nil) {
-        photo.image = [pictures objectForKey:[participant.imageURL absoluteString]];
+        cell.imageView.image = [pictures objectForKey:[participant.imageURL absoluteString]];
     } else {
-        photo.image = [UIImage imageNamed:@"defaulticon.png"];
+        cell.imageView.image = [UIImage imageNamed:@"defaulticon.png"];
     }
-    
-    [cell.contentView addSubview:photo];
-    [photo release];
-
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, size.height - 30, size.width - 20, 30)];
-    label.text = participant.name;
-    label.textAlignment = UITextAlignmentCenter;
-    label.lineBreakMode = UILineBreakModeWordWrap;
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor colorWithRed:84/255.0 green:95/255.0 blue:105/255.0 alpha:1.0];
-    label.font = [UIFont boldSystemFontOfSize:12];
-    [cell.contentView addSubview:label];
-    [label release];
     
     return cell;
 }
 
-
-- (BOOL)GMGridView:(GMGridView *)gridView canDeleteItemAtIndex:(NSInteger)index {
-    return NO;
-}
-
-- (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position {
-    GMParticipant *touchedPerson = [[[GMDataSource sharedDataSource] currentCourse].participantsArray objectAtIndex:position];
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    GMParticipant *touchedPerson = [[[GMDataSource sharedDataSource] currentCourse].participantsArray objectAtIndex:indexPath.row];
     [self displayAddressBookEntryForParticipant:touchedPerson];
 }
 

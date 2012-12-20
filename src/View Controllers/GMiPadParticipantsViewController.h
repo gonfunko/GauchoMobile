@@ -7,10 +7,11 @@
 //
 
 #import "ParticipantsViewController.h"
-#import <QuartzCore/QuartzCore.h>
-#import "GMGridView.h"
+#import "GMParticipantCollectionViewCell.h"
 
-@interface GMiPadParticipantsViewController : ParticipantsViewController <GMGridViewDataSource, GMGridViewActionDelegate> {
+@interface GMiPadParticipantsViewController : ParticipantsViewController <UICollectionViewDataSource, UICollectionViewDelegate> {
+    IBOutlet UICollectionView *collectionView;
+    
     BOOL visible;
 }
 
