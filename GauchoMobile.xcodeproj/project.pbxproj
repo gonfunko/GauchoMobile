@@ -40,6 +40,8 @@
 		933098FC1513F5A700F891C1 /* GMiPadAssignmentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933098FA1513F5A700F891C1 /* GMiPadAssignmentsViewController.m */; };
 		933098FD1513F5A700F891C1 /* GMiPadAssignmentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 933098FB1513F5A700F891C1 /* GMiPadAssignmentsViewController.xib */; };
 		933586421512E0160002D70D /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933586411512E0160002D70D /* MainTabBarViewController.m */; };
+		93361DA3167EA53E00532C5F /* AssignmentsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93361DA1167EA53D00532C5F /* AssignmentsListViewController.m */; };
+		93361DA4167EA53E00532C5F /* AssignmentsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93361DA2167EA53E00532C5F /* AssignmentsListViewController.xib */; };
 		933A49CA14C9FBE00037AD30 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A49C914C9FBE00037AD30 /* back@2x.png */; };
 		933A49CC14C9FC9A0037AD30 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 933A49CB14C9FC9A0037AD30 /* back.png */; };
 		934300DA12E0F42600AFFFE4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934300D912E0F42600AFFFE4 /* UIKit.framework */; };
@@ -217,6 +219,9 @@
 		933098FB1513F5A700F891C1 /* GMiPadAssignmentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GMiPadAssignmentsViewController.xib; sourceTree = "<group>"; };
 		933586401512E0160002D70D /* MainTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
 		933586411512E0160002D70D /* MainTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
+		93361DA0167EA53D00532C5F /* AssignmentsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentsListViewController.h; sourceTree = "<group>"; };
+		93361DA1167EA53D00532C5F /* AssignmentsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentsListViewController.m; sourceTree = "<group>"; };
+		93361DA2167EA53E00532C5F /* AssignmentsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AssignmentsListViewController.xib; path = "../../src/View Controllers/AssignmentsListViewController.xib"; sourceTree = "<group>"; };
 		933A49C914C9FBE00037AD30 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		933A49CB14C9FC9A0037AD30 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		934300D512E0F42600AFFFE4 /* GauchoMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GauchoMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -414,6 +419,7 @@
 		9314EC3112F3DC5B00F99756 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				93361DA2167EA53E00532C5F /* AssignmentsListViewController.xib */,
 				93725DCE150D56E50095B420 /* ForumPostsViewController.xib */,
 				93725DC4150D2EAA0095B420 /* ForumTopicsViewController.xib */,
 				9385EFFD15086BE800872595 /* ForumViewController.xib */,
@@ -709,6 +715,8 @@
 				938C792E12F5245300C3F134 /* CourseViewController.m */,
 				931C650812F8CCF7005799F1 /* AssignmentsViewController.h */,
 				931C650912F8CCF7005799F1 /* AssignmentsViewController.m */,
+				93361DA0167EA53D00532C5F /* AssignmentsListViewController.h */,
+				93361DA1167EA53D00532C5F /* AssignmentsListViewController.m */,
 				934DBC7913031AF5009BC05D /* GradesViewController.h */,
 				934DBC7A13031AF5009BC05D /* GradesViewController.m */,
 				934DBC7B13031AF5009BC05D /* ParticipantsViewController.h */,
@@ -903,6 +911,7 @@
 				93BDDA6C161117800007519F /* ipadtabbarbackground@2x.png in Resources */,
 				93BDDA6F161118020007519F /* ipadtabbarselection.png in Resources */,
 				93BDDA70161118020007519F /* ipadtabbarbackground.png in Resources */,
+				93361DA4167EA53E00532C5F /* AssignmentsListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,6 +985,7 @@
 				9359AFD71530A8D60072EDC8 /* GMPersonViewController.m in Sources */,
 				93BDDA73161122270007519F /* UITableView+GMAdditions.m in Sources */,
 				93928852164F198F00A9BAD2 /* GTMNSString+HTML.m in Sources */,
+				93361DA3167EA53E00532C5F /* AssignmentsListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

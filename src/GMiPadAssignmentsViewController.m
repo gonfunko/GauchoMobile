@@ -27,8 +27,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.tableView.layer.borderWidth = 1.0;
-    self.tableView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    assignmentListViewController.tableView.layer.borderWidth = 1.0;
+    assignmentListViewController.tableView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    assignmentListViewController.tableView.frame = CGRectMake(20, 300, self.view.frame.size.width - 40, self.view.frame.size.height - 320);
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(loadAssignments) 
@@ -57,11 +58,10 @@
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     
     if ([[currentCourse assignments] count] == 0) {
-        [self loadAssignmentsWithLoadingView:YES];
+        [assignmentListViewController loadAssignmentsWithLoadingView:YES];
     } else {
-        [self.tableView reloadData];
+        [assignmentListViewController.tableView reloadData];
         [ipadCalendar reloadData];
-        noAssignmentsLabel.hidden = YES;
     }
 }
 
@@ -75,19 +75,14 @@
 	return YES;
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    noAssignmentsLabel.frame = [self.tableView boundsForPlaceholderLabel];
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    [ipadCalendar reloadData];
 }
 
 - (void)loadAssignments {
     if (self.visible) {
-        [self loadAssignmentsWithLoadingView:YES];
+        [assignmentListViewController loadAssignmentsWithLoadingView:YES];
     }
-}
-
-- (void)sourceFetchSucceededWithPageSource:(NSString *)source {
-    [super sourceFetchSucceededWithPageSource:source];
-    [ipadCalendar reloadData];
 }
 
 - (void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -142,7 +142,7 @@
     title.foregroundColor = [[UIColor lightGrayColor] CGColor];
     title.font = @"Helvetica-Bold";
     title.alignmentMode = kCAAlignmentCenter;
-    title.frame = CGRectMake(0, 10, self.frame.size.width, 24.0);
+    title.frame = CGRectMake(0, 5, self.frame.size.width, 30.0);
     title.contentsScale = [[UIScreen mainScreen] scale];
     [self.layer addSublayer:title];
        

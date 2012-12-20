@@ -9,22 +9,6 @@
 
 @implementation AssignmentsViewController
 
-@synthesize tableView;
-
-- (void)dealloc
-{
-    [fetcher release];
-    [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -33,45 +17,43 @@
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"Assignments";
     
+    assignmentListViewController = [[AssignmentsListViewController alloc] initWithNibName:@"AssignmentsListViewController"
+                                                                                   bundle:[NSBundle mainBundle]];
+    
+    [self addChildViewController:assignmentListViewController];
+    [self.view addSubview:assignmentListViewController.view];
+    
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
-    fetcher = [[GMSourceFetcher alloc] init];
-    noAssignmentsLabel = nil;
+    
+    
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    HUD.labelText = @"Loading";
+    
+    assignmentListViewController.HUD = HUD;
     
     if ([[currentCourse assignments] count] == 0) {
-        [self loadAssignmentsWithLoadingView:YES];
+        [self.navigationController.view addSubview:HUD];
+        [assignmentListViewController loadAssignmentsWithLoadingView:YES];
     }
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    TKCalendarMonthView *monthView = [[TKCalendarMonthView alloc] initWithSundayAsFirst:YES];
-    monthView.delegate = self;
-    monthView.dataSource = self;
-    [self.view addSubview:monthView];
-    [monthView release];
-    [monthView reload];
+        TKCalendarMonthView *monthView = [[TKCalendarMonthView alloc] initWithSundayAsFirst:YES];
+        monthView.delegate = self;
+        monthView.dataSource = self;
+        [self.view addSubview:monthView];
+        [monthView release];
+        [monthView reload];
         calendar = monthView;
+        
+        assignmentListViewController.view.frame = CGRectMake(0, monthView.frame.origin.y + monthView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - monthView.frame.size.height);
     }
     
-    self.tableView.scrollsToTop = YES;
-
-    pendingID = 0;
+    [[GMDataSource sharedDataSource] addObserver:self
+                                      forKeyPath:@"currentCourse.assignments"
+                                         options:NSKeyValueObservingOptionNew
+                                         context:nil];
     
     calendar.hidden = NO;
-    
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        self.tableView.frame = CGRectMake(0, calendar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - calendar.frame.size.height);
-    }
-    
-    noAssignmentsLabel = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
-    noAssignmentsLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    noAssignmentsLabel.enabled = NO;
-    noAssignmentsLabel.text = @"No Assignments";
-    noAssignmentsLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
-    noAssignmentsLabel.textColor = [UIColor grayColor];
-    noAssignmentsLabel.textAlignment = UITextAlignmentCenter;
-    noAssignmentsLabel.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    noAssignmentsLabel.hidden = YES;
-    [self.tableView addSubview:noAssignmentsLabel];
-    [noAssignmentsLabel release];
 }
 
 - (void)viewDidUnload
@@ -84,7 +66,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    noAssignmentsLabel.frame = [self.tableView boundsForPlaceholderLabel];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -107,261 +88,19 @@
     [super viewDidDisappear:animated];
 }
 
-#pragma mark - Data Loading Methods
-
-- (void)loadAssignmentsWithLoadingView:(BOOL)flag {
-    if (!loading) {
-        loading = YES;
-        
-        if (flag) {
-            HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-            [self.navigationController.view addSubview:HUD];
-            [HUD release];
-            HUD.labelText = @"Loading";
-            HUD.removeFromSuperViewOnHide = YES;
-            [HUD show:YES];
-        }
-        
-        GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
-        [fetcher assignmentsForCourse:currentCourse withDelegate:self];
-    }
-}
-
-- (void)sourceFetchDidFailWithError:(NSError *)error {
-    NSLog(@"Loading assignments failed with error: %@", [error description]);
-    loading = NO;
-    [HUD hide:YES];
-}
-
-- (void)sourceFetchSucceededWithPageSource:(NSString *)source {
-    loading = NO;
-    [HUD hide:YES];
-    
-    [[[GMDataSource sharedDataSource] currentCourse] removeAllAssignments];
-    
-    GMAssignmentsParser *parser = [[GMAssignmentsParser alloc] init];
-    NSArray *assignments = [parser assignmentsFromSource:source];
-    
-    for (GMAssignment *assignment in assignments) {
-        [[[GMDataSource sharedDataSource] currentCourse] addAssignment:assignment];
-    }
-    
-    [parser release];
-    
-    [self.tableView reloadData];
-    
-    if ([assignments count] == 0) {
-        noAssignmentsLabel.hidden = NO;
-    } else {
-        noAssignmentsLabel.hidden = YES;
-    }
-    
-    if ([calendar respondsToSelector:@selector(reload)]) {
-        [calendar performSelector:@selector(reload)];
-    }
-    
-    if (pendingID != 0) {
-        [self showAssignmentWithID:[NSNumber numberWithInteger:pendingID]];
-        pendingID = 0;
-    }
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    int rows = [[[[GMDataSource sharedDataSource] currentCourse] assignments] count];
-    return rows;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)table cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [table dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    GMAssignment *assignment = [[[[GMDataSource sharedDataSource] currentCourse] assignments] objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = assignment.description;
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 80, 25);
-    button.layer.cornerRadius = 5.0;
-    button.titleLabel.textColor = [UIColor whiteColor];
-    button.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
-    button.titleLabel.shadowColor = [UIColor darkGrayColor];
-    button.titleLabel.shadowOffset = CGSizeMake(0, -1.0);
-    
-    NSInteger offset = [[NSTimeZone localTimeZone] secondsFromGMTForDate:[NSDate date]];
-    NSDate *now = [[NSDate date] dateByAddingTimeInterval:offset];
-    if (assignment.submittedDate != nil) {
-        [button setTitle:@"DONE" forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor grayColor];
-    } else if (assignment.dueDate != nil && [[assignment.dueDate earlierDate:now] isEqualToDate:assignment.dueDate]) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"M/d"];
-        [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-        [button setTitle:[NSString stringWithFormat:@"DUE %@", [formatter stringFromDate:assignment.dueDate]] forState:UIControlStateNormal];
-        [formatter release];
-        button.backgroundColor = [UIColor colorWithRed:163/255.0 green:0.0 blue:6.0/255.0 alpha:1.0];
-        [button addTarget:self action:@selector(accessoryButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-    } else if (assignment.dueDate != nil) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"M/d"];
-        [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-        [button setTitle:[NSString stringWithFormat:@"DUE %@", [formatter stringFromDate:assignment.dueDate]] forState:UIControlStateNormal];
-        [formatter release];
-        button.backgroundColor = [UIColor colorWithRed:0.0 green:139/255.0 blue:15.0/255.0 alpha:1.0];
-        [button addTarget:self action:@selector(accessoryButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-    } else {
-        button.backgroundColor = [UIColor clearColor];
-        [button setTitle:@"" forState:UIControlStateNormal];
-    }
-    
-    cell.accessoryView = button;
-    
-    return cell;
-}
-
-- (void)accessoryButtonTapped:(UIButton *)button withEvent:(UIEvent *)event
-{
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:[[[event touchesForView:button] anyObject] locationInView:self.tableView]];
-    if (indexPath == nil)
-        return;
-    
-    GMAssignment *assignment = [[[[GMDataSource sharedDataSource] currentCourse] assignments] objectAtIndex:indexPath.row];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateStyle:NSDateFormatterNoStyle];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    NSString *newString = @"";
-    
-    if ([[button titleForState:UIControlStateNormal] rangeOfString:@":"].location == NSNotFound) {
-        [formatter setDateFormat:@"h:mm a"];
-        newString = [formatter stringFromDate:assignment.dueDate];
-    } else {
-        [formatter setDateFormat:@"M/d"];
-        newString = [NSString stringWithFormat:@"DUE %@", [formatter stringFromDate:assignment.dueDate]];
-    }
-    
-    [button setTitle:newString forState:UIControlStateNormal];
-    [formatter release];
-}
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)table didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    GMAssignment *assignment = [[[[GMDataSource sharedDataSource] currentCourse] assignments] objectAtIndex:indexPath.row];
-    
-    [table deselectRowAtIndexPath:indexPath animated:YES];
-    
-    AssignmentDetailViewController *details = [[AssignmentDetailViewController alloc] initWithNibName:@"AssignmentDetailViewController" bundle:[NSBundle mainBundle]];
-    details.assignment = assignment;
-    details.tabBarController = (UITabBarController *)(self.navigationController.visibleViewController);
-    [self.navigationController pushViewController:details animated:YES];
-    [details release];
-}
-
-#pragma mark - Animation methods
-
-- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
-    if ([theAnimation valueForKey:@"layer"] != nil) {
-        [(CALayer *)[theAnimation valueForKey:@"layer"] removeFromSuperlayer];
-    }
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    [(TKCalendarMonthView *)calendar reload];
 }
 
 - (void)showAssignmentWithID:(NSNumber *)assignmentID {
-    if ([[[[GMDataSource sharedDataSource] currentCourse] assignments] count] != 0) {
-        
-        NSArray *assignments = [[[GMDataSource sharedDataSource] currentCourse] assignments];
-        
-        for (int i = 0; i < [assignments count]; i++) {
-            if (((GMAssignment *)[assignments objectAtIndex:i]).assignmentID == [assignmentID integerValue]) {
-                GMAssignment *assignment = [assignments objectAtIndex:i];
-                
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
-                
-                CAGradientLayer *layer = [[CAGradientLayer alloc] init];
-                
-                CGColorRef first = [[UIColor colorWithRed:242/255.0 green:206/255.0 blue:68/255.0 alpha:1.0] CGColor];
-                CGColorRef second = [[UIColor colorWithRed:239/255.0 green:172/255.0 blue:30/255.0 alpha:1.0] CGColor];
-                
-                layer.colors = [NSArray arrayWithObjects:(id)first, (id)second, nil];
-                layer.cornerRadius = 15.0;
-                layer.borderWidth = 1.0;
-                layer.borderColor = [[UIColor grayColor] CGColor];
-                layer.frame = CGRectMake(0, i * 44, [self.tableView frame].size.width, 44);
-                [self.tableView.layer addSublayer:layer];
-                [layer release];
-                
-                CATextLayer *description = [[CATextLayer alloc] init];
-                description.frame = CGRectMake(10, 14, layer.frame.size.width - 20, layer.frame.size.height - 10);
-                CGFontRef descriptionFont = CGFontCreateWithFontName((CFStringRef)[UIFont fontWithName:@"Helvetica-Bold" size:18.0].fontName);
-                description.font = descriptionFont;
-                CGFontRelease(descriptionFont);
-                description.fontSize = 18.0;
-                description.foregroundColor = [[UIColor blackColor] CGColor];
-                description.contentsScale = [[UIScreen mainScreen] scale];
-                description.string = assignment.description;
-                [layer addSublayer:description];
-                [description release];
-                
-                //From http://stackoverflow.com/questions/2690775/creating-a-pop-animation-similar-to-the-presentation-of-uialertview
-                CAKeyframeAnimation *animation = [CAKeyframeAnimation
-                                                  animationWithKeyPath:@"transform"];
-                
-                CATransform3D scale1 = CATransform3DMakeScale(0.5, 0.5, 1);
-                CATransform3D scale2 = CATransform3DMakeScale(1.2, 1.2, 1);
-                CATransform3D scale3 = CATransform3DMakeScale(0.9, 0.9, 1);
-                CATransform3D scale4 = CATransform3DMakeScale(1.0, 1.0, 1);
-                
-                NSArray *frameValues = [NSArray arrayWithObjects:
-                                        [NSValue valueWithCATransform3D:scale1],
-                                        [NSValue valueWithCATransform3D:scale2],
-                                        [NSValue valueWithCATransform3D:scale3],
-                                        [NSValue valueWithCATransform3D:scale4],
-                                        nil];
-                [animation setValues:frameValues];
-                
-                NSArray *frameTimes = [NSArray arrayWithObjects:
-                                       [NSNumber numberWithFloat:0.0],
-                                       [NSNumber numberWithFloat:0.5],
-                                       [NSNumber numberWithFloat:0.9],
-                                       [NSNumber numberWithFloat:1.0],
-                                       nil];    
-                [animation setKeyTimes:frameTimes];
-                
-                animation.fillMode = kCAFillModeForwards;
-                animation.removedOnCompletion = NO;
-                animation.duration = .4;
-                animation.delegate = self;
-                [animation setValue:layer forKey:@"layer"];
-                
-                [layer addAnimation:animation forKey:@"popup"];
-                
-                return;
-            }
-        }
-    } else {
-        pendingID = [assignmentID integerValue];
-    }
+    [assignmentListViewController showAssignmentWithID:assignmentID];
 }
 
 #pragma mark -
 #pragma mark Calendar View Methods
 
 - (void)calendarMonthView:(TKCalendarMonthView *)monthView monthDidChange:(NSDate *)month animated:(BOOL)animated {
-    self.tableView.frame = CGRectMake(0, monthView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - monthView.frame.size.height);
-    noAssignmentsLabel.frame = [self.tableView boundsForPlaceholderLabel];
+    assignmentListViewController.view.frame = CGRectMake(0, monthView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - monthView.frame.size.height);
 }
 
 - (void)calendarMonthView:(TKCalendarMonthView *)monthView didSelectDate:(NSDate *)date {
@@ -373,7 +112,7 @@
         NSString *dueDateString = [[[assignment.dueDate description] componentsSeparatedByString:@" "] objectAtIndex:0];
         
         if ([dateString isEqualToString:dueDateString]) {
-            [self showAssignmentWithID:[NSNumber numberWithInteger:assignment.assignmentID]];
+            [assignmentListViewController showAssignmentWithID:[NSNumber numberWithInteger:assignment.assignmentID]];
             return;
         }
     }
@@ -420,7 +159,7 @@
         NSDateComponents *assignmentComponents = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:assignment.dueDate];
         
         if ([assignmentComponents isEqual:selectedDateComponents]) {
-            [self showAssignmentWithID:[NSNumber numberWithInteger:assignment.assignmentID]];
+            [assignmentListViewController showAssignmentWithID:[NSNumber numberWithInteger:assignment.assignmentID]];
             return;
         }
     }
@@ -478,5 +217,12 @@
     [store release];
 }
 
+- (void)dealloc {
+    [[GMDataSource sharedDataSource] removeObserver:self
+                                         forKeyPath:@"currentCourse.assignments"];
+    [HUD removeFromSuperview];
+    [HUD release];
+    [super dealloc];
+}
 
 @end
