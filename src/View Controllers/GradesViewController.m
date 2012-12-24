@@ -8,9 +8,22 @@
 
 @implementation GradesViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(loadGrades)
+                                                     name:@"GMCurrentCourseChangedNotification"
+                                                   object:nil];
+    }
+    
+    return self;
+}
+
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GMCurrentCourseChangedNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"GMCurrentCourseChangedNotification"
+                                                  object:nil];
     [fetcher release];
     [HUD release];
     [super dealloc];
@@ -94,6 +107,10 @@
 
 - (void)refreshGrades:(id)sender {
     [self loadGradesWithLoadingView:NO];
+}
+
+- (void)loadGrades {
+    [self loadGradesWithLoadingView:YES];
 }
 
 - (void)loadGradesWithLoadingView:(BOOL)flag {
