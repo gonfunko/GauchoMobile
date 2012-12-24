@@ -65,6 +65,14 @@
                 max = [self maxValueFromRange:[gradeInformation objectAtIndex:1]];
             }
             
+            /* If there's a third column and it has a percent sign in it, use its value to determine the score
+               Normally we use the first column ("Grade") in the first if above, but sometimes that contains letter grades instead of a numeric score
+               We use its value by default, but if there's a % in this column, that strongly implies it also contains a number, so we'll use it instead
+            */
+            if ([gradeInformation count] > 2 && [[gradeInformation objectAtIndex:2] rangeOfString:@"%"].location != NSNotFound) {
+                score = [self numericalScoreFromScoreDescription:[gradeInformation objectAtIndex:2]];
+            }
+            
             if ([currentRow rangeOfString:@"<td class='  item b1b feedbacktext' >"].location != NSNotFound) {
                 cruftRange = [currentRow rangeOfString:@"<td class='  item b1b feedbacktext' >"];
                 currentRow = [currentRow substringFromIndex:cruftRange.location + cruftRange.length];
@@ -96,8 +104,7 @@
     else if ([description rangeOfString:@" "].location != NSNotFound) {
         int score = (int)[[description substringToIndex:[description rangeOfString:@" "].location] floatValue];
         return score;
-    }
-    else {
+    } else {
         int score = (int)[description floatValue];
         return score;
     }

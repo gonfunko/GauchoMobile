@@ -289,8 +289,13 @@
         cell.outof.text = @"Not Graded";   
     }
     else {
-    cell.percentage.text = [NSString stringWithFormat:@"%i%%", (int)((double)grades.score / (double)grades.max * 100.0)];
-    cell.outof.text = [NSString stringWithFormat:@"%i out of %i", grades.score, grades.max];
+        if (grades.max != 0) {
+            cell.percentage.text = [NSString stringWithFormat:@"%i%%", (int)((double)grades.score / (double)grades.max * 100.0)];
+            cell.outof.text = [NSString stringWithFormat:@"%i out of %i", grades.score, grades.max];
+        } else { // If we don't have a range, just assume it's out of 100
+            cell.percentage.text = [NSString stringWithFormat:@"%i%%", grades.score];
+            cell.outof.text = [NSString stringWithFormat:@"%i out of 100", grades.score];
+        }
     }
     
     return cell;
