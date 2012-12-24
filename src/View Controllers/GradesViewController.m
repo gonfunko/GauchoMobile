@@ -195,10 +195,13 @@
                 percentage.fontSize = 30.0;
                 percentage.foregroundColor = [[UIColor blackColor] CGColor];
                 percentage.contentsScale = [[UIScreen mainScreen] scale];
-                if (grade.score != -1)
+                if (grade.score != -1 && grade.max != 0) {
                     percentage.string = [NSString stringWithFormat:@"%i%%", (int)((double)grade.score / (double)grade.max * 100.0)];
-                else
+                } else if (grade.score != -1) {
+                    percentage.string = [NSString stringWithFormat:@"%i%%", grade.score];
+                } else {
                     percentage.string = @"–";
+                }
                 [layer addSublayer:percentage];
                 [percentage release];
                 
@@ -222,10 +225,13 @@
                 outof.fontSize = 12.0;
                 outof.foregroundColor = [[UIColor grayColor] CGColor];
                 outof.contentsScale = [[UIScreen mainScreen] scale];
-                if (grade.score != -1)
+                if (grade.score != -1 && grade.max != 0) {
                     outof.string = [NSString stringWithFormat:@"%i out of %i", grade.score, grade.max];
-                else
+                } else if (grade.score != -1) {
+                    outof.string = [NSString stringWithFormat:@"%i out of 100", grade.score];
+                } else {
                     outof.string = @"Not Graded";
+                }
                 [layer addSublayer:outof];
                 [outof release];
                 
