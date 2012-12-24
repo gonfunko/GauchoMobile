@@ -9,6 +9,17 @@
 
 @implementation AssignmentsViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        [[GMDataSource sharedDataSource] addObserver:self
+                                          forKeyPath:@"currentCourse.assignments"
+                                             options:NSKeyValueObservingOptionNew
+                                             context:nil];
+    }
+    
+    return self;
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -47,11 +58,6 @@
         
         assignmentListViewController.view.frame = CGRectMake(0, monthView.frame.origin.y + monthView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - monthView.frame.size.height);
     }
-    
-    [[GMDataSource sharedDataSource] addObserver:self
-                                      forKeyPath:@"currentCourse.assignments"
-                                         options:NSKeyValueObservingOptionNew
-                                         context:nil];
     
     calendar.hidden = NO;
 }
@@ -218,8 +224,7 @@
 }
 
 - (void)dealloc {
-    [[GMDataSource sharedDataSource] removeObserver:self
-                                         forKeyPath:@"currentCourse.assignments"];
+    [[GMDataSource sharedDataSource] removeObserver:self forKeyPath:@"currentCourse.assignments"];
     [HUD removeFromSuperview];
     [HUD release];
     [super dealloc];
