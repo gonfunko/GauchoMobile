@@ -50,7 +50,6 @@
     [super viewDidUnload];
 }
 
-
 - (void)loadURL:(NSURL *)url {
     if ([[url absoluteString] hasPrefix:@"https://gauchospace.ucsb.edu/courses/mod/resource/"])
         pendingURL = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:@"&inpopup=false"]];
@@ -65,6 +64,8 @@
     HUD.labelText = @"Loading";
     HUD.removeFromSuperViewOnHide = YES;
     [HUD show:YES];
+    
+    [self enableToolbarButtons];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)view {
@@ -76,10 +77,21 @@
         [HUD hide:YES];
         HUD = nil;
     }
+    
+    [self enableToolbarButtons];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [HUD hide:YES];
+    [self enableToolbarButtons];
+}
+
+- (void)enableToolbarButtons {
+    [backButton setEnabled:webView.canGoBack];
+    [forwardButton setEnabled:webView.canGoForward];
+    [stopButton setEnabled:webView.isLoading];
+    [reloadButton setEnabled:!webView.isLoading];
+    [actionButton setEnabled:!webView.isLoading];
 }
 
 - (IBAction)showActionSheet:(id)sender {

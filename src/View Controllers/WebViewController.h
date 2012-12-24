@@ -14,6 +14,11 @@
 @private
     IBOutlet UIWebView *webView;
     IBOutlet UIBarButtonItem *actionButton;
+    IBOutlet UIBarButtonItem *backButton;
+    IBOutlet UIBarButtonItem *forwardButton;
+    IBOutlet UIBarButtonItem *reloadButton;
+    IBOutlet UIBarButtonItem *stopButton;
+    
     NSURL *pendingURL;
     
     MBProgressHUD *HUD;
