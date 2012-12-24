@@ -101,7 +101,7 @@
         self.assignments = [self.assignments arrayByAddingObject:newAssignment];
     }
     
-    NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"description" ascending:YES];
+    NSSortDescriptor *sorter = [NSSortDescriptor sortDescriptorWithKey:@"dueDate" ascending:YES];
     self.assignments = [self.assignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:sorter]];
 }
 
