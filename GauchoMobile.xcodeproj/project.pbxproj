@@ -107,7 +107,6 @@
 		93A9AF64131099CE0012CAF3 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A9AF62131099CE0012CAF3 /* WebViewController.m */; };
 		93A9AF65131099CE0012CAF3 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93A9AF63131099CE0012CAF3 /* WebViewController.xib */; };
 		93AF5FAF12F37A64009A3657 /* GMQuarter.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AF5FAE12F37A64009A3657 /* GMQuarter.m */; };
-		93AF5FB212F37C37009A3657 /* GMOfficeHours.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AF5FB112F37C37009A3657 /* GMOfficeHours.m */; };
 		93AF5FB712F380BC009A3657 /* GMAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AF5FB412F380BC009A3657 /* GMAssignment.m */; };
 		93AF5FB812F380BC009A3657 /* GMGrade.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AF5FB612F380BC009A3657 /* GMGrade.m */; };
 		93AF604512F385F2009A3657 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93AF604412F385F2009A3657 /* CFNetwork.framework */; };
@@ -308,8 +307,6 @@
 		93A9AF63131099CE0012CAF3 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		93AF5FAD12F37A64009A3657 /* GMQuarter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMQuarter.h; sourceTree = "<group>"; };
 		93AF5FAE12F37A64009A3657 /* GMQuarter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMQuarter.m; sourceTree = "<group>"; };
-		93AF5FB012F37C37009A3657 /* GMOfficeHours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMOfficeHours.h; sourceTree = "<group>"; };
-		93AF5FB112F37C37009A3657 /* GMOfficeHours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMOfficeHours.m; sourceTree = "<group>"; };
 		93AF5FB312F380BC009A3657 /* GMAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMAssignment.h; sourceTree = "<group>"; };
 		93AF5FB412F380BC009A3657 /* GMAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMAssignment.m; sourceTree = "<group>"; };
 		93AF5FB512F380BC009A3657 /* GMGrade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGrade.h; sourceTree = "<group>"; };
@@ -574,8 +571,6 @@
 				938C408C12E9471700A8894E /* GMCourse.m */,
 				93DFABDC12EBB935005C42B8 /* GMParticipant.h */,
 				93DFABDD12EBB935005C42B8 /* GMParticipant.m */,
-				93AF5FB012F37C37009A3657 /* GMOfficeHours.h */,
-				93AF5FB112F37C37009A3657 /* GMOfficeHours.m */,
 				93AF5FB312F380BC009A3657 /* GMAssignment.h */,
 				93AF5FB412F380BC009A3657 /* GMAssignment.m */,
 				93AF5FB512F380BC009A3657 /* GMGrade.h */,
@@ -893,7 +888,6 @@
 				938277C112EBC2CC001C35E9 /* GMGradesParser.m in Sources */,
 				932A920912ED0E1E00C78AE9 /* GMAssignmentsParser.m in Sources */,
 				93AF5FAF12F37A64009A3657 /* GMQuarter.m in Sources */,
-				93AF5FB212F37C37009A3657 /* GMOfficeHours.m in Sources */,
 				93AF5FB712F380BC009A3657 /* GMAssignment.m in Sources */,
 				93AF5FB812F380BC009A3657 /* GMGrade.m in Sources */,
 				93AF605012F38C0C009A3657 /* LoginViewController.m in Sources */,

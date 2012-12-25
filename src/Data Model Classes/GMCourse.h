@@ -5,7 +5,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GMOfficeHours.h"
 #import "GMQuarter.h"
 #import "GMParticipant.h"
 #import "GMGrade.h"
@@ -23,7 +22,6 @@
     NSArray *dashboardItems;
     NSArray *forums;
     NSInteger courseID;
-    GMOfficeHours *officeHours;
     GMQuarter *quarter;
     GMParticipant *instructor;
 }
@@ -36,7 +34,6 @@
 @property (retain) NSArray *forums;
 @property (retain) NSArray *dashboardItems;
 @property (assign) NSInteger courseID;
-@property (retain) GMOfficeHours *officeHours;
 @property (retain) GMQuarter *quarter;
 @property (retain) GMParticipant *instructor;
 

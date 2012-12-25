@@ -41,7 +41,6 @@
         self.grades = [decoder decodeObjectForKey:@"grades"];
         self.dashboardItems = [decoder decodeObjectForKey:@"dashboardItems"];
         self.courseID = [decoder decodeIntegerForKey:@"courseID"];
-        self.officeHours = [decoder decodeObjectForKey:@"officeHours"];
         self.quarter = [decoder decodeObjectForKey:@"quarter"];    
         self.instructor = [decoder decodeObjectForKey:@"instructor"];
     }
@@ -59,10 +58,6 @@
         self.dashboardItems = [NSArray array];
         self.courseID = 0;
         self.forums = [NSArray array];
-    
-        GMOfficeHours *_officeHours = [[GMOfficeHours alloc] init];
-        self.officeHours = _officeHours;
-        [_officeHours release];
         
         GMQuarter *_quarter = [[GMQuarter alloc] init];
         self.quarter = _quarter;
