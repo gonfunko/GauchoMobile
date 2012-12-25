@@ -16,7 +16,6 @@
 @synthesize dashboardItems;
 @synthesize forums;
 @synthesize courseID;
-@synthesize officeHours;
 @synthesize quarter;
 @synthesize instructor;
 
@@ -27,7 +26,6 @@
     [encoder encodeObject:self.grades forKey:@"grades"];
     [encoder encodeObject:self.dashboardItems forKey:@"dashboardItems"];
     [encoder encodeInteger:self.courseID forKey:@"courseID"];
-    [encoder encodeObject:self.officeHours forKey:@"officeHours"];
     [encoder encodeObject:self.quarter forKey:@"quarter"];
     [encoder encodeObject:self.instructor forKey:@"instructor"];
 }
@@ -221,7 +219,6 @@
     self.grades = nil;
     self.dashboardItems = nil;
     self.forums = nil;
-    self.officeHours = nil;
     self.quarter = nil;
     self.instructor = nil;
     [super dealloc];
