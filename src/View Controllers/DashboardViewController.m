@@ -35,6 +35,15 @@
 	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"Dashboard";
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self
+                       action:@selector(refreshDashboard:)
+             forControlEvents:UIControlEventValueChanged];
+    
+    self.refreshControl = refreshControl;
+    
+    [refreshControl release];
+    
     dateFormatter = [[NSDateFormatter alloc] init];
     fetcher = [[GMSourceFetcher alloc] init];
     HUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -103,6 +112,10 @@
 }
 
 #pragma mark - Data loading methods
+
+- (void)refreshDashboard:(id)sender {
+    [self loadDashboardWithLoadingView:NO];
+}
      
  - (void)loadDashboard {
      if (self.visible) {
@@ -131,12 +144,14 @@
     
     loading = NO;
     [HUD hide:YES];
+    [self.refreshControl endRefreshing];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
     
     loading = NO;
     [HUD hide:YES];
+    [self.refreshControl endRefreshing];
        
     GMDashboardParser *parser = [[GMDashboardParser alloc] init];
     NSArray *items = [parser dashboardItemsFromSource:source];
