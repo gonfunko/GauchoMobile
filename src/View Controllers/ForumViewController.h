@@ -10,7 +10,6 @@
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMForumsParser.h"
-#import "MBProgressHUD.h"
 #import "ForumTopicsViewController.h"
 #import "GMSplitViewController.h"
 #import "UITableView+GMAdditions.h"
@@ -18,14 +17,9 @@
 @interface ForumViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private
     GMSourceFetcher *fetcher;
-    MBProgressHUD *HUD;
     UITextField *noForumsLabel;
-    BOOL loading;
-    BOOL visible;
 }
 
-@property (assign) BOOL visible;
-
-- (void)loadForumsWithLoadingView:(BOOL)flag;
+- (void)loadForums;
 
 @end

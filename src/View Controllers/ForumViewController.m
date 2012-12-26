@@ -11,8 +11,6 @@
 
 @implementation ForumViewController
 
-@synthesize visible;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -21,6 +19,13 @@
                                              selector:@selector(loadForums)
                                                  name:@"GMCurrentCourseChangedNotification" 
                                                object:nil];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self
+                       action:@selector(loadForums)
+             forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    [refreshControl release];
     
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"Forums";
@@ -34,11 +39,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.visible = YES;
     
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     if ([[currentCourse forums] count] == 0) {
-        [self loadForumsWithLoadingView:YES];
+        [self loadForums];
     } else {
         [self.tableView reloadData];
     }
@@ -46,7 +50,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.visible = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -77,41 +80,24 @@
     noForumsLabel.frame = [self.tableView boundsForPlaceholderLabel];
 }
 
-- (void)loadForums {
-    if (self.visible) {
-        [self loadForumsWithLoadingView:YES];
-    }
-}
 
-- (void)loadForumsWithLoadingView:(BOOL)flag {
-    if (!loading) {
-        loading = YES;
-        
-        if (flag) {
-            HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-            [self.navigationController.view addSubview:HUD];
-            [HUD release];
-            HUD.labelText = @"Loading";
-            HUD.removeFromSuperViewOnHide = YES;
-            [HUD show:YES];
-        }
-        
-        GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
-        [fetcher forumsForCourse:currentCourse withDelegate:self];
+- (void)loadForums {
+    if (!self.refreshControl.isRefreshing) {
+        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
+        [self.refreshControl beginRefreshing];
     }
+        
+    GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
+    [fetcher forumsForCourse:currentCourse withDelegate:self];
 }
 
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Loading forums failed with error: %@", [error description]);
     
-    [HUD hide:YES];
-    loading = NO;
+    [self.refreshControl endRefreshing];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
-    [HUD hide:YES];
-    loading = NO;
-    
     [[[GMDataSource sharedDataSource] currentCourse] removeAllForums];
     
     GMForumsParser *parser = [[GMForumsParser alloc] init];
@@ -136,6 +122,8 @@
         [self.tableView addSubview:noForumsLabel];
         [noForumsLabel release];
     }
+    
+    [self.refreshControl endRefreshing];
 }
 
 
