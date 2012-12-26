@@ -37,10 +37,17 @@
                                                  name:@"GMCurrentCourseChangedNotification" 
                                                object:nil];
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self
+                       action:@selector(loadTopics)
+             forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    [refreshControl release];
+    
     fetcher = [[GMSourceFetcher alloc] init];
     
     if ([forum.topics count] == 0) {
-        [self loadTopicsWithLoadingView:YES];
+        [self loadTopics];
     }
     
     self.tableView.rowHeight = 49;
@@ -60,37 +67,22 @@
     noTopicsLabel.frame = [self.tableView boundsForPlaceholderLabel];
 }
 
-- (void)loadTopicsWithLoadingView:(BOOL)flag {
-    if (!loading) {
-        loading = YES;
-        
-        if (flag) {
-            HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-            [self.navigationController.view addSubview:HUD];
-            [HUD release];
-            HUD.labelText = @"Loading";
-            HUD.removeFromSuperViewOnHide = YES;
-            [HUD show:YES];
-        }
-        
-        [fetcher topicsForForum:forum withDelegate:self];
+- (void)loadTopics {
+    if (!self.refreshControl.isRefreshing) {
+        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
+        [self.refreshControl beginRefreshing];
     }
+        
+    [fetcher topicsForForum:forum withDelegate:self];
 }
 
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Loading forum topics failed with error: %@", [error description]);
 
-    self.tableView.scrollEnabled = YES;
-    [HUD hide:YES];
-    loading = NO;
+    [self.refreshControl endRefreshing];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
-
-    self.tableView.scrollEnabled = YES;
-    [HUD hide:YES];
-    loading = NO;
-    
     GMForumsParser *parser = [[GMForumsParser alloc] init];
     NSArray *forums = [parser forumTopicsFromSource:source];
     forum.topics = forums;
@@ -111,6 +103,8 @@
         [self.tableView addSubview:noTopicsLabel];
         [noTopicsLabel release];
     }
+    
+    [self.refreshControl endRefreshing];
 }
 
 #pragma mark - Table view data source

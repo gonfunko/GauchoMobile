@@ -10,7 +10,6 @@
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMForumsParser.h"
-#import "MBProgressHUD.h"
 #import "GMForumTopicTableCell.h"
 #import "ForumPostsViewController.h"
 #import "UITableView+GMAdditions.h"
@@ -19,9 +18,7 @@
 @private
     GMForum *forum;
     GMSourceFetcher *fetcher;
-    MBProgressHUD *HUD;
     UITextField *noTopicsLabel;
-    BOOL loading;
     
     IBOutlet GMForumTopicTableCell *topicCell;
 }
@@ -29,6 +26,6 @@
 @property (retain) GMForum *forum;
 @property (nonatomic, retain) GMForumTopicTableCell *topicCell;
 
-- (void)loadTopicsWithLoadingView:(BOOL)flag;
+- (void)loadTopics;
 
 @end
