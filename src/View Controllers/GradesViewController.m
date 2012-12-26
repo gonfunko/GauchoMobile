@@ -25,7 +25,6 @@
                                                     name:@"GMCurrentCourseChangedNotification"
                                                   object:nil];
     [fetcher release];
-    [HUD release];
     [super dealloc];
 }
 
@@ -42,11 +41,9 @@
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.tabBarController.navigationItem.title = @"Grades";
     
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self
-                       action:@selector(refreshGrades:)
+                       action:@selector(loadGrades)
              forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
     [refreshControl release];
@@ -83,7 +80,7 @@
     fetcher = [[GMSourceFetcher alloc] init];
     
     if ([[currentCourse grades] count] == 0) {
-        [self loadGradesWithLoadingView:YES];
+        [self loadGrades];
     }
     
     pendingID = 0;
@@ -105,22 +102,12 @@
 
 #pragma mark - Data loading methods
 
-- (void)refreshGrades:(id)sender {
-    [self loadGradesWithLoadingView:NO];
-}
-
 - (void)loadGrades {
-    [self loadGradesWithLoadingView:YES];
-}
-
-- (void)loadGradesWithLoadingView:(BOOL)flag {
-    if (flag) {
-        [self.navigationController.view addSubview:HUD];
-        HUD.labelText = @"Loading";
-        HUD.removeFromSuperViewOnHide = YES;
-        [HUD show:YES];
+    if (!self.refreshControl.isRefreshing) {
+        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
+        [self.refreshControl beginRefreshing];
     }
-    
+
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     [fetcher gradesForCourse:currentCourse withDelegate:self];
 }
@@ -128,14 +115,10 @@
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Loading grades failed with error: %@", [error description]);
 
-    [HUD hide:YES];
     [self.refreshControl endRefreshing];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
-    [HUD hide:YES];
-    [self.refreshControl endRefreshing];
-    
     [[[GMDataSource sharedDataSource] currentCourse] removeAllGrades];
 
     GMGradesParser *parser = [[GMGradesParser alloc] init];
@@ -159,6 +142,8 @@
         [self showGradeWithID:[NSNumber numberWithInteger:pendingID]];
         pendingID = 0;
     }
+    
+    [self.refreshControl endRefreshing];
 }
 
 #pragma mark - Animation methods

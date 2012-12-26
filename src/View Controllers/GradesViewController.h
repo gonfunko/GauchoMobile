@@ -9,19 +9,17 @@
 #import "GMDataSource.h"
 #import "GMGradesParser.h"
 #import "GMGradesTableViewCell.h"
-#import "MBProgressHUD.h"
 #import "UITableView+GMAdditions.h"
 
 @interface GradesViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private
     GMSourceFetcher *fetcher;
-    MBProgressHUD *HUD;
     UITextField *noGradesLabel;
     NSInteger pendingID;
 }
 
 //Loads grades from the network
-- (void)loadGradesWithLoadingView:(BOOL)flag;
+- (void)loadGrades;
 
 //Scrolls to and highlights the grade with the given grade ID in yellow
 - (void)showGradeWithID:(NSNumber *)gradeID;
