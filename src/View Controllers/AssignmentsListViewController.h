@@ -21,12 +21,10 @@
     GMSourceFetcher *fetcher;
 }
 
-@property (retain) MBProgressHUD *HUD;
-
 //Scrolls to the assignment with the specified assignment ID and highlights it in yellow
 - (void)showAssignmentWithID:(NSNumber *)assignmentID;
 
-- (void)loadAssignmentsWithLoadingView:(BOOL)showLoadingView;
+- (void)loadAssignments;
 
 
 @end

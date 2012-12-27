@@ -9,13 +9,11 @@
 #import "GMDataSource.h"
 #import "TKCalendarMonthView.h"
 #import "NSDate+TKCategory.h"
-#import "MBProgressHUD.h"
 #import "AssignmentsListViewController.h"
 
 @interface AssignmentsViewController : UIViewController <TKCalendarMonthViewDelegate, TKCalendarMonthViewDataSource> {
 @protected
     AssignmentsListViewController *assignmentListViewController;
-    MBProgressHUD *HUD;
     UIView *calendar;
 }
 

@@ -11,8 +11,6 @@
 
 @implementation DashboardViewController
 
-@synthesize visible;
-
 - (void)dealloc
 {
     [fetcher release];
@@ -37,7 +35,7 @@
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self
-                       action:@selector(refreshDashboard:)
+                       action:@selector(loadDashboard)
              forControlEvents:UIControlEventValueChanged];
     
     self.refreshControl = refreshControl;
@@ -46,9 +44,6 @@
     
     dateFormatter = [[NSDateFormatter alloc] init];
     fetcher = [[GMSourceFetcher alloc] init];
-    HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:HUD];
-    [HUD hide:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(loadDashboard) 
@@ -70,11 +65,9 @@
 {
     [super viewWillAppear:animated];
     
-    self.visible = YES;
-    
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     if (currentCourse != nil && [[currentCourse dashboardItems] count] == 0) {
-        [self loadDashboardWithLoadingView:YES];
+        [self loadDashboard];
     } else {
         [self.tableView reloadData];
     }
@@ -89,7 +82,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.visible = NO;
 }
 
 - (void)viewWillLayoutSubviews
@@ -113,46 +105,23 @@
 
 #pragma mark - Data loading methods
 
-- (void)refreshDashboard:(id)sender {
-    [self loadDashboardWithLoadingView:NO];
-}
-     
- - (void)loadDashboard {
-     if (self.visible) {
-         [self loadDashboardWithLoadingView:YES];
-     } else {
-         [self.tableView reloadData];
-     }
- }
-
-- (void)loadDashboardWithLoadingView:(BOOL)flag {
-    if (!loading) {
-        loading = YES;
-    
-        if (flag) {
-            HUD.labelText = @"Loading";
-            [HUD show:YES];
-        }
-        
-        GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
-        [fetcher dashboardForCourse:currentCourse withDelegate:self];
+- (void)loadDashboard {
+    if (!self.refreshControl.isRefreshing) {
+        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
+        [self.refreshControl beginRefreshing];
     }
+    
+    GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
+    [fetcher dashboardForCourse:currentCourse withDelegate:self];
 }
 
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Loading dashboard failed with error: %@", [error description]);
     
-    loading = NO;
-    [HUD hide:YES];
     [self.refreshControl endRefreshing];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
-    
-    loading = NO;
-    [HUD hide:YES];
-    [self.refreshControl endRefreshing];
-       
     GMDashboardParser *parser = [[GMDashboardParser alloc] init];
     NSArray *items = [parser dashboardItemsFromSource:source];
     
@@ -173,6 +142,8 @@
         [self.tableView addSubview:label];
         [label release];
     }
+    
+    [self.refreshControl endRefreshing];
 }
 
 #pragma mark - Table view data source

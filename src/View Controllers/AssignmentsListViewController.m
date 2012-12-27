@@ -10,8 +10,6 @@
 
 @implementation AssignmentsListViewController
 
-@synthesize HUD;
-
 - (void)viewDidLoad {
     self.tableView.scrollsToTop = YES;
     pendingID = 0;
@@ -41,22 +39,18 @@
 }
 
 - (void)loadAssignments {
+    if (!self.refreshControl.isRefreshing) {
+        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
+        [self.refreshControl beginRefreshing];
+    }
+        
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     [fetcher assignmentsForCourse:currentCourse withDelegate:self];
-}
-
-- (void)loadAssignmentsWithLoadingView:(BOOL)showLoadingView {
-    if (showLoadingView) {
-        [self.HUD show:YES];
-    }
-    
-    [self loadAssignments];
 }
 
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Loading assignments failed with error: %@", [error description]);
     [self.refreshControl endRefreshing];
-    [self.HUD hide:YES];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
@@ -80,7 +74,6 @@
     }
     
     [self.refreshControl endRefreshing];
-    [self.HUD hide:YES];
 }
 
 - (void)viewDidLayoutSubviews {

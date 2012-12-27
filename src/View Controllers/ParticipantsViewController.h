@@ -10,28 +10,21 @@
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMParticipantsParser.h"
-#import "MBProgressHUD.h"
 #import "GMPersonViewController.h"
 #import "UITableView+GMAdditions.h"
 
-@interface ParticipantsViewController : UIViewController<GMSourceFetcherDelegate, UIScrollViewDelegate> {
+@interface ParticipantsViewController : UITableViewController <GMSourceFetcherDelegate, UIScrollViewDelegate> {
 @protected
     NSArray *sections;
     NSMutableDictionary *pictures;
 	GMSourceFetcher *fetcher;
-    MBProgressHUD *HUD;
     ABAddressBookRef addressBook;
-    
-    BOOL loading;
-    
-    IBOutlet UITableView *tableView;
 }
 
-@property (retain) UITableView *tableView;
 @property (copy) NSArray *sections;
 
-//Loads participants from the network, optionally with or without the yellow loading view
-- (void)loadParticipantsWithLoadingView:(BOOL)flag;
+//Loads participants from the network
+- (void)loadParticipants;
 
 //Loads and caches profile pictures for all participants
 - (void)loadPicturesForParticipants;

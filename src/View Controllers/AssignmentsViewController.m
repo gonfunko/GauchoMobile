@@ -36,15 +36,8 @@
     
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     
-    
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    HUD.labelText = @"Loading";
-    
-    assignmentListViewController.HUD = HUD;
-    
     if ([[currentCourse assignments] count] == 0) {
-        [self.navigationController.view addSubview:HUD];
-        [assignmentListViewController loadAssignmentsWithLoadingView:YES];
+        [assignmentListViewController loadAssignments];
     }
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -225,8 +218,6 @@
 
 - (void)dealloc {
     [[GMDataSource sharedDataSource] removeObserver:self forKeyPath:@"currentCourse.assignments"];
-    [HUD removeFromSuperview];
-    [HUD release];
     [super dealloc];
 }
 

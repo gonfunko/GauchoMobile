@@ -58,7 +58,7 @@
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     
     if ([[currentCourse assignments] count] == 0) {
-        [assignmentListViewController loadAssignmentsWithLoadingView:YES];
+        [assignmentListViewController loadAssignments];
     } else {
         [assignmentListViewController.tableView reloadData];
         [ipadCalendar reloadData];
@@ -81,7 +81,7 @@
 
 - (void)loadAssignments {
     if (self.visible) {
-        [assignmentListViewController loadAssignmentsWithLoadingView:YES];
+        [assignmentListViewController loadAssignments];
     }
 }
 

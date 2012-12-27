@@ -9,7 +9,6 @@
 
 @implementation ParticipantsViewController
 
-@synthesize tableView;
 @synthesize sections;
 
 - (void)didReceiveMemoryWarning {
@@ -45,11 +44,18 @@
     
     self.sections = [NSMutableArray array];
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self
+                       action:@selector(loadParticipants)
+              forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    [refreshControl release];
+    
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
     
     if ([[currentCourse participants] count] == 0) {
-        [self loadParticipantsWithLoadingView:YES];
+        [self loadParticipants];
     } else {
         NSDictionary *_participants = [[[GMDataSource sharedDataSource] currentCourse] participants];
         NSArray *letters = [_participants allKeys];
@@ -90,40 +96,23 @@
 
 #pragma mark - Data loading methods
 
-- (void)loadParticipantsWithLoadingView:(BOOL)flag {
-    if (!loading) {
-        loading = YES;
-        
-        if (flag) {
-            HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-            [self.navigationController.view addSubview:HUD];
-            [HUD release];
-            HUD.labelText = @"Loading";
-            HUD.removeFromSuperViewOnHide = YES;
-            [HUD show:YES];
-        }
-        
-        GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
-        [fetcher participantsForCourse:currentCourse withDelegate:self];
+- (void)loadParticipants {
+    if (!self.refreshControl.isRefreshing) {
+        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
+        [self.refreshControl beginRefreshing];
     }
+        
+    GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
+    [fetcher participantsForCourse:currentCourse withDelegate:self];
 }
 
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Loading participants failed with error: %@", [error description]);
     
-    loading = NO;
-    [HUD hide:YES];
-    HUD = nil;
+    [self.refreshControl endRefreshing];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
-    
-    loading = NO;
-    if (HUD != nil) {
-        [HUD hide:YES];
-        HUD = nil;
-    }
-    
     GMParticipantsParser *parser = [[GMParticipantsParser alloc] init];
     NSArray *participants = [parser participantsFromSource:source];
     [[GMDataSource sharedDataSource] currentCourse].participantsArray = [NSArray array];
@@ -165,6 +154,8 @@
         [self.tableView addSubview:label];
         [label release];
     }
+    
+    [self.refreshControl endRefreshing];
 }
 
 - (void)loadPicturesForParticipants {

@@ -38,7 +38,7 @@
     
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     if ([[currentCourse participantsArray] count] == 0) {
-        [self loadParticipantsWithLoadingView:YES];
+        [self loadParticipants];
     } else {
         [collectionView reloadData];
     }
@@ -56,7 +56,7 @@
 
 - (void)loadParticipants {
     if (self.visible) {
-        [self loadParticipantsWithLoadingView:YES];
+        [self loadParticipants];
     }
 }
 

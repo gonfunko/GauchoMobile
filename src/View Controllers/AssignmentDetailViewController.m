@@ -192,14 +192,17 @@
         [((GMWebViewTableCell *)cell).webview loadHTMLString:details baseURL:[NSURL URLWithString:@"https://gauchospace.ucsb.edu"]];
         ((GMWebViewTableCell *)cell).webview.delegate = self;
     } else if (indexPath.section == 1) {
-        [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"View Grade" forState:UIControlStateNormal];
-        [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"View Grade" forState:UIControlStateHighlighted];
-        [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"View Grade" forState:UIControlStateSelected];
-        [((GMTwoButtonTableCell *)cell).firstButton addTarget:self action:@selector(showGrade:) forControlEvents:UIControlEventTouchUpInside];
-        [((GMTwoButtonTableCell *)cell).secondButton setTitle:@"Print" forState:UIControlStateNormal];
-        [((GMTwoButtonTableCell *)cell).secondButton setTitle:@"Print" forState:UIControlStateHighlighted];
-        [((GMTwoButtonTableCell *)cell).secondButton setTitle:@"Print" forState:UIControlStateSelected];
-        [((GMTwoButtonTableCell *)cell).secondButton addTarget:self action:@selector(printAssignment:) forControlEvents:UIControlEventTouchUpInside];
+        [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"View Grade"
+                                                    forState:UIControlStateNormal | UIControlStateHighlighted | UIControlStateSelected];
+        [((GMTwoButtonTableCell *)cell).firstButton addTarget:self
+                                                       action:@selector(showGrade:)
+                                             forControlEvents:UIControlEventTouchUpInside];
+        
+        [((GMTwoButtonTableCell *)cell).secondButton setTitle:@"Print"
+                                                     forState:UIControlStateNormal | UIControlStateHighlighted | UIControlStateSelected];
+        [((GMTwoButtonTableCell *)cell).secondButton addTarget:self
+                                                        action:@selector(printAssignment:)
+                                              forControlEvents:UIControlEventTouchUpInside];
     }
     
     return cell;

@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GMDashboardItem.h"
 #import "GMDashboardParser.h"
-#import "MBProgressHUD.h"
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMTextViewTableCell.h"
@@ -20,15 +19,10 @@
 @interface DashboardViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private
     GMSourceFetcher *fetcher;
-    MBProgressHUD *HUD;
     NSDateFormatter *dateFormatter;
-    BOOL loading;
-    BOOL visible;
 }
 
-@property (assign) BOOL visible;
-
-//Loads dashboard items from the network, optionally with or without the yellow loading view
-- (void)loadDashboardWithLoadingView:(BOOL)flag;
+//Loads dashboard items from the network
+- (void)loadDashboard;
 
 @end
