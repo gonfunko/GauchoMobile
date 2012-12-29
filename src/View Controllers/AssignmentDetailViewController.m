@@ -46,7 +46,13 @@
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
     self.navigationController.visibleViewController.navigationItem.title = @"Details";
     self.tableView.allowsSelection = NO;
-    self.tableView.scrollEnabled = NO;
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self
+                       action:@selector(loadAssignmentDetails)
+             forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    [refreshControl release];
     
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissModalViewControllerAnimated:)];
@@ -54,16 +60,8 @@
         [doneButton release];
     }
 
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:HUD];
-    [HUD release];
-    HUD.labelText = @"Loading";
-    HUD.removeFromSuperViewOnHide = YES;
-    [HUD show:YES];
-
-    
-    GMSourceFetcher *fetcher = [[GMSourceFetcher alloc] init];
-    [fetcher detailsForAssignment:self.assignment withDelegate:self];
+    fetcher = [[GMSourceFetcher alloc] init];
+    [self loadAssignmentDetails];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -95,10 +93,18 @@
     }
 }
 
+- (void)loadAssignmentDetails {
+    if (!self.refreshControl.isRefreshing) {
+        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
+        [self.refreshControl beginRefreshing];
+    }
+    
+    [fetcher detailsForAssignment:self.assignment withDelegate:self];
+}
+
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     NSLog(@"Fetching assignment details failed with error: %@", [error description]);
-    [HUD hide:YES];
-    self.tableView.scrollEnabled = YES;
+    [self.refreshControl endRefreshing];
 }
 
 - (void)sourceFetchSucceededWithPageSource:(NSString *)source {
@@ -116,14 +122,13 @@
     [results release];
     
     [sizingWebView loadHTMLString:self.details baseURL:[NSURL URLWithString:@"https://gauchospace.ucsb.edu"]];
+    [self.refreshControl endRefreshing];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)view {
     if ([view isEqual:sizingWebView]) {
         webviewHeight = [[view stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"] intValue];
         [self.tableView reloadData];
-        [HUD hide:YES];
-        self.tableView.scrollEnabled = YES;
     }
 }
 
@@ -193,13 +198,13 @@
         ((GMWebViewTableCell *)cell).webview.delegate = self;
     } else if (indexPath.section == 1) {
         [((GMTwoButtonTableCell *)cell).firstButton setTitle:@"View Grade"
-                                                    forState:UIControlStateNormal | UIControlStateHighlighted | UIControlStateSelected];
+                                                    forState:UIControlStateNormal];
         [((GMTwoButtonTableCell *)cell).firstButton addTarget:self
                                                        action:@selector(showGrade:)
                                              forControlEvents:UIControlEventTouchUpInside];
         
         [((GMTwoButtonTableCell *)cell).secondButton setTitle:@"Print"
-                                                     forState:UIControlStateNormal | UIControlStateHighlighted | UIControlStateSelected];
+                                                     forState:UIControlStateNormal];
         [((GMTwoButtonTableCell *)cell).secondButton addTarget:self
                                                         action:@selector(printAssignment:)
                                               forControlEvents:UIControlEventTouchUpInside];

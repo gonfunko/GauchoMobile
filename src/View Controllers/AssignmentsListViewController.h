@@ -13,7 +13,6 @@
 #import "GMAssignmentsParser.h"
 #import "AssignmentDetailViewController.h"
 #import "UITableView+GMAdditions.h"
-#import "MBProgressHUD.h"
 
 @interface AssignmentsListViewController : UITableViewController <GMSourceFetcherDelegate> {
     UITextField *noAssignmentsLabel;

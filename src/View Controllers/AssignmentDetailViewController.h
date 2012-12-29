@@ -13,12 +13,11 @@
 #import "GMAssignmentDetailsParser.h"
 #import "GMWebViewTableCell.h"
 #import "GMTwoButtonTableCell.h"
-#import "MBProgressHUD.h"
 #import "WebViewController.h"
 
 @interface AssignmentDetailViewController : UITableViewController <GMSourceFetcherDelegate, UIWebViewDelegate, MFMailComposeViewControllerDelegate> {
     GMAssignment *assignment;
-    MBProgressHUD *HUD;
+    GMSourceFetcher *fetcher;
     NSString *details;
     UIWebView *sizingWebView;
     __unsafe_unretained UITabBarController *tabBarController;
