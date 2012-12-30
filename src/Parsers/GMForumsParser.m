@@ -137,7 +137,13 @@
     NSArray *postingChunks = [html componentsSeparatedByString:@"<div class=\"posting\">"];
     
     for (int i = 1; i < [postingChunks count]; i++) {
-        NSString *message = [[postingChunks objectAtIndex:i] substringToIndex:[[postingChunks objectAtIndex:i] rangeOfString:@"</div>"].location];
+        NSString *message = nil;
+        if ([[postingChunks objectAtIndex:i] rangeOfString:@"</div>"].location != NSNotFound) {
+            message = [[postingChunks objectAtIndex:i] substringToIndex:[[postingChunks objectAtIndex:i] rangeOfString:@"</div>"].location];
+        } else {
+            message = [postingChunks objectAtIndex:i];
+        }
+        
         message = [self stripHTMLFromString:message];
 
         GMForumPost *post = [[GMForumPost alloc] init];

@@ -81,7 +81,6 @@
 		938277C112EBC2CC001C35E9 /* GMGradesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 938277C012EBC2CC001C35E9 /* GMGradesParser.m */; };
 		938489B314C0ACBF00F9986D /* gm.png in Resources */ = {isa = PBXBuildFile; fileRef = 938489B214C0ACBF00F9986D /* gm.png */; };
 		9385EFE91508692B00872595 /* GMForumsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFE81508692B00872595 /* GMForumsParser.m */; };
-		9385EFEC1508693A00872595 /* GMForumTopicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFEB1508693A00872595 /* GMForumTopicView.m */; };
 		9385EFF31508696C00872595 /* GMForum.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFEE1508696C00872595 /* GMForum.m */; };
 		9385EFF41508696C00872595 /* GMForumPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFF01508696C00872595 /* GMForumPost.m */; };
 		9385EFF51508696C00872595 /* GMForumTopic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9385EFF21508696C00872595 /* GMForumTopic.m */; };
@@ -146,6 +145,8 @@
 		93D9861B1310783C009C11C3 /* GMTextViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D9861A1310783C009C11C3 /* GMTextViewTableCell.m */; };
 		93DB4838130F9125004EF57C /* GMDashboardParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DB4837130F9125004EF57C /* GMDashboardParser.m */; };
 		93DFABDE12EBB935005C42B8 /* GMParticipant.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DFABDD12EBB935005C42B8 /* GMParticipant.m */; };
+		93E703C2168FB2D700DF1F2D /* GMForumPostTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E703C1168FB2D600DF1F2D /* GMForumPostTableCell.m */; };
+		93E703C4168FB2F200DF1F2D /* ForumPostTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E703C3168FB2F200DF1F2D /* ForumPostTableCell.xib */; };
 		93EB5D0B130EFE6300555E8A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93EB5D03130EFE2300555E8A /* AddressBook.framework */; };
 		93EB5D0C130EFE6300555E8A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93EB5D04130EFE2300555E8A /* AddressBookUI.framework */; };
 		93EC607E1332E1E000601B04 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EC607D1332E1E000601B04 /* MainWindow-iPad.xib */; };
@@ -263,8 +264,6 @@
 		938489B214C0ACBF00F9986D /* gm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gm.png; sourceTree = "<group>"; };
 		9385EFE71508692B00872595 /* GMForumsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMForumsParser.h; sourceTree = "<group>"; };
 		9385EFE81508692B00872595 /* GMForumsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMForumsParser.m; sourceTree = "<group>"; };
-		9385EFEA1508693A00872595 /* GMForumTopicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMForumTopicView.h; sourceTree = "<group>"; };
-		9385EFEB1508693A00872595 /* GMForumTopicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMForumTopicView.m; sourceTree = "<group>"; };
 		9385EFED1508696C00872595 /* GMForum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMForum.h; sourceTree = "<group>"; };
 		9385EFEE1508696C00872595 /* GMForum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMForum.m; sourceTree = "<group>"; };
 		9385EFEF1508696C00872595 /* GMForumPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMForumPost.h; sourceTree = "<group>"; };
@@ -359,6 +358,9 @@
 		93DB4837130F9125004EF57C /* GMDashboardParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMDashboardParser.m; sourceTree = "<group>"; };
 		93DFABDC12EBB935005C42B8 /* GMParticipant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMParticipant.h; sourceTree = "<group>"; };
 		93DFABDD12EBB935005C42B8 /* GMParticipant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMParticipant.m; sourceTree = "<group>"; };
+		93E703C0168FB2D600DF1F2D /* GMForumPostTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMForumPostTableCell.h; sourceTree = "<group>"; };
+		93E703C1168FB2D600DF1F2D /* GMForumPostTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMForumPostTableCell.m; sourceTree = "<group>"; };
+		93E703C3168FB2F200DF1F2D /* ForumPostTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForumPostTableCell.xib; sourceTree = "<group>"; };
 		93EB5D03130EFE2300555E8A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		93EB5D04130EFE2300555E8A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		93EC607D1332E1E000601B04 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "data/XIBs/iPad/MainWindow-iPad.xib"; sourceTree = SOURCE_ROOT; };
@@ -413,6 +415,7 @@
 				93AF604F12F38C0C009A3657 /* LoginViewController.xib */,
 				939036F1132AD76100A5AF6E /* MainWindow.xib */,
 				93725DCA150D4DC70095B420 /* ForumTopicTableCell.xib */,
+				93E703C3168FB2F200DF1F2D /* ForumPostTableCell.xib */,
 			);
 			name = XIBs;
 			path = ../data/XIBs;
@@ -530,6 +533,8 @@
 				93127E7314C5341300CAF15F /* GMTwoButtonTableCell.m */,
 				93725DC7150D35D60095B420 /* GMForumTopicTableCell.h */,
 				93725DC8150D35D60095B420 /* GMForumTopicTableCell.m */,
+				93E703C0168FB2D600DF1F2D /* GMForumPostTableCell.h */,
+				93E703C1168FB2D600DF1F2D /* GMForumPostTableCell.m */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -708,8 +713,6 @@
 				934BACA11304E7ED0083A5F9 /* Table View Cells */,
 				93BBF5CD130E3A8800B07C25 /* GMLoadingView.h */,
 				93BBF5CE130E3A8900B07C25 /* GMLoadingView.m */,
-				9385EFEA1508693A00872595 /* GMForumTopicView.h */,
-				9385EFEB1508693A00872595 /* GMForumTopicView.m */,
 				933098F51513F55400F891C1 /* ADCalendarView.h */,
 				933098F61513F55400F891C1 /* ADCalendarView.m */,
 				936DAFF315150B1B00F99EE8 /* MBProgressHUD.h */,
@@ -870,6 +873,7 @@
 				93BDDA6F161118020007519F /* ipadtabbarselection.png in Resources */,
 				93BDDA70161118020007519F /* ipadtabbarbackground.png in Resources */,
 				93361DA4167EA53E00532C5F /* AssignmentsListViewController.xib in Resources */,
+				93E703C4168FB2F200DF1F2D /* ForumPostTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,7 +923,6 @@
 				93127E7414C5341300CAF15F /* GMTwoButtonTableCell.m in Sources */,
 				93C257DF14CCC1810079E5CD /* KeychainItemWrapper.m in Sources */,
 				9385EFE91508692B00872595 /* GMForumsParser.m in Sources */,
-				9385EFEC1508693A00872595 /* GMForumTopicView.m in Sources */,
 				9385EFF31508696C00872595 /* GMForum.m in Sources */,
 				9385EFF41508696C00872595 /* GMForumPost.m in Sources */,
 				9385EFF51508696C00872595 /* GMForumTopic.m in Sources */,
@@ -938,6 +941,7 @@
 				93928852164F198F00A9BAD2 /* GTMNSString+HTML.m in Sources */,
 				93361DA3167EA53E00532C5F /* AssignmentsListViewController.m in Sources */,
 				9313F1411683C2FA008127DC /* GMParticipantCollectionViewCell.m in Sources */,
+				93E703C2168FB2D700DF1F2D /* GMForumPostTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,24 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "GMSourceFetcher.h"
 #import "GMForumsParser.h"
-#import "MBProgressHUD.h"
-#import "GMForumTopicView.h"
+#import "GMForumPostTableCell.h"
 
-@interface ForumPostsViewController : UIViewController <GMSourceFetcherDelegate> {
+@interface ForumPostsViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private
     GMForumTopic *topic;
     GMSourceFetcher *fetcher;
-    MBProgressHUD *HUD;
-    BOOL loading;
-    
-    IBOutlet GMForumTopicView *postsView;
+    NSDateFormatter *formatter;
+    NSMutableDictionary *pictures;
 }
 
 @property (retain) GMForumTopic *topic;
-@property (nonatomic, retain) GMForumTopicView *postsView;
 
-- (void)loadPostsWithLoadingView:(BOOL)flag;
+- (void)loadPosts;
 
 @end
