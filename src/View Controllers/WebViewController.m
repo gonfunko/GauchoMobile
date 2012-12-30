@@ -16,12 +16,14 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
     	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
+        loadingSpinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [loadingSpinner release];
     [super dealloc];
 }
 
@@ -38,6 +40,10 @@
     webView.delegate = self;
     webView.scalesPageToFit = YES;
     [webView loadRequest:[NSURLRequest requestWithURL:pendingURL]];
+    
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:loadingSpinner];
+    self.navigationItem.rightBarButtonItem = barButton;
+    [barButton release];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -58,13 +64,7 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)_webView {
-    HUD = [[MBProgressHUD alloc] initWithView:webView];
-    [self.view addSubview:HUD];
-    [HUD release];
-    HUD.labelText = @"Loading";
-    HUD.removeFromSuperViewOnHide = YES;
-    [HUD show:YES];
-    
+    [loadingSpinner startAnimating];
     [self enableToolbarButtons];
 }
 
@@ -73,16 +73,12 @@
     NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     self.navigationController.visibleViewController.navigationItem.title = title;
     
-    if (HUD != nil) {
-        [HUD hide:YES];
-        HUD = nil;
-    }
-    
+    [loadingSpinner stopAnimating];
     [self enableToolbarButtons];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [HUD hide:YES];
+    [loadingSpinner stopAnimating];
     [self enableToolbarButtons];
 }
 

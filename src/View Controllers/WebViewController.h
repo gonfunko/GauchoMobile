@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "MBProgressHUD.h"
 
 @interface WebViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate, UIDocumentInteractionControllerDelegate> {
 @private
@@ -21,7 +20,7 @@
     
     NSURL *pendingURL;
     
-    MBProgressHUD *HUD;
+    UIActivityIndicatorView *loadingSpinner;
 }
 
 //Loads a given URL in the web view
