@@ -19,7 +19,7 @@
     if (self = [super init]) {
         self.postID = @"";
         self.message = @"";
-        self.author = nil;
+        self.author = [[GMParticipant alloc] init];
         self.postDate = [NSDate date];
     }
     
