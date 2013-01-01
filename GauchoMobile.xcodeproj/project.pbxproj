@@ -102,6 +102,8 @@
 		9395D606132881B700332A38 /* TKGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5BF132881B200332A38 /* TKGlobal.m */; };
 		9395D61A132881B700332A38 /* UIImage+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5E7132881B500332A38 /* UIImage+TKCategory.m */; };
 		9395D623132882A200332A38 /* TapkuLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9395D622132882A200332A38 /* TapkuLibrary.bundle */; };
+		939B9EE116925E8C00C5BB95 /* GMPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939B9EDF16925E8C00C5BB95 /* GMPeopleViewController.m */; };
+		939B9EE216925E8C00C5BB95 /* GMPeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 939B9EE016925E8C00C5BB95 /* GMPeopleViewController.xib */; };
 		93A9AF64131099CE0012CAF3 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A9AF62131099CE0012CAF3 /* WebViewController.m */; };
 		93A9AF65131099CE0012CAF3 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93A9AF63131099CE0012CAF3 /* WebViewController.xib */; };
 		93AF5FAF12F37A64009A3657 /* GMQuarter.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AF5FAE12F37A64009A3657 /* GMQuarter.m */; };
@@ -298,6 +300,9 @@
 		9395D5E6132881B500332A38 /* UIImage+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TKCategory.h"; sourceTree = "<group>"; };
 		9395D5E7132881B500332A38 /* UIImage+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+TKCategory.m"; sourceTree = "<group>"; };
 		9395D622132882A200332A38 /* TapkuLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapkuLibrary.bundle; sourceTree = "<group>"; };
+		939B9EDE16925E8C00C5BB95 /* GMPeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPeopleViewController.h; sourceTree = "<group>"; };
+		939B9EDF16925E8C00C5BB95 /* GMPeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMPeopleViewController.m; sourceTree = "<group>"; };
+		939B9EE016925E8C00C5BB95 /* GMPeopleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GMPeopleViewController.xib; path = "../../src/View Controllers/GMPeopleViewController.xib"; sourceTree = "<group>"; };
 		93A9AF61131099CE0012CAF3 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		93A9AF62131099CE0012CAF3 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		93A9AF63131099CE0012CAF3 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
@@ -398,6 +403,7 @@
 		9314EC3112F3DC5B00F99756 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				939B9EE016925E8C00C5BB95 /* GMPeopleViewController.xib */,
 				93361DA2167EA53E00532C5F /* AssignmentsListViewController.xib */,
 				93725DCE150D56E50095B420 /* ForumPostsViewController.xib */,
 				93725DC4150D2EAA0095B420 /* ForumTopicsViewController.xib */,
@@ -700,6 +706,8 @@
 				9321933C152B7C86001461EE /* GMSplitViewController.m */,
 				9359AFD51530A8D60072EDC8 /* GMPersonViewController.h */,
 				9359AFD61530A8D60072EDC8 /* GMPersonViewController.m */,
+				939B9EDE16925E8C00C5BB95 /* GMPeopleViewController.h */,
+				939B9EDF16925E8C00C5BB95 /* GMPeopleViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -869,6 +877,7 @@
 				93BDDA70161118020007519F /* ipadtabbarbackground.png in Resources */,
 				93361DA4167EA53E00532C5F /* AssignmentsListViewController.xib in Resources */,
 				93E703C4168FB2F200DF1F2D /* ForumPostTableCell.xib in Resources */,
+				939B9EE216925E8C00C5BB95 /* GMPeopleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,6 +945,7 @@
 				93361DA3167EA53E00532C5F /* AssignmentsListViewController.m in Sources */,
 				9313F1411683C2FA008127DC /* GMParticipantCollectionViewCell.m in Sources */,
 				93E703C2168FB2D700DF1F2D /* GMForumPostTableCell.m in Sources */,
+				939B9EE116925E8C00C5BB95 /* GMPeopleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -946,6 +956,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Robert Dodson (N8DJ46FH9G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert Dodson (N8DJ46FH9G)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -966,6 +977,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Robert Dodson (N8DJ46FH9G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert Dodson (N8DJ46FH9G)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;

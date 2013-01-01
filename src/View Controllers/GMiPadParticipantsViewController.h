@@ -9,12 +9,8 @@
 #import "ParticipantsViewController.h"
 #import "GMParticipantCollectionViewCell.h"
 
-@interface GMiPadParticipantsViewController : ParticipantsViewController <UICollectionViewDataSource, UICollectionViewDelegate> {
+@interface GMiPadParticipantsViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate> {
     IBOutlet UICollectionView *collectionView;
-    
-    BOOL visible;
 }
-
-@property (assign) BOOL visible;
 
 @end

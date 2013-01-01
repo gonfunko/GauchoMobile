@@ -52,6 +52,8 @@
     [login release];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissMasterPopover) name:@"GMLogoutNotification" object:nil];
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0]];
 
     return YES;
 }
