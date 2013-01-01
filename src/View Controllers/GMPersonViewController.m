@@ -2,8 +2,8 @@
 //  GMPersonViewController.m
 //  GauchoMobile
 //
-//  Created by Aaron Dodson on 4/7/12.
-//  Copyright (c) 2012 Me. All rights reserved.
+//  GMPersonViewController is a subclass of ABPersonViewController that adds a Done button
+//  to allow it to be dismissed when presented modally on the iPad.
 //
 
 #import "GMPersonViewController.h"
@@ -12,30 +12,42 @@
 
 - (id)init {
     if (self = [super init]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addDoneButton) name:UIApplicationDidBecomeActiveNotification object:nil];
+        /* Register for notifications when we resume from the background – the underlying subclass
+           appears to clear the bar button item, so make sure it gets put back so we don't get stuck
+           with an undismissable view */
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(addDoneButton)
+                                                     name:UIApplicationDidBecomeActiveNotification
+                                                   object:nil];
     }
     
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0];
+    // The Edit button is in the same place as the Done button we're adding, so disallow editing
     self.allowsEditing = NO;
     [self addDoneButton];
 }
 
 - (void)addDoneButton {
+    /* Only add the done button on the iPad, since otherwise this view controller will be pushed onto
+       the navigation stack, and thus be dismissable with the normal back arrow button */
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissModalViewControllerAnimated:)];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                       style:UIBarButtonItemStyleDone
+                                                                      target:self
+                                                                      action:@selector(dismissModalViewControllerAnimated:)];
         self.navigationItem.rightBarButtonItem = doneButton;
         [doneButton release];
     }
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidBecomeActiveNotification
+                                                  object:nil];
     [super dealloc];
 }
 

@@ -2,8 +2,8 @@
 //  GMPersonViewController.h
 //  GauchoMobile
 //
-//  Created by Aaron Dodson on 4/7/12.
-//  Copyright (c) 2012 Me. All rights reserved.
+//  GMPersonViewController is a subclass of ABPersonViewController that adds a Done button
+//  to allow it to be dismissed when presented modally on the iPad.
 //
 
 #import <AddressBookUI/AddressBookUI.h>
