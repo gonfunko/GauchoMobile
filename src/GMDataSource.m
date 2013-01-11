@@ -14,7 +14,7 @@
 @synthesize password;
 
 //Implementation of singleton design pattern, based on http://eschatologist.net/blog/?p=178
-+ (id)sharedDataSource {
++ (GMDataSource *)sharedDataSource {
     static id sharedDataSource = nil;
     
     if (sharedDataSource == nil) {

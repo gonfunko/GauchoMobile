@@ -29,12 +29,7 @@
         assignmentsController.tabBarItem.image = [UIImage imageNamed:@"assignments"];
 
         
-        UIViewController *participantsController;
-        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-            participantsController = [[ParticipantsViewController alloc] initWithNibName:@"ParticipantsViewController" bundle:[NSBundle mainBundle]];
-        } else {
-            participantsController = [[GMiPadParticipantsViewController alloc] initWithNibName:@"GMiPadParticipantsViewController" bundle:[NSBundle mainBundle]];
-        }
+        UIViewController *participantsController = [[GMParticipantsViewController alloc] initWithNibName:@"GMParticipantsViewController" bundle:[NSBundle mainBundle]];
         participantsController.title = @"People";
         participantsController.tabBarItem.image = [UIImage imageNamed:@"participants"];
         

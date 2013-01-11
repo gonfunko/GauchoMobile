@@ -20,7 +20,7 @@
 @property (copy) NSString *password;
 
 //Returns the only instance of the data source
-+ (id)sharedDataSource;
++ (GMDataSource *)sharedDataSource;
 
 //Adds a GMCourse object to the data source
 - (void)addCourse:(GMCourse *)newCourse;
