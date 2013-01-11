@@ -28,7 +28,7 @@
     } else {
         UISplitViewController *splitViewController = [[GMSplitViewController alloc] init];
         
-        self.detail = [[[MainTabBarViewController alloc] init] autorelease];
+        self.detail = [[[GMOMainTabBarViewController alloc] init] autorelease];
         UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:self.courseController];
         UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:self.detail];
         

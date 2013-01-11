@@ -118,7 +118,7 @@
     [dataSource setCurrentCourse:[[dataSource allCourses] objectAtIndex:indexPath.row]];
     
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        MainTabBarViewController *tabBarController = [[MainTabBarViewController alloc] init];
+        GMOMainTabBarViewController *tabBarController = [[GMOMainTabBarViewController alloc] init];
         [self.navigationController pushViewController:tabBarController animated:YES];
         [tabBarController release];
     }

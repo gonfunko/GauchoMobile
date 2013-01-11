@@ -14,7 +14,7 @@
 @interface GauchoMobileAppDelegate : NSObject <UIApplicationDelegate, UISplitViewControllerDelegate, GMSourceFetcherDelegate> {
 @private
     GMSourceFetcher *sourceFetcher;
-    MainTabBarViewController *detail;
+    GMOMainTabBarViewController *detail;
     CourseViewController *courseController;
     UIPopoverController *masterPopoverController;
     UIAlertView *waitMessage;
@@ -23,7 +23,7 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (retain) UIPopoverController *masterPopoverController;
-@property (retain) MainTabBarViewController *detail;
+@property (retain) GMOMainTabBarViewController *detail;
 @property (retain) CourseViewController *courseController;
 
 @end

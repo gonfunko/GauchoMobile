@@ -7,7 +7,7 @@
 #import <UIKit/UIKit.h>
 #import "GMDataSource.h"
 #import "LoginViewController.h"
-#import "MainTabBarViewController.h"
+#import "GMOMainTabBarViewController.h"
 #import "GMSourceFetcher.h"
 #import "KeychainItemWrapper.h"
 
