@@ -11,7 +11,7 @@
 #import "GMDataSource.h"
 #import "GMForumsParser.h"
 #import "GMForumTopicTableCell.h"
-#import "ForumPostsViewController.h"
+#import "GMOForumPostsViewController.h"
 #import "UITableView+GMAdditions.h"
 
 @interface ForumTopicsViewController : UITableViewController <GMSourceFetcherDelegate> {

@@ -144,7 +144,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ForumPostsViewController *posts = [[ForumPostsViewController alloc] initWithNibName:@"ForumPostsViewController" bundle:[NSBundle mainBundle]];
+    GMOForumPostsViewController *posts = [[GMOForumPostsViewController alloc] initWithNibName:@"ForumPostsViewController" bundle:[NSBundle mainBundle]];
     posts.topic = [self.forum.topics objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:posts animated:YES];
     [posts release];
