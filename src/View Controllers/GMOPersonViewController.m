@@ -1,14 +1,14 @@
 //
-//  GMPersonViewController.m
+//  GMOPersonViewController.m
 //  GauchoMobile
 //
-//  GMPersonViewController is a subclass of ABPersonViewController that adds a Done button
+//  GMOPersonViewController is a subclass of ABPersonViewController that adds a Done button
 //  to allow it to be dismissed when presented modally on the iPad.
 //
 
-#import "GMPersonViewController.h"
+#import "GMOPersonViewController.h"
 
-@implementation GMPersonViewController
+@implementation GMOPersonViewController
 
 - (id)init {
     if (self = [super init]) {

@@ -222,9 +222,9 @@
         CFArrayRef matches = ABAddressBookCopyPeopleWithName(self.addressBook, (CFStringRef)participant.name);
         
         if (CFArrayGetCount(matches) != 0) {
-            /* Assuming we found a match, initialize a GMPersonViewController and set its person
+            /* Assuming we found a match, initialize a GMOPersonViewController and set its person
                to the one we found earlier */
-            GMPersonViewController *controller = [[GMPersonViewController alloc] init];
+            GMOPersonViewController *controller = [[GMOPersonViewController alloc] init];
             controller.displayedPerson = CFArrayGetValueAtIndex(matches, 0);
             
             // On the iPhone, push the view controller...

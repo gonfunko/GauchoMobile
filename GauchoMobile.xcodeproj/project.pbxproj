@@ -52,7 +52,7 @@
 		934DBC8013031B02009BC05D /* GradesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934DBC7F13031B02009BC05D /* GradesViewController.xib */; };
 		934DBC8213031B88009BC05D /* GMParticipantsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934DBC8113031B88009BC05D /* GMParticipantsTableViewController.xib */; };
 		935037CB12EBA28F001CBAD0 /* GMParticipantsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 935037CA12EBA28F001CBAD0 /* GMParticipantsParser.m */; };
-		9359AFD71530A8D60072EDC8 /* GMPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9359AFD61530A8D60072EDC8 /* GMPersonViewController.m */; };
+		9359AFD71530A8D60072EDC8 /* GMOPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9359AFD61530A8D60072EDC8 /* GMOPersonViewController.m */; };
 		936DAFEB15150A6200F99EE8 /* greyforward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 936DAFE715150A6200F99EE8 /* greyforward@2x.png */; };
 		936DAFEC15150A6200F99EE8 /* greyback.png in Resources */ = {isa = PBXBuildFile; fileRef = 936DAFE815150A6200F99EE8 /* greyback.png */; };
 		936DAFED15150A6200F99EE8 /* greyback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 936DAFE915150A6200F99EE8 /* greyback@2x.png */; };
@@ -229,8 +229,8 @@
 		934DBC8113031B88009BC05D /* GMParticipantsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GMParticipantsTableViewController.xib; sourceTree = "<group>"; };
 		935037C912EBA28F001CBAD0 /* GMParticipantsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMParticipantsParser.h; sourceTree = "<group>"; };
 		935037CA12EBA28F001CBAD0 /* GMParticipantsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMParticipantsParser.m; sourceTree = "<group>"; };
-		9359AFD51530A8D60072EDC8 /* GMPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPersonViewController.h; sourceTree = "<group>"; };
-		9359AFD61530A8D60072EDC8 /* GMPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMPersonViewController.m; sourceTree = "<group>"; };
+		9359AFD51530A8D60072EDC8 /* GMOPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMOPersonViewController.h; sourceTree = "<group>"; };
+		9359AFD61530A8D60072EDC8 /* GMOPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMOPersonViewController.m; sourceTree = "<group>"; };
 		936DAFE715150A6200F99EE8 /* greyforward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greyforward@2x.png"; sourceTree = "<group>"; };
 		936DAFE815150A6200F99EE8 /* greyback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greyback.png; sourceTree = "<group>"; };
 		936DAFE915150A6200F99EE8 /* greyback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greyback@2x.png"; sourceTree = "<group>"; };
@@ -704,8 +704,8 @@
 				933586411512E0160002D70D /* GMOMainTabBarViewController.m */,
 				9321933B152B7C86001461EE /* GMSplitViewController.h */,
 				9321933C152B7C86001461EE /* GMSplitViewController.m */,
-				9359AFD51530A8D60072EDC8 /* GMPersonViewController.h */,
-				9359AFD61530A8D60072EDC8 /* GMPersonViewController.m */,
+				9359AFD51530A8D60072EDC8 /* GMOPersonViewController.h */,
+				9359AFD61530A8D60072EDC8 /* GMOPersonViewController.m */,
 				939B9EDE16925E8C00C5BB95 /* GMOParticipantsViewController.h */,
 				939B9EDF16925E8C00C5BB95 /* GMOParticipantsViewController.m */,
 			);
@@ -939,7 +939,7 @@
 				933098FC1513F5A700F891C1 /* GMiPadAssignmentsViewController.m in Sources */,
 				9321933D152B7C86001461EE /* GMSplitViewController.m in Sources */,
 				931F43EE152BAAA70059A9D7 /* GMParticipantsCollectionViewController.m in Sources */,
-				9359AFD71530A8D60072EDC8 /* GMPersonViewController.m in Sources */,
+				9359AFD71530A8D60072EDC8 /* GMOPersonViewController.m in Sources */,
 				93BDDA73161122270007519F /* UITableView+GMAdditions.m in Sources */,
 				93928852164F198F00A9BAD2 /* GTMNSString+HTML.m in Sources */,
 				93361DA3167EA53E00532C5F /* AssignmentsListViewController.m in Sources */,

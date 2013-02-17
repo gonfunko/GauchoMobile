@@ -14,7 +14,7 @@
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMParticipantsParser.h"
-#import "GMPersonViewController.h"
+#import "GMOPersonViewController.h"
 
 @protocol GMParticipantsChildViewController <NSObject>
 @required
