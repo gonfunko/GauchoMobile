@@ -10,7 +10,7 @@
 
 @interface GMParticipantsCollectionViewController () {
     // We keep a reference to our parent view controller to avoid having to cast self.parentViewController
-    GMParticipantsViewController *parent;
+    GMOParticipantsViewController *parent;
 }
 
 @end
@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    parent = (GMParticipantsViewController *)self.parentViewController;
+    parent = (GMOParticipantsViewController *)self.parentViewController;
 
     // Register the class containing our collection view cells with the collection view
     [self.collectionView registerClass:[GMParticipantCollectionViewCell class] forCellWithReuseIdentifier:@"participantCell"];

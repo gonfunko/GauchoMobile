@@ -10,7 +10,7 @@
 #import "DashboardViewController.h"
 #import "AssignmentsViewController.h"
 #import "GMiPadAssignmentsViewController.h"
-#import "GMParticipantsViewController.h"
+#import "GMOParticipantsViewController.h"
 #import "GradesViewController.h"
 #import "ForumViewController.h"
 

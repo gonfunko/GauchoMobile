@@ -1,5 +1,5 @@
 //
-//  GMParticipantsViewController.h
+//  GMOParticipantsViewController.h
 //  GauchoMobile
 //
 //  GMParticipantsTableViewController is responsible for providing data, configuring cells and
@@ -10,7 +10,7 @@
 #import <AddressBook/AddressBook.h>
 #import "GMDataSource.h"
 #import "UITableView+GMAdditions.h"
-#import "GMParticipantsViewController.h"
+#import "GMOParticipantsViewController.h"
 
 @interface GMParticipantsTableViewController : UITableViewController <GMParticipantsChildViewController> 
 

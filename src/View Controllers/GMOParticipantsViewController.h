@@ -1,8 +1,8 @@
 //
-//  GMParticipantsViewController.h
+//  GMOParticipantsViewController.h
 //  GauchoMobile
 //
-//  GMParticipantsViewController is the base view controller for the People view. It handles loading data,
+//  GMOParticipantsViewController is the base view controller for the People view. It handles loading data,
 //  loading and caching images of people enrolled in the class, and handling address book lookups
 //  and presentation. Depending on the current device, it adds GMPeopleTableViewController or
 //  GMPeopleCollectionViewController as a child view controller, which is responsible for managing
@@ -29,7 +29,7 @@
 - (void)loadingFinished;
 @end
 
-@interface GMParticipantsViewController : UIViewController <GMSourceFetcherDelegate>
+@interface GMOParticipantsViewController : UIViewController <GMSourceFetcherDelegate>
 
 @property (retain, readonly) NSMutableDictionary *pictures;
 @property (retain, readonly) NSArray *sections;

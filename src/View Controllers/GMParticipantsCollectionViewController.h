@@ -7,7 +7,7 @@
 //
 
 #import "GMParticipantCollectionViewCell.h"
-#import "GMParticipantsViewController.h"
+#import "GMOParticipantsViewController.h"
 
 @interface GMParticipantsCollectionViewController : UICollectionViewController <GMParticipantsChildViewController>
 

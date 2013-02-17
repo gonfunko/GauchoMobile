@@ -39,7 +39,7 @@
                                        withFinishedUnselectedImage:tabBarIcon];
 
         // Create and configure the Participants VC and tab bar item
-        GMParticipantsViewController *participantsController = [[GMParticipantsViewController alloc] initWithNibName:@"GMParticipantsViewController" bundle:[NSBundle mainBundle]];
+        GMOParticipantsViewController *participantsController = [[GMOParticipantsViewController alloc] initWithNibName:@"GMOParticipantsViewController" bundle:[NSBundle mainBundle]];
         participantsController.title = @"People";
         selectedIcon = [self tabBarIconWithImage:[UIImage imageNamed:@"participants"]
                               andGradientOverlay:[UIImage imageNamed:@"selectedtabbaritemgradient"]];

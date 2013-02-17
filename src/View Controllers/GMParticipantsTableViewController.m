@@ -1,5 +1,5 @@
 //
-//  GMParticipantsViewController.m
+//  GMOParticipantsViewController.m
 //  GauchoMobile
 //
 //  GMParticipantsTableViewController is responsible for providing data, configuring cells and
@@ -10,9 +10,9 @@
 
 @interface GMParticipantsTableViewController () {
     /* This isn't strictly necessary, since UIViewController already has the parentViewController
-       property. However, by declaring it as an instance of GMParticipantsViewController, we can avoid
+       property. However, by declaring it as an instance of GMOParticipantsViewController, we can avoid
        using a cast everywhere we reference our parent view controller */
-    GMParticipantsViewController *parent;
+    GMOParticipantsViewController *parent;
 }
 
 @property (retain) UILabel *noPeopleLabel;
@@ -69,7 +69,7 @@
 // We explicitly set the value of parent when it is passed to us, since self.parentViewController is nil in viewDidLoad
 - (void)didMoveToParentViewController:(UIViewController *)parentVC {
     [super didMoveToParentViewController:parentVC];
-    parent = (GMParticipantsViewController *)parentVC;
+    parent = (GMOParticipantsViewController *)parentVC;
     [self.tableView reloadData];
 }
 

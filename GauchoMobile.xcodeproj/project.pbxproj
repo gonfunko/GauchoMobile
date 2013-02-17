@@ -102,7 +102,7 @@
 		9395D606132881B700332A38 /* TKGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5BF132881B200332A38 /* TKGlobal.m */; };
 		9395D61A132881B700332A38 /* UIImage+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5E7132881B500332A38 /* UIImage+TKCategory.m */; };
 		9395D623132882A200332A38 /* TapkuLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9395D622132882A200332A38 /* TapkuLibrary.bundle */; };
-		939B9EE116925E8C00C5BB95 /* GMParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939B9EDF16925E8C00C5BB95 /* GMParticipantsViewController.m */; };
+		939B9EE116925E8C00C5BB95 /* GMOParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939B9EDF16925E8C00C5BB95 /* GMOParticipantsViewController.m */; };
 		939B9EE216925E8C00C5BB95 /* GMParticipantsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 939B9EE016925E8C00C5BB95 /* GMParticipantsViewController.xib */; };
 		93A9AF64131099CE0012CAF3 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A9AF62131099CE0012CAF3 /* WebViewController.m */; };
 		93A9AF65131099CE0012CAF3 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93A9AF63131099CE0012CAF3 /* WebViewController.xib */; };
@@ -300,8 +300,8 @@
 		9395D5E6132881B500332A38 /* UIImage+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TKCategory.h"; sourceTree = "<group>"; };
 		9395D5E7132881B500332A38 /* UIImage+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+TKCategory.m"; sourceTree = "<group>"; };
 		9395D622132882A200332A38 /* TapkuLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapkuLibrary.bundle; sourceTree = "<group>"; };
-		939B9EDE16925E8C00C5BB95 /* GMParticipantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMParticipantsViewController.h; sourceTree = "<group>"; };
-		939B9EDF16925E8C00C5BB95 /* GMParticipantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMParticipantsViewController.m; sourceTree = "<group>"; };
+		939B9EDE16925E8C00C5BB95 /* GMOParticipantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMOParticipantsViewController.h; sourceTree = "<group>"; };
+		939B9EDF16925E8C00C5BB95 /* GMOParticipantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMOParticipantsViewController.m; sourceTree = "<group>"; };
 		939B9EE016925E8C00C5BB95 /* GMParticipantsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GMParticipantsViewController.xib; path = "../../src/View Controllers/GMParticipantsViewController.xib"; sourceTree = "<group>"; };
 		93A9AF61131099CE0012CAF3 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		93A9AF62131099CE0012CAF3 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
@@ -706,8 +706,8 @@
 				9321933C152B7C86001461EE /* GMSplitViewController.m */,
 				9359AFD51530A8D60072EDC8 /* GMPersonViewController.h */,
 				9359AFD61530A8D60072EDC8 /* GMPersonViewController.m */,
-				939B9EDE16925E8C00C5BB95 /* GMParticipantsViewController.h */,
-				939B9EDF16925E8C00C5BB95 /* GMParticipantsViewController.m */,
+				939B9EDE16925E8C00C5BB95 /* GMOParticipantsViewController.h */,
+				939B9EDF16925E8C00C5BB95 /* GMOParticipantsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -945,7 +945,7 @@
 				93361DA3167EA53E00532C5F /* AssignmentsListViewController.m in Sources */,
 				9313F1411683C2FA008127DC /* GMParticipantCollectionViewCell.m in Sources */,
 				93E703C2168FB2D700DF1F2D /* GMForumPostTableCell.m in Sources */,
-				939B9EE116925E8C00C5BB95 /* GMParticipantsViewController.m in Sources */,
+				939B9EE116925E8C00C5BB95 /* GMOParticipantsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

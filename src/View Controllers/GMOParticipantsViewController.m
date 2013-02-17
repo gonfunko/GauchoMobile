@@ -1,21 +1,21 @@
 //
-//  GMParticipantsViewController.m
+//  GMOParticipantsViewController.m
 //  GauchoMobile
 //
-//  GMParticipantsViewController is the base view controller for the People view. It handles loading data,
+//  GMOParticipantsViewController is the base view controller for the People view. It handles loading data,
 //  loading and caching images of people enrolled in the class, and handling address book lookups
 //  and presentation. Depending on the current device, it adds GMPeopleTableViewController or
 //  GMPeopleCollectionViewController as a child view controller, which is responsible for managing
 //  the view the user ultimately sees.
 //
 
-#import "GMParticipantsViewController.h"
+#import "GMOParticipantsViewController.h"
 #import "GMParticipantsTableViewController.h"
 #import "GMParticipantsCollectionViewController.h"
 
-@interface GMParticipantsViewController () {
+@interface GMOParticipantsViewController () {
     GMSourceFetcher *fetcher;
-    /* GMParticipantsViewController does not control any view the user interacts with – it just 
+    /* GMOParticipantsViewController does not control any view the user interacts with – it just 
        contains common logic and data structures shared between a table view or collection view view
        controller, which is added as a child view controller and is responsible for the view the 
        user interacts with. This ivar is that child view controller. */
@@ -29,7 +29,7 @@
 @end
 
 
-@implementation GMParticipantsViewController
+@implementation GMOParticipantsViewController
 
 @synthesize pictures;
 @synthesize sections;
@@ -131,6 +131,7 @@
 /* On the iPad, the current course can be changed while our view is still visible. We listen to KVO
    changes on the data source's current course property, and load participants afresh when it changes */
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    [presentationViewController reloadData];
     [self loadParticipants];
 }
 
