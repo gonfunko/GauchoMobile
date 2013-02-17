@@ -54,8 +54,13 @@
                     
                     NSString *url = [currentLink substringToIndex:[currentLink rangeOfString:@"\""].location];
                     
-                    currentLink = [currentLink substringFromIndex:[currentLink rangeOfString:@"<span>"].location + 6];
-                    NSString *title = [[currentLink substringToIndex:[currentLink rangeOfString:@"<"].location] gtm_stringByUnescapingFromHTML];
+                    NSString *title;
+                    if ([currentLink rangeOfString:@"<span>"].location != NSNotFound) {
+                        currentLink = [currentLink substringFromIndex:[currentLink rangeOfString:@"<span>"].location + 6];
+                        title = [[currentLink substringToIndex:[currentLink rangeOfString:@"<"].location] gtm_stringByUnescapingFromHTML];
+                    } else {
+                        title = @"Link";
+                    }
                     
                     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:title, @"title", url, @"url", nil];
                     [allLinks addObject:dict];
