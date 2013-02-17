@@ -69,7 +69,7 @@
                Normally we use the first column ("Grade") in the first if above, but sometimes that contains letter grades instead of a numeric score
                We use its value by default, but if there's a % in this column, that strongly implies it also contains a number, so we'll use it instead
             */
-            if ([gradeInformation count] > 2 && [[gradeInformation objectAtIndex:2] rangeOfString:@"%"].location != NSNotFound) {
+            if ([gradeInformation count] > 2 && [[gradeInformation objectAtIndex:2] rangeOfString:@"%"].location != NSNotFound && score == -1) {
                 score = [self numericalScoreFromScoreDescription:[gradeInformation objectAtIndex:2]];
             }
             
@@ -99,7 +99,12 @@
 }
 
 - (int)numericalScoreFromScoreDescription:(NSString *)description {
-    if ([description isEqualToString:@"-"])
+    if ([description isEqualToString:@"-"]
+        || [description hasPrefix:@"A"]
+        || [description hasPrefix:@"B"]
+        || [description hasPrefix:@"C"]
+        || [description hasPrefix:@"D"]
+        || [description hasPrefix:@"F"])
         return -1;
     else if ([description rangeOfString:@" "].location != NSNotFound) {
         int score = (int)[[description substringToIndex:[description rangeOfString:@" "].location] floatValue];
@@ -113,11 +118,11 @@
 - (int)maxValueFromRange:(NSString *)range {
     
     int max;
-    if ([range rangeOfString:@" "].location != NSNotFound) {
-        range = [range substringFromIndex:[range rangeOfString:@" "].location + 1];
-        max = (int)[[range substringWithRange:NSMakeRange([range rangeOfString:@";"].location + 1, [range rangeOfString:@" "].location - ([range rangeOfString:@";"].location + 1))] floatValue];
-    }
-    else {
+    
+    if ([range rangeOfString:@"–"].location != NSNotFound) {
+        range = [range substringFromIndex:[range rangeOfString:@"–"].location + 1];
+        max = (int)[range floatValue];
+    } else {
         max = (int)[[range substringFromIndex:[range rangeOfString:@";"].location + 1] floatValue];
     }
     
