@@ -7,7 +7,6 @@
 //
 
 #import "ForumViewController.h"
-#import "GMSplitViewController.h"
 
 @implementation ForumViewController
 
@@ -55,17 +54,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     self.navigationController.visibleViewController.navigationItem.title = @"Forums";
     self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = nil;
-}
-
-- (void)viewWillLayoutSubviews
-{
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-        self.navigationController.topViewController.navigationItem.leftBarButtonItem = ((GMSplitViewController *)[self splitViewController]).barButtonItem;
-        } else {
-            self.navigationController.topViewController.navigationItem.leftBarButtonItem = nil;
-        }
-    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

@@ -26,7 +26,7 @@
         [navController pushViewController:courseController animated:NO];
         [navController release];
     } else {
-        UISplitViewController *splitViewController = [[GMSplitViewController alloc] init];
+        UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
         
         self.detail = [[[GMOMainTabBarViewController alloc] init] autorelease];
         UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:self.courseController];
@@ -50,8 +50,6 @@
     LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
     [self.window.rootViewController presentModalViewController:login animated:NO];
     [login release];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissMasterPopover) name:@"GMLogoutNotification" object:nil];
     
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:24/255.0 green:69/255.0 blue:135/255.0 alpha:1.0]];
 
@@ -142,32 +140,29 @@
     [indicator release];
 }
 
+- (void)splitViewController:(UISplitViewController *)splitController
+     willHideViewController:(UIViewController *)viewController
+          withBarButtonItem:(UIBarButtonItem *)barButtonItem
+       forPopoverController:(UIPopoverController *)popoverController
+{
+    barButtonItem.title = NSLocalizedString(@"Courses", @"Courses");
+    [self.detail.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
+    self.masterPopoverController = popoverController;
+}
+
+- (void)splitViewController:(UISplitViewController *)splitController
+     willShowViewController:(UIViewController *)viewController
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    // Called when the view is shown again in the split view, invalidating the button and popover controller.
+    [self.detail.navigationItem setLeftBarButtonItem:nil animated:YES];
+    self.masterPopoverController = nil;
+}
+
 - (void)dismissMasterPopover {
     [self.masterPopoverController dismissPopoverAnimated:YES];
     self.masterPopoverController = nil;
 }
-
-
-- (void)splitViewController:(UISplitViewController*)svc
-     willHideViewController:(UIViewController *)aViewController 
-          withBarButtonItem:(UIBarButtonItem*)barButtonItem 
-       forPopoverController:(UIPopoverController*)pc
-{
-    [barButtonItem setTitle:@"Courses"];
-    ((GMSplitViewController *)svc).barButtonItem = barButtonItem;
-    self.masterPopoverController = pc;
-}
-
-
-- (void)splitViewController:(UISplitViewController*)svc
-     willShowViewController:(UIViewController *)aViewController 
-  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    ((GMSplitViewController *)svc).barButtonItem = nil;
-    self.masterPopoverController = nil;
-}
-
-
 
 - (void)dealloc {
     [window release];

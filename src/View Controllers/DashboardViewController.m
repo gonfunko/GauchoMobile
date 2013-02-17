@@ -84,17 +84,6 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)viewWillLayoutSubviews
-{
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-            self.navigationController.topViewController.navigationItem.leftBarButtonItem = ((GMSplitViewController *)[self splitViewController]).barButtonItem;
-        } else {
-            self.navigationController.topViewController.navigationItem.leftBarButtonItem = nil;
-        }
-    }
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         return (toInterfaceOrientation == UIInterfaceOrientationPortrait);

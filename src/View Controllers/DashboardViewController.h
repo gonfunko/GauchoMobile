@@ -14,7 +14,6 @@
 #import "GMDataSource.h"
 #import "GMTextViewTableCell.h"
 #import "WebViewController.h"
-#import "GMSplitViewController.h"
 
 @interface DashboardViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private

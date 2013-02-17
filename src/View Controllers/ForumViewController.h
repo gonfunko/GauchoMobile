@@ -11,7 +11,6 @@
 #import "GMDataSource.h"
 #import "GMForumsParser.h"
 #import "ForumTopicsViewController.h"
-#import "GMSplitViewController.h"
 #import "UITableView+GMAdditions.h"
 
 @interface ForumViewController : UITableViewController <GMSourceFetcherDelegate> {
