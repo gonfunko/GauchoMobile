@@ -56,8 +56,7 @@
 		936DAFEC15150A6200F99EE8 /* greyback.png in Resources */ = {isa = PBXBuildFile; fileRef = 936DAFE815150A6200F99EE8 /* greyback.png */; };
 		936DAFED15150A6200F99EE8 /* greyback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 936DAFE915150A6200F99EE8 /* greyback@2x.png */; };
 		936DAFEE15150A6200F99EE8 /* greyforward.png in Resources */ = {isa = PBXBuildFile; fileRef = 936DAFEA15150A6200F99EE8 /* greyforward.png */; };
-		93725DC5150D2EAA0095B420 /* ForumTopicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93725DC3150D2EAA0095B420 /* ForumTopicsViewController.m */; };
-		93725DC6150D2EAA0095B420 /* ForumTopicsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93725DC4150D2EAA0095B420 /* ForumTopicsViewController.xib */; };
+		93725DC5150D2EAA0095B420 /* GMOForumTopicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93725DC3150D2EAA0095B420 /* GMOForumTopicsViewController.m */; };
 		93725DC9150D35D60095B420 /* GMForumTopicTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93725DC8150D35D60095B420 /* GMForumTopicTableCell.m */; };
 		93725DCB150D4DC70095B420 /* ForumTopicTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93725DCA150D4DC70095B420 /* ForumTopicTableCell.xib */; };
 		93725DCF150D56E50095B420 /* GMOForumPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93725DCD150D56E40095B420 /* GMOForumPostsViewController.m */; };
@@ -127,7 +126,6 @@
 		93BDDA6C161117800007519F /* ipadtabbarbackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BDDA6B161117800007519F /* ipadtabbarbackground@2x.png */; };
 		93BDDA6F161118020007519F /* ipadtabbarselection.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BDDA6D161118020007519F /* ipadtabbarselection.png */; };
 		93BDDA70161118020007519F /* ipadtabbarbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BDDA6E161118020007519F /* ipadtabbarbackground.png */; };
-		93BDDA73161122270007519F /* UITableView+GMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BDDA72161122270007519F /* UITableView+GMAdditions.m */; };
 		93C257DF14CCC1810079E5CD /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C257DE14CCC1800079E5CD /* KeychainItemWrapper.m */; };
 		93C257E214CCC2800079E5CD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C257E014CCC2760079E5CD /* Security.framework */; };
 		93C257E414CCCE3F0079E5CD /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 93C257E314CCCE3F0079E5CD /* Icon.png */; };
@@ -136,6 +134,7 @@
 		93C58BD514C3525A001F7558 /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C58BD314C3525A001F7558 /* AssignmentDetailViewController.m */; };
 		93C58BD614C3525A001F7558 /* AssignmentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */; };
 		93C58BD914C35544001F7558 /* GMWebViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C58BD814C35544001F7558 /* GMWebViewTableCell.m */; };
+		93CAE16716D1893A0059040B /* GMOTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CAE16616D1893A0059040B /* GMOTableView.m */; };
 		93D0759113340D0B0025BF9E /* Month Calendar Left Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0758F13340D0B0025BF9E /* Month Calendar Left Arrow@2x.png */; };
 		93D0759213340D0B0025BF9E /* Month Calendar Right Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93D0759013340D0B0025BF9E /* Month Calendar Right Arrow@2x.png */; };
 		93D6CB2114C53DED00F8BFDB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D6CB1F14C53DE300F8BFDB /* MessageUI.framework */; };
@@ -232,9 +231,8 @@
 		936DAFE815150A6200F99EE8 /* greyback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greyback.png; sourceTree = "<group>"; };
 		936DAFE915150A6200F99EE8 /* greyback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greyback@2x.png"; sourceTree = "<group>"; };
 		936DAFEA15150A6200F99EE8 /* greyforward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greyforward.png; sourceTree = "<group>"; };
-		93725DC2150D2EAA0095B420 /* ForumTopicsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumTopicsViewController.h; sourceTree = "<group>"; };
-		93725DC3150D2EAA0095B420 /* ForumTopicsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumTopicsViewController.m; sourceTree = "<group>"; };
-		93725DC4150D2EAA0095B420 /* ForumTopicsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForumTopicsViewController.xib; sourceTree = "<group>"; };
+		93725DC2150D2EAA0095B420 /* GMOForumTopicsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMOForumTopicsViewController.h; sourceTree = "<group>"; };
+		93725DC3150D2EAA0095B420 /* GMOForumTopicsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMOForumTopicsViewController.m; sourceTree = "<group>"; };
 		93725DC7150D35D60095B420 /* GMForumTopicTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMForumTopicTableCell.h; sourceTree = "<group>"; };
 		93725DC8150D35D60095B420 /* GMForumTopicTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMForumTopicTableCell.m; sourceTree = "<group>"; };
 		93725DCA150D4DC70095B420 /* ForumTopicTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForumTopicTableCell.xib; sourceTree = "<group>"; };
@@ -330,8 +328,6 @@
 		93BDDA6B161117800007519F /* ipadtabbarbackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipadtabbarbackground@2x.png"; sourceTree = "<group>"; };
 		93BDDA6D161118020007519F /* ipadtabbarselection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipadtabbarselection.png; sourceTree = "<group>"; };
 		93BDDA6E161118020007519F /* ipadtabbarbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipadtabbarbackground.png; sourceTree = "<group>"; };
-		93BDDA71161122270007519F /* UITableView+GMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+GMAdditions.h"; sourceTree = "<group>"; };
-		93BDDA72161122270007519F /* UITableView+GMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+GMAdditions.m"; sourceTree = "<group>"; };
 		93C257DD14CCC1800079E5CD /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		93C257DE14CCC1800079E5CD /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		93C257E014CCC2760079E5CD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -343,6 +339,8 @@
 		93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentDetailViewController.xib; sourceTree = "<group>"; };
 		93C58BD714C35544001F7558 /* GMWebViewTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMWebViewTableCell.h; sourceTree = "<group>"; };
 		93C58BD814C35544001F7558 /* GMWebViewTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMWebViewTableCell.m; sourceTree = "<group>"; };
+		93CAE16516D1893A0059040B /* GMOTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMOTableView.h; sourceTree = "<group>"; };
+		93CAE16616D1893A0059040B /* GMOTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMOTableView.m; sourceTree = "<group>"; };
 		93D0758F13340D0B0025BF9E /* Month Calendar Left Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Month Calendar Left Arrow@2x.png"; path = "TapkuLibrary.bundle/Images/calendar/Month Calendar Left Arrow@2x.png"; sourceTree = "<group>"; };
 		93D0759013340D0B0025BF9E /* Month Calendar Right Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Month Calendar Right Arrow@2x.png"; path = "TapkuLibrary.bundle/Images/calendar/Month Calendar Right Arrow@2x.png"; sourceTree = "<group>"; };
 		93D6CB1F14C53DE300F8BFDB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -403,7 +401,6 @@
 				939B9EE016925E8C00C5BB95 /* GMParticipantsViewController.xib */,
 				93361DA2167EA53E00532C5F /* AssignmentsListViewController.xib */,
 				93725DCE150D56E50095B420 /* GMOForumPostsViewController.xib */,
-				93725DC4150D2EAA0095B420 /* ForumTopicsViewController.xib */,
 				9385EFFD15086BE800872595 /* ForumViewController.xib */,
 				93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */,
 				93A9AF63131099CE0012CAF3 /* WebViewController.xib */,
@@ -693,8 +690,8 @@
 				93C58BD314C3525A001F7558 /* AssignmentDetailViewController.m */,
 				9385EFFB15086BE800872595 /* ForumViewController.h */,
 				9385EFFC15086BE800872595 /* ForumViewController.m */,
-				93725DC2150D2EAA0095B420 /* ForumTopicsViewController.h */,
-				93725DC3150D2EAA0095B420 /* ForumTopicsViewController.m */,
+				93725DC2150D2EAA0095B420 /* GMOForumTopicsViewController.h */,
+				93725DC3150D2EAA0095B420 /* GMOForumTopicsViewController.m */,
 				93725DCC150D56E40095B420 /* GMOForumPostsViewController.h */,
 				93725DCD150D56E40095B420 /* GMOForumPostsViewController.m */,
 				933586401512E0160002D70D /* GMOMainTabBarViewController.h */,
@@ -717,6 +714,8 @@
 				933098F61513F55400F891C1 /* ADCalendarView.m */,
 				9313F13F1683C2FA008127DC /* GMParticipantCollectionViewCell.h */,
 				9313F1401683C2FA008127DC /* GMParticipantCollectionViewCell.m */,
+				93CAE16516D1893A0059040B /* GMOTableView.h */,
+				93CAE16616D1893A0059040B /* GMOTableView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -727,8 +726,6 @@
 				9392884F164F198F00A9BAD2 /* GTMDefines.h */,
 				93928850164F198F00A9BAD2 /* GTMNSString+HTML.h */,
 				93928851164F198F00A9BAD2 /* GTMNSString+HTML.m */,
-				93BDDA71161122270007519F /* UITableView+GMAdditions.h */,
-				93BDDA72161122270007519F /* UITableView+GMAdditions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -835,7 +832,6 @@
 				9385EFFF15086BE800872595 /* ForumViewController.xib in Resources */,
 				9324D9A115086F1200B10D3F /* forums.png in Resources */,
 				9324D9A215086F1200B10D3F /* forums@2x.png in Resources */,
-				93725DC6150D2EAA0095B420 /* ForumTopicsViewController.xib in Resources */,
 				93725DCB150D4DC70095B420 /* ForumTopicTableCell.xib in Resources */,
 				93725DD0150D56E50095B420 /* GMOForumPostsViewController.xib in Resources */,
 				933098FD1513F5A700F891C1 /* GMiPadAssignmentsViewController.xib in Resources */,
@@ -926,7 +922,7 @@
 				9385EFF41508696C00872595 /* GMForumPost.m in Sources */,
 				9385EFF51508696C00872595 /* GMForumTopic.m in Sources */,
 				9385EFFE15086BE800872595 /* ForumViewController.m in Sources */,
-				93725DC5150D2EAA0095B420 /* ForumTopicsViewController.m in Sources */,
+				93725DC5150D2EAA0095B420 /* GMOForumTopicsViewController.m in Sources */,
 				93725DC9150D35D60095B420 /* GMForumTopicTableCell.m in Sources */,
 				93725DCF150D56E50095B420 /* GMOForumPostsViewController.m in Sources */,
 				933586421512E0160002D70D /* GMOMainTabBarViewController.m in Sources */,
@@ -934,12 +930,12 @@
 				933098FC1513F5A700F891C1 /* GMiPadAssignmentsViewController.m in Sources */,
 				931F43EE152BAAA70059A9D7 /* GMParticipantsCollectionViewController.m in Sources */,
 				9359AFD71530A8D60072EDC8 /* GMOPersonViewController.m in Sources */,
-				93BDDA73161122270007519F /* UITableView+GMAdditions.m in Sources */,
 				93928852164F198F00A9BAD2 /* GTMNSString+HTML.m in Sources */,
 				93361DA3167EA53E00532C5F /* AssignmentsListViewController.m in Sources */,
 				9313F1411683C2FA008127DC /* GMParticipantCollectionViewCell.m in Sources */,
 				93E703C2168FB2D700DF1F2D /* GMForumPostTableCell.m in Sources */,
 				939B9EE116925E8C00C5BB95 /* GMOParticipantsViewController.m in Sources */,
+				93CAE16716D1893A0059040B /* GMOTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

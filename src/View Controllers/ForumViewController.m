@@ -151,7 +151,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ForumTopicsViewController *topics = [[ForumTopicsViewController alloc] initWithNibName:@"ForumTopicsViewController" bundle:[NSBundle mainBundle]];
+    GMOForumTopicsViewController *topics = [[GMOForumTopicsViewController alloc] init];
     topics.forum = [[[[GMDataSource sharedDataSource] currentCourse] forums] objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:topics animated:YES];
     [topics release];

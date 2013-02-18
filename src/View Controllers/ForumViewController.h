@@ -10,8 +10,7 @@
 #import "GMSourceFetcher.h"
 #import "GMDataSource.h"
 #import "GMForumsParser.h"
-#import "ForumTopicsViewController.h"
-#import "UITableView+GMAdditions.h"
+#import "GMOForumTopicsViewController.h"
 
 @interface ForumViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private
