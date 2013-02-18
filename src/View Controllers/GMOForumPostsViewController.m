@@ -8,25 +8,25 @@
 
 #import "GMOForumPostsViewController.h"
 
-@interface GMOForumPostsViewController () {
-    GMSourceFetcher *fetcher;
-    NSDateFormatter *formatter;
-    NSMutableDictionary *pictures;
-}
+@interface GMOForumPostsViewController ()
+
+@property (retain) GMSourceFetcher *fetcher;
+@property (retain) NSDateFormatter *formatter;
+@property (retain) NSMutableDictionary *pictures;
 
 @end
 
 @implementation GMOForumPostsViewController
 
+@synthesize fetcher;
+@synthesize formatter;
+@synthesize pictures;
 @synthesize topic;
 
 #pragma mark - Initialization
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Initialize our topic to nil
-        self.topic = nil;
-        
         /* Create and configure a date formatter to be used when formatting times for display
            This is done once here because NSDateFormatters have notoriously high overhead, so we don't
            want to make one every time the table requests a cell */
@@ -111,7 +111,7 @@
     [self.refreshControl beginRefreshing];
     
     // Load the posts for our topic
-    [fetcher postsForTopic:self.topic withDelegate:self];
+    [self.fetcher postsForTopic:self.topic withDelegate:self];
 }
 
 - (void)loadPictures {
@@ -134,7 +134,7 @@
                     UIImage *photo = [UIImage imageWithData:data];
                     //It's possible (if we have a bad URL) that we could get a valid response that isn't image data. Hence, we need to check we actually have an image.
                     if (photo) {
-                        [pictures setObject:photo forKey:url];
+                        [self.pictures setObject:photo forKey:url];
                         [self.tableView reloadData];
                     }
                 }
@@ -205,11 +205,11 @@
     
     // Configure the cell with the post's information
     cell.name.text = post.author.name;
-    cell.date.text = [NSString stringWithFormat:@"Posted %@", [formatter stringFromDate:post.postDate]];
-    if ([pictures objectForKey:[post.author.imageURL absoluteString]] == nil) {
+    cell.date.text = [NSString stringWithFormat:@"Posted %@", [self.formatter stringFromDate:post.postDate]];
+    if ([self.pictures objectForKey:[post.author.imageURL absoluteString]] == nil) {
         cell.userPhoto.image = [UIImage imageNamed:@"defaulticon.png"];
     } else {
-        cell.userPhoto.image = [pictures objectForKey:[post.author.imageURL absoluteString]];
+        cell.userPhoto.image = [self.pictures objectForKey:[post.author.imageURL absoluteString]];
     }
     cell.post.text = post.message;
     
@@ -241,10 +241,11 @@
 #pragma mark - Cleanup
 
 - (void)dealloc {
-    self.topic = nil;
+    [topic release];
     [fetcher release];
     [formatter release];
     [pictures release];
+
     [super dealloc];
 }
 

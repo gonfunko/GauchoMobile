@@ -13,15 +13,15 @@
 #import "GMParticipantsTableViewController.h"
 #import "GMParticipantsCollectionViewController.h"
 
-@interface GMOParticipantsViewController () {
-    GMSourceFetcher *fetcher;
-    /* GMOParticipantsViewController does not control any view the user interacts with – it just 
-       contains common logic and data structures shared between a table view or collection view view
-       controller, which is added as a child view controller and is responsible for the view the 
-       user interacts with. This ivar is that child view controller. */
-    UIViewController <GMParticipantsChildViewController> *presentationViewController;
-}
+@interface GMOParticipantsViewController ()
 
+/* GMOParticipantsViewController does not control any view the user interacts with – it just
+ contains common logic and data structures shared between a table view or collection view view
+ controller, which is added as a child view controller and is responsible for the view the
+ user interacts with. This property is that child view controller. */
+@property (retain) UIViewController <GMParticipantsChildViewController> *presentationViewController;
+
+@property (retain) GMSourceFetcher *fetcher;
 @property (retain, readwrite) NSMutableDictionary *pictures;
 @property (retain, readwrite) NSArray *sections;
 @property (assign, readwrite) ABAddressBookRef addressBook;
@@ -31,6 +31,8 @@
 
 @implementation GMOParticipantsViewController
 
+@synthesize presentationViewController;
+@synthesize fetcher;
 @synthesize pictures;
 @synthesize sections;
 @synthesize addressBook;
@@ -52,8 +54,7 @@
             pictures = [[NSMutableDictionary alloc] init];
         }
 
-        GMSourceFetcher *sourceFetcher = [[GMSourceFetcher alloc] init];
-        fetcher = sourceFetcher;
+        fetcher = [[GMSourceFetcher alloc] init];
         
         CFErrorRef error = nil;
         addressBook = ABAddressBookCreateWithOptions(NULL, &error);
@@ -155,6 +156,7 @@
 
 - (void)sourceFetchDidFailWithError:(NSError *)error {
     [presentationViewController loadingFinished];
+    [presentationViewController reloadData];
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error loading people"
                                                     message:[error localizedDescription]
