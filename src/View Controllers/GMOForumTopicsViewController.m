@@ -158,7 +158,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     // Create a GMOForumPostsViewController, set its topic to the one that was selected, and present it
-    GMOForumPostsViewController *posts = [[GMOForumPostsViewController alloc] initWithNibName:@"ForumPostsViewController" bundle:[NSBundle mainBundle]];
+    GMOForumPostsViewController *posts = [[GMOForumPostsViewController alloc] initWithNibName:@"GMOForumPostsViewController" bundle:[NSBundle mainBundle]];
     posts.topic = [self.forum.topics objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:posts animated:YES];
     [posts release];

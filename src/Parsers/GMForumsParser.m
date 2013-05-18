@@ -93,7 +93,7 @@
         topic.title = [el.content gtm_stringByUnescapingFromHTML];
         
         NSString *topicID = [el.attributes objectForKey:@"href"];
-        topicID = [topicID substringFromIndex:[topicID length] - 5];
+        topicID = [topicID substringFromIndex:[topicID length] - 6];
         topic.topicID = topicID;
         [allTopics addObject:topic];
         [topic release];
