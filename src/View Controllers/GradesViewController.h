@@ -9,12 +9,11 @@
 #import "GMDataSource.h"
 #import "GMGradesParser.h"
 #import "GMGradesTableViewCell.h"
-#import "UITableView+GMAdditions.h"
+#import "GMOTableView.h"
 
 @interface GradesViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private
     GMSourceFetcher *fetcher;
-    UITextField *noGradesLabel;
     NSInteger pendingID;
 }
 

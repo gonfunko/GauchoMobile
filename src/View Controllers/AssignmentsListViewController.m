@@ -14,17 +14,7 @@
     self.tableView.scrollsToTop = YES;
     pendingID = 0;
     
-    noAssignmentsLabel = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
-    noAssignmentsLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    noAssignmentsLabel.enabled = NO;
-    noAssignmentsLabel.text = @"No Assignments";
-    noAssignmentsLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
-    noAssignmentsLabel.textColor = [UIColor grayColor];
-    noAssignmentsLabel.textAlignment = UITextAlignmentCenter;
-    noAssignmentsLabel.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    noAssignmentsLabel.hidden = YES;
-    [self.tableView addSubview:noAssignmentsLabel];
-    [noAssignmentsLabel release];
+    ((GMOTableView *)self.tableView).placeholderLabel.text = @"No Assignments";
     
     fetcher = [[GMSourceFetcher alloc] init];
     
@@ -76,10 +66,6 @@
     [self.refreshControl endRefreshing];
 }
 
-- (void)viewDidLayoutSubviews {
-    noAssignmentsLabel.frame = [self.tableView boundsForPlaceholderLabel];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -90,12 +76,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     int rows = [[[[GMDataSource sharedDataSource] currentCourse] assignments] count];
-    
-    if (rows == 0) {
-        noAssignmentsLabel.hidden = NO;
-    } else {
-        noAssignmentsLabel.hidden = YES;
-    }
     
     return rows;
 }

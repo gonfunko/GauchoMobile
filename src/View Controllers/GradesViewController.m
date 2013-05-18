@@ -48,17 +48,7 @@
     self.refreshControl = refreshControl;
     [refreshControl release];
     
-    noGradesLabel = [[UITextField alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
-    noGradesLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    noGradesLabel.hidden = YES;
-    noGradesLabel.text = @"No Grades";
-    noGradesLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
-    noGradesLabel.textColor = [UIColor grayColor];
-    noGradesLabel.textAlignment = UITextAlignmentCenter;
-    noGradesLabel.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    noGradesLabel.userInteractionEnabled = NO;
-    [self.tableView addSubview:noGradesLabel];
-    [noGradesLabel release];
+    ((GMOTableView *)self.tableView).placeholderLabel.text = @"No Grades";
 }
 
 - (void)viewDidUnload
@@ -74,8 +64,6 @@
     self.tabBarController.navigationItem.title = @"Grades";
     self.tabBarController.navigationItem.rightBarButtonItem = nil;
     
-    noGradesLabel.frame = [self.tableView boundsForPlaceholderLabel];
-    
     GMCourse *currentCourse = [[GMDataSource sharedDataSource] currentCourse];
     fetcher = [[GMSourceFetcher alloc] init];
     
@@ -84,20 +72,6 @@
     }
     
     pendingID = 0;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    noGradesLabel.frame = [self.tableView boundsForPlaceholderLabel];
 }
 
 #pragma mark - Data loading methods
@@ -131,12 +105,6 @@
     [parser release];
     
     [self.tableView reloadData];
-    
-    if ([grades count] == 0) {
-        noGradesLabel.hidden = NO;
-    } else {
-        noGradesLabel.hidden = YES;
-    }
     
     if (pendingID != 0) {
         [self showGradeWithID:[NSNumber numberWithInteger:pendingID]];

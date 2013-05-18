@@ -27,6 +27,7 @@
         self.placeholderLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
         self.placeholderLabel.textColor = [UIColor grayColor];
         self.placeholderLabel.textAlignment = UITextAlignmentCenter;
+        self.placeholderLabel.backgroundColor = [UIColor clearColor];
         self.placeholderLabel.hidden = YES;
         
         // Add the label to the table view
@@ -44,6 +45,7 @@
         self.placeholderLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
         self.placeholderLabel.textColor = [UIColor grayColor];
         self.placeholderLabel.textAlignment = UITextAlignmentCenter;
+        self.placeholderLabel.backgroundColor = [UIColor clearColor];
         self.placeholderLabel.hidden = YES;
         
         // Add the label to the table view

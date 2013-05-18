@@ -11,11 +11,11 @@
 #import "GMDataSource.h"
 #import "GMForumsParser.h"
 #import "GMOForumTopicsViewController.h"
+#import "GMOTableView.h"
 
 @interface ForumViewController : UITableViewController <GMSourceFetcherDelegate> {
 @private
     GMSourceFetcher *fetcher;
-    UITextField *noForumsLabel;
 }
 
 - (void)loadForums;

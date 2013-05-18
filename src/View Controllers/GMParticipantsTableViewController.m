@@ -15,32 +15,10 @@
     GMOParticipantsViewController *parent;
 }
 
-@property (retain) UILabel *noPeopleLabel;
-
 @end
 
 
 @implementation GMParticipantsTableViewController
-
-@synthesize noPeopleLabel;
-
-#pragma mark -
-#pragma mark Setup and teardown
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        noPeopleLabel = [[UILabel alloc] initWithFrame:[self.tableView boundsForPlaceholderLabel]];
-    }
-    
-    return self;
-}
-
-- (void)dealloc {
-    [noPeopleLabel removeFromSuperview];
-    [noPeopleLabel release];
-    
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -57,13 +35,7 @@
     [refreshControl release];
     
     // Configure the placeholder label displayed when there are no participants
-    self.noPeopleLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    self.noPeopleLabel.text = @"No People";
-    self.noPeopleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0];
-    self.noPeopleLabel.textColor = [UIColor grayColor];
-    self.noPeopleLabel.textAlignment = UITextAlignmentCenter;
-    self.noPeopleLabel.userInteractionEnabled = NO;
-    [self.tableView addSubview:self.noPeopleLabel];
+    ((GMOTableView *)self.tableView).placeholderLabel.text = @"No People";
 }
 
 // We explicitly set the value of parent when it is passed to us, since self.parentViewController is nil in viewDidLoad

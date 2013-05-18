@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
 #import "GMDataSource.h"
-#import "UITableView+GMAdditions.h"
 #import "GMOParticipantsViewController.h"
+#import "GMOTableView.h"
 
 @interface GMParticipantsTableViewController : UITableViewController <GMParticipantsChildViewController> 
 

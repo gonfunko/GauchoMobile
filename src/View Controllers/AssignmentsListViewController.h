@@ -12,10 +12,9 @@
 #import "GMDataSource.h"
 #import "GMAssignmentsParser.h"
 #import "AssignmentDetailViewController.h"
-#import "UITableView+GMAdditions.h"
+#import "GMOTableView.h"
 
 @interface AssignmentsListViewController : UITableViewController <GMSourceFetcherDelegate> {
-    UITextField *noAssignmentsLabel;
     NSInteger pendingID;
     GMSourceFetcher *fetcher;
 }
