@@ -49,7 +49,7 @@
 		934DBC7D13031AF5009BC05D /* GradesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DBC7A13031AF5009BC05D /* GradesViewController.m */; };
 		934DBC7E13031AF5009BC05D /* GMParticipantsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DBC7C13031AF5009BC05D /* GMParticipantsTableViewController.m */; };
 		934DBC8013031B02009BC05D /* GradesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934DBC7F13031B02009BC05D /* GradesViewController.xib */; };
-		934DBC8213031B88009BC05D /* GMParticipantsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934DBC8113031B88009BC05D /* GMParticipantsTableViewController.xib */; };
+		934DBC8213031B88009BC05D /* GMOParticipantsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934DBC8113031B88009BC05D /* GMOParticipantsTableViewController.xib */; };
 		935037CB12EBA28F001CBAD0 /* GMParticipantsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 935037CA12EBA28F001CBAD0 /* GMParticipantsParser.m */; };
 		9359AFD71530A8D60072EDC8 /* GMOPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9359AFD61530A8D60072EDC8 /* GMOPersonViewController.m */; };
 		936DAFEB15150A6200F99EE8 /* greyforward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 936DAFE715150A6200F99EE8 /* greyforward@2x.png */; };
@@ -101,7 +101,7 @@
 		9395D61A132881B700332A38 /* UIImage+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 9395D5E7132881B500332A38 /* UIImage+TKCategory.m */; };
 		9395D623132882A200332A38 /* TapkuLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9395D622132882A200332A38 /* TapkuLibrary.bundle */; };
 		939B9EE116925E8C00C5BB95 /* GMOParticipantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939B9EDF16925E8C00C5BB95 /* GMOParticipantsViewController.m */; };
-		939B9EE216925E8C00C5BB95 /* GMParticipantsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 939B9EE016925E8C00C5BB95 /* GMParticipantsViewController.xib */; };
+		939B9EE216925E8C00C5BB95 /* GMOParticipantsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 939B9EE016925E8C00C5BB95 /* GMOParticipantsViewController.xib */; };
 		93A9AF64131099CE0012CAF3 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A9AF62131099CE0012CAF3 /* WebViewController.m */; };
 		93A9AF65131099CE0012CAF3 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93A9AF63131099CE0012CAF3 /* WebViewController.xib */; };
 		93AF5FAF12F37A64009A3657 /* GMQuarter.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AF5FAE12F37A64009A3657 /* GMQuarter.m */; };
@@ -222,7 +222,7 @@
 		934DBC7B13031AF5009BC05D /* GMParticipantsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMParticipantsTableViewController.h; sourceTree = "<group>"; };
 		934DBC7C13031AF5009BC05D /* GMParticipantsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMParticipantsTableViewController.m; sourceTree = "<group>"; };
 		934DBC7F13031B02009BC05D /* GradesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GradesViewController.xib; sourceTree = "<group>"; };
-		934DBC8113031B88009BC05D /* GMParticipantsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GMParticipantsTableViewController.xib; sourceTree = "<group>"; };
+		934DBC8113031B88009BC05D /* GMOParticipantsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GMOParticipantsTableViewController.xib; sourceTree = "<group>"; };
 		935037C912EBA28F001CBAD0 /* GMParticipantsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMParticipantsParser.h; sourceTree = "<group>"; };
 		935037CA12EBA28F001CBAD0 /* GMParticipantsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMParticipantsParser.m; sourceTree = "<group>"; };
 		9359AFD51530A8D60072EDC8 /* GMOPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMOPersonViewController.h; sourceTree = "<group>"; };
@@ -297,7 +297,7 @@
 		9395D622132882A200332A38 /* TapkuLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapkuLibrary.bundle; sourceTree = "<group>"; };
 		939B9EDE16925E8C00C5BB95 /* GMOParticipantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMOParticipantsViewController.h; sourceTree = "<group>"; };
 		939B9EDF16925E8C00C5BB95 /* GMOParticipantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMOParticipantsViewController.m; sourceTree = "<group>"; };
-		939B9EE016925E8C00C5BB95 /* GMParticipantsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GMParticipantsViewController.xib; path = "../../src/View Controllers/GMParticipantsViewController.xib"; sourceTree = "<group>"; };
+		939B9EE016925E8C00C5BB95 /* GMOParticipantsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GMOParticipantsViewController.xib; path = "../../src/View Controllers/GMOParticipantsViewController.xib"; sourceTree = "<group>"; };
 		93A9AF61131099CE0012CAF3 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		93A9AF62131099CE0012CAF3 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		93A9AF63131099CE0012CAF3 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
@@ -398,14 +398,14 @@
 		9314EC3112F3DC5B00F99756 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
-				939B9EE016925E8C00C5BB95 /* GMParticipantsViewController.xib */,
+				939B9EE016925E8C00C5BB95 /* GMOParticipantsViewController.xib */,
 				93361DA2167EA53E00532C5F /* AssignmentsListViewController.xib */,
 				93725DCE150D56E50095B420 /* GMOForumPostsViewController.xib */,
 				9385EFFD15086BE800872595 /* ForumViewController.xib */,
 				93C58BD414C3525A001F7558 /* AssignmentDetailViewController.xib */,
 				93A9AF63131099CE0012CAF3 /* WebViewController.xib */,
 				93D9861613105895009C11C3 /* DashboardViewController.xib */,
-				934DBC8113031B88009BC05D /* GMParticipantsTableViewController.xib */,
+				934DBC8113031B88009BC05D /* GMOParticipantsTableViewController.xib */,
 				934DBC7F13031B02009BC05D /* GradesViewController.xib */,
 				931C650A12F8CCF7005799F1 /* AssignmentsViewController.xib */,
 				938C792F12F5245300C3F134 /* CourseViewController.xib */,
@@ -808,7 +808,7 @@
 				938C793112F5245300C3F134 /* CourseViewController.xib in Resources */,
 				931C650C12F8CCF7005799F1 /* AssignmentsViewController.xib in Resources */,
 				934DBC8013031B02009BC05D /* GradesViewController.xib in Resources */,
-				934DBC8213031B88009BC05D /* GMParticipantsTableViewController.xib in Resources */,
+				934DBC8213031B88009BC05D /* GMOParticipantsTableViewController.xib in Resources */,
 				934BACA31304E8380083A5F9 /* defaulticon.png in Resources */,
 				93BBF5D3130E4B8800B07C25 /* bands.png in Resources */,
 				93D9861813105895009C11C3 /* DashboardViewController.xib in Resources */,
@@ -868,7 +868,7 @@
 				93BDDA70161118020007519F /* ipadtabbarbackground.png in Resources */,
 				93361DA4167EA53E00532C5F /* AssignmentsListViewController.xib in Resources */,
 				93E703C4168FB2F200DF1F2D /* ForumPostTableCell.xib in Resources */,
-				939B9EE216925E8C00C5BB95 /* GMParticipantsViewController.xib in Resources */,
+				939B9EE216925E8C00C5BB95 /* GMOParticipantsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
